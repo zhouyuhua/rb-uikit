@@ -7,6 +7,81 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0114041799FDC300C8594C /* UIEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B0114031799FDC300C8594C /* UIEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B01140B179A193D00C8594C /* UIAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B01140A179A193D00C8594C /* UIAppearance.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B01140E179A19C500C8594C /* UIConcreteAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B01140C179A19C500C8594C /* UIConcreteAppearance.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B01140F179A19C500C8594C /* UIConcreteAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B01140D179A19C500C8594C /* UIConcreteAppearance.m */; };
+		8B08255B17AA18B100494FAA /* UISearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B08255917AA18B100494FAA /* UISearchBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B08255C17AA18B100494FAA /* UISearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B08255A17AA18B100494FAA /* UISearchBar.m */; };
+		8B08255E17AA19EF00494FAA /* UIBarCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B08255D17AA19EF00494FAA /* UIBarCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B08256017AA1A3500494FAA /* UITextInputTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B08255F17AA1A3500494FAA /* UITextInputTraits.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B08256317AA1F7300494FAA /* UISearchBarMagnifyingGlass.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B08256117AA1F7300494FAA /* UISearchBarMagnifyingGlass.png */; };
+		8B08256417AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B08256217AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png */; };
+		8B08256717AA264100494FAA /* UIBackButtonChevron@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B08256517AA264100494FAA /* UIBackButtonChevron@2x.png */; };
+		8B08256817AA264100494FAA /* UIBackButtonChevron.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B08256617AA264100494FAA /* UIBackButtonChevron.png */; };
+		8B08256D17AA2ACF00494FAA /* UIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B08256B17AA2ACF00494FAA /* UIAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B08256E17AA2ACF00494FAA /* UIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B08256C17AA2ACF00494FAA /* UIAlertView.m */; };
+		8B1EC8DA17A9F2B10035369C /* UIAppKitAdaptorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8D817A9F2B10035369C /* UIAppKitAdaptorView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B1EC8DB17A9F2B10035369C /* UIAppKitAdaptorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8D917A9F2B10035369C /* UIAppKitAdaptorView.m */; };
+		8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B1EC8E217A9F8280035369C /* UINSTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8DD17A9F8280035369C /* UINSTextFieldCell.m */; };
+		8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DE17A9F8280035369C /* UITextField_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B1EC8E417A9F8280035369C /* UITextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DF17A9F8280035369C /* UITextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B1EC8E517A9F8280035369C /* UITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8E017A9F8280035369C /* UITextField.m */; };
+		8B5AF84B179B67F7008B3BF3 /* UINavigationBarAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B5AF84C179B67F7008B3BF3 /* UINavigationBarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5AF84A179B67F7008B3BF3 /* UINavigationBarAppearance.m */; };
+		8B5AF84F179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5AF84D179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png */; };
+		8B5AF850179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5AF84E179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted.png */; };
+		8B5AF863179B9B79008B3BF3 /* UITextFieldSquareBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5AF861179B9B79008B3BF3 /* UITextFieldSquareBackground.png */; };
+		8B5AF864179B9B79008B3BF3 /* UITextFieldSquareBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5AF862179B9B79008B3BF3 /* UITextFieldSquareBackground@2x.png */; };
+		8B5AF867179B9D15008B3BF3 /* UITextFieldRoundBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5AF865179B9D15008B3BF3 /* UITextFieldRoundBackground.png */; };
+		8B5AF868179B9D15008B3BF3 /* UITextFieldRoundBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5AF866179B9D15008B3BF3 /* UITextFieldRoundBackground@2x.png */; };
+		8B5BD72E1798F05C00A53E4A /* UIImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5BD72C1798F05C00A53E4A /* UIImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B5BD72F1798F05C00A53E4A /* UIImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BD72D1798F05C00A53E4A /* UIImageView.m */; };
+		8B5BD7331798F1A200A53E4A /* UINavigationBarBackgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BD7311798F1A200A53E4A /* UINavigationBarBackgroundImage.png */; };
+		8B5BD7351798F3E100A53E4A /* UINavigationBarBackgroundImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5BD7341798F3E100A53E4A /* UINavigationBarBackgroundImage@2x.png */; };
+		8B5BD7381798FA9B00A53E4A /* UIButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5BD7361798FA9B00A53E4A /* UIButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B5BD7391798FA9B00A53E4A /* UIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BD7371798FA9B00A53E4A /* UIButton.m */; };
+		8B5BD73D1799037400A53E4A /* UIButtonBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5BD73B1799037400A53E4A /* UIButtonBackgroundView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B5BD73E1799037400A53E4A /* UIButtonBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BD73C1799037400A53E4A /* UIButtonBackgroundView.m */; };
+		8B5BD742179903AB00A53E4A /* UIButtonRoundRectBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5BD740179903AB00A53E4A /* UIButtonRoundRectBackgroundView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B5BD743179903AB00A53E4A /* UIButtonRoundRectBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BD741179903AB00A53E4A /* UIButtonRoundRectBackgroundView.m */; };
+		8B5BD7491799040E00A53E4A /* UIButton_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5BD7481799040E00A53E4A /* UIButton_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B5BD74B179904C800A53E4A /* UIBarButtonItem_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5BD74A179904C800A53E4A /* UIBarButtonItem_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B5BD74E179908EC00A53E4A /* UIButtonBarBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5BD74C179908EC00A53E4A /* UIButtonBarBackgroundView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B5BD74F179908EC00A53E4A /* UIButtonBarBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BD74D179908EC00A53E4A /* UIButtonBarBackgroundView.m */; };
+		8B5BD758179B24D400A53E4A /* UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BD757179B24D400A53E4A /* UIImage.m */; };
+		8B5BD75B179B2CA700A53E4A /* UIImageProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5BD759179B2CA700A53E4A /* UIImageProvider.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B5BD75C179B2CA700A53E4A /* UIImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BD75A179B2CA700A53E4A /* UIImageProvider.m */; };
+		8B5BD75E179B348700A53E4A /* UIGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5BD75D179B348700A53E4A /* UIGraphics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B5BD761179B3A8500A53E4A /* UIThreePartImageProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5BD75F179B3A8500A53E4A /* UIThreePartImageProvider.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B5BD762179B3A8500A53E4A /* UIThreePartImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BD760179B3A8500A53E4A /* UIThreePartImageProvider.m */; };
+		8B5BD764179B404C00A53E4A /* UIImage_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5BD763179B404C00A53E4A /* UIImage_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B6AEDE617AB638B00D6858A /* UIGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDE417AB638B00D6858A /* UIGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B6AEDE717AB638B00D6858A /* UIGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B6AEDE517AB638B00D6858A /* UIGestureRecognizer.m */; };
+		8B6AEDE917AB639400D6858A /* UIGestureRecognizer_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDE817AB639400D6858A /* UIGestureRecognizer_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B6AEDEC17AB642A00D6858A /* UIApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDEA17AB642A00D6858A /* UIApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B6AEDED17AB642A00D6858A /* UIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B6AEDEB17AB642A00D6858A /* UIApplication.m */; };
+		8B6AEDEF17AB6BF600D6858A /* UIApplication_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDEE17AB6BF600D6858A /* UIApplication_Private.h */; };
+		8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDFE17AC614100D6858A /* UIGestureRecognizerSubclass.h */; };
+		8B91075B17A8A8A8008D9DF0 /* UIResponder_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075C17A8A971008D9DF0 /* UIView_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B91075F17A8B1EA008D9DF0 /* UIGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */; };
+		8B91076217A8B6B7008D9DF0 /* UIWindowAppKitHostView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91076017A8B6B7008D9DF0 /* UIWindowAppKitHostView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B91076317A8B6B7008D9DF0 /* UIWindowAppKitHostView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91076117A8B6B7008D9DF0 /* UIWindowAppKitHostView.m */; };
+		8B91076517A8B772008D9DF0 /* UIEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91076417A8B772008D9DF0 /* UIEvent.m */; };
+		8B91076717A8B7B1008D9DF0 /* UIEvent_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91076617A8B7B1008D9DF0 /* UIEvent_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B91076A17A8B883008D9DF0 /* UITouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91076817A8B883008D9DF0 /* UITouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B91076B17A8B883008D9DF0 /* UITouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91076917A8B883008D9DF0 /* UITouch.m */; };
+		8B91076D17A8B8BC008D9DF0 /* UITouch_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91076C17A8B8BC008D9DF0 /* UITouch_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B91077017A8C5C9008D9DF0 /* UIView_UIViewAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91076E17A8C5A7008D9DF0 /* UIView_UIViewAnimation.m */; };
+		8B91077317A8C62D008D9DF0 /* UIAnimationCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91077117A8C62D008D9DF0 /* UIAnimationCollection.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B91077417A8C62D008D9DF0 /* UIAnimationCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91077217A8C62D008D9DF0 /* UIAnimationCollection.m */; };
+		8B91077817A979F9008D9DF0 /* UIWindow_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91077717A979F9008D9DF0 /* UIWindow_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91077D17A97EF7008D9DF0 /* UIAppKitView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91077E17A97EF7008D9DF0 /* UIAppKitView.m */; };
+		8BAE9590179A1D3100562F35 /* UIBarButtonItemBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE958E179A1D3100562F35 /* UIBarButtonItemBackground@2x.png */; };
+		8BAE9591179A1D3100562F35 /* UIBarButtonItemBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE958F179A1D3100562F35 /* UIBarButtonItemBackground.png */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -14,6 +89,42 @@
 		8BE492D41798C44F002BEA5A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492B71798C44F002BEA5A /* UIKit.framework */; };
 		8BE492DA1798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492D81798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492DC1798C44F002BEA5A /* UIKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE492DB1798C44F002BEA5A /* UIKitTests.m */; };
+		8BE492E81798C52F002BEA5A /* UIResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE492E61798C52F002BEA5A /* UIResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE492E91798C52F002BEA5A /* UIResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE492E71798C52F002BEA5A /* UIResponder.m */; };
+		8BE492EC1798C888002BEA5A /* UIView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE492EA1798C888002BEA5A /* UIView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE492ED1798C888002BEA5A /* UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE492EB1798C888002BEA5A /* UIView.m */; };
+		8BE492EF1798C986002BEA5A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492EE1798C986002BEA5A /* QuartzCore.framework */; };
+		8BE492F21798CF0C002BEA5A /* UIColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE492F01798CF0C002BEA5A /* UIColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE492F31798CF0C002BEA5A /* UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE492F11798CF0C002BEA5A /* UIColor.m */; };
+		8BE492FB1798CFAB002BEA5A /* UIBezierPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE492FA1798CFAB002BEA5A /* UIBezierPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE492FE1798CFDD002BEA5A /* UIWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE492FC1798CFDD002BEA5A /* UIWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE492FF1798CFDD002BEA5A /* UIWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE492FD1798CFDD002BEA5A /* UIWindow.m */; };
+		8BE493161798D65C002BEA5A /* UINavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE493091798D65C002BEA5A /* UINavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE493171798D65C002BEA5A /* UINavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4930A1798D65C002BEA5A /* UINavigationBar.m */; };
+		8BE493181798D65C002BEA5A /* UINavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4930B1798D65C002BEA5A /* UINavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE493191798D65C002BEA5A /* UINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4930C1798D65C002BEA5A /* UINavigationController.m */; };
+		8BE4931A1798D65C002BEA5A /* UINavigationItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4930D1798D65C002BEA5A /* UINavigationItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE4931B1798D65C002BEA5A /* UINavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4930E1798D65C002BEA5A /* UINavigationItem.m */; };
+		8BE4931C1798D65C002BEA5A /* UIViewController_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4930F1798D65C002BEA5A /* UIViewController_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8BE4931D1798D65C002BEA5A /* UIViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE493101798D65C002BEA5A /* UIViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE4931E1798D65C002BEA5A /* UIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE493111798D65C002BEA5A /* UIViewController.m */; };
+		8BE493241798DA39002BEA5A /* UIScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE493221798DA39002BEA5A /* UIScreen.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE493251798DA39002BEA5A /* UIScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE493231798DA39002BEA5A /* UIScreen.m */; };
+		8BE4932A1798DBD5002BEA5A /* UIDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE493281798DBD5002BEA5A /* UIDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE4932B1798DBD5002BEA5A /* UIDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE493291798DBD5002BEA5A /* UIDevice.m */; };
+		8BE493301798E39A002BEA5A /* UILabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4932E1798E39A002BEA5A /* UILabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE493311798E39A002BEA5A /* UILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4932F1798E39A002BEA5A /* UILabel.m */; };
+		8BE493341798E3F3002BEA5A /* UIBarItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE493321798E3F3002BEA5A /* UIBarItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE493351798E3F3002BEA5A /* UIBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE493331798E3F3002BEA5A /* UIBarItem.m */; };
+		8BE493391798E44D002BEA5A /* UIControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE493371798E44D002BEA5A /* UIControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE4933A1798E44D002BEA5A /* UIControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE493381798E44D002BEA5A /* UIControl.m */; };
+		8BE4933E1798E564002BEA5A /* UIBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4933C1798E564002BEA5A /* UIBarButtonItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE4933F1798E564002BEA5A /* UIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4933D1798E564002BEA5A /* UIBarButtonItem.m */; };
+		8BE493401798EAA0002BEA5A /* UIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE492C71798C44F002BEA5A /* UIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE493411798EAA0002BEA5A /* UIKitDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE492E51798C4AE002BEA5A /* UIKitDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE493421798EAA0002BEA5A /* UIImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE492F81798CF7C002BEA5A /* UIImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE493431798EAA0002BEA5A /* UIFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4932C1798DFB4002BEA5A /* UIFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4933B1798E481002BEA5A /* UIGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +138,81 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B0114031799FDC300C8594C /* UIEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIEvent.h; sourceTree = "<group>"; };
+		8B01140A179A193D00C8594C /* UIAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppearance.h; sourceTree = "<group>"; };
+		8B01140C179A19C500C8594C /* UIConcreteAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIConcreteAppearance.h; sourceTree = "<group>"; };
+		8B01140D179A19C500C8594C /* UIConcreteAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIConcreteAppearance.m; sourceTree = "<group>"; };
+		8B08255917AA18B100494FAA /* UISearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISearchBar.h; sourceTree = "<group>"; };
+		8B08255A17AA18B100494FAA /* UISearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISearchBar.m; sourceTree = "<group>"; };
+		8B08255D17AA19EF00494FAA /* UIBarCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBarCommon.h; sourceTree = "<group>"; };
+		8B08255F17AA1A3500494FAA /* UITextInputTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextInputTraits.h; sourceTree = "<group>"; };
+		8B08256117AA1F7300494FAA /* UISearchBarMagnifyingGlass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UISearchBarMagnifyingGlass.png; sourceTree = "<group>"; };
+		8B08256217AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UISearchBarMagnifyingGlass@2x.png"; sourceTree = "<group>"; };
+		8B08256517AA264100494FAA /* UIBackButtonChevron@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBackButtonChevron@2x.png"; sourceTree = "<group>"; };
+		8B08256617AA264100494FAA /* UIBackButtonChevron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBackButtonChevron.png; sourceTree = "<group>"; };
+		8B08256B17AA2ACF00494FAA /* UIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertView.h; sourceTree = "<group>"; };
+		8B08256C17AA2ACF00494FAA /* UIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAlertView.m; sourceTree = "<group>"; };
+		8B1EC8D817A9F2B10035369C /* UIAppKitAdaptorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitAdaptorView.h; sourceTree = "<group>"; };
+		8B1EC8D917A9F2B10035369C /* UIAppKitAdaptorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitAdaptorView.m; sourceTree = "<group>"; };
+		8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINSTextFieldCell.h; sourceTree = "<group>"; };
+		8B1EC8DD17A9F8280035369C /* UINSTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINSTextFieldCell.m; sourceTree = "<group>"; };
+		8B1EC8DE17A9F8280035369C /* UITextField_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextField_Private.h; sourceTree = "<group>"; };
+		8B1EC8DF17A9F8280035369C /* UITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextField.h; sourceTree = "<group>"; };
+		8B1EC8E017A9F8280035369C /* UITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextField.m; sourceTree = "<group>"; };
+		8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationBarAppearance.h; sourceTree = "<group>"; };
+		8B5AF84A179B67F7008B3BF3 /* UINavigationBarAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationBarAppearance.m; sourceTree = "<group>"; };
+		8B5AF84D179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemBackgroundHighlighted@2x.png"; sourceTree = "<group>"; };
+		8B5AF84E179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemBackgroundHighlighted.png; sourceTree = "<group>"; };
+		8B5AF861179B9B79008B3BF3 /* UITextFieldSquareBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITextFieldSquareBackground.png; sourceTree = "<group>"; };
+		8B5AF862179B9B79008B3BF3 /* UITextFieldSquareBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITextFieldSquareBackground@2x.png"; sourceTree = "<group>"; };
+		8B5AF865179B9D15008B3BF3 /* UITextFieldRoundBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITextFieldRoundBackground.png; sourceTree = "<group>"; };
+		8B5AF866179B9D15008B3BF3 /* UITextFieldRoundBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITextFieldRoundBackground@2x.png"; sourceTree = "<group>"; };
+		8B5BD72C1798F05C00A53E4A /* UIImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageView.h; sourceTree = "<group>"; };
+		8B5BD72D1798F05C00A53E4A /* UIImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageView.m; sourceTree = "<group>"; };
+		8B5BD7311798F1A200A53E4A /* UINavigationBarBackgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UINavigationBarBackgroundImage.png; sourceTree = "<group>"; };
+		8B5BD7341798F3E100A53E4A /* UINavigationBarBackgroundImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UINavigationBarBackgroundImage@2x.png"; sourceTree = "<group>"; };
+		8B5BD7361798FA9B00A53E4A /* UIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButton.h; sourceTree = "<group>"; };
+		8B5BD7371798FA9B00A53E4A /* UIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButton.m; sourceTree = "<group>"; };
+		8B5BD73B1799037400A53E4A /* UIButtonBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonBackgroundView.h; sourceTree = "<group>"; };
+		8B5BD73C1799037400A53E4A /* UIButtonBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonBackgroundView.m; sourceTree = "<group>"; };
+		8B5BD740179903AB00A53E4A /* UIButtonRoundRectBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonRoundRectBackgroundView.h; sourceTree = "<group>"; };
+		8B5BD741179903AB00A53E4A /* UIButtonRoundRectBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonRoundRectBackgroundView.m; sourceTree = "<group>"; };
+		8B5BD7481799040E00A53E4A /* UIButton_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButton_Private.h; sourceTree = "<group>"; };
+		8B5BD74A179904C800A53E4A /* UIBarButtonItem_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBarButtonItem_Private.h; sourceTree = "<group>"; };
+		8B5BD74C179908EC00A53E4A /* UIButtonBarBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonBarBackgroundView.h; sourceTree = "<group>"; };
+		8B5BD74D179908EC00A53E4A /* UIButtonBarBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonBarBackgroundView.m; sourceTree = "<group>"; };
+		8B5BD757179B24D400A53E4A /* UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage.m; sourceTree = "<group>"; };
+		8B5BD759179B2CA700A53E4A /* UIImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageProvider.h; sourceTree = "<group>"; };
+		8B5BD75A179B2CA700A53E4A /* UIImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageProvider.m; sourceTree = "<group>"; };
+		8B5BD75D179B348700A53E4A /* UIGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGraphics.h; sourceTree = "<group>"; };
+		8B5BD75F179B3A8500A53E4A /* UIThreePartImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIThreePartImageProvider.h; sourceTree = "<group>"; };
+		8B5BD760179B3A8500A53E4A /* UIThreePartImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIThreePartImageProvider.m; sourceTree = "<group>"; };
+		8B5BD763179B404C00A53E4A /* UIImage_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImage_Private.h; sourceTree = "<group>"; };
+		8B6AEDE417AB638B00D6858A /* UIGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGestureRecognizer.h; sourceTree = "<group>"; };
+		8B6AEDE517AB638B00D6858A /* UIGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIGestureRecognizer.m; sourceTree = "<group>"; };
+		8B6AEDE817AB639400D6858A /* UIGestureRecognizer_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGestureRecognizer_Private.h; sourceTree = "<group>"; };
+		8B6AEDEA17AB642A00D6858A /* UIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIApplication.h; sourceTree = "<group>"; };
+		8B6AEDEB17AB642A00D6858A /* UIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIApplication.m; sourceTree = "<group>"; };
+		8B6AEDEE17AB6BF600D6858A /* UIApplication_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIApplication_Private.h; sourceTree = "<group>"; };
+		8B6AEDFE17AC614100D6858A /* UIGestureRecognizerSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGestureRecognizerSubclass.h; sourceTree = "<group>"; };
+		8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIResponder_Private.h; sourceTree = "<group>"; };
+		8B91075C17A8A971008D9DF0 /* UIView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIView_Private.h; sourceTree = "<group>"; };
+		8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIGraphics.m; sourceTree = "<group>"; };
+		8B91076017A8B6B7008D9DF0 /* UIWindowAppKitHostView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWindowAppKitHostView.h; sourceTree = "<group>"; };
+		8B91076117A8B6B7008D9DF0 /* UIWindowAppKitHostView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWindowAppKitHostView.m; sourceTree = "<group>"; };
+		8B91076417A8B772008D9DF0 /* UIEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIEvent.m; sourceTree = "<group>"; };
+		8B91076617A8B7B1008D9DF0 /* UIEvent_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIEvent_Private.h; sourceTree = "<group>"; };
+		8B91076817A8B883008D9DF0 /* UITouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouch.h; sourceTree = "<group>"; };
+		8B91076917A8B883008D9DF0 /* UITouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITouch.m; sourceTree = "<group>"; };
+		8B91076C17A8B8BC008D9DF0 /* UITouch_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouch_Private.h; sourceTree = "<group>"; };
+		8B91076E17A8C5A7008D9DF0 /* UIView_UIViewAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIView_UIViewAnimation.m; sourceTree = "<group>"; };
+		8B91077117A8C62D008D9DF0 /* UIAnimationCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAnimationCollection.h; sourceTree = "<group>"; };
+		8B91077217A8C62D008D9DF0 /* UIAnimationCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAnimationCollection.m; sourceTree = "<group>"; };
+		8B91077717A979F9008D9DF0 /* UIWindow_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWindow_Private.h; sourceTree = "<group>"; };
+		8B91077D17A97EF7008D9DF0 /* UIAppKitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitView.h; sourceTree = "<group>"; };
+		8B91077E17A97EF7008D9DF0 /* UIAppKitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitView.m; sourceTree = "<group>"; };
+		8BAE958E179A1D3100562F35 /* UIBarButtonItemBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemBackground@2x.png"; sourceTree = "<group>"; };
+		8BAE958F179A1D3100562F35 /* UIBarButtonItemBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemBackground.png; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -36,11 +222,46 @@
 		8BE492C41798C44F002BEA5A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8BE492C61798C44F002BEA5A /* UIKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIKit-Prefix.pch"; sourceTree = "<group>"; };
 		8BE492C71798C44F002BEA5A /* UIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIKit.h; sourceTree = "<group>"; };
-		8BE492CE1798C44F002BEA5A /* UIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = folder; includeInIndex = 0; path = UIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BE492CE1798C44F002BEA5A /* UIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492CF1798C44F002BEA5A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8BE492D71798C44F002BEA5A /* UIKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIKitTests-Info.plist"; sourceTree = "<group>"; };
 		8BE492D91798C44F002BEA5A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8BE492DB1798C44F002BEA5A /* UIKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIKitTests.m; sourceTree = "<group>"; };
+		8BE492E51798C4AE002BEA5A /* UIKitDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIKitDefines.h; sourceTree = "<group>"; };
+		8BE492E61798C52F002BEA5A /* UIResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIResponder.h; path = UIKit/UIResponder.h; sourceTree = "<group>"; };
+		8BE492E71798C52F002BEA5A /* UIResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIResponder.m; path = UIKit/UIResponder.m; sourceTree = "<group>"; };
+		8BE492EA1798C888002BEA5A /* UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIView.h; path = UIKit/UIView.h; sourceTree = "<group>"; };
+		8BE492EB1798C888002BEA5A /* UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIView.m; path = UIKit/UIView.m; sourceTree = "<group>"; };
+		8BE492EE1798C986002BEA5A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8BE492F01798CF0C002BEA5A /* UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColor.h; sourceTree = "<group>"; };
+		8BE492F11798CF0C002BEA5A /* UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColor.m; sourceTree = "<group>"; };
+		8BE492F81798CF7C002BEA5A /* UIImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIImage.h; sourceTree = "<group>"; };
+		8BE492FA1798CFAB002BEA5A /* UIBezierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBezierPath.h; sourceTree = "<group>"; };
+		8BE492FC1798CFDD002BEA5A /* UIWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWindow.h; path = UIKit/UIWindow.h; sourceTree = "<group>"; };
+		8BE492FD1798CFDD002BEA5A /* UIWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIWindow.m; path = UIKit/UIWindow.m; sourceTree = "<group>"; };
+		8BE493091798D65C002BEA5A /* UINavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationBar.h; sourceTree = "<group>"; };
+		8BE4930A1798D65C002BEA5A /* UINavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationBar.m; sourceTree = "<group>"; };
+		8BE4930B1798D65C002BEA5A /* UINavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationController.h; sourceTree = "<group>"; };
+		8BE4930C1798D65C002BEA5A /* UINavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationController.m; sourceTree = "<group>"; };
+		8BE4930D1798D65C002BEA5A /* UINavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationItem.h; sourceTree = "<group>"; };
+		8BE4930E1798D65C002BEA5A /* UINavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationItem.m; sourceTree = "<group>"; };
+		8BE4930F1798D65C002BEA5A /* UIViewController_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewController_Private.h; sourceTree = "<group>"; };
+		8BE493101798D65C002BEA5A /* UIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewController.h; sourceTree = "<group>"; };
+		8BE493111798D65C002BEA5A /* UIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewController.m; sourceTree = "<group>"; };
+		8BE493221798DA39002BEA5A /* UIScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScreen.h; sourceTree = "<group>"; };
+		8BE493231798DA39002BEA5A /* UIScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScreen.m; sourceTree = "<group>"; };
+		8BE493281798DBD5002BEA5A /* UIDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDevice.h; sourceTree = "<group>"; };
+		8BE493291798DBD5002BEA5A /* UIDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDevice.m; sourceTree = "<group>"; };
+		8BE4932C1798DFB4002BEA5A /* UIFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIFont.h; sourceTree = "<group>"; };
+		8BE4932E1798E39A002BEA5A /* UILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UILabel.h; path = UIKit/UILabel.h; sourceTree = "<group>"; };
+		8BE4932F1798E39A002BEA5A /* UILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UILabel.m; path = UIKit/UILabel.m; sourceTree = "<group>"; };
+		8BE493321798E3F3002BEA5A /* UIBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBarItem.h; sourceTree = "<group>"; };
+		8BE493331798E3F3002BEA5A /* UIBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBarItem.m; sourceTree = "<group>"; };
+		8BE493371798E44D002BEA5A /* UIControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIControl.h; sourceTree = "<group>"; };
+		8BE493381798E44D002BEA5A /* UIControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIControl.m; sourceTree = "<group>"; };
+		8BE4933B1798E481002BEA5A /* UIGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIGeometry.h; sourceTree = "<group>"; };
+		8BE4933C1798E564002BEA5A /* UIBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBarButtonItem.h; sourceTree = "<group>"; };
+		8BE4933D1798E564002BEA5A /* UIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBarButtonItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +269,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BE492EF1798C986002BEA5A /* QuartzCore.framework in Frameworks */,
 				8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,6 +287,159 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B08255717AA189C00494FAA /* UITextField */ = {
+			isa = PBXGroup;
+			children = (
+				8B1EC8DF17A9F8280035369C /* UITextField.h */,
+				8B1EC8E017A9F8280035369C /* UITextField.m */,
+				8B1EC8DE17A9F8280035369C /* UITextField_Private.h */,
+				8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */,
+				8B1EC8DD17A9F8280035369C /* UINSTextFieldCell.m */,
+			);
+			name = UITextField;
+			sourceTree = "<group>";
+		};
+		8B08255817AA18A200494FAA /* UISearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				8B08255917AA18B100494FAA /* UISearchBar.h */,
+				8B08255A17AA18B100494FAA /* UISearchBar.m */,
+			);
+			name = UISearchBar;
+			sourceTree = "<group>";
+		};
+		8B08256A17AA2ABF00494FAA /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				8B08256B17AA2ACF00494FAA /* UIAlertView.h */,
+				8B08256C17AA2ACF00494FAA /* UIAlertView.m */,
+			);
+			name = Alerts;
+			sourceTree = "<group>";
+		};
+		8B5AF848179B67C3008B3BF3 /* Appearances */ = {
+			isa = PBXGroup;
+			children = (
+				8B01140A179A193D00C8594C /* UIAppearance.h */,
+				8B01140C179A19C500C8594C /* UIConcreteAppearance.h */,
+				8B01140D179A19C500C8594C /* UIConcreteAppearance.m */,
+			);
+			name = Appearances;
+			sourceTree = "<group>";
+		};
+		8B5AF852179B8F2A008B3BF3 /* Text & Images */ = {
+			isa = PBXGroup;
+			children = (
+				8B5BD72C1798F05C00A53E4A /* UIImageView.h */,
+				8B5BD72D1798F05C00A53E4A /* UIImageView.m */,
+				8BE4932E1798E39A002BEA5A /* UILabel.h */,
+				8BE4932F1798E39A002BEA5A /* UILabel.m */,
+				8B08255F17AA1A3500494FAA /* UITextInputTraits.h */,
+				8B08255717AA189C00494FAA /* UITextField */,
+				8B08255817AA18A200494FAA /* UISearchBar */,
+			);
+			name = "Text & Images";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		8B5BD73F1799039E00A53E4A /* UIButton Background Views */ = {
+			isa = PBXGroup;
+			children = (
+				8B5BD73B1799037400A53E4A /* UIButtonBackgroundView.h */,
+				8B5BD73C1799037400A53E4A /* UIButtonBackgroundView.m */,
+				8B5BD740179903AB00A53E4A /* UIButtonRoundRectBackgroundView.h */,
+				8B5BD741179903AB00A53E4A /* UIButtonRoundRectBackgroundView.m */,
+				8B5BD74C179908EC00A53E4A /* UIButtonBarBackgroundView.h */,
+				8B5BD74D179908EC00A53E4A /* UIButtonBarBackgroundView.m */,
+			);
+			name = "UIButton Background Views";
+			sourceTree = "<group>";
+		};
+		8B5BD752179B22F400A53E4A /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				8BE492F81798CF7C002BEA5A /* UIImage.h */,
+				8B5BD757179B24D400A53E4A /* UIImage.m */,
+				8B5BD763179B404C00A53E4A /* UIImage_Private.h */,
+				8B5BD759179B2CA700A53E4A /* UIImageProvider.h */,
+				8B5BD75A179B2CA700A53E4A /* UIImageProvider.m */,
+				8B5BD75F179B3A8500A53E4A /* UIThreePartImageProvider.h */,
+				8B5BD760179B3A8500A53E4A /* UIThreePartImageProvider.m */,
+			);
+			name = UIImage;
+			sourceTree = "<group>";
+		};
+		8B6AEDE317AB606B00D6858A /* Event Handling */ = {
+			isa = PBXGroup;
+			children = (
+				8B0114031799FDC300C8594C /* UIEvent.h */,
+				8B91076417A8B772008D9DF0 /* UIEvent.m */,
+				8B91076617A8B7B1008D9DF0 /* UIEvent_Private.h */,
+				8B91076817A8B883008D9DF0 /* UITouch.h */,
+				8B91076917A8B883008D9DF0 /* UITouch.m */,
+				8B91076C17A8B8BC008D9DF0 /* UITouch_Private.h */,
+				8B6AEDE417AB638B00D6858A /* UIGestureRecognizer.h */,
+				8B6AEDE517AB638B00D6858A /* UIGestureRecognizer.m */,
+				8B6AEDE817AB639400D6858A /* UIGestureRecognizer_Private.h */,
+				8B6AEDFE17AC614100D6858A /* UIGestureRecognizerSubclass.h */,
+			);
+			name = "Event Handling";
+			sourceTree = "<group>";
+		};
+		8B91077517A8C6C4008D9DF0 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				8B91077117A8C62D008D9DF0 /* UIAnimationCollection.h */,
+				8B91077217A8C62D008D9DF0 /* UIAnimationCollection.m */,
+				8B91076E17A8C5A7008D9DF0 /* UIView_UIViewAnimation.m */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
+		8B91077917A97E9E008D9DF0 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				8BE492EA1798C888002BEA5A /* UIView.h */,
+				8BE492EB1798C888002BEA5A /* UIView.m */,
+				8B91075C17A8A971008D9DF0 /* UIView_Private.h */,
+				8B91077517A8C6C4008D9DF0 /* Animation */,
+			);
+			name = UIView;
+			sourceTree = "<group>";
+		};
+		8B91077A17A97EA6008D9DF0 /* UIWindow */ = {
+			isa = PBXGroup;
+			children = (
+				8BE492FC1798CFDD002BEA5A /* UIWindow.h */,
+				8BE492FD1798CFDD002BEA5A /* UIWindow.m */,
+				8B91077717A979F9008D9DF0 /* UIWindow_Private.h */,
+			);
+			name = UIWindow;
+			sourceTree = "<group>";
+		};
+		8B91077B17A97EAB008D9DF0 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8BE4930F1798D65C002BEA5A /* UIViewController_Private.h */,
+				8BE493101798D65C002BEA5A /* UIViewController.h */,
+				8BE493111798D65C002BEA5A /* UIViewController.m */,
+			);
+			name = UIViewController;
+			sourceTree = "<group>";
+		};
+		8B91077C17A97EBA008D9DF0 /* Adaptors */ = {
+			isa = PBXGroup;
+			children = (
+				8B91076017A8B6B7008D9DF0 /* UIWindowAppKitHostView.h */,
+				8B91076117A8B6B7008D9DF0 /* UIWindowAppKitHostView.m */,
+				8B91077D17A97EF7008D9DF0 /* UIAppKitView.h */,
+				8B91077E17A97EF7008D9DF0 /* UIAppKitView.m */,
+				8B1EC8D817A9F2B10035369C /* UIAppKitAdaptorView.h */,
+				8B1EC8D917A9F2B10035369C /* UIAppKitAdaptorView.m */,
+			);
+			name = Adaptors;
+			sourceTree = "<group>";
+		};
 		8BE492AD1798C44F002BEA5A = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +462,7 @@
 		8BE492B91798C44F002BEA5A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8BE492EE1798C986002BEA5A /* QuartzCore.framework */,
 				8BE492BA1798C44F002BEA5A /* Cocoa.framework */,
 				8BE492CF1798C44F002BEA5A /* XCTest.framework */,
 				8BE492BC1798C44F002BEA5A /* Other Frameworks */,
@@ -108,6 +484,18 @@
 			isa = PBXGroup;
 			children = (
 				8BE492C71798C44F002BEA5A /* UIKit.h */,
+				8BE492E51798C4AE002BEA5A /* UIKitDefines.h */,
+				8BE493211798DA2C002BEA5A /* Device */,
+				8BE493001798D620002BEA5A /* Responders */,
+				8BE4931F1798D663002BEA5A /* Navigation Stack */,
+				8B5AF852179B8F2A008B3BF3 /* Text & Images */,
+				8BE493361798E3FA002BEA5A /* Bars */,
+				8BE493201798D668002BEA5A /* Controls */,
+				8B5AF848179B67C3008B3BF3 /* Appearances */,
+				8B6AEDE317AB606B00D6858A /* Event Handling */,
+				8BE492F91798CF9D002BEA5A /* Graphic Types */,
+				8B91077C17A97EBA008D9DF0 /* Adaptors */,
+				8B08256A17AA2ABF00494FAA /* Alerts */,
 				8BE492C11798C44F002BEA5A /* Supporting Files */,
 			);
 			path = UIKit;
@@ -116,6 +504,20 @@
 		8BE492C11798C44F002BEA5A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8B08256517AA264100494FAA /* UIBackButtonChevron@2x.png */,
+				8B08256617AA264100494FAA /* UIBackButtonChevron.png */,
+				8B08256117AA1F7300494FAA /* UISearchBarMagnifyingGlass.png */,
+				8B08256217AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png */,
+				8B5AF861179B9B79008B3BF3 /* UITextFieldSquareBackground.png */,
+				8B5AF862179B9B79008B3BF3 /* UITextFieldSquareBackground@2x.png */,
+				8B5AF865179B9D15008B3BF3 /* UITextFieldRoundBackground.png */,
+				8B5AF866179B9D15008B3BF3 /* UITextFieldRoundBackground@2x.png */,
+				8B5AF84D179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png */,
+				8B5AF84E179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted.png */,
+				8BAE958E179A1D3100562F35 /* UIBarButtonItemBackground@2x.png */,
+				8BAE958F179A1D3100562F35 /* UIBarButtonItemBackground.png */,
+				8B5BD7341798F3E100A53E4A /* UINavigationBarBackgroundImage@2x.png */,
+				8B5BD7311798F1A200A53E4A /* UINavigationBarBackgroundImage.png */,
 				8BE492C21798C44F002BEA5A /* UIKit-Info.plist */,
 				8BE492C31798C44F002BEA5A /* InfoPlist.strings */,
 				8BE492C61798C44F002BEA5A /* UIKit-Prefix.pch */,
@@ -141,6 +543,93 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8BE492F91798CF9D002BEA5A /* Graphic Types */ = {
+			isa = PBXGroup;
+			children = (
+				8B5BD752179B22F400A53E4A /* UIImage */,
+				8BE492F01798CF0C002BEA5A /* UIColor.h */,
+				8BE492F11798CF0C002BEA5A /* UIColor.m */,
+				8BE492FA1798CFAB002BEA5A /* UIBezierPath.h */,
+				8BE4932C1798DFB4002BEA5A /* UIFont.h */,
+				8BE4933B1798E481002BEA5A /* UIGeometry.h */,
+				8B5BD75D179B348700A53E4A /* UIGraphics.h */,
+				8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */,
+			);
+			name = "Graphic Types";
+			sourceTree = "<group>";
+		};
+		8BE493001798D620002BEA5A /* Responders */ = {
+			isa = PBXGroup;
+			children = (
+				8BE492E61798C52F002BEA5A /* UIResponder.h */,
+				8BE492E71798C52F002BEA5A /* UIResponder.m */,
+				8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */,
+				8B91077917A97E9E008D9DF0 /* UIView */,
+				8B91077A17A97EA6008D9DF0 /* UIWindow */,
+				8B91077B17A97EAB008D9DF0 /* UIViewController */,
+			);
+			name = Responders;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		8BE4931F1798D663002BEA5A /* Navigation Stack */ = {
+			isa = PBXGroup;
+			children = (
+				8BE493091798D65C002BEA5A /* UINavigationBar.h */,
+				8BE4930A1798D65C002BEA5A /* UINavigationBar.m */,
+				8BE4930B1798D65C002BEA5A /* UINavigationController.h */,
+				8BE4930C1798D65C002BEA5A /* UINavigationController.m */,
+				8BE4930D1798D65C002BEA5A /* UINavigationItem.h */,
+				8BE4930E1798D65C002BEA5A /* UINavigationItem.m */,
+				8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */,
+				8B5AF84A179B67F7008B3BF3 /* UINavigationBarAppearance.m */,
+			);
+			name = "Navigation Stack";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		8BE493201798D668002BEA5A /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				8BE493371798E44D002BEA5A /* UIControl.h */,
+				8BE493381798E44D002BEA5A /* UIControl.m */,
+				8B5BD7361798FA9B00A53E4A /* UIButton.h */,
+				8B5BD7371798FA9B00A53E4A /* UIButton.m */,
+				8B5BD7481799040E00A53E4A /* UIButton_Private.h */,
+				8B5BD73F1799039E00A53E4A /* UIButton Background Views */,
+			);
+			name = Controls;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		8BE493211798DA2C002BEA5A /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				8BE493221798DA39002BEA5A /* UIScreen.h */,
+				8BE493231798DA39002BEA5A /* UIScreen.m */,
+				8BE493281798DBD5002BEA5A /* UIDevice.h */,
+				8BE493291798DBD5002BEA5A /* UIDevice.m */,
+				8B6AEDEA17AB642A00D6858A /* UIApplication.h */,
+				8B6AEDEB17AB642A00D6858A /* UIApplication.m */,
+				8B6AEDEE17AB6BF600D6858A /* UIApplication_Private.h */,
+			);
+			name = Device;
+			sourceTree = "<group>";
+		};
+		8BE493361798E3FA002BEA5A /* Bars */ = {
+			isa = PBXGroup;
+			children = (
+				8BE493321798E3F3002BEA5A /* UIBarItem.h */,
+				8BE493331798E3F3002BEA5A /* UIBarItem.m */,
+				8BE4933C1798E564002BEA5A /* UIBarButtonItem.h */,
+				8BE4933D1798E564002BEA5A /* UIBarButtonItem.m */,
+				8B5BD74A179904C800A53E4A /* UIBarButtonItem_Private.h */,
+				8B08255D17AA19EF00494FAA /* UIBarCommon.h */,
+			);
+			name = Bars;
+			path = ..;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -148,6 +637,64 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BE493401798EAA0002BEA5A /* UIKit.h in Headers */,
+				8BE493411798EAA0002BEA5A /* UIKitDefines.h in Headers */,
+				8BE493241798DA39002BEA5A /* UIScreen.h in Headers */,
+				8BE4932A1798DBD5002BEA5A /* UIDevice.h in Headers */,
+				8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */,
+				8BE492E81798C52F002BEA5A /* UIResponder.h in Headers */,
+				8BE492EC1798C888002BEA5A /* UIView.h in Headers */,
+				8B5BD764179B404C00A53E4A /* UIImage_Private.h in Headers */,
+				8BE492FE1798CFDD002BEA5A /* UIWindow.h in Headers */,
+				8B5BD72E1798F05C00A53E4A /* UIImageView.h in Headers */,
+				8B01140B179A193D00C8594C /* UIAppearance.h in Headers */,
+				8B5BD761179B3A8500A53E4A /* UIThreePartImageProvider.h in Headers */,
+				8BE4931D1798D65C002BEA5A /* UIViewController.h in Headers */,
+				8BE493161798D65C002BEA5A /* UINavigationBar.h in Headers */,
+				8BE493181798D65C002BEA5A /* UINavigationController.h in Headers */,
+				8BE4931A1798D65C002BEA5A /* UINavigationItem.h in Headers */,
+				8B5BD74E179908EC00A53E4A /* UIButtonBarBackgroundView.h in Headers */,
+				8BE493341798E3F3002BEA5A /* UIBarItem.h in Headers */,
+				8BE4933E1798E564002BEA5A /* UIBarButtonItem.h in Headers */,
+				8BE493391798E44D002BEA5A /* UIControl.h in Headers */,
+				8B0114041799FDC300C8594C /* UIEvent.h in Headers */,
+				8B01140E179A19C500C8594C /* UIConcreteAppearance.h in Headers */,
+				8B5BD75B179B2CA700A53E4A /* UIImageProvider.h in Headers */,
+				8B91076217A8B6B7008D9DF0 /* UIWindowAppKitHostView.h in Headers */,
+				8B91076A17A8B883008D9DF0 /* UITouch.h in Headers */,
+				8B08255B17AA18B100494FAA /* UISearchBar.h in Headers */,
+				8B08256017AA1A3500494FAA /* UITextInputTraits.h in Headers */,
+				8B1EC8E417A9F8280035369C /* UITextField.h in Headers */,
+				8B6AEDEF17AB6BF600D6858A /* UIApplication_Private.h in Headers */,
+				8B08255E17AA19EF00494FAA /* UIBarCommon.h in Headers */,
+				8BE493301798E39A002BEA5A /* UILabel.h in Headers */,
+				8B6AEDE617AB638B00D6858A /* UIGestureRecognizer.h in Headers */,
+				8B6AEDEC17AB642A00D6858A /* UIApplication.h in Headers */,
+				8B08256D17AA2ACF00494FAA /* UIAlertView.h in Headers */,
+				8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */,
+				8BE492F21798CF0C002BEA5A /* UIColor.h in Headers */,
+				8B5AF84B179B67F7008B3BF3 /* UINavigationBarAppearance.h in Headers */,
+				8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */,
+				8B91076D17A8B8BC008D9DF0 /* UITouch_Private.h in Headers */,
+				8B91075B17A8A8A8008D9DF0 /* UIResponder_Private.h in Headers */,
+				8B91076717A8B7B1008D9DF0 /* UIEvent_Private.h in Headers */,
+				8B5BD7381798FA9B00A53E4A /* UIButton.h in Headers */,
+				8BE493421798EAA0002BEA5A /* UIImage.h in Headers */,
+				8B91077317A8C62D008D9DF0 /* UIAnimationCollection.h in Headers */,
+				8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */,
+				8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */,
+				8B1EC8DA17A9F2B10035369C /* UIAppKitAdaptorView.h in Headers */,
+				8B91077817A979F9008D9DF0 /* UIWindow_Private.h in Headers */,
+				8B6AEDE917AB639400D6858A /* UIGestureRecognizer_Private.h in Headers */,
+				8BE492FB1798CFAB002BEA5A /* UIBezierPath.h in Headers */,
+				8BE493431798EAA0002BEA5A /* UIFont.h in Headers */,
+				8B5BD742179903AB00A53E4A /* UIButtonRoundRectBackgroundView.h in Headers */,
+				8B5BD7491799040E00A53E4A /* UIButton_Private.h in Headers */,
+				8B5BD75E179B348700A53E4A /* UIGraphics.h in Headers */,
+				8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */,
+				8B5BD73D1799037400A53E4A /* UIButtonBackgroundView.h in Headers */,
+				8BE4931C1798D65C002BEA5A /* UIViewController_Private.h in Headers */,
+				8B5BD74B179904C800A53E4A /* UIBarButtonItem_Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,7 +774,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B5BD7331798F1A200A53E4A /* UINavigationBarBackgroundImage.png in Resources */,
+				8B5AF850179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted.png in Resources */,
+				8B5AF84F179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png in Resources */,
+				8B5AF863179B9B79008B3BF3 /* UITextFieldSquareBackground.png in Resources */,
 				8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */,
+				8B08256417AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png in Resources */,
+				8BAE9591179A1D3100562F35 /* UIBarButtonItemBackground.png in Resources */,
+				8B5AF867179B9D15008B3BF3 /* UITextFieldRoundBackground.png in Resources */,
+				8B08256817AA264100494FAA /* UIBackButtonChevron.png in Resources */,
+				8B5AF864179B9B79008B3BF3 /* UITextFieldSquareBackground@2x.png in Resources */,
+				8B08256717AA264100494FAA /* UIBackButtonChevron@2x.png in Resources */,
+				8BAE9590179A1D3100562F35 /* UIBarButtonItemBackground@2x.png in Resources */,
+				8B08256317AA1F7300494FAA /* UISearchBarMagnifyingGlass.png in Resources */,
+				8B5BD7351798F3E100A53E4A /* UINavigationBarBackgroundImage@2x.png in Resources */,
+				8B5AF868179B9D15008B3BF3 /* UITextFieldRoundBackground@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +807,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B91075F17A8B1EA008D9DF0 /* UIGraphics.m in Sources */,
+				8B5BD72F1798F05C00A53E4A /* UIImageView.m in Sources */,
+				8B5BD73E1799037400A53E4A /* UIButtonBackgroundView.m in Sources */,
+				8BE4931B1798D65C002BEA5A /* UINavigationItem.m in Sources */,
+				8B5BD758179B24D400A53E4A /* UIImage.m in Sources */,
+				8BE493351798E3F3002BEA5A /* UIBarItem.m in Sources */,
+				8BE492ED1798C888002BEA5A /* UIView.m in Sources */,
+				8B5BD75C179B2CA700A53E4A /* UIImageProvider.m in Sources */,
+				8BE493171798D65C002BEA5A /* UINavigationBar.m in Sources */,
+				8B08256E17AA2ACF00494FAA /* UIAlertView.m in Sources */,
+				8BE492E91798C52F002BEA5A /* UIResponder.m in Sources */,
+				8B91076317A8B6B7008D9DF0 /* UIWindowAppKitHostView.m in Sources */,
+				8B91076517A8B772008D9DF0 /* UIEvent.m in Sources */,
+				8B5AF84C179B67F7008B3BF3 /* UINavigationBarAppearance.m in Sources */,
+				8BE4931E1798D65C002BEA5A /* UIViewController.m in Sources */,
+				8BE4933A1798E44D002BEA5A /* UIControl.m in Sources */,
+				8BE493191798D65C002BEA5A /* UINavigationController.m in Sources */,
+				8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */,
+				8B6AEDE717AB638B00D6858A /* UIGestureRecognizer.m in Sources */,
+				8BE4932B1798DBD5002BEA5A /* UIDevice.m in Sources */,
+				8BE4933F1798E564002BEA5A /* UIBarButtonItem.m in Sources */,
+				8BE492F31798CF0C002BEA5A /* UIColor.m in Sources */,
+				8BE493311798E39A002BEA5A /* UILabel.m in Sources */,
+				8B91077417A8C62D008D9DF0 /* UIAnimationCollection.m in Sources */,
+				8B5BD762179B3A8500A53E4A /* UIThreePartImageProvider.m in Sources */,
+				8B91076B17A8B883008D9DF0 /* UITouch.m in Sources */,
+				8B1EC8E217A9F8280035369C /* UINSTextFieldCell.m in Sources */,
+				8BE492FF1798CFDD002BEA5A /* UIWindow.m in Sources */,
+				8B6AEDED17AB642A00D6858A /* UIApplication.m in Sources */,
+				8B91077017A8C5C9008D9DF0 /* UIView_UIViewAnimation.m in Sources */,
+				8B1EC8E517A9F8280035369C /* UITextField.m in Sources */,
+				8BE493251798DA39002BEA5A /* UIScreen.m in Sources */,
+				8B5BD74F179908EC00A53E4A /* UIButtonBarBackgroundView.m in Sources */,
+				8B5BD7391798FA9B00A53E4A /* UIButton.m in Sources */,
+				8B1EC8DB17A9F2B10035369C /* UIAppKitAdaptorView.m in Sources */,
+				8B01140F179A19C500C8594C /* UIConcreteAppearance.m in Sources */,
+				8B08255C17AA18B100494FAA /* UISearchBar.m in Sources */,
+				8B5BD743179903AB00A53E4A /* UIButtonRoundRectBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,13 +959,14 @@
 		8BE492E01798C44F002BEA5A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
+				COMBINE_HIDPI_IMAGES = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIKit/UIKit-Prefix.pch";
 				INFOPLIST_FILE = "UIKit/UIKit-Info.plist";
+				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -375,13 +975,14 @@
 		8BE492E11798C44F002BEA5A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
+				COMBINE_HIDPI_IMAGES = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UIKit/UIKit-Prefix.pch";
 				INFOPLIST_FILE = "UIKit/UIKit-Info.plist";
+				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -446,6 +1047,7 @@
 				8BE492E11798C44F002BEA5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8BE492E21798C44F002BEA5A /* Build configuration list for PBXNativeTarget "UIKitTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +1056,7 @@
 				8BE492E41798C44F002BEA5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
