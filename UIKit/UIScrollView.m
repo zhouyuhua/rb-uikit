@@ -7,7 +7,7 @@
 //
 
 #import "UIScrollView.h"
-#import "UIPanGestureRecognizer.h"
+#import "UIScrollWheelGestureRecognizer.h"
 
 #import "UIScroller.h"
 
@@ -18,6 +18,8 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
 @property (nonatomic) UIScroller *horizontalScroller;
 @property (nonatomic) UIScroller *verticalScroller;
+
+@property (nonatomic, weak) NSTimer *hideScrollersTimer;
 
 #pragma mark - readwrite
 
@@ -38,7 +40,7 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
         
         self.clipsToBounds = YES;
         
-        self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panned:)];
+        self.panGestureRecognizer = [[UIScrollWheelGestureRecognizer alloc] initWithTarget:self action:@selector(panned:)];
         [self addGestureRecognizer:self.panGestureRecognizer];
         
         self.horizontalScroller = [[UIScroller alloc] initWithOrientation:UIScrollerOrientationHorizontal];
@@ -132,6 +134,25 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
     
 }
 
+- (void)_showScrollers
+{
+    [self.hideScrollersTimer invalidate];
+    
+    if([self _canScrollVertical])
+        _verticalScroller.alpha = 1.0;
+    
+    if([self _canScrollHorizontal])
+        _horizontalScroller.alpha = 1.0;
+}
+
+- (void)_hideScrollers
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        _verticalScroller.alpha = 0.0;
+        _horizontalScroller.alpha = 0.0;
+    }];
+}
+
 #pragma mark - Layout
 
 - (void)layoutSubviews
@@ -147,7 +168,7 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
     verticalScrollerFrame.origin.y = CGRectGetMinY(bounds);
     
     if(bothScrollersVisible)
-        verticalScrollerFrame.size.height -= 12.0;
+        verticalScrollerFrame.size.height -= UIScrollerTrackArea;
     
     _verticalScroller.frame = verticalScrollerFrame;
     
@@ -157,7 +178,7 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
     horizontalScrollerFrame.origin.y = CGRectGetMaxY(bounds) - CGRectGetHeight(horizontalScrollerFrame);
     
     if(bothScrollersVisible)
-        horizontalScrollerFrame.size.width -= 12.0;
+        horizontalScrollerFrame.size.width -= UIScrollerTrackArea;
     
     _horizontalScroller.frame = horizontalScrollerFrame;
 }
@@ -184,11 +205,7 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
 - (void)_beginDragging
 {
-    if([self _canScrollVertical])
-        _verticalScroller.alpha = 1.0;
-    
-    if([self _canScrollHorizontal])
-        _horizontalScroller.alpha = 1.0;
+    [self _showScrollers];
 }
 
 - (void)_dragBy:(CGPoint)delta
@@ -217,10 +234,11 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
 - (void)_endDraggingWithVelocity:(CGPoint)velocity
 {
-    [UIView animateWithDuration:0.25 animations:^{
-        _verticalScroller.alpha = 0.0;
-        _horizontalScroller.alpha = 0.0;
-    }];
+    self.hideScrollersTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                               target:self
+                                                             selector:@selector(_hideScrollers)
+                                                             userInfo:nil
+                                                              repeats:NO];
 }
 
 

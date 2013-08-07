@@ -28,6 +28,8 @@
 		8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DE17A9F8280035369C /* UITextField_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B1EC8E417A9F8280035369C /* UITextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DF17A9F8280035369C /* UITextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1EC8E517A9F8280035369C /* UITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8E017A9F8280035369C /* UITextField.m */; };
+		8B39CBFA17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B39CBF817B2B9C900435CEC /* UIScrollWheelGestureRecognizer.h */; };
+		8B39CBFB17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B39CBF917B2B9C900435CEC /* UIScrollWheelGestureRecognizer.m */; };
 		8B5AF84B179B67F7008B3BF3 /* UINavigationBarAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B5AF84C179B67F7008B3BF3 /* UINavigationBarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5AF84A179B67F7008B3BF3 /* UINavigationBarAppearance.m */; };
 		8B5AF84F179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5AF84D179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png */; };
@@ -167,6 +169,8 @@
 		8B1EC8DE17A9F8280035369C /* UITextField_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextField_Private.h; sourceTree = "<group>"; };
 		8B1EC8DF17A9F8280035369C /* UITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextField.h; sourceTree = "<group>"; };
 		8B1EC8E017A9F8280035369C /* UITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextField.m; sourceTree = "<group>"; };
+		8B39CBF817B2B9C900435CEC /* UIScrollWheelGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollWheelGestureRecognizer.h; sourceTree = "<group>"; };
+		8B39CBF917B2B9C900435CEC /* UIScrollWheelGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScrollWheelGestureRecognizer.m; sourceTree = "<group>"; };
 		8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationBarAppearance.h; sourceTree = "<group>"; };
 		8B5AF84A179B67F7008B3BF3 /* UINavigationBarAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationBarAppearance.m; sourceTree = "<group>"; };
 		8B5AF84D179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemBackgroundHighlighted@2x.png"; sourceTree = "<group>"; };
@@ -473,6 +477,8 @@
 				8B6AEDFE17AC614100D6858A /* UIGestureRecognizerSubclass.h */,
 				8BB4BD5E17B1ED5E009B7708 /* UIPanGestureRecognizer.h */,
 				8BB4BD5F17B1ED5E009B7708 /* UIPanGestureRecognizer.m */,
+				8B39CBF817B2B9C900435CEC /* UIScrollWheelGestureRecognizer.h */,
+				8B39CBF917B2B9C900435CEC /* UIScrollWheelGestureRecognizer.m */,
 			);
 			name = UIGestureRecognizer;
 			sourceTree = "<group>";
@@ -733,6 +739,7 @@
 				8BE492FB1798CFAB002BEA5A /* UIBezierPath.h in Headers */,
 				8BE493431798EAA0002BEA5A /* UIFont.h in Headers */,
 				8B5BD742179903AB00A53E4A /* UIButtonRoundRectBackgroundView.h in Headers */,
+				8B39CBFA17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.h in Headers */,
 				8B5BD7491799040E00A53E4A /* UIButton_Private.h in Headers */,
 				8B5BD75E179B348700A53E4A /* UIGraphics.h in Headers */,
 				8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */,
@@ -869,6 +876,7 @@
 				8B5AF84C179B67F7008B3BF3 /* UINavigationBarAppearance.m in Sources */,
 				8BE4931E1798D65C002BEA5A /* UIViewController.m in Sources */,
 				8BE4933A1798E44D002BEA5A /* UIControl.m in Sources */,
+				8B39CBFB17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.m in Sources */,
 				8BB4BD5617B1E860009B7708 /* UIScrollView.m in Sources */,
 				8BE493191798D65C002BEA5A /* UINavigationController.m in Sources */,
 				8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */,

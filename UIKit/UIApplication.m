@@ -121,6 +121,19 @@ static NSArray *UIGestureRecognizersForView(UIView *view)
     return gestureRecognizers;
 }
 
+static BOOL ScrollWheelEventIsContinuous(NSEvent *event)
+{
+    return CGEventGetIntegerValueField(event.CGEvent, kCGScrollWheelEventIsContinuous);
+}
+
+static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
+{
+    CGPoint delta = CGPointMake(-CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis2),
+                                -CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis1));
+    
+    return delta;
+}
+
 - (void)_beginTrackingNativeMouseEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView
 {
     _currentEvent = [UIEvent new];
@@ -203,8 +216,7 @@ static NSArray *UIGestureRecognizersForView(UIView *view)
     CGPoint locationInWindow = _currentTouch.locationInWindow;
     _currentTouch.previousLocationInWindow = locationInWindow;
     
-    CGPoint delta = CGPointMake(-CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis2),
-                                -CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis1));
+    CGPoint delta = ScrollWheelEventGetDelta(event);
     locationInWindow.x += delta.x;
     locationInWindow.y += delta.y;
     
@@ -225,8 +237,7 @@ static NSArray *UIGestureRecognizersForView(UIView *view)
     CGPoint locationInWindow = _currentTouch.locationInWindow;
     _currentTouch.previousLocationInWindow = locationInWindow;
     
-    CGPoint delta = CGPointMake(-CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis2),
-                                -CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis1));
+    CGPoint delta = ScrollWheelEventGetDelta(event);
     locationInWindow.x += delta.x;
     locationInWindow.y += delta.y;
     
@@ -289,8 +300,22 @@ static NSArray *UIGestureRecognizersForView(UIView *view)
         }
             
         case NSScrollWheel: {
-            [self _trackingUpdateForNativeGestureEvent:event fromHostView:hostView];
-            [self sendEvent:_currentEvent];
+            if(!ScrollWheelEventIsContinuous(event)) {
+                [self _beginTrackingNativeGestureEvent:event fromHostView:hostView];
+                [self sendEvent:_currentEvent];
+                
+                [self _trackingUpdateForNativeGestureEvent:event fromHostView:hostView];
+                [self sendEvent:_currentEvent];
+                
+                [self _endTrackingNativeGestureEvent:event fromHostview:hostView];
+                [self sendEvent:_currentEvent];
+                
+                _currentEvent = nil;
+                _currentTouch = nil;
+            } else {
+                [self _trackingUpdateForNativeGestureEvent:event fromHostView:hostView];
+                [self sendEvent:_currentEvent];
+            }
             
             break;
         }

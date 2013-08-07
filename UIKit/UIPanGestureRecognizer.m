@@ -50,9 +50,12 @@
 
 #pragma mark -
 
+///UIScrollWheelGestureRecognizer overrides this to receive its events
+///from the scroll wheel instead of the mouse. As such, all code in this
+///recognizer must be functional with both the mouse and the scroll wheel.
 - (BOOL)_wantsGestureEvents
 {
-    return YES;
+    return NO;
 }
 
 - (void)processChangeWithTouch:(UITouch *)touch forEvent:(UIEvent *)event

@@ -8,8 +8,8 @@
 
 #import "UIScroller.h"
 
-static CGFloat const UIScrollerTrackArea = 12.0;
-static CGFloat const UIScrollerMinimumKnobArea = 40.0;
+CGFloat const UIScrollerTrackArea = 12.0;
+CGFloat const UIScrollerMinimumKnobArea = 40.0;
 
 @interface UIScroller ()
 

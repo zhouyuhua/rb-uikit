@@ -11,7 +11,7 @@
 typedef NS_ENUM(NSUInteger, UIScrollerOrientation) {
     UIScrollerOrientationVertical,
     UIScrollerOrientationHorizontal,
-};;
+};
 
 @interface UIScroller : UIView
 
@@ -23,3 +23,6 @@ typedef NS_ENUM(NSUInteger, UIScrollerOrientation) {
 @property (nonatomic) CGPoint contentOffset;
 
 @end
+
+UIKIT_EXTERN CGFloat const UIScrollerTrackArea;
+UIKIT_EXTERN CGFloat const UIScrollerMinimumKnobArea;
