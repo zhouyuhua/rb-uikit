@@ -35,6 +35,8 @@
 #import "UITouch.h"
 #import "UIAppearance.h"
 
+#import "UIScrollView.h"
+
 #import "UIAppKitView.h"
 
 #import "UIAlertView.h"

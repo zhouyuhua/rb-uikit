@@ -167,7 +167,7 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
-    if([self pointInside:point withEvent:event] && !self.hidden && self.alpha > 0.0 && self.userInteractionEnabled) {
+    if([self pointInside:point withEvent:event] && !self.hidden && self.alpha > 0.1 && self.userInteractionEnabled) {
         __block UIView *result = self;
         [_subviews enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(UIView *view, NSUInteger index, BOOL *stop) {
             UIView *insideView = [view hitTest:[view convertPoint:point fromView:self] withEvent:event];

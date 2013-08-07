@@ -7,6 +7,8 @@
 
 #import "UIGestureRecognizer.h"
 
+@class UITouch, UIEvent;
+
 @interface UIGestureRecognizer (ForSubclassEyesOnly)
 
 @property (nonatomic, readwrite) UIGestureRecognizerState state;

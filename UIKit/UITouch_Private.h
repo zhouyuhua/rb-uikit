@@ -13,6 +13,8 @@
 @property (nonatomic) CGPoint locationInWindow;
 @property (nonatomic) CGPoint previousLocationInWindow;
 
+@property (nonatomic) CGPoint delta;
+
 #pragma mark - readwrite
 
 @property (nonatomic, readwrite) NSTimeInterval timestamp;

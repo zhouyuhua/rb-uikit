@@ -12,23 +12,52 @@
 #import "UITouch_Private.h"
 #import "UIView_Private.h"
 
-@implementation UIGestureRecognizer
+#import "UIAction.h"
+
+@implementation UIGestureRecognizer {
+    NSMutableArray *_actions;
+}
+
+- (id)init
+{
+    if((self = [super init])) {
+        _actions = [NSMutableArray array];
+        self.state = UIGestureRecognizerStatePossible;
+    }
+    
+    return self;
+}
 
 - (id)initWithTarget:(id)target action:(SEL)action
 {
-    return nil;
+    if((self = [self init])) {
+        if(target && action)
+            [self addTarget:target action:action];
+    }
+    
+    return self;
 }
 
 #pragma mark - Actions
 
 - (void)addTarget:(id)target action:(SEL)action
 {
-    
+    UIAction *actionObject = [UIAction new];
+    actionObject.target = target;
+    actionObject.action = action;
+    [_actions addObject:actionObject];
 }
 
 - (void)removeTarget:(id)target action:(SEL)action
 {
+    NSUInteger firstMatch = [_actions indexOfObjectPassingTest:^BOOL(UIAction *internalAction, NSUInteger index, BOOL *stop) {
+        return (internalAction.action == action &&
+                internalAction.target == target);
+    }];
     
+    if(firstMatch) {
+        [_actions removeObjectAtIndex:firstMatch];
+    }
 }
 
 #pragma mark - <NSCopying>
@@ -39,6 +68,7 @@
     
     gestureRecognizer->_delegate = _delegate;
     gestureRecognizer->_delegateRespondsTo = _delegateRespondsTo;
+    gestureRecognizer->_actions = [_actions copy];
     
     return gestureRecognizer;
 }
@@ -102,7 +132,7 @@
 
 - (void)reset
 {
-    
+    self.state = UIGestureRecognizerStatePossible;
 }
 
 - (BOOL)canPreventGestureRecognizer:(UIGestureRecognizer *)preventedGestureRecognizer
@@ -137,6 +167,11 @@
 
 #pragma mark - Internal Event Handling
 
+- (BOOL)_wantsGestureEvents
+{
+    return NO;
+}
+
 - (BOOL)_wantsToTrackEvent:(UIEvent *)event
 {
     if(!self._view)
@@ -169,12 +204,14 @@
         }
         
         switch (touch.phase) {
+            case _UITouchPhaseGestureBegan:
             case UITouchPhaseBegan: {
                 [self touchesBegan:touches withEvent:event];
                 self._touches = [touches allObjects];
                 break;
             }
                 
+            case _UITouchPhaseGestureMoved:
             case UITouchPhaseMoved: {
                 [self touchesMoved:touches withEvent:event];
                 self._touches = [touches allObjects];
@@ -185,9 +222,13 @@
                 break;
             }
                 
+            case _UITouchPhaseGestureEnd:
             case UITouchPhaseEnded: {
                 [self touchesEnded:touches withEvent:event];
                 self._touches = nil;
+                
+                [self performSelector:@selector(reset) withObject:nil afterDelay:0.0];
+                
                 break;
             }
                 
@@ -197,19 +238,11 @@
                 self._touches = nil;
                 break;
             }
-                
-            case _UITouchPhaseGestureBegan: {
-                break;
-            }
-                
-            case _UITouchPhaseGestureMoved: {
-                break;
-            }
-                
-            case _UITouchPhaseGestureEnd: {
-                break;
-            }
         }
+    }
+    
+    for (UIAction *action in _actions) {
+        [action invokeFromSender:self];
     }
 }
 

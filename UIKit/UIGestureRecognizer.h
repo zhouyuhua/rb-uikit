@@ -23,6 +23,11 @@ typedef NS_ENUM(NSInteger, UIGestureRecognizerState) {
 
 @interface UIGestureRecognizer : NSObject <NSCopying>
 
+- (id)initWithTarget:(id)target action:(SEL)action;
+
+- (void)addTarget:(id)target action:(SEL)action;
+- (void)removeTarget:(id)target action:(SEL)action;
+
 @property (nonatomic, assign) id <UIGestureRecognizerDelegate> delegate;
 @property (nonatomic, readonly) UIGestureRecognizerState state;
 @property (nonatomic, readonly) NSView *view;

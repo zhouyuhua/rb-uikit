@@ -62,8 +62,8 @@
 		8B6AEDE917AB639400D6858A /* UIGestureRecognizer_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDE817AB639400D6858A /* UIGestureRecognizer_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B6AEDEC17AB642A00D6858A /* UIApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDEA17AB642A00D6858A /* UIApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B6AEDED17AB642A00D6858A /* UIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B6AEDEB17AB642A00D6858A /* UIApplication.m */; };
-		8B6AEDEF17AB6BF600D6858A /* UIApplication_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDEE17AB6BF600D6858A /* UIApplication_Private.h */; };
-		8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDFE17AC614100D6858A /* UIGestureRecognizerSubclass.h */; };
+		8B6AEDEF17AB6BF600D6858A /* UIApplication_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDEE17AB6BF600D6858A /* UIApplication_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDFE17AC614100D6858A /* UIGestureRecognizerSubclass.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B91075B17A8A8A8008D9DF0 /* UIResponder_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075C17A8A971008D9DF0 /* UIView_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91075F17A8B1EA008D9DF0 /* UIGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */; };
@@ -82,6 +82,14 @@
 		8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91077E17A97EF7008D9DF0 /* UIAppKitView.m */; };
 		8BAE9590179A1D3100562F35 /* UIBarButtonItemBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE958E179A1D3100562F35 /* UIBarButtonItemBackground@2x.png */; };
 		8BAE9591179A1D3100562F35 /* UIBarButtonItemBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE958F179A1D3100562F35 /* UIBarButtonItemBackground.png */; };
+		8BB4BD5517B1E860009B7708 /* UIScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD5317B1E860009B7708 /* UIScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BB4BD5617B1E860009B7708 /* UIScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD5417B1E860009B7708 /* UIScrollView.m */; };
+		8BB4BD5B17B1EC51009B7708 /* UIScroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD5917B1EC51009B7708 /* UIScroller.h */; };
+		8BB4BD5C17B1EC51009B7708 /* UIScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD5A17B1EC51009B7708 /* UIScroller.m */; };
+		8BB4BD6017B1ED5E009B7708 /* UIPanGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD5E17B1ED5E009B7708 /* UIPanGestureRecognizer.h */; };
+		8BB4BD6117B1ED5E009B7708 /* UIPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD5F17B1ED5E009B7708 /* UIPanGestureRecognizer.m */; };
+		8BB8A22D17B1E66A004FB0E8 /* UIAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB8A22B17B1E66A004FB0E8 /* UIAction.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8A22C17B1E66A004FB0E8 /* UIAction.m */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -213,6 +221,14 @@
 		8B91077E17A97EF7008D9DF0 /* UIAppKitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitView.m; sourceTree = "<group>"; };
 		8BAE958E179A1D3100562F35 /* UIBarButtonItemBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemBackground@2x.png"; sourceTree = "<group>"; };
 		8BAE958F179A1D3100562F35 /* UIBarButtonItemBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemBackground.png; sourceTree = "<group>"; };
+		8BB4BD5317B1E860009B7708 /* UIScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollView.h; sourceTree = "<group>"; };
+		8BB4BD5417B1E860009B7708 /* UIScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScrollView.m; sourceTree = "<group>"; };
+		8BB4BD5917B1EC51009B7708 /* UIScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScroller.h; sourceTree = "<group>"; };
+		8BB4BD5A17B1EC51009B7708 /* UIScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScroller.m; sourceTree = "<group>"; };
+		8BB4BD5E17B1ED5E009B7708 /* UIPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPanGestureRecognizer.h; sourceTree = "<group>"; };
+		8BB4BD5F17B1ED5E009B7708 /* UIPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPanGestureRecognizer.m; sourceTree = "<group>"; };
+		8BB8A22B17B1E66A004FB0E8 /* UIAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAction.h; sourceTree = "<group>"; };
+		8BB8A22C17B1E66A004FB0E8 /* UIAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAction.m; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -378,10 +394,7 @@
 				8B91076817A8B883008D9DF0 /* UITouch.h */,
 				8B91076917A8B883008D9DF0 /* UITouch.m */,
 				8B91076C17A8B8BC008D9DF0 /* UITouch_Private.h */,
-				8B6AEDE417AB638B00D6858A /* UIGestureRecognizer.h */,
-				8B6AEDE517AB638B00D6858A /* UIGestureRecognizer.m */,
-				8B6AEDE817AB639400D6858A /* UIGestureRecognizer_Private.h */,
-				8B6AEDFE17AC614100D6858A /* UIGestureRecognizerSubclass.h */,
+				8BB4BD5D17B1ED53009B7708 /* UIGestureRecognizer */,
 			);
 			name = "Event Handling";
 			sourceTree = "<group>";
@@ -440,6 +453,30 @@
 			name = Adaptors;
 			sourceTree = "<group>";
 		};
+		8BB4BD5217B1E856009B7708 /* Scroll View */ = {
+			isa = PBXGroup;
+			children = (
+				8BB4BD5317B1E860009B7708 /* UIScrollView.h */,
+				8BB4BD5417B1E860009B7708 /* UIScrollView.m */,
+				8BB4BD5917B1EC51009B7708 /* UIScroller.h */,
+				8BB4BD5A17B1EC51009B7708 /* UIScroller.m */,
+			);
+			name = "Scroll View";
+			sourceTree = "<group>";
+		};
+		8BB4BD5D17B1ED53009B7708 /* UIGestureRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				8B6AEDE417AB638B00D6858A /* UIGestureRecognizer.h */,
+				8B6AEDE517AB638B00D6858A /* UIGestureRecognizer.m */,
+				8B6AEDE817AB639400D6858A /* UIGestureRecognizer_Private.h */,
+				8B6AEDFE17AC614100D6858A /* UIGestureRecognizerSubclass.h */,
+				8BB4BD5E17B1ED5E009B7708 /* UIPanGestureRecognizer.h */,
+				8BB4BD5F17B1ED5E009B7708 /* UIPanGestureRecognizer.m */,
+			);
+			name = UIGestureRecognizer;
+			sourceTree = "<group>";
+		};
 		8BE492AD1798C44F002BEA5A = {
 			isa = PBXGroup;
 			children = (
@@ -491,6 +528,7 @@
 				8B5AF852179B8F2A008B3BF3 /* Text & Images */,
 				8BE493361798E3FA002BEA5A /* Bars */,
 				8BE493201798D668002BEA5A /* Controls */,
+				8BB4BD5217B1E856009B7708 /* Scroll View */,
 				8B5AF848179B67C3008B3BF3 /* Appearances */,
 				8B6AEDE317AB606B00D6858A /* Event Handling */,
 				8BE492F91798CF9D002BEA5A /* Graphic Types */,
@@ -593,6 +631,8 @@
 			children = (
 				8BE493371798E44D002BEA5A /* UIControl.h */,
 				8BE493381798E44D002BEA5A /* UIControl.m */,
+				8BB8A22B17B1E66A004FB0E8 /* UIAction.h */,
+				8BB8A22C17B1E66A004FB0E8 /* UIAction.m */,
 				8B5BD7361798FA9B00A53E4A /* UIButton.h */,
 				8B5BD7371798FA9B00A53E4A /* UIButton.m */,
 				8B5BD7481799040E00A53E4A /* UIButton_Private.h */,
@@ -641,7 +681,6 @@
 				8BE493411798EAA0002BEA5A /* UIKitDefines.h in Headers */,
 				8BE493241798DA39002BEA5A /* UIScreen.h in Headers */,
 				8BE4932A1798DBD5002BEA5A /* UIDevice.h in Headers */,
-				8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */,
 				8BE492E81798C52F002BEA5A /* UIResponder.h in Headers */,
 				8BE492EC1798C888002BEA5A /* UIView.h in Headers */,
 				8B5BD764179B404C00A53E4A /* UIImage_Private.h in Headers */,
@@ -665,10 +704,12 @@
 				8B08255B17AA18B100494FAA /* UISearchBar.h in Headers */,
 				8B08256017AA1A3500494FAA /* UITextInputTraits.h in Headers */,
 				8B1EC8E417A9F8280035369C /* UITextField.h in Headers */,
-				8B6AEDEF17AB6BF600D6858A /* UIApplication_Private.h in Headers */,
 				8B08255E17AA19EF00494FAA /* UIBarCommon.h in Headers */,
 				8BE493301798E39A002BEA5A /* UILabel.h in Headers */,
 				8B6AEDE617AB638B00D6858A /* UIGestureRecognizer.h in Headers */,
+				8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */,
+				8BB4BD5517B1E860009B7708 /* UIScrollView.h in Headers */,
+				8BB4BD6017B1ED5E009B7708 /* UIPanGestureRecognizer.h in Headers */,
 				8B6AEDEC17AB642A00D6858A /* UIApplication.h in Headers */,
 				8B08256D17AA2ACF00494FAA /* UIAlertView.h in Headers */,
 				8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */,
@@ -686,6 +727,9 @@
 				8B1EC8DA17A9F2B10035369C /* UIAppKitAdaptorView.h in Headers */,
 				8B91077817A979F9008D9DF0 /* UIWindow_Private.h in Headers */,
 				8B6AEDE917AB639400D6858A /* UIGestureRecognizer_Private.h in Headers */,
+				8BB8A22D17B1E66A004FB0E8 /* UIAction.h in Headers */,
+				8B6AEDEF17AB6BF600D6858A /* UIApplication_Private.h in Headers */,
+				8BB4BD5B17B1EC51009B7708 /* UIScroller.h in Headers */,
 				8BE492FB1798CFAB002BEA5A /* UIBezierPath.h in Headers */,
 				8BE493431798EAA0002BEA5A /* UIFont.h in Headers */,
 				8B5BD742179903AB00A53E4A /* UIButtonRoundRectBackgroundView.h in Headers */,
@@ -809,6 +853,7 @@
 			files = (
 				8B91075F17A8B1EA008D9DF0 /* UIGraphics.m in Sources */,
 				8B5BD72F1798F05C00A53E4A /* UIImageView.m in Sources */,
+				8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */,
 				8B5BD73E1799037400A53E4A /* UIButtonBackgroundView.m in Sources */,
 				8BE4931B1798D65C002BEA5A /* UINavigationItem.m in Sources */,
 				8B5BD758179B24D400A53E4A /* UIImage.m in Sources */,
@@ -819,10 +864,12 @@
 				8B08256E17AA2ACF00494FAA /* UIAlertView.m in Sources */,
 				8BE492E91798C52F002BEA5A /* UIResponder.m in Sources */,
 				8B91076317A8B6B7008D9DF0 /* UIWindowAppKitHostView.m in Sources */,
+				8BB4BD5C17B1EC51009B7708 /* UIScroller.m in Sources */,
 				8B91076517A8B772008D9DF0 /* UIEvent.m in Sources */,
 				8B5AF84C179B67F7008B3BF3 /* UINavigationBarAppearance.m in Sources */,
 				8BE4931E1798D65C002BEA5A /* UIViewController.m in Sources */,
 				8BE4933A1798E44D002BEA5A /* UIControl.m in Sources */,
+				8BB4BD5617B1E860009B7708 /* UIScrollView.m in Sources */,
 				8BE493191798D65C002BEA5A /* UINavigationController.m in Sources */,
 				8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */,
 				8B6AEDE717AB638B00D6858A /* UIGestureRecognizer.m in Sources */,
@@ -835,6 +882,7 @@
 				8B91076B17A8B883008D9DF0 /* UITouch.m in Sources */,
 				8B1EC8E217A9F8280035369C /* UINSTextFieldCell.m in Sources */,
 				8BE492FF1798CFDD002BEA5A /* UIWindow.m in Sources */,
+				8BB4BD6117B1ED5E009B7708 /* UIPanGestureRecognizer.m in Sources */,
 				8B6AEDED17AB642A00D6858A /* UIApplication.m in Sources */,
 				8B91077017A8C5C9008D9DF0 /* UIView_UIViewAnimation.m in Sources */,
 				8B1EC8E517A9F8280035369C /* UITextField.m in Sources */,

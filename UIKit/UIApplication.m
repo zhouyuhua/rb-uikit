@@ -109,24 +109,38 @@ static Class _SharedApplicationClass = Nil;
 
 #pragma mark - Event Handling
 
+static NSArray *UIGestureRecognizersForView(UIView *view)
+{
+    NSMutableArray *gestureRecognizers = [NSMutableArray array];
+    
+    while (view != nil) {
+        [gestureRecognizers addObjectsFromArray:view.gestureRecognizers];
+        view = view.superview;
+    }
+    
+    return gestureRecognizers;
+}
+
 - (void)_beginTrackingNativeMouseEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView
 {
+    _currentEvent = [UIEvent new];
+    _currentEvent.type = UIEventTypeTouches;
+    _currentEvent.subtype = UIEventSubtypeNone;
+    _currentEvent.timestamp = event.timestamp;
+    
     _currentTouch = [UITouch new];
     _currentTouch.timestamp = event.timestamp;
     _currentTouch.tapCount = event.clickCount;
     _currentTouch.window = hostView.kitWindow;
     _currentTouch.locationInWindow = [hostView convertPoint:event.locationInWindow fromView:nil];
-    _currentTouch.view = [hostView.kitWindow hitTest:_currentTouch.locationInWindow withEvent:nil];
     _currentTouch.phase = UITouchPhaseBegan;
     
-    _currentEvent = [UIEvent new];
-    _currentEvent.type = UIEventTypeTouches;
-    _currentEvent.subtype = UIEventSubtypeNone;
-    _currentEvent.timestamp = event.timestamp;
     [_currentEvent.touches addObject:_currentTouch];
     
+    _currentTouch.view = [hostView.kitWindow hitTest:_currentTouch.locationInWindow withEvent:_currentEvent];
+    
     NSMutableArray *gestureRecognizers = [NSMutableArray array];
-    for (UIGestureRecognizer *gestureRecognizer in _currentTouch.view.gestureRecognizers) {
+    for (UIGestureRecognizer *gestureRecognizer in UIGestureRecognizersForView(_currentTouch.view)) {
         if([gestureRecognizer _wantsToTrackEvent:_currentEvent]) {
             [gestureRecognizers addObject:gestureRecognizer];
             
@@ -143,6 +157,7 @@ static Class _SharedApplicationClass = Nil;
     _currentTouch.timestamp = event.timestamp;
     _currentTouch.previousLocationInWindow = _currentTouch.locationInWindow;
     _currentTouch.locationInWindow = [hostView convertPoint:event.locationInWindow fromView:nil];
+    _currentTouch.delta = CGPointMake(event.deltaX, event.deltaY);
     _currentTouch.phase = phase;
     
     for (UIGestureRecognizer *gestureRecognizer in _currentTouch.gestureRecognizers) {
@@ -156,20 +171,21 @@ static Class _SharedApplicationClass = Nil;
 {
     _currentTouch = [UITouch new];
     _currentTouch.timestamp = event.timestamp;
-    _currentTouch.tapCount = event.clickCount;
+    _currentTouch.tapCount = 1;
     _currentTouch.window = hostView.kitWindow;
     _currentTouch.locationInWindow = [hostView convertPoint:event.locationInWindow fromView:nil];
-    _currentTouch.view = [hostView.kitWindow hitTest:_currentTouch.locationInWindow withEvent:nil];
     _currentTouch.phase = _UITouchPhaseGestureBegan;
     
     _currentEvent = [UIEvent new];
-    _currentEvent.type = UIEventTypeTouches;
+    _currentEvent.type = _UIEventTypeGesture;
     _currentEvent.subtype = UIEventSubtypeNone;
     _currentEvent.timestamp = event.timestamp;
     [_currentEvent.touches addObject:_currentTouch];
     
+    _currentTouch.view = [hostView.kitWindow hitTest:_currentTouch.locationInWindow withEvent:_currentEvent];
+    
     NSMutableArray *gestureRecognizers = [NSMutableArray array];
-    for (UIGestureRecognizer *gestureRecognizer in _currentTouch.view.gestureRecognizers) {
+    for (UIGestureRecognizer *gestureRecognizer in UIGestureRecognizersForView(_currentTouch.view)) {
         if([gestureRecognizer _wantsToTrackEvent:_currentEvent]) {
             [gestureRecognizers addObject:gestureRecognizer];
             
@@ -181,12 +197,46 @@ static Class _SharedApplicationClass = Nil;
 
 - (void)_trackingUpdateForNativeGestureEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView
 {
+    _currentEvent.timestamp = event.timestamp;
     
+    _currentTouch.timestamp = event.timestamp;
+    CGPoint locationInWindow = _currentTouch.locationInWindow;
+    _currentTouch.previousLocationInWindow = locationInWindow;
+    
+    CGPoint delta = CGPointMake(-CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis2),
+                                -CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis1));
+    locationInWindow.x += delta.x;
+    locationInWindow.y += delta.y;
+    
+    _currentTouch.locationInWindow = locationInWindow;
+    _currentTouch.delta = delta;
+    _currentTouch.phase = _UITouchPhaseGestureMoved;
+    
+    for (UIGestureRecognizer *gestureRecognizer in _currentTouch.gestureRecognizers) {
+        [gestureRecognizer _handleEvent:_currentEvent];
+    }
 }
 
 - (void)_endTrackingNativeGestureEvent:(NSEvent *)event fromHostview:(UIWindowAppKitHostView *)hostView
 {
+    _currentEvent.timestamp = event.timestamp;
     
+    _currentTouch.timestamp = event.timestamp;
+    CGPoint locationInWindow = _currentTouch.locationInWindow;
+    _currentTouch.previousLocationInWindow = locationInWindow;
+    
+    CGPoint delta = CGPointMake(-CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis2),
+                                -CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis1));
+    locationInWindow.x += delta.x;
+    locationInWindow.y += delta.y;
+    
+    _currentTouch.locationInWindow = locationInWindow;
+    _currentTouch.delta = delta;
+    _currentTouch.phase = _UITouchPhaseGestureEnd;
+    
+    for (UIGestureRecognizer *gestureRecognizer in _currentTouch.gestureRecognizers) {
+        [gestureRecognizer _handleEvent:_currentEvent];
+    }
 }
 
 #pragma mark -
@@ -233,16 +283,21 @@ static Class _SharedApplicationClass = Nil;
             
         case NSEventTypeBeginGesture: {
             [self _beginTrackingNativeGestureEvent:event fromHostView:hostView];
+            [self sendEvent:_currentEvent];
+            
             break;
         }
             
         case NSScrollWheel: {
             [self _trackingUpdateForNativeGestureEvent:event fromHostView:hostView];
+            [self sendEvent:_currentEvent];
+            
             break;
         }
             
         case NSEventTypeEndGesture: {
             [self _endTrackingNativeGestureEvent:event fromHostview:hostView];
+            [self sendEvent:_currentEvent];
             
             _currentEvent = nil;
             _currentTouch = nil;
@@ -350,6 +405,13 @@ static Class _SharedApplicationClass = Nil;
 {
     if(_delegateRespondsTo.applicationDidReceiveRemoteNotification)
         [_delegate application:self didReceiveRemoteNotification:userInfo];
+}
+
+#pragma mark -
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)application
+{
+    return YES;
 }
 
 @end
