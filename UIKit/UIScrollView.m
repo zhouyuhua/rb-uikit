@@ -9,6 +9,9 @@
 #import "UIScrollView.h"
 #import "UIScrollWheelGestureRecognizer.h"
 
+#import "UIScrollViewDecelerationAnimator.h"
+#import "UIScrollViewScrollAnimator.h"
+
 #import "UIScroller.h"
 
 const CGFloat UIScrollViewDecelerationRateNormal = 0.3;
@@ -20,6 +23,10 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 @property (nonatomic) UIScroller *verticalScroller;
 
 @property (nonatomic, weak) NSTimer *hideScrollersTimer;
+
+@property (nonatomic) BOOL _shouldBounceBack;
+
+@property (nonatomic) UIAnimator *_currentAnimator;
 
 #pragma mark - readwrite
 
@@ -94,32 +101,49 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
         contentOffset.y = (_contentSize.height - CGRectGetHeight(bounds));
     }
     
-    contentOffset.x = MAX(contentOffset.x, 0.0);
-    contentOffset.y = MAX(contentOffset.y, 0.0);
+    contentOffset.x = MIN(_contentSize.width, MAX(contentOffset.x, 0.0));
+    contentOffset.y = MIN(_contentSize.height, MAX(contentOffset.y, 0.0));
     
     return contentOffset;
 }
 
 - (void)setContentOffset:(CGPoint)contentOffset
 {
-    [self setContentOffset:contentOffset animated:YES];
+    [self setContentOffset:contentOffset animated:NO];
 }
 
 - (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated
 {
-    _contentOffset = contentOffset;
+    if(self._currentAnimator) {
+        [self._currentAnimator stop];
+    }
     
-    CGRect bounds = self.bounds;
-    
-    bounds.origin.x = contentOffset.x + _contentInset.left;
-    bounds.origin.y = contentOffset.y + _contentInset.top;
-    
-    self.bounds = bounds;
-    
-    _horizontalScroller.contentOffset = contentOffset;
-    _verticalScroller.contentOffset = contentOffset;
-    
-    [self setNeedsLayout];
+    if(animated) {
+        self._currentAnimator = [[UIScrollViewScrollAnimator alloc] initWithScrollView:self
+                                                                     fromContentOffset:_contentOffset
+                                                                                    to:contentOffset
+                                                                              duration:0.3
+                                                                        timingFunction:&UIAnimatorLinear];
+        __weak __typeof(self) me = self;
+        self._currentAnimator.completionHandler = ^{
+            me._currentAnimator = nil;
+        };
+        [self._currentAnimator run];
+    } else {
+        _contentOffset = contentOffset;
+        
+        CGRect bounds = self.bounds;
+        
+        bounds.origin.x = contentOffset.x + _contentInset.left;
+        bounds.origin.y = contentOffset.y + _contentInset.top;
+        
+        self.bounds = bounds;
+        
+        _horizontalScroller.contentOffset = contentOffset;
+        _verticalScroller.contentOffset = contentOffset;
+        
+        [self setNeedsLayout];
+    }
 }
 
 - (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated
@@ -201,10 +225,36 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
         [self _bringScrollersToFront];
 }
 
+#pragma mark - Animations
+
+- (void)_bounceBack
+{
+    self._shouldBounceBack = NO;
+    [self setContentOffset:[self _constrainContentOffset:_contentOffset] animated:YES];
+}
+
+- (void)_decelerateScrollWithVelocity:(CGPoint)velocity
+{
+    CGPoint contentOffset = self.contentOffset;
+    contentOffset.y += velocity.y;
+    
+    self._currentAnimator = [[UIScrollViewScrollAnimator alloc] initWithScrollView:self
+                                                                 fromContentOffset:_contentOffset
+                                                                                to:[self _constrainContentOffset:contentOffset]
+                                                                          duration:0.3
+                                                                    timingFunction:&UIAnimatorQuadradicEaseOut];
+    __weak __typeof(self) me = self;
+    self._currentAnimator.completionHandler = ^{
+        me._currentAnimator = nil;
+    };
+    [self._currentAnimator run];
+}
+
 #pragma mark - Gestures
 
 - (void)_beginDragging
 {
+    self._shouldBounceBack = NO;
     [self _showScrollers];
 }
 
@@ -217,17 +267,33 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
     rawOffset.y += delta.y;
     
     CGPoint constrainedOffset = [self _constrainContentOffset:rawOffset];
-//    if(_bounces) {
-//        BOOL shouldBounceHorizontal = _alwaysBounceHorizontal && (ABS(rawOffset.x - constrainedOffset.x) > 0);
-//        if(shouldBounceHorizontal) {
-//            constrainedOffset.x = originalOffset.x + (0.05 * delta.x);
-//        }
-//        
-//        BOOL shouldBounceVertical = _alwaysBounceVertical && (ABS(rawOffset.y - constrainedOffset.y) > 0);
-//        if(shouldBounceVertical) {
-//            constrainedOffset.y = originalOffset.y + (0.05 * delta.y);
-//        }
-//    }
+    if(_bounces) {
+        BOOL shouldBounceHorizontal = _alwaysBounceHorizontal && (ABS(rawOffset.x - constrainedOffset.x) > 0);
+        if(shouldBounceHorizontal) {
+            constrainedOffset.x = originalOffset.x + (0.05 * delta.x);
+            
+            self._shouldBounceBack = YES;
+            
+            if(constrainedOffset.x < -CGRectGetWidth(self.bounds) / 2.0) {
+                constrainedOffset.x = round(-CGRectGetWidth(self.bounds) / 2.0);
+            } else if(constrainedOffset.x > _contentSize.width - CGRectGetWidth(self.bounds) / 2.0) {
+                constrainedOffset.x = round(_contentSize.width - CGRectGetWidth(self.bounds) / 2.0);
+            }
+        }
+        
+        BOOL shouldBounceVertical = _alwaysBounceVertical && (ABS(rawOffset.y - constrainedOffset.y) > 0);
+        if(shouldBounceVertical) {
+            constrainedOffset.y = originalOffset.y + (0.05 * delta.y);
+            
+            self._shouldBounceBack = YES;
+            
+            if(constrainedOffset.y < -CGRectGetHeight(self.bounds) / 2.0) {
+                constrainedOffset.y = round(-CGRectGetHeight(self.bounds) / 2.0);
+            } else if(constrainedOffset.y > _contentSize.height - CGRectGetHeight(self.bounds) / 2.0) {
+                constrainedOffset.y = round(_contentSize.height - CGRectGetHeight(self.bounds) / 2.0);
+            }
+        }
+    }
     
     self.contentOffset = constrainedOffset;
 }
@@ -239,6 +305,12 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
                                                              selector:@selector(_hideScrollers)
                                                              userInfo:nil
                                                               repeats:NO];
+    
+    if(self._shouldBounceBack) {
+        [self _bounceBack];
+    } else {
+        [self _decelerateScrollWithVelocity:velocity];
+    }
 }
 
 
@@ -255,6 +327,7 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
         case UIGestureRecognizerStateChanged: {
             CGPoint delta = [pan translationInView:self];
             [self _dragBy:delta];
+            [pan setTranslation:CGPointZero inView:self];
             break;
         }
             

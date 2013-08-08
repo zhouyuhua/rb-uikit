@@ -39,7 +39,6 @@
 
 - (void)setTranslation:(CGPoint)translation inView:(UIView *)view
 {
-    _velocity = CGPointZero;
     _translation = translation;
 }
 
@@ -58,16 +57,23 @@
     return NO;
 }
 
-- (void)processChangeWithTouch:(UITouch *)touch forEvent:(UIEvent *)event
+- (BOOL)_processChangeWithTouch:(UITouch *)touch forEvent:(UIEvent *)event
 {
     NSTimeInterval elapsedTime = event.timestamp - _lastEventTimestamp;
     CGPoint delta = touch.delta;
-    
-    _translation.x += delta.x;
-    _translation.y += delta.y;
-    
-    _velocity.x = delta.x / elapsedTime;
-    _velocity.y = delta.y / elapsedTime;
+    if(!CGPointEqualToPoint(delta, CGPointZero) && elapsedTime > 0.0) {
+        _translation.x += delta.x;
+        _translation.y += delta.y;
+        
+        _velocity.x = delta.x / elapsedTime;
+        _velocity.y = delta.y / elapsedTime;
+        
+        _lastEventTimestamp = event.timestamp;
+        
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -92,10 +98,9 @@
     } else if(self.state == UIGestureRecognizerStateBegan || self.state == UIGestureRecognizerStateChanged) {
         UITouch *touch = [touches anyObject];
         
-        [self processChangeWithTouch:touch forEvent:event];
-        
-        _lastEventTimestamp = event.timestamp;
-        self.state = UIGestureRecognizerStateChanged;
+        if([self _processChangeWithTouch:touch forEvent:event]) {
+            self.state = UIGestureRecognizerStateChanged;
+        }
     }
 }
 
@@ -103,8 +108,7 @@
 {
     if(self.state == UIGestureRecognizerStateBegan || self.state == UIGestureRecognizerStateChanged) {
         UITouch *touch = [touches anyObject];
-        
-        [self processChangeWithTouch:touch forEvent:event];
+        [self _processChangeWithTouch:touch forEvent:event];
         
         _lastEventTimestamp = 0.0;
         self.state = UIGestureRecognizerStateEnded;

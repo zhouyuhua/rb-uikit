@@ -90,6 +90,12 @@
 		8BB4BD5C17B1EC51009B7708 /* UIScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD5A17B1EC51009B7708 /* UIScroller.m */; };
 		8BB4BD6017B1ED5E009B7708 /* UIPanGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD5E17B1ED5E009B7708 /* UIPanGestureRecognizer.h */; };
 		8BB4BD6117B1ED5E009B7708 /* UIPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD5F17B1ED5E009B7708 /* UIPanGestureRecognizer.m */; };
+		8BB4BD6717B359BC009B7708 /* UIAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD6517B359BC009B7708 /* UIAnimator.h */; };
+		8BB4BD6817B359BC009B7708 /* UIAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD6617B359BC009B7708 /* UIAnimator.m */; };
+		8BB4BD6B17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD6917B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h */; };
+		8BB4BD6C17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD6A17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.m */; };
+		8BB4BD6F17B35AF7009B7708 /* UIScrollViewScrollAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD6D17B35AF7009B7708 /* UIScrollViewScrollAnimator.h */; };
+		8BB4BD7017B35AF7009B7708 /* UIScrollViewScrollAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD6E17B35AF7009B7708 /* UIScrollViewScrollAnimator.m */; };
 		8BB8A22D17B1E66A004FB0E8 /* UIAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB8A22B17B1E66A004FB0E8 /* UIAction.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8A22C17B1E66A004FB0E8 /* UIAction.m */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
@@ -231,6 +237,12 @@
 		8BB4BD5A17B1EC51009B7708 /* UIScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScroller.m; sourceTree = "<group>"; };
 		8BB4BD5E17B1ED5E009B7708 /* UIPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPanGestureRecognizer.h; sourceTree = "<group>"; };
 		8BB4BD5F17B1ED5E009B7708 /* UIPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPanGestureRecognizer.m; sourceTree = "<group>"; };
+		8BB4BD6517B359BC009B7708 /* UIAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAnimator.h; sourceTree = "<group>"; };
+		8BB4BD6617B359BC009B7708 /* UIAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAnimator.m; sourceTree = "<group>"; };
+		8BB4BD6917B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollViewDecelerationAnimator.h; sourceTree = "<group>"; };
+		8BB4BD6A17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScrollViewDecelerationAnimator.m; sourceTree = "<group>"; };
+		8BB4BD6D17B35AF7009B7708 /* UIScrollViewScrollAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollViewScrollAnimator.h; sourceTree = "<group>"; };
+		8BB4BD6E17B35AF7009B7708 /* UIScrollViewScrollAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScrollViewScrollAnimator.m; sourceTree = "<group>"; };
 		8BB8A22B17B1E66A004FB0E8 /* UIAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAction.h; sourceTree = "<group>"; };
 		8BB8A22C17B1E66A004FB0E8 /* UIAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAction.m; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -464,6 +476,12 @@
 				8BB4BD5417B1E860009B7708 /* UIScrollView.m */,
 				8BB4BD5917B1EC51009B7708 /* UIScroller.h */,
 				8BB4BD5A17B1EC51009B7708 /* UIScroller.m */,
+				8BB4BD6517B359BC009B7708 /* UIAnimator.h */,
+				8BB4BD6617B359BC009B7708 /* UIAnimator.m */,
+				8BB4BD6917B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h */,
+				8BB4BD6A17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.m */,
+				8BB4BD6D17B35AF7009B7708 /* UIScrollViewScrollAnimator.h */,
+				8BB4BD6E17B35AF7009B7708 /* UIScrollViewScrollAnimator.m */,
 			);
 			name = "Scroll View";
 			sourceTree = "<group>";
@@ -693,6 +711,7 @@
 				8BE492FE1798CFDD002BEA5A /* UIWindow.h in Headers */,
 				8B5BD72E1798F05C00A53E4A /* UIImageView.h in Headers */,
 				8B01140B179A193D00C8594C /* UIAppearance.h in Headers */,
+				8BB4BD6F17B35AF7009B7708 /* UIScrollViewScrollAnimator.h in Headers */,
 				8B5BD761179B3A8500A53E4A /* UIThreePartImageProvider.h in Headers */,
 				8BE4931D1798D65C002BEA5A /* UIViewController.h in Headers */,
 				8BE493161798D65C002BEA5A /* UINavigationBar.h in Headers */,
@@ -724,6 +743,7 @@
 				8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */,
 				8B91076D17A8B8BC008D9DF0 /* UITouch_Private.h in Headers */,
 				8B91075B17A8A8A8008D9DF0 /* UIResponder_Private.h in Headers */,
+				8BB4BD6B17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h in Headers */,
 				8B91076717A8B7B1008D9DF0 /* UIEvent_Private.h in Headers */,
 				8B5BD7381798FA9B00A53E4A /* UIButton.h in Headers */,
 				8BE493421798EAA0002BEA5A /* UIImage.h in Headers */,
@@ -742,6 +762,7 @@
 				8B39CBFA17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.h in Headers */,
 				8B5BD7491799040E00A53E4A /* UIButton_Private.h in Headers */,
 				8B5BD75E179B348700A53E4A /* UIGraphics.h in Headers */,
+				8BB4BD6717B359BC009B7708 /* UIAnimator.h in Headers */,
 				8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */,
 				8B5BD73D1799037400A53E4A /* UIButtonBackgroundView.h in Headers */,
 				8BE4931C1798D65C002BEA5A /* UIViewController_Private.h in Headers */,
@@ -879,10 +900,13 @@
 				8B39CBFB17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.m in Sources */,
 				8BB4BD5617B1E860009B7708 /* UIScrollView.m in Sources */,
 				8BE493191798D65C002BEA5A /* UINavigationController.m in Sources */,
+				8BB4BD7017B35AF7009B7708 /* UIScrollViewScrollAnimator.m in Sources */,
 				8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */,
 				8B6AEDE717AB638B00D6858A /* UIGestureRecognizer.m in Sources */,
 				8BE4932B1798DBD5002BEA5A /* UIDevice.m in Sources */,
+				8BB4BD6817B359BC009B7708 /* UIAnimator.m in Sources */,
 				8BE4933F1798E564002BEA5A /* UIBarButtonItem.m in Sources */,
+				8BB4BD6C17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.m in Sources */,
 				8BE492F31798CF0C002BEA5A /* UIColor.m in Sources */,
 				8BE493311798E39A002BEA5A /* UILabel.m in Sources */,
 				8B91077417A8C62D008D9DF0 /* UIAnimationCollection.m in Sources */,

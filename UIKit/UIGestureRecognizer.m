@@ -180,6 +180,9 @@
     if(event.type == _UIEventTypeGesture && ![self _wantsGestureEvents])
         return NO;
     
+    if(event.type == UIEventTypeTouches && [self _wantsGestureEvents])
+        return NO;
+    
     if(![self._view gestureRecognizerShouldBegin:self])
         return NO;
     
