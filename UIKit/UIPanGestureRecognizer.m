@@ -61,7 +61,7 @@
 {
     NSTimeInterval elapsedTime = event.timestamp - _lastEventTimestamp;
     CGPoint delta = touch.delta;
-    if(!CGPointEqualToPoint(delta, CGPointZero) && elapsedTime > 0.0) {
+    if(!CGPointEqualToPoint(delta, CGPointZero) && (elapsedTime > 0.0 || event._isPartOfBurst)) {
         _translation.x += delta.x;
         _translation.y += delta.y;
         
@@ -109,6 +109,9 @@
     if(self.state == UIGestureRecognizerStateBegan || self.state == UIGestureRecognizerStateChanged) {
         UITouch *touch = [touches anyObject];
         [self _processChangeWithTouch:touch forEvent:event];
+        
+        if(touch._isFromOldStyleScrollWheel)
+            _velocity = CGPointZero;
         
         _lastEventTimestamp = 0.0;
         self.state = UIGestureRecognizerStateEnded;

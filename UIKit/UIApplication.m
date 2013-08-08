@@ -128,8 +128,18 @@ static BOOL ScrollWheelEventIsContinuous(NSEvent *event)
 
 static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 {
-    CGPoint delta = CGPointMake(-CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis2),
-                                -CGEventGetDoubleValueField([event CGEvent], kCGScrollWheelEventFixedPtDeltaAxis1));
+    CGEventRef underlyingEvent = [event CGEvent];
+    CGPoint delta = CGPointMake(-CGEventGetDoubleValueField(underlyingEvent, kCGScrollWheelEventFixedPtDeltaAxis2),
+                                -CGEventGetDoubleValueField(underlyingEvent, kCGScrollWheelEventFixedPtDeltaAxis1));
+    
+    if(!ScrollWheelEventIsContinuous(event)) {
+        CGEventSourceRef underlyingEventSource = CGEventCreateSourceFromEvent(underlyingEvent);
+        double pixelsPerLine = CGEventSourceGetPixelsPerLine(underlyingEventSource);
+        CFRelease(underlyingEventSource);
+        
+        delta.x *= pixelsPerLine;
+        delta.y *= pixelsPerLine;
+    }
     
     return delta;
 }
@@ -188,6 +198,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     _currentTouch.window = hostView.kitWindow;
     _currentTouch.locationInWindow = [hostView convertPoint:event.locationInWindow fromView:nil];
     _currentTouch.phase = _UITouchPhaseGestureBegan;
+    _currentTouch._isFromOldStyleScrollWheel = !ScrollWheelEventIsContinuous(event);
     
     _currentEvent = [UIEvent new];
     _currentEvent.type = _UIEventTypeGesture;
@@ -302,6 +313,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
         case NSScrollWheel: {
             if(!ScrollWheelEventIsContinuous(event)) {
                 [self _beginTrackingNativeGestureEvent:event fromHostView:hostView];
+                _currentEvent._isPartOfBurst = YES;
                 [self sendEvent:_currentEvent];
                 
                 [self _trackingUpdateForNativeGestureEvent:event fromHostView:hostView];

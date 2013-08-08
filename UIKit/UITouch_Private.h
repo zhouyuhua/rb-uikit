@@ -15,6 +15,8 @@
 
 @property (nonatomic) CGPoint delta;
 
+@property (nonatomic) BOOL _isFromOldStyleScrollWheel;
+
 #pragma mark - readwrite
 
 @property (nonatomic, readwrite) NSTimeInterval timestamp;

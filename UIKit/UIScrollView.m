@@ -114,11 +114,12 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
 - (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated
 {
-    if(self._currentAnimator) {
-        [self._currentAnimator stop];
-    }
-    
     if(animated) {
+        if(self._currentAnimator) {
+            [self._currentAnimator stop];
+            self._currentAnimator = nil;
+        }
+        
         self._currentAnimator = [[UIScrollViewScrollAnimator alloc] initWithScrollView:self
                                                                      fromContentOffset:_contentOffset
                                                                                     to:contentOffset
@@ -308,7 +309,9 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
     
     if(self._shouldBounceBack) {
         [self _bounceBack];
-    } else {
+    } else if(!CGPointEqualToPoint(velocity, CGPointZero)) {
+        //velocity will come back as a zero point if we're being
+        //scrolled from an old-fashioned scroll-wheel device.
         [self _decelerateScrollWithVelocity:velocity];
     }
 }

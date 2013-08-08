@@ -13,6 +13,7 @@
 @interface UIEvent ()
 
 @property (nonatomic) NSMutableSet *touches;
+@property (nonatomic) BOOL _isPartOfBurst;
 
 #pragma mark - readwrite
 
