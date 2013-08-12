@@ -231,19 +231,23 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 - (void)_bounceBack
 {
     self._shouldBounceBack = NO;
+    
     [self setContentOffset:[self _constrainContentOffset:_contentOffset] animated:YES];
 }
 
 - (void)_decelerateScrollWithVelocity:(CGPoint)velocity
 {
-    CGPoint contentOffset = self.contentOffset;
-    contentOffset.y += velocity.y;
+    self._currentAnimator = [[UIScrollViewDecelerationAnimator alloc] initWithScrollView:self
+                                                                                velocity:velocity];
     
-    self._currentAnimator = [[UIScrollViewScrollAnimator alloc] initWithScrollView:self
-                                                                 fromContentOffset:_contentOffset
-                                                                                to:[self _constrainContentOffset:contentOffset]
-                                                                          duration:0.3
-                                                                    timingFunction:&UIAnimatorQuadradicEaseOut];
+//    CGPoint contentOffset = self.contentOffset;
+//    contentOffset.y += velocity.y;
+//    
+//    self._currentAnimator = [[UIScrollViewScrollAnimator alloc] initWithScrollView:self
+//                                                                 fromContentOffset:_contentOffset
+//                                                                                to:[self _constrainContentOffset:contentOffset]
+//                                                                          duration:0.3
+//                                                                    timingFunction:&UIAnimatorQuadradicEaseOut];
     __weak __typeof(self) me = self;
     self._currentAnimator.completionHandler = ^{
         me._currentAnimator = nil;
@@ -255,6 +259,9 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
 - (void)_beginDragging
 {
+    [self._currentAnimator stop];
+    self._currentAnimator = nil;
+    
     self._shouldBounceBack = NO;
     [self _showScrollers];
 }

@@ -50,8 +50,8 @@
 {
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate] - _startTime;
     
-    _scrollView.contentOffset = CGPointMake(UIAnimatorLinear(currentTime, _fromContentOffset.x, _toContentOffset.x, _duration),
-                                            UIAnimatorLinear(currentTime, _fromContentOffset.y, _toContentOffset.y, _duration));
+    _scrollView.contentOffset = CGPointMake(_timingFunction(currentTime, _fromContentOffset.x, _toContentOffset.x, _duration),
+                                            _timingFunction(currentTime, _fromContentOffset.y, _toContentOffset.y, _duration));
     
     return (currentTime >= _duration);
 }
