@@ -7,15 +7,30 @@
 //
 
 #import "UIScrollViewDecelerationAnimator.h"
-#import "UIScrollView.h"
+#import "UIScrollView_Private.h"
+
+static CGFloat const MaxBounceBack = 50.0;
+
+static CGFloat Constrain(CGFloat value, CGFloat min, CGFloat max)
+{
+    if(value < min)
+        return min;
+    else if(value > max)
+        return max;
+    else
+        return value;
+}
+
+static CGFloat ConstrainVelocity(CGFloat velocity)
+{
+    CGFloat const MaxVelocity = 500.0;
+    return Constrain(velocity, -MaxVelocity, MaxVelocity);
+}
 
 typedef NS_ENUM(NSUInteger, AnimationPhase) {
-    kAnimationPhaseCoasting,
-    kAnimationPhaseDroppingOff,
-    kAnimationPhaseDone,
+    AnimationPhaseMomentum,
+    AnimationPhaseBounce,
 };
-
-static NSTimeInterval const kCoastingDuration = 0.3;
 
 @interface UIScrollViewDecelerationAnimator ()
 
@@ -23,13 +38,17 @@ static NSTimeInterval const kCoastingDuration = 0.3;
 
 @property (nonatomic) NSTimeInterval startTime;
 
-@property (nonatomic) CGPoint velocity;
+@property (nonatomic) CGPoint initialContentOffset;
 
-@property (nonatomic) CGPoint startOffset, endOffset, paddingOffset;
+@property (nonatomic) CGPoint constrainedTargetContentOffset;
 
-@property (nonatomic) NSTimeInterval duration;
+@property (nonatomic) BOOL bounceX, bounceY;
 
 @property (nonatomic) AnimationPhase phase;
+
+@property (nonatomic) UIAnimationFunction momentumTimingFunction;
+
+@property (nonatomic) NSTimeInterval duration;
 
 @end
 
@@ -42,11 +61,29 @@ static NSTimeInterval const kCoastingDuration = 0.3;
     if((self = [super init])) {
         self.scrollView = scrollView;
         
-        self.startOffset = scrollView.contentOffset;
-        self.endOffset = CGPointMake(_startOffset.x + velocity.x, _startOffset.y + velocity.y);
-        self.paddingOffset = CGPointMake(_endOffset.x, _endOffset.y - 3.0);
+        velocity.x = ConstrainVelocity(velocity.x);
+        velocity.y = ConstrainVelocity(velocity.y);
         
-        self.duration = 100.0 / abs(velocity.y);
+        self.initialContentOffset = scrollView.contentOffset;
+        if(_initialContentOffset.x == 0.0)
+            velocity.x = 0.0;
+        
+        if(_initialContentOffset.y == 0.0)
+            velocity.y = 0.0;
+        
+        CGSize contentSize = scrollView.contentSize;
+        self.targetContentOffset = CGPointMake(Constrain(_initialContentOffset.x + velocity.x, -MaxBounceBack, (contentSize.width - CGRectGetWidth(scrollView.frame)) + MaxBounceBack),
+                                               Constrain(_initialContentOffset.y + velocity.y, -MaxBounceBack, (contentSize.height - CGRectGetHeight(scrollView.frame)) + MaxBounceBack));
+        self.constrainedTargetContentOffset = [scrollView _constrainContentOffset:_targetContentOffset];
+        
+        self.bounceX = velocity.x != 0.0 && _targetContentOffset.x != _constrainedTargetContentOffset.x;
+        self.bounceY = velocity.y != 0.0 && _targetContentOffset.y != _constrainedTargetContentOffset.y;
+        if(_bounceX || _bounceY)
+            _momentumTimingFunction = &UIAnimatorLinear;
+        else
+            _momentumTimingFunction = &UIAnimatorQuadradicEaseOut;
+        
+        self.duration = 100.0 / abs(velocity.y) * 1.5;
         
         self.startTime = [NSDate timeIntervalSinceReferenceDate];
     }
@@ -56,10 +93,26 @@ static NSTimeInterval const kCoastingDuration = 0.3;
 
 - (BOOL)animateSingleFrame
 {
+    if(CGPointEqualToPoint(_initialContentOffset, CGPointZero) ||
+       CGPointEqualToPoint(_initialContentOffset, _targetContentOffset))
+        return YES;
+    
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate] - _startTime;
     
-    _scrollView.contentOffset = CGPointMake(UIAnimatorQuadradicEaseOut(currentTime, _startOffset.x, _endOffset.x, _duration),
-                                            UIAnimatorQuadradicEaseOut(currentTime, _startOffset.y, _endOffset.y, _duration));
+    if((_bounceX || _bounceY) && ((currentTime >= _duration && (_phase == AnimationPhaseMomentum)) || _phase == AnimationPhaseBounce)) {
+        if(_phase == AnimationPhaseMomentum) {
+            _phase = AnimationPhaseBounce;
+            _startTime = [NSDate timeIntervalSinceReferenceDate];
+            _duration *= 1.2;
+            currentTime = 0.0;
+        }
+        
+        _scrollView.contentOffset = CGPointMake(UIAnimatorQuadradicEaseOut(currentTime, _targetContentOffset.x, _constrainedTargetContentOffset.x, _duration),
+                                                UIAnimatorQuadradicEaseOut(currentTime, _targetContentOffset.y, _constrainedTargetContentOffset.y, _duration));
+    } else if(_phase == AnimationPhaseMomentum) {
+        _scrollView.contentOffset = CGPointMake(_momentumTimingFunction(currentTime, _initialContentOffset.x, _targetContentOffset.x, _duration),
+                                                _momentumTimingFunction(currentTime, _initialContentOffset.y, _targetContentOffset.y, _duration));
+    }
     
     return (currentTime >= _duration);
 }

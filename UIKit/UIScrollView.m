@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UIScrollView.h"
+#import "UIScrollView_Private.h"
 #import "UIScrollWheelGestureRecognizer.h"
 
 #import "UIScrollViewDecelerationAnimator.h"
@@ -18,45 +18,6 @@ const CGFloat UIScrollViewDecelerationRateNormal = 0.3;
 const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
 static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
-
-@interface UIScrollView () {
-    struct {
-        int scrollViewDidScroll : 1;
-        int scrollViewDidZoom : 1;
-        
-        int scrollViewWillBeginDragging : 1;
-        
-        int scrollViewWillEndDraggingWithVelocityTargetContentOffset : 1;
-        int scrollViewDidEndDraggingWillDecelerate : 1;
-        
-        int scrollViewWillBeginDecelerating : 1;
-        int scrollViewDidEndDecelerating : 1;
-        
-        int scrollViewDidEndScrollingAnimation : 1;
-        
-        int viewForZoomingInScrollView : 1;
-        int scrollViewWillBeginZoomingWithView : 1;
-        int scrollViewDidEndZoomingWithViewAtScale : 1;
-        
-        int scrollViewShouldScrollToTop : 1;
-        int scrollViewDidScrollToTop : 1;
-    } _delegateRespondsTo;
-}
-
-@property (nonatomic) UIScroller *horizontalScroller;
-@property (nonatomic) UIScroller *verticalScroller;
-
-@property (nonatomic, weak) NSTimer *hideScrollersTimer;
-
-@property (nonatomic) BOOL _shouldBounceBack;
-
-@property (nonatomic) UIAnimator *_currentAnimator;
-
-#pragma mark - readwrite
-
-@property (nonatomic, readwrite) UIPanGestureRecognizer *panGestureRecognizer;
-
-@end
 
 @implementation UIScrollView
 
@@ -198,7 +159,12 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
 
 - (void)flashScrollIndicators
 {
-    
+    [self _showScrollers];
+    self.hideScrollersTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                               target:self
+                                                             selector:@selector(_hideScrollers)
+                                                             userInfo:nil
+                                                              repeats:NO];
 }
 
 - (void)_showScrollers

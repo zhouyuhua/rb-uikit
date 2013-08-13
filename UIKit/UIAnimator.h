@@ -8,10 +8,11 @@
 
 #import "UIView.h"
 
-UIKIT_EXTERN CGFloat UIAnimatorQuadradicEaseOut(CGFloat timeWithinDuration, CGFloat start, CGFloat change, CGFloat duration);
-UIKIT_EXTERN CGFloat UIAnimatorLinear(CGFloat timeWithinDuration, CGFloat start, CGFloat change, CGFloat duration);
+UIKIT_EXTERN CGFloat UIAnimatorQuadradicEaseOut(CGFloat timeWithinDuration, CGFloat start, CGFloat end, CGFloat duration);
+UIKIT_EXTERN CGFloat UIAnimatorQuadradicEaseIn(CGFloat timeWithinDuration, CGFloat start, CGFloat end, CGFloat duration);
+UIKIT_EXTERN CGFloat UIAnimatorLinear(CGFloat timeWithinDuration, CGFloat start, CGFloat end, CGFloat duration);
 
-typedef CGFloat (*UIAnimationFunction)(CGFloat timeWithinDuration, CGFloat start, CGFloat change, CGFloat duration);
+typedef CGFloat (*UIAnimationFunction)(CGFloat timeWithinDuration, CGFloat start, CGFloat end, CGFloat duration);
 
 @interface UIAnimator : NSObject
 

@@ -60,6 +60,7 @@
 		8B54A05217B9CD7B0068775C /* UIGridLayoutRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A01517B9C8790068775C /* UIGridLayoutRow.m */; };
 		8B54A05317B9CD7B0068775C /* UIGridLayoutSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01617B9C8790068775C /* UIGridLayoutSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A05417B9CD7B0068775C /* UIGridLayoutSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A01717B9C8790068775C /* UIGridLayoutSection.m */; };
+		8B54A05617B9D6CC0068775C /* UIScrollView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A05517B9D6CC0068775C /* UIScrollView_Private.h */; };
 		8B5AF84B179B67F7008B3BF3 /* UINavigationBarAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B5AF84C179B67F7008B3BF3 /* UINavigationBarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5AF84A179B67F7008B3BF3 /* UINavigationBarAppearance.m */; };
 		8B5AF84F179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5AF84D179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png */; };
@@ -237,6 +238,7 @@
 		8B54A01717B9C8790068775C /* UIGridLayoutSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIGridLayoutSection.m; sourceTree = "<group>"; };
 		8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILongPressGestureRecognizer.h; sourceTree = "<group>"; };
 		8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		8B54A05517B9D6CC0068775C /* UIScrollView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollView_Private.h; sourceTree = "<group>"; };
 		8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationBarAppearance.h; sourceTree = "<group>"; };
 		8B5AF84A179B67F7008B3BF3 /* UINavigationBarAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationBarAppearance.m; sourceTree = "<group>"; };
 		8B5AF84D179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemBackgroundHighlighted@2x.png"; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 			children = (
 				8BB4BD5317B1E860009B7708 /* UIScrollView.h */,
 				8BB4BD5417B1E860009B7708 /* UIScrollView.m */,
+				8B54A05517B9D6CC0068775C /* UIScrollView_Private.h */,
 				8BB4BD5917B1EC51009B7708 /* UIScroller.h */,
 				8BB4BD5A17B1EC51009B7708 /* UIScroller.m */,
 				8BB4BD6517B359BC009B7708 /* UIAnimator.h */,
@@ -868,6 +871,7 @@
 				8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */,
 				8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */,
 				8B1EC8DA17A9F2B10035369C /* UIAppKitAdaptorView.h in Headers */,
+				8B54A05617B9D6CC0068775C /* UIScrollView_Private.h in Headers */,
 				8B91077817A979F9008D9DF0 /* UIWindow_Private.h in Headers */,
 				8B6AEDE917AB639400D6858A /* UIGestureRecognizer_Private.h in Headers */,
 				8BB8A22D17B1E66A004FB0E8 /* UIAction.h in Headers */,

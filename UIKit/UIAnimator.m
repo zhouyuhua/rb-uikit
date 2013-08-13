@@ -9,10 +9,17 @@
 #import "UIAnimator.h"
 
 //From <http://www.gizma.com/easing/>, <http://stackoverflow.com/questions/10171966/ease-out-cubic-function-arguments-explanation>
-CGFloat UIAnimatorQuadradicEaseOut(CGFloat timeWithinDuration, CGFloat start, CGFloat change, CGFloat duration)
+CGFloat UIAnimatorQuadradicEaseOut(CGFloat timeWithinDuration, CGFloat start, CGFloat end, CGFloat duration)
+{
+    timeWithinDuration /= duration;
+    return UIAnimatorLinear(2.0 * timeWithinDuration - timeWithinDuration * timeWithinDuration, start, end, 1.0);
+}
+
+CGFloat UIAnimatorQuadradicEaseIn(CGFloat timeWithinDuration, CGFloat start, CGFloat end, CGFloat duration)
 {
 	timeWithinDuration /= duration;
-	return -change * timeWithinDuration * (timeWithinDuration - 2) + start;
+    return UIAnimatorLinear(timeWithinDuration * timeWithinDuration, start, end, 1.0);
+	return end * timeWithinDuration * timeWithinDuration + start;
 }
 
 //From <http://en.wikipedia.org/wiki/Linear_interpolation>
