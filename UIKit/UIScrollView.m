@@ -17,6 +17,8 @@
 const CGFloat UIScrollViewDecelerationRateNormal = 0.3;
 const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
+static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
+
 @interface UIScrollView () {
     struct {
         int scrollViewDidScroll : 1;
@@ -349,7 +351,7 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
     if(_bounces) {
         BOOL shouldBounceHorizontal = _alwaysBounceHorizontal && (ABS(rawOffset.x - constrainedOffset.x) > 0);
         if(shouldBounceHorizontal) {
-            constrainedOffset.x = originalOffset.x + (0.05 * delta.x);
+            constrainedOffset.x = originalOffset.x + (UIScrollViewNegativeSpaceScaleFactor * delta.x);
             
             self._shouldBounceBack = YES;
             
@@ -362,7 +364,7 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
         
         BOOL shouldBounceVertical = _alwaysBounceVertical && (ABS(rawOffset.y - constrainedOffset.y) > 0);
         if(shouldBounceVertical) {
-            constrainedOffset.y = originalOffset.y + (0.05 * delta.y);
+            constrainedOffset.y = originalOffset.y + (UIScrollViewNegativeSpaceScaleFactor * delta.y);
             
             self._shouldBounceBack = YES;
             

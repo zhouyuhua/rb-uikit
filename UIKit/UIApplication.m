@@ -166,8 +166,6 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     for (UIGestureRecognizer *gestureRecognizer in UIGestureRecognizersForView(_currentTouch.view)) {
         if([gestureRecognizer _wantsToTrackEvent:_currentEvent]) {
             [gestureRecognizers addObject:gestureRecognizer];
-            
-            [gestureRecognizer _handleEvent:_currentEvent];
         }
     }
     _currentTouch.gestureRecognizers = gestureRecognizers;
@@ -182,10 +180,6 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     _currentTouch.locationInWindow = [hostView convertPoint:event.locationInWindow fromView:nil];
     _currentTouch.delta = CGPointMake(event.deltaX, event.deltaY);
     _currentTouch.phase = phase;
-    
-    for (UIGestureRecognizer *gestureRecognizer in _currentTouch.gestureRecognizers) {
-        [gestureRecognizer _handleEvent:_currentEvent];
-    }
 }
 
 #pragma mark -
@@ -209,11 +203,8 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     
     NSMutableArray *gestureRecognizers = [NSMutableArray array];
     for (UIGestureRecognizer *gestureRecognizer in UIGestureRecognizersForView(_currentTouch.view)) {
-        if([gestureRecognizer _wantsToTrackEvent:_currentEvent]) {
+        if([gestureRecognizer _wantsToTrackEvent:_currentEvent])
             [gestureRecognizers addObject:gestureRecognizer];
-            
-            [gestureRecognizer _handleEvent:_currentEvent];
-        }
     }
     _currentTouch.gestureRecognizers = gestureRecognizers;
 }
@@ -233,10 +224,6 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     _currentTouch.locationInWindow = locationInWindow;
     _currentTouch.delta = delta;
     _currentTouch.phase = _UITouchPhaseGestureMoved;
-    
-    for (UIGestureRecognizer *gestureRecognizer in _currentTouch.gestureRecognizers) {
-        [gestureRecognizer _handleEvent:_currentEvent];
-    }
 }
 
 - (void)_endTrackingNativeGestureEvent:(NSEvent *)event fromHostview:(UIWindowAppKitHostView *)hostView
@@ -254,10 +241,6 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     _currentTouch.locationInWindow = locationInWindow;
     _currentTouch.delta = delta;
     _currentTouch.phase = _UITouchPhaseGestureEnd;
-    
-    for (UIGestureRecognizer *gestureRecognizer in _currentTouch.gestureRecognizers) {
-        [gestureRecognizer _handleEvent:_currentEvent];
-    }
 }
 
 #pragma mark -
