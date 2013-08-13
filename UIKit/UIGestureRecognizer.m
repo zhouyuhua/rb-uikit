@@ -60,6 +60,18 @@
     }
 }
 
+- (BOOL)_wantsAutomaticActionSending
+{
+    return YES;
+}
+
+- (void)_sendActions
+{
+    for (UIAction *action in _actions) {
+        [action invokeFromSender:self];
+    }
+}
+
 #pragma mark - <NSCopying>
 
 - (id)copyWithZone:(NSZone *)zone
@@ -244,9 +256,8 @@
         }
     }
     
-    for (UIAction *action in _actions) {
-        [action invokeFromSender:self];
-    }
+    if([self _wantsAutomaticActionSending])
+        [self _sendActions];
 }
 
 @end

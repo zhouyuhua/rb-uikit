@@ -24,6 +24,9 @@
 - (BOOL)_wantsToTrackEvent:(UIEvent *)event;
 - (void)_handleEvent:(UIEvent *)event;
 
+- (BOOL)_wantsAutomaticActionSending;
+- (void)_sendActions;
+
 @property (nonatomic, weak) UIView *_view;
 @property (nonatomic) UIEvent *_currentEvent;
 @property (nonatomic) NSArray *_touches;

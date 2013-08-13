@@ -10,4 +10,9 @@
 
 @interface UILongPressGestureRecognizer : UIGestureRecognizer
 
+@property (nonatomic) CGFloat allowableMovement;
+@property (nonatomic) CFTimeInterval minimumPressDuration;
+@property (nonatomic) NSUInteger numberOfTapsRequired;
+@property (nonatomic) NSInteger numberOfTouchesRequired;
+
 @end

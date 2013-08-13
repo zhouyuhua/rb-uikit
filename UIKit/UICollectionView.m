@@ -20,7 +20,7 @@
  THE SOFTWARE.
  */
 
-#import "UICollectionView.h"
+#import "UICollectionView_Internal.h"
 #import "UICollectionViewData.h"
 #import "UICollectionViewLayout+Internals.h"
 #import "UICollectionViewItemKey.h"
@@ -28,6 +28,7 @@
 #import "NSIndexPath+UICollectionViewAdditions.h"
 
 #import "UITouch.h"
+#import "UIMenuItem.h"
 
 #import <objc/runtime.h>
 
@@ -53,82 +54,6 @@
     char junk[128];
 }
 @property (nonatomic, copy) NSString *elementKind;
-@end
-
-@class UICollectionViewExt;
-
-@interface UICollectionView () <UIScrollViewDelegate> {
-    // ivar layout needs to EQUAL to UICollectionView.
-    UICollectionViewLayout *_layout;
-    __unsafe_unretained id<UICollectionViewDataSource> _dataSource;
-    UIView *_backgroundView;
-    NSMutableSet *_indexPathsForSelectedItems;
-    NSMutableDictionary *_cellReuseQueues;
-    NSMutableDictionary *_supplementaryViewReuseQueues;
-    NSMutableDictionary *_decorationViewReuseQueues;
-    NSMutableSet *_indexPathsForHighlightedItems;
-    int _reloadingSuspendedCount;
-    UICollectionReusableView *_firstResponderView;
-    UIView *_newContentView;
-    int _firstResponderViewType;
-    NSString *_firstResponderViewKind;
-    NSIndexPath *_firstResponderIndexPath;
-    NSMutableDictionary *_allVisibleViewsDict;
-    NSIndexPath *_pendingSelectionIndexPath;
-    NSMutableSet *_pendingDeselectionIndexPaths;
-    UICollectionViewData *_collectionViewData;
-    id _update;
-    CGRect _visibleBoundRects;
-    CGRect _preRotationBounds;
-    CGPoint _rotationBoundsOffset;
-    int _rotationAnimationCount;
-    int _updateCount;
-    NSMutableArray *_insertItems;
-    NSMutableArray *_deleteItems;
-    NSMutableArray *_reloadItems;
-    NSMutableArray *_moveItems;
-    NSArray *_originalInsertItems;
-    NSArray *_originalDeleteItems;
-    UITouch *_currentTouch;
-    
-    void (^_updateCompletionHandler)(BOOL finished);
-    
-    NSMutableDictionary *_cellClassDict;
-    NSMutableDictionary *_supplementaryViewClassDict;
-    struct {
-        unsigned int delegateShouldHighlightItemAtIndexPath : 1;
-        unsigned int delegateDidHighlightItemAtIndexPath : 1;
-        unsigned int delegateDidUnhighlightItemAtIndexPath : 1;
-        unsigned int delegateShouldSelectItemAtIndexPath : 1;
-        unsigned int delegateShouldDeselectItemAtIndexPath : 1;
-        unsigned int delegateDidSelectItemAtIndexPath : 1;
-        unsigned int delegateDidDeselectItemAtIndexPath : 1;
-        unsigned int delegateSupportsMenus : 1;
-        unsigned int delegateDidEndDisplayingCell : 1;
-        unsigned int delegateDidEndDisplayingSupplementaryView : 1;
-        unsigned int dataSourceNumberOfSections : 1;
-        unsigned int dataSourceViewForSupplementaryElement : 1;
-        unsigned int reloadSkippedDuringSuspension : 1;
-        unsigned int scheduledUpdateVisibleCells : 1;
-        unsigned int scheduledUpdateVisibleCellLayoutAttributes : 1;
-        unsigned int allowsSelection : 1;
-        unsigned int allowsMultipleSelection : 1;
-        unsigned int updating : 1;
-        unsigned int fadeCellsForBoundsChange : 1;
-        unsigned int updatingLayout : 1;
-        unsigned int needsReload : 1;
-        unsigned int reloading : 1;
-        unsigned int skipLayoutDuringSnapshotting : 1;
-        unsigned int layoutInvalidatedSinceLastCellUpdate : 1;
-        unsigned int doneFirstLayout : 1;
-    }_collectionViewFlags;
-    CGPoint _lastLayoutOffset;
-}
-@property (nonatomic, strong) UICollectionViewData *collectionViewData;
-@property (nonatomic, strong, readonly) UICollectionViewExt *extVars;
-@property (nonatomic, readonly) id currentUpdate;
-@property (nonatomic, readonly) NSDictionary *visibleViewsDict;
-@property (nonatomic, assign) CGRect visibleBoundRects;
 @end
 
 // Used by UICollectionView for external variables.
@@ -2104,6 +2029,42 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
     }];
     
     if(!updating) [self endItemAnimations];
+}
+
+#pragma mark - Menus
+
+- (BOOL)menuController:(UIMenuController *)controller shouldEnableItem:(UIMenuItem *)item
+{
+    if(_collectionViewFlags.delegateSupportsMenus) {
+        NSIndexPath *indexPath = [self indexPathForCell:self.menuCell];
+        return [self.delegate collectionView:self canPerformAction:item.action forItemAtIndexPath:indexPath withSender:item];
+    }
+    
+    return NO;
+}
+
+- (void)menuController:(UIMenuController *)controller didSelectItem:(UIMenuItem *)item
+{
+    NSIndexPath *indexPath = [self indexPathForCell:self.menuCell];
+    [self.delegate collectionView:self performAction:item.action forItemAtIndexPath:indexPath withSender:item];
+}
+
+#pragma mark -
+
+- (void)showMenuForCell:(UICollectionViewCell *)cell
+{
+    if(_collectionViewFlags.delegateSupportsMenus) {
+        NSIndexPath *indexPath = [self indexPathForCell:self.menuCell];
+        if(![self.delegate collectionView:self shouldShowMenuForItemAtIndexPath:indexPath])
+            return;
+        
+        self.menuCell = cell;
+        
+        UIMenuController *menuController = [UIMenuController sharedMenuController];
+        [menuController pushActionHandler:self];
+        [menuController setTargetRect:CGRectZero inView:self];
+        [menuController setMenuVisible:YES animated:YES];
+    }
 }
 
 @end

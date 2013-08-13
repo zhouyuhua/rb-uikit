@@ -7,6 +7,7 @@
 //
 
 #import "UIApplication_Private.h"
+#import <objc/message.h>
 #import "UIEvent.h"
 #import "UITouch.h"
 #import "UIWindow_Private.h"
@@ -102,6 +103,15 @@ static Class _SharedApplicationClass = Nil;
 
 - (BOOL)sendAction:(SEL)action to:(id)target from:(id)sender forEvent:(UIEvent *)event
 {
+    if(!target)
+        target = [self.keyWindow targetForAction:action withSender:sender];
+    
+    if(target) {
+        ((void(*)(id self, SEL _cmd, id sender))objc_msgSend)(target, action, sender);
+        
+        return YES;
+    }
+    
     return NO;
 }
 

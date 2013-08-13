@@ -20,7 +20,7 @@
  THE SOFTWARE.
  */
 
-#import "UICollectionView.h"
+#import "UICollectionView_Internal.h"
 
 #import "UILongPressGestureRecognizer.h"
 #import "UIPanGestureRecognizer.h"
@@ -133,27 +133,14 @@
         [self addSubview:_contentView];
         
         _menuGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(menuGesture:)];
+        [self addGestureRecognizer:_menuGesture];
     }
     return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    if((self = [super initWithCoder:aDecoder])) {
-        if(self.subviews.count > 0) {
-            _contentView = self.subviews[0];
-        } else {
-            _contentView = [[UIView alloc] initWithFrame:self.bounds];
-            _contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-            [self addSubview:_contentView];
-        }
-        
-        _backgroundView = [[UIView alloc] initWithFrame:self.bounds];
-        _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        [self insertSubview:_backgroundView belowSubview:_contentView];
-        
-        _menuGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(menuGesture:)];
-    }
-    return self;
+    UIKitUnimplementedMethod();
+    return nil;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -196,7 +183,7 @@
 }
 
 - (void)menuGesture:(UILongPressGestureRecognizer *)recognizer {
-    NSLog(@"Not yet implemented: %@", NSStringFromSelector(_cmd));
+    [self.collectionView showMenuForCell:self];
 }
 
 - (void)setBackgroundView:(UIView *)backgroundView {
