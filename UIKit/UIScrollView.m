@@ -14,7 +14,7 @@
 
 #import "UIScroller.h"
 
-const CGFloat UIScrollViewDecelerationRateNormal = 0.3;
+const CGFloat UIScrollViewDecelerationRateNormal = 0.33;
 const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
 static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
@@ -29,6 +29,9 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
         self.scrollEnabled = YES;
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = YES;
+        
+        self.minimumZoomScale = 1.0;
+        self.maximumZoomScale = 1.0;
         
         self.clipsToBounds = YES;
         
@@ -201,6 +204,23 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
     }];
 }
 
+#pragma mark - Zooming
+
+- (void)setZoomScale:(float)zoomScale
+{
+    [self setZoomScale:zoomScale animated:YES];
+}
+
+- (void)setZoomScale:(float)scale animated:(BOOL)animated
+{
+    UIKitUnimplementedMethod();
+}
+
+- (void)zoomToRect:(CGRect)rect animated:(BOOL)animated
+{
+    UIKitUnimplementedMethod();
+}
+
 #pragma mark - Layout
 
 - (void)layoutSubviews
@@ -287,7 +307,10 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
     if(_delegateRespondsTo.scrollViewDidEndDraggingWillDecelerate)
         [_delegate scrollViewDidEndDragging:self willDecelerate:YES];
     
+    self.decelerating = YES;
+    
     UIScrollViewDecelerationAnimator *deceleration = [[UIScrollViewDecelerationAnimator alloc] initWithScrollView:self velocity:velocity];
+    self.decelerationRate = deceleration.duration;
     
     if(_delegateRespondsTo.scrollViewWillEndDraggingWithVelocityTargetContentOffset) {
         CGPoint targetContentOffset = deceleration.targetContentOffset;
@@ -300,6 +323,9 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
     
     __weak __typeof(self) me = self;
     [self _runAnimation:deceleration completionHandler:^{
+        self.decelerating = NO;
+        self.decelerationRate = 0.0;
+        
         __typeof(self) strongMe = me;
         if(strongMe->_delegateRespondsTo.scrollViewDidEndDecelerating)
             [strongMe->_delegate scrollViewDidEndDecelerating:self];
@@ -307,6 +333,18 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
 }
 
 #pragma mark - Gestures
+
+- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view
+{
+    return YES;
+}
+
+- (BOOL)touchesShouldCancelInContentView:(UIView *)view
+{
+    return NO;
+}
+
+#pragma mark -
 
 - (void)_beginDragging
 {
@@ -318,6 +356,9 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
     
     self._shouldBounceBack = NO;
     [self _showScrollers];
+    
+    self.dragging = YES;
+    self.tracking = YES;
 }
 
 - (void)_dragBy:(CGPoint)delta
@@ -378,6 +419,9 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
         //scrolled from an old-fashioned scroll-wheel device.
         [self _decelerateScrollWithVelocity:velocity];
     }
+    
+    self.dragging = NO;
+    self.tracking = NO;
 }
 
 

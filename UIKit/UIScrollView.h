@@ -9,7 +9,7 @@
 #import "UIView.h"
 
 @protocol UIScrollViewDelegate;
-@class UIPanGestureRecognizer;
+@class UIPanGestureRecognizer, UIPinchGestureRecognizer;
 
 typedef NS_ENUM(NSInteger, UIScrollViewIndicatorStyle) {
     UIScrollViewIndicatorStyleDefault,
@@ -38,7 +38,29 @@ UIKIT_EXTERN const CGFloat UIScrollViewDecelerationRateFast;
 @property (nonatomic) UIScrollViewIndicatorStyle indicatorStyle;
 @property (nonatomic) CGFloat decelerationRate;
 
-@property (nonatomic, getter=isDragging) BOOL dragging;
+@property (nonatomic, readonly, getter=isTracking) BOOL tracking;
+@property (nonatomic, getter=isDragging, readonly) BOOL dragging;
+@property (nonatomic, readonly, getter=isDecelerating) BOOL decelerating;
+
+@property (nonatomic) BOOL delaysContentTouches;
+@property (nonatomic) BOOL canCancelContentTouches;
+
+@property (nonatomic) float minimumZoomScale;
+@property (nonatomic) float maximumZoomScale;
+
+@property (nonatomic) float zoomScale;
+- (void)setZoomScale:(float)scale animated:(BOOL)animated;
+- (void)zoomToRect:(CGRect)rect animated:(BOOL)animated;
+
+@property (nonatomic) BOOL bouncesZoom;
+
+@property (nonatomic, readonly, getter=isZooming) BOOL zooming;
+@property (nonatomic, readonly, getter=isZoomBouncing) BOOL zoomBouncing;
+
+@property (nonatomic) BOOL scrollsToTop;
+
+- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view;
+- (BOOL)touchesShouldCancelInContentView:(UIView *)view;
 
 - (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated;
 - (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated;
@@ -46,6 +68,7 @@ UIKIT_EXTERN const CGFloat UIScrollViewDecelerationRateFast;
 - (void)flashScrollIndicators;
 
 @property (nonatomic, readonly) UIPanGestureRecognizer *panGestureRecognizer;
+@property (nonatomic, readonly) UIPinchGestureRecognizer *pinchGestureRecognizer;
 
 @end
 

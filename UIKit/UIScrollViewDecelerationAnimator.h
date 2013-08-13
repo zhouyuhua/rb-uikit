@@ -16,4 +16,6 @@
 
 @property (nonatomic) CGPoint targetContentOffset;
 
+@property (nonatomic) NSTimeInterval duration;
+
 @end

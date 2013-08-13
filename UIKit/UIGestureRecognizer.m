@@ -214,8 +214,6 @@
             touch.view = nil;
             self._lastIgnoredTouch = nil;
             self._lastIgnoredEvent = nil;
-        } else {
-            touch.view = self._view;
         }
         
         switch (touch.phase) {

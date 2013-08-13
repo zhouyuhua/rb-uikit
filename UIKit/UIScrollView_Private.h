@@ -51,4 +51,8 @@
 
 @property (nonatomic, readwrite) UIPanGestureRecognizer *panGestureRecognizer;
 
+@property (nonatomic, readwrite, getter=isTracking) BOOL tracking;
+@property (nonatomic, getter=isDragging, readwrite) BOOL dragging;
+@property (nonatomic, readwrite, getter=isDecelerating) BOOL decelerating;
+
 @end

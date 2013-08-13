@@ -48,8 +48,6 @@ typedef NS_ENUM(NSUInteger, AnimationPhase) {
 
 @property (nonatomic) UIAnimatorFunction momentumTimingFunction;
 
-@property (nonatomic) NSTimeInterval duration;
-
 @end
 
 @implementation UIScrollViewDecelerationAnimator
@@ -86,7 +84,7 @@ typedef NS_ENUM(NSUInteger, AnimationPhase) {
             self.targetContentOffset = self.constrainedTargetContentOffset;
         }
         
-        self.duration = 100.0 / abs(velocity.y);
+        self.duration = abs(velocity.y) > 300? UIScrollViewDecelerationRateFast : UIScrollViewDecelerationRateNormal;
 
         self.startTime = [NSDate timeIntervalSinceReferenceDate];
     }
