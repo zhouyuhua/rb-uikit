@@ -10,7 +10,7 @@
 
 @class UINavigationController, UINavigationItem, UIView;
 
-@interface UIViewController : UIResponder
+@interface UIViewController : UIResponder <NSCoding>
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 

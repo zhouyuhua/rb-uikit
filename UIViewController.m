@@ -56,6 +56,19 @@
     return nibName;
 }
 
+#pragma mark - <NSCoding>
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    UIKitUnimplementedMethod();
+    return nil;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    UIKitUnimplementedMethod();
+}
+
 #pragma mark - Appearance
 
 - (void)viewWillAppear:(BOOL)animated

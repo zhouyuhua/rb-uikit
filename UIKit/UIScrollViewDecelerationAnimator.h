@@ -14,4 +14,6 @@
 
 - (instancetype)initWithScrollView:(UIScrollView *)scrollView velocity:(CGPoint)velocity;
 
+@property (nonatomic) CGPoint targetContentOffset;
+
 @end

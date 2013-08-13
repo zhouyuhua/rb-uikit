@@ -94,6 +94,19 @@
     return [self initWithFrame:CGRectZero];
 }
 
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    UIKitUnimplementedMethod();
+    return nil;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    UIKitUnimplementedMethod();
+}
+
 #pragma mark - Geometry
 
 - (void)setFrame:(CGRect)frame

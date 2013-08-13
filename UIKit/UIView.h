@@ -80,7 +80,7 @@ typedef NS_OPTIONS(NSUInteger, UIViewAnimationOptions) {
 
 @class UIWindow, UIGestureRecognizer;
 
-@interface UIView : UIResponder <UIAppearance>
+@interface UIView : UIResponder <UIAppearance, NSCoding>
 
 + (Class)layerClass;
 

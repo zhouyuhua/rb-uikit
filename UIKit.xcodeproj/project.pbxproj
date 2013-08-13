@@ -28,8 +28,38 @@
 		8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DE17A9F8280035369C /* UITextField_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B1EC8E417A9F8280035369C /* UITextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DF17A9F8280035369C /* UITextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1EC8E517A9F8280035369C /* UITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8E017A9F8280035369C /* UITextField.m */; };
-		8B39CBFA17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B39CBF817B2B9C900435CEC /* UIScrollWheelGestureRecognizer.h */; };
+		8B39CBFA17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B39CBF817B2B9C900435CEC /* UIScrollWheelGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B39CBFB17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B39CBF917B2B9C900435CEC /* UIScrollWheelGestureRecognizer.m */; };
+		8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */; };
+		8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A03A17B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B549FFD17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.m */; };
+		8B54A03B17B9CD7B0068775C /* UICollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B549FFE17B9C8790068775C /* UICollectionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A03C17B9CD7B0068775C /* UICollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B549FFF17B9C8790068775C /* UICollectionView.m */; };
+		8B54A03D17B9CD7B0068775C /* UICollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00017B9C8790068775C /* UICollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A03E17B9CD7B0068775C /* UICollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00117B9C8790068775C /* UICollectionViewCell.m */; };
+		8B54A03F17B9CD7B0068775C /* UICollectionViewCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00217B9C8790068775C /* UICollectionViewCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04017B9CD7B0068775C /* UICollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00317B9C8790068775C /* UICollectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04117B9CD7B0068775C /* UICollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00417B9C8790068775C /* UICollectionViewController.m */; };
+		8B54A04217B9CD7B0068775C /* UICollectionViewData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00517B9C8790068775C /* UICollectionViewData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04317B9CD7B0068775C /* UICollectionViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00617B9C8790068775C /* UICollectionViewData.m */; };
+		8B54A04417B9CD7B0068775C /* UICollectionViewFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00717B9C8790068775C /* UICollectionViewFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04517B9CD7B0068775C /* UICollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00817B9C8790068775C /* UICollectionViewFlowLayout.m */; };
+		8B54A04617B9CD7B0068775C /* UICollectionViewItemKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00917B9C8790068775C /* UICollectionViewItemKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04717B9CD7B0068775C /* UICollectionViewItemKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00A17B9C8790068775C /* UICollectionViewItemKey.m */; };
+		8B54A04817B9CD7B0068775C /* UICollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00B17B9C8790068775C /* UICollectionViewLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04917B9CD7B0068775C /* UICollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00C17B9C8790068775C /* UICollectionViewLayout.m */; };
+		8B54A04A17B9CD7B0068775C /* UICollectionViewLayout+Internals.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00D17B9C8790068775C /* UICollectionViewLayout+Internals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04B17B9CD7B0068775C /* UICollectionViewUpdateItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00E17B9C8790068775C /* UICollectionViewUpdateItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04C17B9CD7B0068775C /* UICollectionViewUpdateItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00F17B9C8790068775C /* UICollectionViewUpdateItem.m */; };
+		8B54A04D17B9CD7B0068775C /* UIGridLayoutInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01017B9C8790068775C /* UIGridLayoutInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04E17B9CD7B0068775C /* UIGridLayoutInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A01117B9C8790068775C /* UIGridLayoutInfo.m */; };
+		8B54A04F17B9CD7B0068775C /* UIGridLayoutItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01217B9C8790068775C /* UIGridLayoutItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A05017B9CD7B0068775C /* UIGridLayoutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A01317B9C8790068775C /* UIGridLayoutItem.m */; };
+		8B54A05117B9CD7B0068775C /* UIGridLayoutRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01417B9C8790068775C /* UIGridLayoutRow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A05217B9CD7B0068775C /* UIGridLayoutRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A01517B9C8790068775C /* UIGridLayoutRow.m */; };
+		8B54A05317B9CD7B0068775C /* UIGridLayoutSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01617B9C8790068775C /* UIGridLayoutSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A05417B9CD7B0068775C /* UIGridLayoutSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A01717B9C8790068775C /* UIGridLayoutSection.m */; };
 		8B5AF84B179B67F7008B3BF3 /* UINavigationBarAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B5AF84C179B67F7008B3BF3 /* UINavigationBarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5AF84A179B67F7008B3BF3 /* UINavigationBarAppearance.m */; };
 		8B5AF84F179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B5AF84D179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png */; };
@@ -86,15 +116,15 @@
 		8BAE9591179A1D3100562F35 /* UIBarButtonItemBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE958F179A1D3100562F35 /* UIBarButtonItemBackground.png */; };
 		8BB4BD5517B1E860009B7708 /* UIScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD5317B1E860009B7708 /* UIScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BB4BD5617B1E860009B7708 /* UIScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD5417B1E860009B7708 /* UIScrollView.m */; };
-		8BB4BD5B17B1EC51009B7708 /* UIScroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD5917B1EC51009B7708 /* UIScroller.h */; };
+		8BB4BD5B17B1EC51009B7708 /* UIScroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD5917B1EC51009B7708 /* UIScroller.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BB4BD5C17B1EC51009B7708 /* UIScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD5A17B1EC51009B7708 /* UIScroller.m */; };
-		8BB4BD6017B1ED5E009B7708 /* UIPanGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD5E17B1ED5E009B7708 /* UIPanGestureRecognizer.h */; };
+		8BB4BD6017B1ED5E009B7708 /* UIPanGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD5E17B1ED5E009B7708 /* UIPanGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BB4BD6117B1ED5E009B7708 /* UIPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD5F17B1ED5E009B7708 /* UIPanGestureRecognizer.m */; };
-		8BB4BD6717B359BC009B7708 /* UIAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD6517B359BC009B7708 /* UIAnimator.h */; };
+		8BB4BD6717B359BC009B7708 /* UIAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD6517B359BC009B7708 /* UIAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BB4BD6817B359BC009B7708 /* UIAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD6617B359BC009B7708 /* UIAnimator.m */; };
-		8BB4BD6B17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD6917B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h */; };
+		8BB4BD6B17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD6917B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BB4BD6C17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD6A17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.m */; };
-		8BB4BD6F17B35AF7009B7708 /* UIScrollViewScrollAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD6D17B35AF7009B7708 /* UIScrollViewScrollAnimator.h */; };
+		8BB4BD6F17B35AF7009B7708 /* UIScrollViewScrollAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD6D17B35AF7009B7708 /* UIScrollViewScrollAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BB4BD7017B35AF7009B7708 /* UIScrollViewScrollAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD6E17B35AF7009B7708 /* UIScrollViewScrollAnimator.m */; };
 		8BB8A22D17B1E66A004FB0E8 /* UIAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB8A22B17B1E66A004FB0E8 /* UIAction.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8A22C17B1E66A004FB0E8 /* UIAction.m */; };
@@ -177,6 +207,36 @@
 		8B1EC8E017A9F8280035369C /* UITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextField.m; sourceTree = "<group>"; };
 		8B39CBF817B2B9C900435CEC /* UIScrollWheelGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollWheelGestureRecognizer.h; sourceTree = "<group>"; };
 		8B39CBF917B2B9C900435CEC /* UIScrollWheelGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScrollWheelGestureRecognizer.m; sourceTree = "<group>"; };
+		8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+UICollectionViewAdditions.h"; sourceTree = "<group>"; };
+		8B549FFD17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+UICollectionViewAdditions.m"; sourceTree = "<group>"; };
+		8B549FFE17B9C8790068775C /* UICollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionView.h; sourceTree = "<group>"; };
+		8B549FFF17B9C8790068775C /* UICollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionView.m; sourceTree = "<group>"; };
+		8B54A00017B9C8790068775C /* UICollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewCell.h; sourceTree = "<group>"; };
+		8B54A00117B9C8790068775C /* UICollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewCell.m; sourceTree = "<group>"; };
+		8B54A00217B9C8790068775C /* UICollectionViewCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewCommon.h; sourceTree = "<group>"; };
+		8B54A00317B9C8790068775C /* UICollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewController.h; sourceTree = "<group>"; };
+		8B54A00417B9C8790068775C /* UICollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewController.m; sourceTree = "<group>"; };
+		8B54A00517B9C8790068775C /* UICollectionViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewData.h; sourceTree = "<group>"; };
+		8B54A00617B9C8790068775C /* UICollectionViewData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewData.m; sourceTree = "<group>"; };
+		8B54A00717B9C8790068775C /* UICollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		8B54A00817B9C8790068775C /* UICollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		8B54A00917B9C8790068775C /* UICollectionViewItemKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewItemKey.h; sourceTree = "<group>"; };
+		8B54A00A17B9C8790068775C /* UICollectionViewItemKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewItemKey.m; sourceTree = "<group>"; };
+		8B54A00B17B9C8790068775C /* UICollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout.h; sourceTree = "<group>"; };
+		8B54A00C17B9C8790068775C /* UICollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewLayout.m; sourceTree = "<group>"; };
+		8B54A00D17B9C8790068775C /* UICollectionViewLayout+Internals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewLayout+Internals.h"; sourceTree = "<group>"; };
+		8B54A00E17B9C8790068775C /* UICollectionViewUpdateItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewUpdateItem.h; sourceTree = "<group>"; };
+		8B54A00F17B9C8790068775C /* UICollectionViewUpdateItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewUpdateItem.m; sourceTree = "<group>"; };
+		8B54A01017B9C8790068775C /* UIGridLayoutInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGridLayoutInfo.h; sourceTree = "<group>"; };
+		8B54A01117B9C8790068775C /* UIGridLayoutInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIGridLayoutInfo.m; sourceTree = "<group>"; };
+		8B54A01217B9C8790068775C /* UIGridLayoutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGridLayoutItem.h; sourceTree = "<group>"; };
+		8B54A01317B9C8790068775C /* UIGridLayoutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIGridLayoutItem.m; sourceTree = "<group>"; };
+		8B54A01417B9C8790068775C /* UIGridLayoutRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGridLayoutRow.h; sourceTree = "<group>"; };
+		8B54A01517B9C8790068775C /* UIGridLayoutRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIGridLayoutRow.m; sourceTree = "<group>"; };
+		8B54A01617B9C8790068775C /* UIGridLayoutSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGridLayoutSection.h; sourceTree = "<group>"; };
+		8B54A01717B9C8790068775C /* UIGridLayoutSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIGridLayoutSection.m; sourceTree = "<group>"; };
+		8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILongPressGestureRecognizer.m; sourceTree = "<group>"; };
 		8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationBarAppearance.h; sourceTree = "<group>"; };
 		8B5AF84A179B67F7008B3BF3 /* UINavigationBarAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationBarAppearance.m; sourceTree = "<group>"; };
 		8B5AF84D179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemBackgroundHighlighted@2x.png"; sourceTree = "<group>"; };
@@ -349,6 +409,41 @@
 			name = Alerts;
 			sourceTree = "<group>";
 		};
+		8B549FFB17B9C86C0068775C /* Collection View */ = {
+			isa = PBXGroup;
+			children = (
+				8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */,
+				8B549FFD17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.m */,
+				8B549FFE17B9C8790068775C /* UICollectionView.h */,
+				8B549FFF17B9C8790068775C /* UICollectionView.m */,
+				8B54A00017B9C8790068775C /* UICollectionViewCell.h */,
+				8B54A00117B9C8790068775C /* UICollectionViewCell.m */,
+				8B54A00217B9C8790068775C /* UICollectionViewCommon.h */,
+				8B54A00317B9C8790068775C /* UICollectionViewController.h */,
+				8B54A00417B9C8790068775C /* UICollectionViewController.m */,
+				8B54A00517B9C8790068775C /* UICollectionViewData.h */,
+				8B54A00617B9C8790068775C /* UICollectionViewData.m */,
+				8B54A00717B9C8790068775C /* UICollectionViewFlowLayout.h */,
+				8B54A00817B9C8790068775C /* UICollectionViewFlowLayout.m */,
+				8B54A00917B9C8790068775C /* UICollectionViewItemKey.h */,
+				8B54A00A17B9C8790068775C /* UICollectionViewItemKey.m */,
+				8B54A00B17B9C8790068775C /* UICollectionViewLayout.h */,
+				8B54A00C17B9C8790068775C /* UICollectionViewLayout.m */,
+				8B54A00D17B9C8790068775C /* UICollectionViewLayout+Internals.h */,
+				8B54A00E17B9C8790068775C /* UICollectionViewUpdateItem.h */,
+				8B54A00F17B9C8790068775C /* UICollectionViewUpdateItem.m */,
+				8B54A01017B9C8790068775C /* UIGridLayoutInfo.h */,
+				8B54A01117B9C8790068775C /* UIGridLayoutInfo.m */,
+				8B54A01217B9C8790068775C /* UIGridLayoutItem.h */,
+				8B54A01317B9C8790068775C /* UIGridLayoutItem.m */,
+				8B54A01417B9C8790068775C /* UIGridLayoutRow.h */,
+				8B54A01517B9C8790068775C /* UIGridLayoutRow.m */,
+				8B54A01617B9C8790068775C /* UIGridLayoutSection.h */,
+				8B54A01717B9C8790068775C /* UIGridLayoutSection.m */,
+			);
+			name = "Collection View";
+			sourceTree = "<group>";
+		};
 		8B5AF848179B67C3008B3BF3 /* Appearances */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,6 +592,8 @@
 				8BB4BD5F17B1ED5E009B7708 /* UIPanGestureRecognizer.m */,
 				8B39CBF817B2B9C900435CEC /* UIScrollWheelGestureRecognizer.h */,
 				8B39CBF917B2B9C900435CEC /* UIScrollWheelGestureRecognizer.m */,
+				8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */,
+				8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */,
 			);
 			name = UIGestureRecognizer;
 			sourceTree = "<group>";
@@ -558,6 +655,7 @@
 				8BE492F91798CF9D002BEA5A /* Graphic Types */,
 				8B91077C17A97EBA008D9DF0 /* Adaptors */,
 				8B08256A17AA2ABF00494FAA /* Alerts */,
+				8B549FFB17B9C86C0068775C /* Collection View */,
 				8BE492C11798C44F002BEA5A /* Supporting Files */,
 			);
 			path = UIKit;
@@ -711,7 +809,6 @@
 				8BE492FE1798CFDD002BEA5A /* UIWindow.h in Headers */,
 				8B5BD72E1798F05C00A53E4A /* UIImageView.h in Headers */,
 				8B01140B179A193D00C8594C /* UIAppearance.h in Headers */,
-				8BB4BD6F17B35AF7009B7708 /* UIScrollViewScrollAnimator.h in Headers */,
 				8B5BD761179B3A8500A53E4A /* UIThreePartImageProvider.h in Headers */,
 				8BE4931D1798D65C002BEA5A /* UIViewController.h in Headers */,
 				8BE493161798D65C002BEA5A /* UINavigationBar.h in Headers */,
@@ -734,7 +831,28 @@
 				8B6AEDE617AB638B00D6858A /* UIGestureRecognizer.h in Headers */,
 				8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */,
 				8BB4BD5517B1E860009B7708 /* UIScrollView.h in Headers */,
+				8BB4BD6F17B35AF7009B7708 /* UIScrollViewScrollAnimator.h in Headers */,
 				8BB4BD6017B1ED5E009B7708 /* UIPanGestureRecognizer.h in Headers */,
+				8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */,
+				8B54A04017B9CD7B0068775C /* UICollectionViewController.h in Headers */,
+				8B54A04217B9CD7B0068775C /* UICollectionViewData.h in Headers */,
+				8B54A03F17B9CD7B0068775C /* UICollectionViewCommon.h in Headers */,
+				8B54A04A17B9CD7B0068775C /* UICollectionViewLayout+Internals.h in Headers */,
+				8B54A03D17B9CD7B0068775C /* UICollectionViewCell.h in Headers */,
+				8B54A05117B9CD7B0068775C /* UIGridLayoutRow.h in Headers */,
+				8B54A03B17B9CD7B0068775C /* UICollectionView.h in Headers */,
+				8B54A04F17B9CD7B0068775C /* UIGridLayoutItem.h in Headers */,
+				8B54A04B17B9CD7B0068775C /* UICollectionViewUpdateItem.h in Headers */,
+				8B54A05317B9CD7B0068775C /* UIGridLayoutSection.h in Headers */,
+				8B54A04D17B9CD7B0068775C /* UIGridLayoutInfo.h in Headers */,
+				8B54A04417B9CD7B0068775C /* UICollectionViewFlowLayout.h in Headers */,
+				8B54A04617B9CD7B0068775C /* UICollectionViewItemKey.h in Headers */,
+				8B54A04817B9CD7B0068775C /* UICollectionViewLayout.h in Headers */,
+				8BB4BD6B17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h in Headers */,
+				8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */,
+				8BB4BD5B17B1EC51009B7708 /* UIScroller.h in Headers */,
+				8B39CBFA17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.h in Headers */,
+				8BB4BD6717B359BC009B7708 /* UIAnimator.h in Headers */,
 				8B6AEDEC17AB642A00D6858A /* UIApplication.h in Headers */,
 				8B08256D17AA2ACF00494FAA /* UIAlertView.h in Headers */,
 				8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */,
@@ -743,7 +861,6 @@
 				8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */,
 				8B91076D17A8B8BC008D9DF0 /* UITouch_Private.h in Headers */,
 				8B91075B17A8A8A8008D9DF0 /* UIResponder_Private.h in Headers */,
-				8BB4BD6B17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h in Headers */,
 				8B91076717A8B7B1008D9DF0 /* UIEvent_Private.h in Headers */,
 				8B5BD7381798FA9B00A53E4A /* UIButton.h in Headers */,
 				8BE493421798EAA0002BEA5A /* UIImage.h in Headers */,
@@ -755,14 +872,11 @@
 				8B6AEDE917AB639400D6858A /* UIGestureRecognizer_Private.h in Headers */,
 				8BB8A22D17B1E66A004FB0E8 /* UIAction.h in Headers */,
 				8B6AEDEF17AB6BF600D6858A /* UIApplication_Private.h in Headers */,
-				8BB4BD5B17B1EC51009B7708 /* UIScroller.h in Headers */,
 				8BE492FB1798CFAB002BEA5A /* UIBezierPath.h in Headers */,
 				8BE493431798EAA0002BEA5A /* UIFont.h in Headers */,
 				8B5BD742179903AB00A53E4A /* UIButtonRoundRectBackgroundView.h in Headers */,
-				8B39CBFA17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.h in Headers */,
 				8B5BD7491799040E00A53E4A /* UIButton_Private.h in Headers */,
 				8B5BD75E179B348700A53E4A /* UIGraphics.h in Headers */,
-				8BB4BD6717B359BC009B7708 /* UIAnimator.h in Headers */,
 				8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */,
 				8B5BD73D1799037400A53E4A /* UIButtonBackgroundView.h in Headers */,
 				8BE4931C1798D65C002BEA5A /* UIViewController_Private.h in Headers */,
@@ -879,39 +993,53 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B54A05017B9CD7B0068775C /* UIGridLayoutItem.m in Sources */,
 				8B91075F17A8B1EA008D9DF0 /* UIGraphics.m in Sources */,
 				8B5BD72F1798F05C00A53E4A /* UIImageView.m in Sources */,
 				8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */,
 				8B5BD73E1799037400A53E4A /* UIButtonBackgroundView.m in Sources */,
 				8BE4931B1798D65C002BEA5A /* UINavigationItem.m in Sources */,
 				8B5BD758179B24D400A53E4A /* UIImage.m in Sources */,
+				8B54A05217B9CD7B0068775C /* UIGridLayoutRow.m in Sources */,
+				8B54A04917B9CD7B0068775C /* UICollectionViewLayout.m in Sources */,
 				8BE493351798E3F3002BEA5A /* UIBarItem.m in Sources */,
 				8BE492ED1798C888002BEA5A /* UIView.m in Sources */,
 				8B5BD75C179B2CA700A53E4A /* UIImageProvider.m in Sources */,
 				8BE493171798D65C002BEA5A /* UINavigationBar.m in Sources */,
+				8B54A03E17B9CD7B0068775C /* UICollectionViewCell.m in Sources */,
 				8B08256E17AA2ACF00494FAA /* UIAlertView.m in Sources */,
+				8B54A04317B9CD7B0068775C /* UICollectionViewData.m in Sources */,
 				8BE492E91798C52F002BEA5A /* UIResponder.m in Sources */,
 				8B91076317A8B6B7008D9DF0 /* UIWindowAppKitHostView.m in Sources */,
 				8BB4BD5C17B1EC51009B7708 /* UIScroller.m in Sources */,
 				8B91076517A8B772008D9DF0 /* UIEvent.m in Sources */,
+				8B54A04717B9CD7B0068775C /* UICollectionViewItemKey.m in Sources */,
+				8B54A04517B9CD7B0068775C /* UICollectionViewFlowLayout.m in Sources */,
 				8B5AF84C179B67F7008B3BF3 /* UINavigationBarAppearance.m in Sources */,
 				8BE4931E1798D65C002BEA5A /* UIViewController.m in Sources */,
 				8BE4933A1798E44D002BEA5A /* UIControl.m in Sources */,
 				8B39CBFB17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.m in Sources */,
 				8BB4BD5617B1E860009B7708 /* UIScrollView.m in Sources */,
 				8BE493191798D65C002BEA5A /* UINavigationController.m in Sources */,
+				8B54A04E17B9CD7B0068775C /* UIGridLayoutInfo.m in Sources */,
+				8B54A03C17B9CD7B0068775C /* UICollectionView.m in Sources */,
 				8BB4BD7017B35AF7009B7708 /* UIScrollViewScrollAnimator.m in Sources */,
 				8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */,
+				8B54A03A17B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.m in Sources */,
 				8B6AEDE717AB638B00D6858A /* UIGestureRecognizer.m in Sources */,
 				8BE4932B1798DBD5002BEA5A /* UIDevice.m in Sources */,
 				8BB4BD6817B359BC009B7708 /* UIAnimator.m in Sources */,
 				8BE4933F1798E564002BEA5A /* UIBarButtonItem.m in Sources */,
 				8BB4BD6C17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.m in Sources */,
 				8BE492F31798CF0C002BEA5A /* UIColor.m in Sources */,
+				8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */,
 				8BE493311798E39A002BEA5A /* UILabel.m in Sources */,
+				8B54A04C17B9CD7B0068775C /* UICollectionViewUpdateItem.m in Sources */,
 				8B91077417A8C62D008D9DF0 /* UIAnimationCollection.m in Sources */,
+				8B54A05417B9CD7B0068775C /* UIGridLayoutSection.m in Sources */,
 				8B5BD762179B3A8500A53E4A /* UIThreePartImageProvider.m in Sources */,
 				8B91076B17A8B883008D9DF0 /* UITouch.m in Sources */,
+				8B54A04117B9CD7B0068775C /* UICollectionViewController.m in Sources */,
 				8B1EC8E217A9F8280035369C /* UINSTextFieldCell.m in Sources */,
 				8BE492FF1798CFDD002BEA5A /* UIWindow.m in Sources */,
 				8BB4BD6117B1ED5E009B7708 /* UIPanGestureRecognizer.m in Sources */,

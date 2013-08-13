@@ -17,7 +17,29 @@
 const CGFloat UIScrollViewDecelerationRateNormal = 0.3;
 const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
-@interface UIScrollView ()
+@interface UIScrollView () {
+    struct {
+        int scrollViewDidScroll : 1;
+        int scrollViewDidZoom : 1;
+        
+        int scrollViewWillBeginDragging : 1;
+        
+        int scrollViewWillEndDraggingWithVelocityTargetContentOffset : 1;
+        int scrollViewDidEndDraggingWillDecelerate : 1;
+        
+        int scrollViewWillBeginDecelerating : 1;
+        int scrollViewDidEndDecelerating : 1;
+        
+        int scrollViewDidEndScrollingAnimation : 1;
+        
+        int viewForZoomingInScrollView : 1;
+        int scrollViewWillBeginZoomingWithView : 1;
+        int scrollViewDidEndZoomingWithViewAtScale : 1;
+        
+        int scrollViewShouldScrollToTop : 1;
+        int scrollViewDidScrollToTop : 1;
+    } _delegateRespondsTo;
+}
 
 @property (nonatomic) UIScroller *horizontalScroller;
 @property (nonatomic) UIScroller *verticalScroller;
@@ -77,6 +99,30 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
     _horizontalScroller.contentSize = contentSize;
 }
 
+#pragma mark -
+
+- (void)setDelegate:(id<UIScrollViewDelegate>)delegate
+{
+    _delegate = delegate;
+    
+    _delegateRespondsTo.scrollViewDidScroll = [delegate respondsToSelector:@selector(scrollViewDidScroll:)];
+    _delegateRespondsTo.scrollViewDidZoom = [delegate respondsToSelector:@selector(scrollViewDidZoom:)];
+    
+    _delegateRespondsTo.scrollViewWillBeginDragging = [delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)];
+    _delegateRespondsTo.scrollViewWillEndDraggingWithVelocityTargetContentOffset = [delegate respondsToSelector:@selector(scrollViewWillEndDragging:withVelocity:targetContentOffset:)];
+    _delegateRespondsTo.scrollViewDidEndDraggingWillDecelerate = [delegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)];
+    _delegateRespondsTo.scrollViewWillBeginDecelerating = [delegate respondsToSelector:@selector(scrollViewWillBeginDecelerating:)];
+    _delegateRespondsTo.scrollViewDidEndDecelerating = [delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)];
+    _delegateRespondsTo.scrollViewDidEndScrollingAnimation = [delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)];
+    
+    _delegateRespondsTo.viewForZoomingInScrollView = [delegate respondsToSelector:@selector(viewForZoomingInScrollView:)];
+    _delegateRespondsTo.scrollViewWillBeginZoomingWithView = [delegate respondsToSelector:@selector(scrollViewWillBeginZooming:withView:)];
+    _delegateRespondsTo.scrollViewDidEndZoomingWithViewAtScale = [delegate respondsToSelector:@selector(scrollViewDidEndZooming:withView:atScale:)];
+    
+    _delegateRespondsTo.scrollViewShouldScrollToTop = [delegate respondsToSelector:@selector(scrollViewShouldScrollToTop:)];
+    _delegateRespondsTo.scrollViewDidScrollToTop = [delegate respondsToSelector:@selector(scrollViewDidScrollToTop:)];
+}
+
 #pragma mark - Scrolling
 
 - (BOOL)_canScrollVertical
@@ -115,21 +161,12 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 - (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated
 {
     if(animated) {
-        if(self._currentAnimator) {
-            [self._currentAnimator stop];
-            self._currentAnimator = nil;
-        }
-        
-        self._currentAnimator = [[UIScrollViewScrollAnimator alloc] initWithScrollView:self
-                                                                     fromContentOffset:_contentOffset
-                                                                                    to:contentOffset
-                                                                              duration:0.3
-                                                                        timingFunction:&UIAnimatorLinear];
-        __weak __typeof(self) me = self;
-        self._currentAnimator.completionHandler = ^{
-            me._currentAnimator = nil;
-        };
-        [self._currentAnimator run];
+        UIScrollViewScrollAnimator *scrollAnimation = [[UIScrollViewScrollAnimator alloc] initWithScrollView:self
+                                                                                           fromContentOffset:_contentOffset
+                                                                                                          to:contentOffset
+                                                                                                    duration:0.3
+                                                                                              timingFunction:&UIAnimatorLinear];
+        [self _runAnimation:scrollAnimation completionHandler:nil];
     } else {
         _contentOffset = contentOffset;
         
@@ -142,6 +179,9 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
         
         _horizontalScroller.contentOffset = contentOffset;
         _verticalScroller.contentOffset = contentOffset;
+        
+        if(_delegateRespondsTo.scrollViewDidScroll)
+            [_delegate scrollViewDidScroll:self];
         
         [self setNeedsLayout];
     }
@@ -228,6 +268,30 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
 #pragma mark - Animations
 
+- (void)_runAnimation:(UIAnimator *)animation completionHandler:(dispatch_block_t)completionHandler
+{
+    if(self._currentAnimator)
+       [self._currentAnimator stop];
+    
+    self._currentAnimator = animation;
+    
+    __weak __typeof(self) me = self;
+    self._currentAnimator.completionHandler = ^{
+        __typeof(self) strongMe = me;
+        
+        strongMe._currentAnimator = nil;
+        
+        if(strongMe->_delegateRespondsTo.scrollViewDidEndScrollingAnimation)
+            [strongMe.delegate scrollViewDidEndScrollingAnimation:strongMe];
+        
+        if(completionHandler)
+            completionHandler();
+    };
+    [self._currentAnimator run];
+}
+
+#pragma mark -
+
 - (void)_bounceBack
 {
     self._shouldBounceBack = NO;
@@ -237,28 +301,35 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
 - (void)_decelerateScrollWithVelocity:(CGPoint)velocity
 {
-    self._currentAnimator = [[UIScrollViewDecelerationAnimator alloc] initWithScrollView:self
-                                                                                velocity:velocity];
+    if(_delegateRespondsTo.scrollViewDidEndDraggingWillDecelerate)
+        [_delegate scrollViewDidEndDragging:self willDecelerate:YES];
     
-//    CGPoint contentOffset = self.contentOffset;
-//    contentOffset.y += velocity.y;
-//    
-//    self._currentAnimator = [[UIScrollViewScrollAnimator alloc] initWithScrollView:self
-//                                                                 fromContentOffset:_contentOffset
-//                                                                                to:[self _constrainContentOffset:contentOffset]
-//                                                                          duration:0.3
-//                                                                    timingFunction:&UIAnimatorQuadradicEaseOut];
+    UIScrollViewDecelerationAnimator *deceleration = [[UIScrollViewDecelerationAnimator alloc] initWithScrollView:self velocity:velocity];
+    
+    if(_delegateRespondsTo.scrollViewWillEndDraggingWithVelocityTargetContentOffset) {
+        CGPoint targetContentOffset = deceleration.targetContentOffset;
+        [_delegate scrollViewWillEndDragging:self withVelocity:velocity targetContentOffset:&targetContentOffset];
+        deceleration.targetContentOffset = targetContentOffset;
+    }
+    
+    if(_delegateRespondsTo.scrollViewWillBeginDecelerating)
+        [_delegate scrollViewWillBeginDecelerating:self];
+    
     __weak __typeof(self) me = self;
-    self._currentAnimator.completionHandler = ^{
-        me._currentAnimator = nil;
-    };
-    [self._currentAnimator run];
+    [self _runAnimation:deceleration completionHandler:^{
+        __typeof(self) strongMe = me;
+        if(strongMe->_delegateRespondsTo.scrollViewDidEndDecelerating)
+            [strongMe.delegate scrollViewDidEndDecelerating:self];
+    }];
 }
 
 #pragma mark - Gestures
 
 - (void)_beginDragging
 {
+    if(_delegateRespondsTo.scrollViewWillBeginDragging)
+        [_delegate scrollViewWillBeginDragging:self];
+    
     [self._currentAnimator stop];
     self._currentAnimator = nil;
     
@@ -315,6 +386,9 @@ const CGFloat UIScrollViewDecelerationRateFast = 0.2;
                                                               repeats:NO];
     
     if(self._shouldBounceBack) {
+        if(_delegateRespondsTo.scrollViewDidEndDraggingWillDecelerate)
+            [_delegate scrollViewDidEndDragging:self willDecelerate:NO];
+        
         [self _bounceBack];
     } else if(!CGPointEqualToPoint(velocity, CGPointZero)) {
         //velocity will come back as a zero point if we're being

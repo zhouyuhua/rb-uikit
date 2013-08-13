@@ -51,4 +51,19 @@ UIKIT_INLINE BOOL UIOffsetEqualToOffset(UIOffset offset1, UIOffset offset2)
 #define UIEdgeInsetsZero ((UIEdgeInsets){ 0.0, 0.0, 0.0, 0.0 })
 #define UIOffsetZero     ((UIOffset){ 0.0, 0.0 })
 
+#pragma mark - Compatibility
+
+#define NSStringFromCGPoint(p)  NSStringFromPoint(p)
+#define NSStringToCGPoint(p)    NSStringToPoint(p)
+
+#pragma mark -
+
+#define NSStringFromCGSize(p)   NSStringFromSize(p)
+#define NSStringToCGSize(p)     NSStringToSize(p)
+
+#pragma mark -
+
+#define NSStringFromCGRect(p)   NSStringFromRect(p)
+#define NSStringToCGRect(p)     NSStringToRect(p)
+
 #endif

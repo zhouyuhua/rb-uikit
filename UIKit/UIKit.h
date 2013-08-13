@@ -40,3 +40,10 @@
 #import "UIAppKitView.h"
 
 #import "UIAlertView.h"
+
+#import "UIGestureRecognizer.h"
+#import "UILongPressGestureRecognizer.h"
+
+#import "UICollectionViewCommon.h"
+#import "UICollectionView.h"
+#import "UICollectionViewController.h"
