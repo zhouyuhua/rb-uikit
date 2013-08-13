@@ -60,18 +60,16 @@
     return self;
 }
 
+- (id)init
+{
+    return [self initWithCollectionViewLayout:nil];
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - UIViewController
 
 - (void)loadView {
     [super loadView];
-    
-    // if this is restored from IB, we don't have plain main view.
-    if([self.view isKindOfClass:UICollectionView.class]) {
-        _collectionView = (UICollectionView *)self.view;
-        self.view = [[UIView alloc] initWithFrame:self.view.bounds];
-        self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    }
     
     if(_collectionView.delegate == nil) _collectionView.delegate = self;
     if(_collectionView.dataSource == nil) _collectionView.dataSource = self;
@@ -121,7 +119,7 @@
 
 - (UICollectionView *)collectionView {
     if(!_collectionView) {
-        _collectionView = [[UICollectionView alloc] initWithFrame:UIScreen.mainScreen.bounds collectionViewLayout:self.layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         

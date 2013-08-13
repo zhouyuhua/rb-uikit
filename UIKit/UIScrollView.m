@@ -49,9 +49,17 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
 
 #pragma mark - Properties
 
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    [self _constrainContent];
+}
+
 - (void)setContentInset:(UIEdgeInsets)contentInset
 {
     _contentInset = contentInset;
+    
+    [self _constrainContent];
 }
 
 - (void)setContentSize:(CGSize)contentSize
@@ -60,6 +68,8 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
     
     _verticalScroller.contentSize = contentSize;
     _horizontalScroller.contentSize = contentSize;
+    
+    [self _constrainContent];
 }
 
 #pragma mark -
@@ -116,6 +126,11 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
     return contentOffset;
 }
 
+- (void)_constrainContent
+{
+    self.contentOffset = [self _constrainContentOffset:_contentOffset];
+}
+
 - (void)setContentOffset:(CGPoint)contentOffset
 {
     [self setContentOffset:contentOffset animated:NO];
@@ -128,7 +143,7 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
                                                                                            fromContentOffset:_contentOffset
                                                                                                           to:contentOffset
                                                                                                     duration:0.3
-                                                                                              timingFunction:&UIAnimatorLinear];
+                                                                                              timingFunction:&UILinearInterpolation];
         [self _runAnimation:scrollAnimation completionHandler:nil];
     } else {
         _contentOffset = contentOffset;
@@ -250,7 +265,7 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
         strongMe._currentAnimator = nil;
         
         if(strongMe->_delegateRespondsTo.scrollViewDidEndScrollingAnimation)
-            [strongMe.delegate scrollViewDidEndScrollingAnimation:strongMe];
+            [strongMe->_delegate scrollViewDidEndScrollingAnimation:strongMe];
         
         if(completionHandler)
             completionHandler();
@@ -287,7 +302,7 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
     [self _runAnimation:deceleration completionHandler:^{
         __typeof(self) strongMe = me;
         if(strongMe->_delegateRespondsTo.scrollViewDidEndDecelerating)
-            [strongMe.delegate scrollViewDidEndDecelerating:self];
+            [strongMe->_delegate scrollViewDidEndDecelerating:self];
     }];
 }
 

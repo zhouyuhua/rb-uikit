@@ -46,7 +46,7 @@ typedef NS_ENUM(NSUInteger, AnimationPhase) {
 
 @property (nonatomic) AnimationPhase phase;
 
-@property (nonatomic) UIAnimationFunction momentumTimingFunction;
+@property (nonatomic) UIAnimatorFunction momentumTimingFunction;
 
 @property (nonatomic) NSTimeInterval duration;
 
@@ -76,15 +76,18 @@ typedef NS_ENUM(NSUInteger, AnimationPhase) {
                                                Constrain(_initialContentOffset.y + velocity.y, -MaxBounceBack, (contentSize.height - CGRectGetHeight(scrollView.frame)) + MaxBounceBack));
         self.constrainedTargetContentOffset = [scrollView _constrainContentOffset:_targetContentOffset];
         
-        self.bounceX = velocity.x != 0.0 && _targetContentOffset.x != _constrainedTargetContentOffset.x;
-        self.bounceY = velocity.y != 0.0 && _targetContentOffset.y != _constrainedTargetContentOffset.y;
-        if(_bounceX || _bounceY)
-            _momentumTimingFunction = &UIAnimatorLinear;
-        else
-            _momentumTimingFunction = &UIAnimatorQuadradicEaseOut;
+        self.bounceX = scrollView.bounces && scrollView.alwaysBounceHorizontal && velocity.x != 0.0 && _targetContentOffset.x != _constrainedTargetContentOffset.x;
+        self.bounceY = scrollView.bounces && scrollView.alwaysBounceVertical && velocity.y != 0.0 && _targetContentOffset.y != _constrainedTargetContentOffset.y;
         
-        self.duration = 100.0 / abs(velocity.y) * 1.5;
+        if(_bounceX || _bounceY) {
+            _momentumTimingFunction = &UILinearInterpolation;
+        } else {
+            _momentumTimingFunction = &UIQuadradicEaseOut;
+            self.targetContentOffset = self.constrainedTargetContentOffset;
+        }
         
+        self.duration = 100.0 / abs(velocity.y);
+
         self.startTime = [NSDate timeIntervalSinceReferenceDate];
     }
     
@@ -103,12 +106,12 @@ typedef NS_ENUM(NSUInteger, AnimationPhase) {
         if(_phase == AnimationPhaseMomentum) {
             _phase = AnimationPhaseBounce;
             _startTime = [NSDate timeIntervalSinceReferenceDate];
-            _duration *= 1.2;
+            _duration = 0.3;
             currentTime = 0.0;
         }
         
-        _scrollView.contentOffset = CGPointMake(UIAnimatorQuadradicEaseOut(currentTime, _targetContentOffset.x, _constrainedTargetContentOffset.x, _duration),
-                                                UIAnimatorQuadradicEaseOut(currentTime, _targetContentOffset.y, _constrainedTargetContentOffset.y, _duration));
+        _scrollView.contentOffset = CGPointMake(UIQuadradicEaseOut(currentTime, _targetContentOffset.x, _constrainedTargetContentOffset.x, _duration),
+                                                UIQuadradicEaseOut(currentTime, _targetContentOffset.y, _constrainedTargetContentOffset.y, _duration));
     } else if(_phase == AnimationPhaseMomentum) {
         _scrollView.contentOffset = CGPointMake(_momentumTimingFunction(currentTime, _initialContentOffset.x, _targetContentOffset.x, _duration),
                                                 _momentumTimingFunction(currentTime, _initialContentOffset.y, _targetContentOffset.y, _duration));

@@ -45,5 +45,6 @@
 #import "UILongPressGestureRecognizer.h"
 
 #import "UICollectionViewCommon.h"
+#import "NSIndexPath+UICollectionViewAdditions.h"
 #import "UICollectionView.h"
 #import "UICollectionViewController.h"

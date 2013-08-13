@@ -135,8 +135,6 @@
 // (We need to keep the total class size equal to the UICollectionView variant)
 @interface UICollectionViewExt : NSObject
 @property (nonatomic, unsafe_unretained) id<UICollectionViewDelegate> collectionViewDelegate;
-@property (nonatomic, strong) UICollectionViewLayout *nibLayout;
-@property (nonatomic, strong) NSDictionary *nibCellsExternalObjects;
 @property (nonatomic, strong) NSDictionary *supplementaryViewsExternalObjects;
 @property (nonatomic, strong) NSIndexPath *touchingIndexPath;
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;

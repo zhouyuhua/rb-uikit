@@ -131,12 +131,12 @@
 
 - (void)setCenter:(CGPoint)center
 {
-    self.layer.anchorPoint = center;
+    self.layer.position = center;
 }
 
 - (CGPoint)center
 {
-    return self.layer.anchorPoint;
+    return self.layer.position;
 }
 
 + (NSSet *)keyPathsForValuesAffectingTransform
@@ -469,7 +469,7 @@
     [view willMoveToSuperview:self];
     
     if([_subviews containsObject:view])
-        [NSException raise:NSInternalInconsistencyException format:@"Cannot add view %@ as subview of %@ more than once.", view, self];
+        return; //This is allowed in real UIKit
     
     [_subviews insertObject:view atIndex:index];
     [self.layer insertSublayer:view.layer atIndex:(unsigned int)index];
@@ -543,6 +543,9 @@
 
 - (void)removeFromSuperview
 {
+    if(!_superview)
+        return;
+    
     [self willMoveToWindow:nil];
     [self willMoveToSuperview:nil];
     [self.superview willRemoveSubview:self];

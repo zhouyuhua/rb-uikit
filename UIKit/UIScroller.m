@@ -66,13 +66,22 @@ CGFloat const UIScrollerMinimumKnobArea = 40.0;
             if(_contentSize.height == CGRectGetHeight(scrollViewFrame)) {
                 knobViewFrame = bounds;
             } else {
-                knobViewFrame.size.height = MAX(UIScrollerMinimumKnobArea, CGRectGetHeight(scrollViewFrame) - _contentSize.height);
+                CGFloat knobScale = CGRectGetHeight(scrollViewFrame) / _contentSize.height;
+                knobViewFrame.size.height = MAX(UIScrollerMinimumKnobArea, CGRectGetHeight(bounds) * knobScale);
                 knobViewFrame.size.width = CGRectGetWidth(bounds);
                 
                 CGFloat scrollViewHeight = CGRectGetHeight(scrollViewFrame) - (CGRectGetHeight(knobViewFrame) * 2.0 + 8.0);
                 CGFloat offset = MAX(0.0, _contentOffset.y / (_contentSize.height - scrollViewHeight));
                 knobViewFrame.origin.y = CGRectGetMinY(bounds) + CGRectGetHeight(bounds) * offset;
                 knobViewFrame.origin.x = CGRectGetMinX(bounds);
+                
+                if(CGRectGetMaxY(knobViewFrame) > CGRectGetHeight(bounds)) {
+                    knobViewFrame.size.height -= CGRectGetMaxY(knobViewFrame) - CGRectGetHeight(bounds);
+                    knobViewFrame.origin.y = CGRectGetMaxY(bounds) - CGRectGetHeight(knobViewFrame);
+                } else if(CGRectGetMinY(knobViewFrame) < 0.0) {
+                    knobViewFrame.size.height += CGRectGetMinY(knobViewFrame);
+                    knobViewFrame.origin.y = 0.0;
+                }
             }
             
             break;
@@ -81,13 +90,22 @@ CGFloat const UIScrollerMinimumKnobArea = 40.0;
             if(_contentSize.width == CGRectGetWidth(scrollViewFrame)) {
                 knobViewFrame = bounds;
             } else {
-                knobViewFrame.size.width = MAX(UIScrollerMinimumKnobArea, CGRectGetWidth(scrollViewFrame) - _contentSize.width);
+                CGFloat knobScale = CGRectGetWidth(scrollViewFrame) / _contentSize.width;
+                knobViewFrame.size.width = MAX(UIScrollerMinimumKnobArea, CGRectGetWidth(bounds) * knobScale);
                 knobViewFrame.size.height = CGRectGetHeight(bounds);
                 
                 CGFloat scrollViewWidth = CGRectGetWidth(scrollViewFrame) - (CGRectGetWidth(knobViewFrame) * 2.0 + 8.0);
                 CGFloat offset = MAX(0.0, _contentOffset.x / (_contentSize.width - scrollViewWidth));
                 knobViewFrame.origin.x = CGRectGetMinX(bounds) + CGRectGetWidth(bounds) * offset;
                 knobViewFrame.origin.y = CGRectGetMinY(bounds);
+                
+                if(CGRectGetMaxX(knobViewFrame) > CGRectGetWidth(bounds)) {
+                    knobViewFrame.size.width -= CGRectGetMaxX(knobViewFrame) - CGRectGetWidth(bounds);
+                    knobViewFrame.origin.x = CGRectGetMaxX(bounds) - CGRectGetWidth(knobViewFrame);
+                } else if(CGRectGetMinX(knobViewFrame) < 0.0) {
+                    knobViewFrame.size.width += CGRectGetMinX(knobViewFrame);
+                    knobViewFrame.origin.x = 0.0;
+                }
             }
             
             break;

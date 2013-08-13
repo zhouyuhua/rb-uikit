@@ -17,7 +17,7 @@
 
 @property (nonatomic) CGPoint fromContentOffset, toContentOffset;
 @property (nonatomic) NSTimeInterval duration, startTime, currentTime;
-@property (nonatomic, assign) UIAnimationFunction timingFunction;
+@property (nonatomic, assign) UIAnimatorFunction timingFunction;
 
 @end
 
@@ -27,7 +27,7 @@
                  fromContentOffset:(CGPoint)fromOffset
                                 to:(CGPoint)toOffset
                           duration:(NSTimeInterval)duration
-                    timingFunction:(UIAnimationFunction)timingFunction
+                    timingFunction:(UIAnimatorFunction)timingFunction
 {
     NSParameterAssert(scrollView);
     NSParameterAssert(timingFunction);

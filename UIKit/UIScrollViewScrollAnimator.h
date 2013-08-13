@@ -16,6 +16,6 @@
                  fromContentOffset:(CGPoint)fromOffset
                                 to:(CGPoint)toOffset
                           duration:(NSTimeInterval)duration
-                    timingFunction:(UIAnimationFunction)timingFunction;
+                    timingFunction:(UIAnimatorFunction)timingFunction;
 
 @end
