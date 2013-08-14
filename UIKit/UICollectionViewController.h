@@ -20,7 +20,7 @@
  THE SOFTWARE.
  */
 
-#import "UICollectionViewCommon.h"
+#import "UICollectionViewDelegate.h"
 #import "UIViewController.h"
 
 @class UICollectionViewLayout, UICollectionViewController;

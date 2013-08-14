@@ -22,11 +22,32 @@
 
 #import "UICollectionViewLayout.h"
 
+@interface UICollectionViewLayout () {
+    __unsafe_unretained UICollectionView *_collectionView;
+    CGSize _collectionViewBoundsSize;
+    NSMutableDictionary *_initialAnimationLayoutAttributesDict;
+    NSMutableDictionary *_finalAnimationLayoutAttributesDict;
+    NSMutableIndexSet *_deletedSectionsSet;
+    NSMutableIndexSet *_insertedSectionsSet;
+    NSMutableDictionary *_decorationViewClassDict;
+    NSMutableDictionary *_decorationViewExternalObjectsTables;
+}
 
-@interface UICollectionViewLayout (Internals)
+@property (nonatomic, copy) NSDictionary *decorationViewClassDict;
+@property (nonatomic, copy) NSDictionary *decorationViewExternalObjectsTables;
 
-@property (nonatomic, copy, readonly) NSDictionary *decorationViewClassDict;
-@property (nonatomic, copy, readonly) NSDictionary *decorationViewNibDict;
-@property (nonatomic, copy, readonly) NSDictionary *decorationViewExternalObjectsTables;
+@property (nonatomic, unsafe_unretained) UICollectionView *collectionView;
+
+@end
+
+@interface UICollectionViewLayoutAttributes () {
+    struct {
+        unsigned int isCellKind:1;
+        unsigned int isDecorationView:1;
+        unsigned int isHidden:1;
+    }_layoutFlags;
+}
+@property (nonatomic) UICollectionViewItemType elementCategory;
+@property (nonatomic, copy) NSString *elementKind;
 
 @end

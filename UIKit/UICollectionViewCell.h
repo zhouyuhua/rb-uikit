@@ -20,7 +20,7 @@
  THE SOFTWARE.
  */
 
-#import "UICollectionViewCommon.h"
+#import "UICollectionViewDelegate.h"
 
 @class UICollectionViewLayout, UICollectionView, UICollectionViewLayoutAttributes;
 
@@ -38,12 +38,6 @@
 
 - (void)didTransitionFromLayout:(UICollectionViewLayout *)oldLayout toLayout:(UICollectionViewLayout *)newLayout;
 
-@end
-
-@interface UICollectionReusableView (Internal)
-@property (nonatomic, unsafe_unretained) UICollectionView *collectionView;
-@property (nonatomic, copy) NSString *reuseIdentifier;
-@property (nonatomic, strong, readonly) UICollectionViewLayoutAttributes *layoutAttributes;
 @end
 
 

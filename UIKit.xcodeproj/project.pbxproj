@@ -30,6 +30,7 @@
 		8B1EC8E517A9F8280035369C /* UITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8E017A9F8280035369C /* UITextField.m */; };
 		8B39CBFA17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B39CBF817B2B9C900435CEC /* UIScrollWheelGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B39CBFB17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B39CBF917B2B9C900435CEC /* UIScrollWheelGestureRecognizer.m */; };
+		8B515C4017BB1715003065D2 /* UICollectionViewUpdateItem_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B515C3F17BB1715003065D2 /* UICollectionViewUpdateItem_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */; };
 		8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -38,27 +39,27 @@
 		8B54A03C17B9CD7B0068775C /* UICollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B549FFF17B9C8790068775C /* UICollectionView.m */; };
 		8B54A03D17B9CD7B0068775C /* UICollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00017B9C8790068775C /* UICollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A03E17B9CD7B0068775C /* UICollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00117B9C8790068775C /* UICollectionViewCell.m */; };
-		8B54A03F17B9CD7B0068775C /* UICollectionViewCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00217B9C8790068775C /* UICollectionViewCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A03F17B9CD7B0068775C /* UICollectionViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00217B9C8790068775C /* UICollectionViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A04017B9CD7B0068775C /* UICollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00317B9C8790068775C /* UICollectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A04117B9CD7B0068775C /* UICollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00417B9C8790068775C /* UICollectionViewController.m */; };
-		8B54A04217B9CD7B0068775C /* UICollectionViewData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00517B9C8790068775C /* UICollectionViewData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04217B9CD7B0068775C /* UICollectionViewData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00517B9C8790068775C /* UICollectionViewData.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54A04317B9CD7B0068775C /* UICollectionViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00617B9C8790068775C /* UICollectionViewData.m */; };
 		8B54A04417B9CD7B0068775C /* UICollectionViewFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00717B9C8790068775C /* UICollectionViewFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A04517B9CD7B0068775C /* UICollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00817B9C8790068775C /* UICollectionViewFlowLayout.m */; };
-		8B54A04617B9CD7B0068775C /* UICollectionViewItemKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00917B9C8790068775C /* UICollectionViewItemKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04617B9CD7B0068775C /* UICollectionViewItemKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00917B9C8790068775C /* UICollectionViewItemKey.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54A04717B9CD7B0068775C /* UICollectionViewItemKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00A17B9C8790068775C /* UICollectionViewItemKey.m */; };
 		8B54A04817B9CD7B0068775C /* UICollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00B17B9C8790068775C /* UICollectionViewLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A04917B9CD7B0068775C /* UICollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00C17B9C8790068775C /* UICollectionViewLayout.m */; };
-		8B54A04A17B9CD7B0068775C /* UICollectionViewLayout+Internals.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00D17B9C8790068775C /* UICollectionViewLayout+Internals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04A17B9CD7B0068775C /* UICollectionViewLayout_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00D17B9C8790068775C /* UICollectionViewLayout_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54A04B17B9CD7B0068775C /* UICollectionViewUpdateItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A00E17B9C8790068775C /* UICollectionViewUpdateItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A04C17B9CD7B0068775C /* UICollectionViewUpdateItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A00F17B9C8790068775C /* UICollectionViewUpdateItem.m */; };
-		8B54A04D17B9CD7B0068775C /* UIGridLayoutInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01017B9C8790068775C /* UIGridLayoutInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04D17B9CD7B0068775C /* UIGridLayoutInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01017B9C8790068775C /* UIGridLayoutInfo.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54A04E17B9CD7B0068775C /* UIGridLayoutInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A01117B9C8790068775C /* UIGridLayoutInfo.m */; };
-		8B54A04F17B9CD7B0068775C /* UIGridLayoutItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01217B9C8790068775C /* UIGridLayoutItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A04F17B9CD7B0068775C /* UIGridLayoutItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01217B9C8790068775C /* UIGridLayoutItem.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54A05017B9CD7B0068775C /* UIGridLayoutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A01317B9C8790068775C /* UIGridLayoutItem.m */; };
-		8B54A05117B9CD7B0068775C /* UIGridLayoutRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01417B9C8790068775C /* UIGridLayoutRow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A05117B9CD7B0068775C /* UIGridLayoutRow.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01417B9C8790068775C /* UIGridLayoutRow.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54A05217B9CD7B0068775C /* UIGridLayoutRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A01517B9C8790068775C /* UIGridLayoutRow.m */; };
-		8B54A05317B9CD7B0068775C /* UIGridLayoutSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01617B9C8790068775C /* UIGridLayoutSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54A05317B9CD7B0068775C /* UIGridLayoutSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A01617B9C8790068775C /* UIGridLayoutSection.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54A05417B9CD7B0068775C /* UIGridLayoutSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A01717B9C8790068775C /* UIGridLayoutSection.m */; };
 		8B54A05617B9D6CC0068775C /* UIScrollView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A05517B9D6CC0068775C /* UIScrollView_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B5AF84B179B67F7008B3BF3 /* UINavigationBarAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -214,13 +215,15 @@
 		8B1EC8E017A9F8280035369C /* UITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextField.m; sourceTree = "<group>"; };
 		8B39CBF817B2B9C900435CEC /* UIScrollWheelGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollWheelGestureRecognizer.h; sourceTree = "<group>"; };
 		8B39CBF917B2B9C900435CEC /* UIScrollWheelGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScrollWheelGestureRecognizer.m; sourceTree = "<group>"; };
+		8B515C3F17BB1715003065D2 /* UICollectionViewUpdateItem_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewUpdateItem_Private.h; sourceTree = "<group>"; };
+		8B515C4117BB185F003065D2 /* UICollectionViewCell_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UICollectionViewCell_Private.h; sourceTree = "<group>"; };
 		8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+UICollectionViewAdditions.h"; sourceTree = "<group>"; };
 		8B549FFD17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+UICollectionViewAdditions.m"; sourceTree = "<group>"; };
 		8B549FFE17B9C8790068775C /* UICollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionView.h; sourceTree = "<group>"; };
 		8B549FFF17B9C8790068775C /* UICollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionView.m; sourceTree = "<group>"; };
 		8B54A00017B9C8790068775C /* UICollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewCell.h; sourceTree = "<group>"; };
 		8B54A00117B9C8790068775C /* UICollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewCell.m; sourceTree = "<group>"; };
-		8B54A00217B9C8790068775C /* UICollectionViewCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewCommon.h; sourceTree = "<group>"; };
+		8B54A00217B9C8790068775C /* UICollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewDelegate.h; sourceTree = "<group>"; };
 		8B54A00317B9C8790068775C /* UICollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewController.h; sourceTree = "<group>"; };
 		8B54A00417B9C8790068775C /* UICollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewController.m; sourceTree = "<group>"; };
 		8B54A00517B9C8790068775C /* UICollectionViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewData.h; sourceTree = "<group>"; };
@@ -231,7 +234,7 @@
 		8B54A00A17B9C8790068775C /* UICollectionViewItemKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewItemKey.m; sourceTree = "<group>"; };
 		8B54A00B17B9C8790068775C /* UICollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout.h; sourceTree = "<group>"; };
 		8B54A00C17B9C8790068775C /* UICollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewLayout.m; sourceTree = "<group>"; };
-		8B54A00D17B9C8790068775C /* UICollectionViewLayout+Internals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewLayout+Internals.h"; sourceTree = "<group>"; };
+		8B54A00D17B9C8790068775C /* UICollectionViewLayout_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout_Private.h; sourceTree = "<group>"; };
 		8B54A00E17B9C8790068775C /* UICollectionViewUpdateItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewUpdateItem.h; sourceTree = "<group>"; };
 		8B54A00F17B9C8790068775C /* UICollectionViewUpdateItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewUpdateItem.m; sourceTree = "<group>"; };
 		8B54A01017B9C8790068775C /* UIGridLayoutInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGridLayoutInfo.h; sourceTree = "<group>"; };
@@ -433,7 +436,8 @@
 				8B5E726017B9F9C1006A16B9 /* UICollectionView_Internal.h */,
 				8B54A00017B9C8790068775C /* UICollectionViewCell.h */,
 				8B54A00117B9C8790068775C /* UICollectionViewCell.m */,
-				8B54A00217B9C8790068775C /* UICollectionViewCommon.h */,
+				8B515C4117BB185F003065D2 /* UICollectionViewCell_Private.h */,
+				8B54A00217B9C8790068775C /* UICollectionViewDelegate.h */,
 				8B54A00317B9C8790068775C /* UICollectionViewController.h */,
 				8B54A00417B9C8790068775C /* UICollectionViewController.m */,
 				8B54A00517B9C8790068775C /* UICollectionViewData.h */,
@@ -444,9 +448,10 @@
 				8B54A00A17B9C8790068775C /* UICollectionViewItemKey.m */,
 				8B54A00B17B9C8790068775C /* UICollectionViewLayout.h */,
 				8B54A00C17B9C8790068775C /* UICollectionViewLayout.m */,
-				8B54A00D17B9C8790068775C /* UICollectionViewLayout+Internals.h */,
+				8B54A00D17B9C8790068775C /* UICollectionViewLayout_Private.h */,
 				8B54A00E17B9C8790068775C /* UICollectionViewUpdateItem.h */,
 				8B54A00F17B9C8790068775C /* UICollectionViewUpdateItem.m */,
+				8B515C3F17BB1715003065D2 /* UICollectionViewUpdateItem_Private.h */,
 				8B54A01017B9C8790068775C /* UIGridLayoutInfo.h */,
 				8B54A01117B9C8790068775C /* UIGridLayoutInfo.m */,
 				8B54A01217B9C8790068775C /* UIGridLayoutItem.h */,
@@ -865,18 +870,10 @@
 				8BB4BD6017B1ED5E009B7708 /* UIPanGestureRecognizer.h in Headers */,
 				8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */,
 				8B54A04017B9CD7B0068775C /* UICollectionViewController.h in Headers */,
-				8B54A04217B9CD7B0068775C /* UICollectionViewData.h in Headers */,
-				8B54A03F17B9CD7B0068775C /* UICollectionViewCommon.h in Headers */,
-				8B54A04A17B9CD7B0068775C /* UICollectionViewLayout+Internals.h in Headers */,
+				8B54A03F17B9CD7B0068775C /* UICollectionViewDelegate.h in Headers */,
 				8B54A03D17B9CD7B0068775C /* UICollectionViewCell.h in Headers */,
-				8B54A05117B9CD7B0068775C /* UIGridLayoutRow.h in Headers */,
 				8B54A03B17B9CD7B0068775C /* UICollectionView.h in Headers */,
-				8B54A04F17B9CD7B0068775C /* UIGridLayoutItem.h in Headers */,
-				8B54A04B17B9CD7B0068775C /* UICollectionViewUpdateItem.h in Headers */,
-				8B54A05317B9CD7B0068775C /* UIGridLayoutSection.h in Headers */,
-				8B54A04D17B9CD7B0068775C /* UIGridLayoutInfo.h in Headers */,
 				8B54A04417B9CD7B0068775C /* UICollectionViewFlowLayout.h in Headers */,
-				8B54A04617B9CD7B0068775C /* UICollectionViewItemKey.h in Headers */,
 				8B54A04817B9CD7B0068775C /* UICollectionViewLayout.h in Headers */,
 				8BB4BD6B17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h in Headers */,
 				8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */,
@@ -885,12 +882,20 @@
 				8BB4BD6717B359BC009B7708 /* UIAnimator.h in Headers */,
 				8B6AEDEC17AB642A00D6858A /* UIApplication.h in Headers */,
 				8B08256D17AA2ACF00494FAA /* UIAlertView.h in Headers */,
+				8B54A04B17B9CD7B0068775C /* UICollectionViewUpdateItem.h in Headers */,
 				8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */,
 				8BE492F21798CF0C002BEA5A /* UIColor.h in Headers */,
 				8B5E725A17B9EFFB006A16B9 /* UIMenuItem.h in Headers */,
 				8B5E725617B9EFF5006A16B9 /* UIMenuController.h in Headers */,
 				8B5AF84B179B67F7008B3BF3 /* UINavigationBarAppearance.h in Headers */,
 				8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */,
+				8B54A04217B9CD7B0068775C /* UICollectionViewData.h in Headers */,
+				8B54A04A17B9CD7B0068775C /* UICollectionViewLayout_Private.h in Headers */,
+				8B54A05117B9CD7B0068775C /* UIGridLayoutRow.h in Headers */,
+				8B54A04F17B9CD7B0068775C /* UIGridLayoutItem.h in Headers */,
+				8B54A05317B9CD7B0068775C /* UIGridLayoutSection.h in Headers */,
+				8B54A04D17B9CD7B0068775C /* UIGridLayoutInfo.h in Headers */,
+				8B54A04617B9CD7B0068775C /* UICollectionViewItemKey.h in Headers */,
 				8B91076D17A8B8BC008D9DF0 /* UITouch_Private.h in Headers */,
 				8B91075B17A8A8A8008D9DF0 /* UIResponder_Private.h in Headers */,
 				8B91076717A8B7B1008D9DF0 /* UIEvent_Private.h in Headers */,
@@ -911,6 +916,7 @@
 				8B5BD7491799040E00A53E4A /* UIButton_Private.h in Headers */,
 				8B5BD75E179B348700A53E4A /* UIGraphics.h in Headers */,
 				8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */,
+				8B515C4017BB1715003065D2 /* UICollectionViewUpdateItem_Private.h in Headers */,
 				8B5E725F17B9F83B006A16B9 /* UIMenuController_Private.h in Headers */,
 				8B5E726117B9F9C1006A16B9 /* UICollectionView_Internal.h in Headers */,
 				8B5BD73D1799037400A53E4A /* UIButtonBackgroundView.h in Headers */,

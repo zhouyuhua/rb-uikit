@@ -100,7 +100,7 @@
 
 - (void)validateLayoutInRect:(CGRect)rect {
     [self validateItemCounts];
-    [self prepareToLoadData];
+    [self _prepareToLoadData];
     
     // TODO: check if we need to fetch data from layout
     if(!CGRectEqualToRect(_validLayoutRect, rect)) {
@@ -240,7 +240,7 @@
     _collectionViewDataFlags.itemCountsAreValid = YES;
 }
 
-- (void)prepareToLoadData {
+- (void)_prepareToLoadData {
     if(!self.layoutIsPrepared) {
         [self.layout prepareLayout];
         _contentSize = self.layout.collectionViewContentSize;

@@ -20,7 +20,7 @@
  THE SOFTWARE.
  */
 
-#import "UICollectionViewCommon.h"
+#import "UICollectionViewDelegate.h"
 
 @class UICollectionView, UICollectionViewLayout, UICollectionViewLayoutAttributes;
 
@@ -75,6 +75,8 @@
 
 @property (readonly) BOOL layoutIsPrepared;
 
+- (void)_prepareToLoadData;
+
 /*
  - (void)_setLayoutAttributes:(id)arg1 atGlobalItemIndex:(int)arg2;
  - (void)_setupMutableIndexPath:(id*)arg1 forGlobalItemIndex:(int)arg2;
@@ -83,7 +85,6 @@
  - (void)_validateItemCounts;
  - (void)_updateItemCounts;
  - (void)_loadEverything;
- - (void)_prepareToLoadData;
  - (void)invalidate:(BOOL)arg1;
  */
 

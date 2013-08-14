@@ -21,24 +21,12 @@
  */
 
 #import "UICollectionView_Internal.h"
+#import "UICollectionViewCell_Private.h"
 
 #import "UILongPressGestureRecognizer.h"
 #import "UIPanGestureRecognizer.h"
 
 #import "UIControl.h"
-
-@interface UICollectionReusableView () {
-    UICollectionViewLayoutAttributes *_layoutAttributes;
-    NSString *_reuseIdentifier;
-    __unsafe_unretained UICollectionView *_collectionView;
-    struct {
-        unsigned int inUpdateAnimation : 1;
-    }_reusableViewFlags;
-}
-@property (nonatomic, copy) NSString *reuseIdentifier;
-@property (nonatomic, unsafe_unretained) UICollectionView *collectionView;
-@property (nonatomic, strong) UICollectionViewLayoutAttributes *layoutAttributes;
-@end
 
 @implementation UICollectionReusableView
 
@@ -218,20 +206,6 @@
 
 - (BOOL)isHighlighted {
     return _collectionCellFlags.highlighted;
-}
-
-- (void)performSelectionSegue {
-    /*
-     Currently there's no "official" way to trigger a storyboard segue
-     using UIStoryboardSegueTemplate, so we're doing it in a semi-legal way.
-     */
-    SEL selector = NSSelectorFromString([NSString stringWithFormat:@"per%@", @"form:"]);
-    if([self->_selectionSegueTemplate respondsToSelector:selector]) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [self->_selectionSegueTemplate performSelector:selector withObject:self];
-#pragma clang diagnostic pop
-    }
 }
 
 @end

@@ -20,16 +20,8 @@
  THE SOFTWARE.
  */
 
-#import "UICollectionViewUpdateItem.h"
+#import "UICollectionViewUpdateItem_Private.h"
 #import "NSIndexPath+UICollectionViewAdditions.h"
-
-@interface UICollectionViewUpdateItem () {
-    NSIndexPath *_initialIndexPath;
-    NSIndexPath *_finalIndexPath;
-    UICollectionUpdateAction _updateAction;
-    id _gap;
-}
-@end
 
 @implementation UICollectionViewUpdateItem
 

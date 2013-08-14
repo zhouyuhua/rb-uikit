@@ -20,40 +20,15 @@
  THE SOFTWARE.
  */
 
-#import "UICollectionView.h"
+#import "UICollectionViewLayout_Private.h"
+#import "UICollectionViewUpdateItem_Private.h"
+
+#import "UICollectionView_Internal.h"
+#import "UICollectionViewCell_Private.h"
+
 #import "UICollectionViewItemKey.h"
 #import "UICollectionViewData.h"
 #import "NSIndexPath+UICollectionViewAdditions.h"
-
-@interface UICollectionView ()
-- (id)currentUpdate;
-- (NSDictionary *)visibleViewsDict;
-- (UICollectionViewData *)collectionViewData;
-- (CGRect)visibleBoundRects; // visibleBounds is flagged as private API (wtf)
-@end
-
-@interface UICollectionReusableView ()
-- (void)setIndexPath:(NSIndexPath *)indexPath;
-@end
-
-@interface UICollectionViewUpdateItem ()
-- (BOOL)isSectionOperation;
-@end
-
-@interface UICollectionViewLayoutAttributes () {
-    struct {
-        unsigned int isCellKind:1;
-        unsigned int isDecorationView:1;
-        unsigned int isHidden:1;
-    }_layoutFlags;
-}
-@property (nonatomic) UICollectionViewItemType elementCategory;
-@property (nonatomic, copy) NSString *elementKind;
-@end
-
-@interface UICollectionViewUpdateItem ()
-- (NSIndexPath *)indexPath;
-@end
 
 @implementation UICollectionViewLayoutAttributes
 
@@ -176,23 +151,6 @@
 @end
 
 
-@interface UICollectionViewLayout () {
-    __unsafe_unretained UICollectionView *_collectionView;
-    CGSize _collectionViewBoundsSize;
-    NSMutableDictionary *_initialAnimationLayoutAttributesDict;
-    NSMutableDictionary *_finalAnimationLayoutAttributesDict;
-    NSMutableIndexSet *_deletedSectionsSet;
-    NSMutableIndexSet *_insertedSectionsSet;
-    NSMutableDictionary *_decorationViewClassDict;
-    NSMutableDictionary *_decorationViewNibDict;
-    NSMutableDictionary *_decorationViewExternalObjectsTables;
-}
-@property (nonatomic, unsafe_unretained) UICollectionView *collectionView;
-@property (nonatomic, copy, readonly) NSDictionary *decorationViewClassDict;
-@property (nonatomic, copy, readonly) NSDictionary *decorationViewNibDict;
-@property (nonatomic, copy, readonly) NSDictionary *decorationViewExternalObjectsTables;
-@end
-
 @implementation UICollectionViewLayout
 ///////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - NSObject
@@ -200,7 +158,6 @@
 - (id)init {
     if((self = [super init])) {
         _decorationViewClassDict = [NSMutableDictionary new];
-        _decorationViewNibDict = [NSMutableDictionary new];
         _decorationViewExternalObjectsTables = [NSMutableDictionary new];
         _initialAnimationLayoutAttributesDict = [NSMutableDictionary new];
         _finalAnimationLayoutAttributesDict = [NSMutableDictionary new];
@@ -398,7 +355,7 @@
 }
 
 - (void)registerNib:(UINib *)nib forDecorationViewOfKind:(NSString *)kind {
-    _decorationViewNibDict[kind] = nib;
+    UIKitUnimplementedMethod();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////

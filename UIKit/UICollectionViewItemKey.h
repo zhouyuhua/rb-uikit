@@ -20,7 +20,7 @@
  THE SOFTWARE.
  */
 
-#import "UICollectionViewCommon.h"
+#import "UICollectionViewDelegate.h"
 #import "UICollectionViewLayout.h"
 
 extern NSString *const UICollectionElementKindCell;

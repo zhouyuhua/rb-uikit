@@ -20,7 +20,7 @@
  THE SOFTWARE.
  */
 
-#import "UICollectionViewCommon.h"
+#import "UICollectionViewDelegate.h"
 #import <CoreGraphics/CoreGraphics.h>
 #import <QuartzCore/QuartzCore.h>
 

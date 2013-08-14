@@ -10,10 +10,9 @@
 
 #import "UIMenuController_Private.h"
 
-@class UICollectionViewExt, UICollectionViewData, UITouch;
+@class UICollectionViewData, UITouch;
 
 @interface UICollectionView () <UIScrollViewDelegate, UIMenuControllerActionHandler> {
-    // ivar layout needs to EQUAL to UICollectionView.
     UICollectionViewLayout *_layout;
     __unsafe_unretained id<UICollectionViewDataSource> _dataSource;
     UIView *_backgroundView;
@@ -80,10 +79,20 @@
     CGPoint _lastLayoutOffset;
 }
 @property (nonatomic, strong) UICollectionViewData *collectionViewData;
-@property (nonatomic, strong, readonly) UICollectionViewExt *extVars;
 @property (nonatomic, readonly) id currentUpdate;
 @property (nonatomic, readonly) NSDictionary *visibleViewsDict;
 @property (nonatomic, assign) CGRect visibleBoundRects;
+
+#pragma mark -
+
+@property (nonatomic, unsafe_unretained) id<UICollectionViewDelegate> collectionViewDelegate;
+@property (nonatomic, strong) NSDictionary *supplementaryViewsExternalObjects;
+@property (nonatomic, strong) NSIndexPath *touchingIndexPath;
+@property (nonatomic, strong) NSIndexPath *currentIndexPath;
+
+#pragma mark -
+
+- (UICollectionViewData *)collectionViewData;
 
 #pragma mark - Menus
 

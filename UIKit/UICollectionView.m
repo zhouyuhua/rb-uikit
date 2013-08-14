@@ -22,53 +22,15 @@
 
 #import "UICollectionView_Internal.h"
 #import "UICollectionViewData.h"
-#import "UICollectionViewLayout+Internals.h"
+#import "UICollectionViewLayout_Private.h"
 #import "UICollectionViewItemKey.h"
+#import "UICollectionViewUpdateItem_Private.h"
+#import "UICollectionViewCell_Private.h"
 
 #import "NSIndexPath+UICollectionViewAdditions.h"
 
 #import "UITouch.h"
 #import "UIMenuItem.h"
-
-#import <objc/runtime.h>
-
-@interface UICollectionViewLayout (Internal)
-@property (nonatomic, unsafe_unretained) UICollectionView *collectionView;
-@end
-
-@interface UICollectionViewData (Internal)
-- (void)prepareToLoadData;
-@end
-
-@interface UICollectionViewCell (Internal)
-- (void)performSelectionSegue;
-@end
-
-@interface UICollectionViewUpdateItem ()
-- (NSIndexPath *)indexPath;
-
-- (BOOL)isSectionOperation;
-@end
-
-@interface UICollectionViewLayoutAttributes () {
-    char junk[128];
-}
-@property (nonatomic, copy) NSString *elementKind;
-@end
-
-// Used by UICollectionView for external variables.
-// (We need to keep the total class size equal to the UICollectionView variant)
-@interface UICollectionViewExt : NSObject
-@property (nonatomic, unsafe_unretained) id<UICollectionViewDelegate> collectionViewDelegate;
-@property (nonatomic, strong) NSDictionary *supplementaryViewsExternalObjects;
-@property (nonatomic, strong) NSIndexPath *touchingIndexPath;
-@property (nonatomic, strong) NSIndexPath *currentIndexPath;
-@end
-
-@implementation UICollectionViewExt
-@end
-
-const char kUIColletionViewExt;
 
 @implementation UICollectionView
 
@@ -89,9 +51,6 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
     _self->_allVisibleViewsDict = [NSMutableDictionary new];
     _self->_cellClassDict = [NSMutableDictionary new];
     _self->_supplementaryViewClassDict = [NSMutableDictionary new];
-    
-    // add class that saves additional ivars
-    objc_setAssociatedObject(_self, &kUIColletionViewExt, [UICollectionViewExt new], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -191,21 +150,21 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewDidScroll:)]) {
         [delegate scrollViewDidScroll:scrollView];
     }
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewDidZoom:)]) {
         [delegate scrollViewDidZoom:scrollView];
     }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)]) {
         [delegate scrollViewWillBeginDragging:scrollView];
     }
@@ -215,7 +174,7 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
     // Let collectionViewLayout decide where to stop.
     *targetContentOffset = [[self collectionViewLayout] targetContentOffsetForProposedContentOffset:*targetContentOffset withScrollingVelocity:velocity];
     
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewWillEndDragging:withVelocity:targetContentOffset:)]) {
         //if collectionViewDelegate implements this method, it may modify targetContentOffset as well
         [delegate scrollViewWillEndDragging:scrollView withVelocity:velocity targetContentOffset:targetContentOffset];
@@ -223,40 +182,40 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
         [delegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
     }
     
     // if we are in the middle of a cell touch event, perform the "touchEnded" simulation
-    if(self.extVars.touchingIndexPath) {
+    if(self.touchingIndexPath) {
         [self cellTouchCancelled];
     }
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewWillBeginDecelerating:)]) {
         [delegate scrollViewWillBeginDecelerating:scrollView];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
         [delegate scrollViewDidEndDecelerating:scrollView];
     }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)]) {
         [delegate scrollViewDidEndScrollingAnimation:scrollView];
     }
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(viewForZoomingInScrollView:)]) {
         return [delegate viewForZoomingInScrollView:scrollView];
     }
@@ -264,21 +223,21 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
 }
 
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewWillBeginZooming:withView:)]) {
         [delegate scrollViewWillBeginZooming:scrollView withView:view];
     }
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewDidEndZooming:withView:atScale:)]) {
         [delegate scrollViewDidEndZooming:scrollView withView:view atScale:scale];
     }
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewShouldScrollToTop:)]) {
         return [delegate scrollViewShouldScrollToTop:scrollView];
     }
@@ -286,7 +245,7 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
 }
 
 - (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
-    id<UICollectionViewDelegate> delegate = self.extVars.collectionViewDelegate;
+    id<UICollectionViewDelegate> delegate = self.collectionViewDelegate;
     if((id)delegate != self && [delegate respondsToSelector:@selector(scrollViewDidScrollToTop:)]) {
         [delegate scrollViewDidScrollToTop:scrollView];
     }
@@ -604,8 +563,8 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
     [super touchesBegan:touches withEvent:event];
     
     // reset touching state vars
-    self.extVars.touchingIndexPath = nil;
-    self.extVars.currentIndexPath = nil;
+    self.touchingIndexPath = nil;
+    self.currentIndexPath = nil;
     
     CGPoint touchPoint = [[touches anyObject] locationInView:self];
     NSIndexPath *indexPath = [self indexPathForItemAtPoint:touchPoint];
@@ -613,14 +572,14 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
         if(![self highlightItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone notifyDelegate:YES])
             return;
         
-        self.extVars.touchingIndexPath = indexPath;
-        self.extVars.currentIndexPath = indexPath;
+        self.touchingIndexPath = indexPath;
+        self.currentIndexPath = indexPath;
         
         if(!self.allowsMultipleSelection) {
             // temporally unhighlight background on touchesBegan (keeps selected by _indexPathsForSelectedItems)
             // single-select only mode only though
             NSIndexPath *tempDeselectIndexPath = _indexPathsForSelectedItems.anyObject;
-            if(tempDeselectIndexPath && ![tempDeselectIndexPath isEqual:self.extVars.touchingIndexPath]) {
+            if(tempDeselectIndexPath && ![tempDeselectIndexPath isEqual:self.touchingIndexPath]) {
                 // iOS6 UICollectionView deselects cell without notification
                 UICollectionViewCell *selectedCell = [self cellForItemAtIndexPath:tempDeselectIndexPath];
                 selectedCell.selected = NO;
@@ -633,20 +592,20 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
     [super touchesMoved:touches withEvent:event];
     
     // allows moving between highlight and unhighlight state only if setHighlighted is not overwritten
-    if(self.extVars.touchingIndexPath) {
+    if(self.touchingIndexPath) {
         CGPoint touchPoint = [[touches anyObject] locationInView:self];
         NSIndexPath *indexPath = [self indexPathForItemAtPoint:touchPoint];
         
         // moving out of bounds
-        if([self.extVars.currentIndexPath isEqual:self.extVars.touchingIndexPath] &&
-           ![indexPath isEqual:self.extVars.touchingIndexPath] &&
-           [self unhighlightItemAtIndexPath:self.extVars.touchingIndexPath animated:YES notifyDelegate:YES shouldCheckHighlight:YES]) {
-            self.extVars.currentIndexPath = indexPath;
+        if([self.currentIndexPath isEqual:self.touchingIndexPath] &&
+           ![indexPath isEqual:self.touchingIndexPath] &&
+           [self unhighlightItemAtIndexPath:self.touchingIndexPath animated:YES notifyDelegate:YES shouldCheckHighlight:YES]) {
+            self.currentIndexPath = indexPath;
             // moving back into the original touching cell
-        } else if(![self.extVars.currentIndexPath isEqual:self.extVars.touchingIndexPath] &&
-                  [indexPath isEqual:self.extVars.touchingIndexPath]) {
-            [self highlightItemAtIndexPath:self.extVars.touchingIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone notifyDelegate:YES];
-            self.extVars.currentIndexPath = self.extVars.touchingIndexPath;
+        } else if(![self.currentIndexPath isEqual:self.touchingIndexPath] &&
+                  [indexPath isEqual:self.touchingIndexPath]) {
+            [self highlightItemAtIndexPath:self.touchingIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone notifyDelegate:YES];
+            self.currentIndexPath = self.touchingIndexPath;
         }
     }
 }
@@ -654,25 +613,25 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
     
-    if(self.extVars.touchingIndexPath) {
+    if(self.touchingIndexPath) {
         // first unhighlight the touch operation
-        [self unhighlightItemAtIndexPath:self.extVars.touchingIndexPath animated:YES notifyDelegate:YES];
+        [self unhighlightItemAtIndexPath:self.touchingIndexPath animated:YES notifyDelegate:YES];
         
         CGPoint touchPoint = [[touches anyObject] locationInView:self];
         NSIndexPath *indexPath = [self indexPathForItemAtPoint:touchPoint];
-        if([indexPath isEqual:self.extVars.touchingIndexPath]) {
+        if([indexPath isEqual:self.touchingIndexPath]) {
             [self userSelectedItemAtIndexPath:indexPath];
         }
         else if(!self.allowsMultipleSelection) {
             NSIndexPath *tempDeselectIndexPath = _indexPathsForSelectedItems.anyObject;
-            if(tempDeselectIndexPath && ![tempDeselectIndexPath isEqual:self.extVars.touchingIndexPath]) {
+            if(tempDeselectIndexPath && ![tempDeselectIndexPath isEqual:self.touchingIndexPath]) {
                 [self cellTouchCancelled];
             }
         }
         
         // for pedantic reasons only - always set to nil on touchesBegan
-        self.extVars.touchingIndexPath = nil;
-        self.extVars.currentIndexPath = nil;
+        self.touchingIndexPath = nil;
+        self.currentIndexPath = nil;
     }
 }
 
@@ -680,9 +639,9 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
     [super touchesCancelled:touches withEvent:event];
     
     // do not mark touchingIndexPath as nil because whoever cancelled this touch will need to signal a touch up event later
-    if(self.extVars.touchingIndexPath) {
+    if(self.touchingIndexPath) {
         // first unhighlight the touch operation
-        [self unhighlightItemAtIndexPath:self.extVars.touchingIndexPath animated:YES notifyDelegate:YES];
+        [self unhighlightItemAtIndexPath:self.touchingIndexPath animated:YES notifyDelegate:YES];
     }
 }
 
@@ -736,8 +695,6 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
             selectedCell.selected = YES;
             
             [_indexPathsForSelectedItems addObject:indexPath];
-            
-            [selectedCell performSelectionSegue];
             
             if(scrollPosition != UICollectionViewScrollPositionNone) {
                 [self scrollToItemAtIndexPath:indexPath atScrollPosition:scrollPosition animated:animated];
@@ -943,7 +900,7 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
         layout.collectionView = self;
         
         _collectionViewData = [[UICollectionViewData alloc] initWithCollectionView:self layout:layout];
-        [_collectionViewData prepareToLoadData];
+        [_collectionViewData _prepareToLoadData];
         
         NSArray *previouslySelectedIndexPaths = [self indexPathsForSelectedItems];
         NSMutableSet *selectedCellKeys = [NSMutableSet setWithCapacity:previouslySelectedIndexPaths.count];
@@ -1152,11 +1109,11 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
 }
 
 - (id<UICollectionViewDelegate>)delegate {
-    return self.extVars.collectionViewDelegate;
+    return self.collectionViewDelegate;
 }
 
 - (void)setDelegate:(id<UICollectionViewDelegate>)delegate {
-    self.extVars.collectionViewDelegate = delegate;
+    self.collectionViewDelegate = delegate;
     
     //  Managing the Selected Cells
     _collectionViewFlags.delegateShouldSelectItemAtIndexPath = [self.delegate respondsToSelector:@selector(collectionView:shouldSelectItemAtIndexPath:)];
@@ -1230,10 +1187,6 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Private
-
-- (UICollectionViewExt *)extVars {
-    return objc_getAssociatedObject(self, &kUIColletionViewExt);
-}
 
 - (void)invalidateLayout {
     [self.collectionViewLayout invalidateLayout];
@@ -1713,7 +1666,7 @@ static void UICollectionViewCommonSetup(UICollectionView *_self) {
     _collectionViewData = [[UICollectionViewData alloc] initWithCollectionView:self layout:_layout];
     
     [_layout invalidateLayout];
-    [_collectionViewData prepareToLoadData];
+    [_collectionViewData _prepareToLoadData];
     
     NSMutableArray *someMutableArr1 = [[NSMutableArray alloc] init];
     
