@@ -51,3 +51,6 @@
 #import "NSIndexPath+UICollectionViewAdditions.h"
 #import "UICollectionView.h"
 #import "UICollectionViewController.h"
+
+#import "UITableView.h"
+#import "NSIndexPath+UITableView.h"
