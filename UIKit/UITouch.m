@@ -15,7 +15,7 @@
 - (CGPoint)locationInView:(UIView *)view
 {
     if(view.window == self.window) {
-        return [view convertPoint:self.locationInWindow fromView:self.window];
+        return [self.window convertPoint:self.locationInWindow toView:view];
     }
     
     return CGPointZero;

@@ -10,4 +10,22 @@
 
 @interface UITableViewCell ()
 
+@property (nonatomic) NSIndexPath *_indexPath;
+@property (nonatomic) UIView *_separatorView;
+
+#pragma mark - readwrite
+
+@property (nonatomic, readwrite) UITableViewCellStyle style;
+@property (nonatomic, readwrite, copy) NSString *reuseIdentifier;
+
+#pragma mark -
+
+@property (nonatomic, readwrite) UIView *contentView;
+
+#pragma mark -
+
+@property (nonatomic, readwrite) UILabel *textLabel;
+@property (nonatomic, readwrite) UILabel *detailTextLabel;
+@property (nonatomic, readwrite) UIImageView *imageView;
+
 @end

@@ -10,6 +10,7 @@
 
 #import "TestController.h"
 #import "TestCollectionViewController.h"
+#import "TestTableViewController.h"
 
 @interface AppDelegate () <UIAlertViewDelegate>
 
@@ -24,7 +25,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 500.0)];
     
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:[TestCollectionViewController new]];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:[TestTableViewController new]];
     self.window.rootViewController = self.navigationController;
     
     [self.window makeKeyAndVisible];

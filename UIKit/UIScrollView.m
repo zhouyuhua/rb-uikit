@@ -67,12 +67,19 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
 
 - (void)setContentSize:(CGSize)contentSize
 {
+    CGRect bounds = self.bounds;
+    if(contentSize.width < CGRectGetWidth(bounds))
+        contentSize.width = CGRectGetWidth(bounds);
+    
+    if(contentSize.height < CGRectGetHeight(bounds))
+        contentSize.height = CGRectGetHeight(bounds);
+    
     _contentSize = contentSize;
     
     _verticalScroller.contentSize = contentSize;
     _horizontalScroller.contentSize = contentSize;
-    
-    [self _constrainContent];
+//
+//    [self _constrainContent];
 }
 
 #pragma mark -
@@ -257,8 +264,6 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
 {
     [self bringSubviewToFront:_horizontalScroller];
     [self bringSubviewToFront:_verticalScroller];
-    
-    [self setNeedsLayout];
 }
 
 - (void)insertSubview:(UIView *)view atIndex:(NSInteger)index

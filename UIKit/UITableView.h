@@ -19,6 +19,13 @@ typedef NS_ENUM(NSUInteger, UITableViewStyle) {
     UITableViewStyleGrouped,
 };
 
+typedef NS_ENUM(NSUInteger, UITableViewScrollPosition) {
+    UITableViewScrollPositionNone,
+    UITableViewScrollPositionTop,
+    UITableViewScrollPositionMiddle,
+    UITableViewScrollPositionBottom
+};
+
 @protocol UITableViewDataSource <NSObject>
 
 @required
@@ -38,8 +45,24 @@ typedef NS_ENUM(NSUInteger, UITableViewStyle) {
 
 @optional
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section;
+
+#pragma mark -
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section;
+
+#pragma mark -
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
+
+#pragma mark -
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -52,6 +75,10 @@ typedef NS_ENUM(NSUInteger, UITableViewStyle) {
 #pragma mark - Properties
 
 @property (nonatomic, readonly) UITableViewStyle style;
+
+@property (nonatomic) CGFloat rowHeight;
+@property (nonatomic) CGFloat sectionHeaderHeight;
+@property (nonatomic) CGFloat sectionFooterHeight;
 
 #pragma mark -
 
@@ -90,5 +117,18 @@ typedef NS_ENUM(NSUInteger, UITableViewStyle) {
 - (CGRect)rectForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (CGRect)rectForFooterInSection:(NSInteger)section;
 - (CGRect)rectForHeaderInSection:(NSInteger)section;
+
+#pragma mark - Accessing Rows and Sections
+
+- (NSArray *)visibleCells;
+- (NSIndexPath *)indexPathForRowAtPoint:(CGPoint)point;
+- (UITableViewCell *)cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+
+#pragma mark - Managing Selection
+
+- (NSIndexPath *)indexPathForSelectedRow;
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(UITableViewScrollPosition)scrollPosition;
+- (void)deselectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
 
 @end

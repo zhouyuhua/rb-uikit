@@ -199,7 +199,7 @@
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
 {
-    return CGRectContainsPoint(self.bounds, point);
+    return [self.layer containsPoint:point];
 }
 
 - (CGPoint)convertPoint:(CGPoint)point toView:(UIView *)view
@@ -291,6 +291,16 @@
 - (CGFloat)alpha
 {
     return self.layer.opacity;
+}
+
+- (void)setHidden:(BOOL)hidden
+{
+    self.layer.hidden = hidden;
+}
+
+- (BOOL)isHidden
+{
+    return self.layer.hidden;
 }
 
 - (void)setOpaque:(BOOL)opaque
@@ -529,14 +539,18 @@
 
 - (void)bringSubviewToFront:(UIView *)view
 {
-    [view removeFromSuperview];
-    [self addSubview:view];
+    NSAssert(view.superview == self, @"Cannot bring view to front that is not child of receiver.");
+    
+    [view.layer removeFromSuperlayer];
+    [self.layer addSublayer:view.layer];
 }
 
 - (void)sendSubviewToBack:(UIView *)view
 {
-    [view removeFromSuperview];
-    [self insertSubview:view atIndex:0];
+    NSAssert(view.superview == self, @"Cannot send view to bacl that is not child of receiver.");
+    
+    [view.layer removeFromSuperlayer];
+    [self.layer insertSublayer:view.layer atIndex:0];
 }
 
 #pragma mark -
@@ -653,6 +667,10 @@
     if(_clearsContextBeforeDrawing) {
         CGContextClearRect(ctx, drawingRect);
     }
+    
+    CGContextSetAllowsFontSmoothing(ctx, true);
+    CGContextSetShouldSubpixelPositionFonts(ctx, true);
+    CGContextSetAllowsFontSubpixelPositioning(ctx, true);
     
     [[UIColor blackColor] set];
     [self drawRect:drawingRect];

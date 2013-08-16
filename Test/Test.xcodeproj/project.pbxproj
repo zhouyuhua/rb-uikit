@@ -21,6 +21,7 @@
 		8BE4937A1798EAE9002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE493781798EAE9002BEA5A /* InfoPlist.strings */; };
 		8BE4937C1798EAE9002BEA5A /* TestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4937B1798EAE9002BEA5A /* TestTests.m */; };
 		8BE493901798EB2B002BEA5A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE4938B1798EAF0002BEA5A /* UIKit.framework */; };
+		8BF623F617BDDD5E0015ED5C /* TestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF623F517BDDD5E0015ED5C /* TestTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,8 @@
 		8BE493791798EAE9002BEA5A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8BE4937B1798EAE9002BEA5A /* TestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTests.m; sourceTree = "<group>"; };
 		8BE493851798EAF0002BEA5A /* UIKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UIKit.xcodeproj; path = ../UIKit.xcodeproj; sourceTree = "<group>"; };
+		8BF623F417BDDD5E0015ED5C /* TestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTableViewController.h; sourceTree = "<group>"; };
+		8BF623F517BDDD5E0015ED5C /* TestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +158,8 @@
 				8BE493581798EAE9002BEA5A /* Supporting Files */,
 				8B54A05B17B9E1FD0068775C /* TestController.h */,
 				8B54A05C17B9E1FD0068775C /* TestController.m */,
+				8BF623F417BDDD5E0015ED5C /* TestTableViewController.h */,
+				8BF623F517BDDD5E0015ED5C /* TestTableViewController.m */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 			files = (
 				8BE493651798EAE9002BEA5A /* AppDelegate.m in Sources */,
 				8B54A05917B9E1240068775C /* TestCollectionViewController.m in Sources */,
+				8BF623F617BDDD5E0015ED5C /* TestTableViewController.m in Sources */,
 				8BE4935E1798EAE9002BEA5A /* main.m in Sources */,
 				8B54A05D17B9E1FD0068775C /* TestController.m in Sources */,
 			);

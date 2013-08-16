@@ -98,12 +98,30 @@
 
 - (void)setTextColor:(UIColor *)textColor
 {
-    [_attributes setValue:textColor forKey:NSForegroundColorAttributeName];
+    _textColor = textColor;
+    if(!_highlighted)
+        [_attributes setValue:textColor forKey:NSForegroundColorAttributeName];
+    [self setNeedsDisplay];
 }
 
-- (UIColor *)textColor
+- (void)setHighlightedTextColor:(NSColor *)highlightedTextColor
 {
-    return _attributes[NSForegroundColorAttributeName];
+    _highlightedTextColor = highlightedTextColor;
+    if(_highlighted)
+        [_attributes setValue:highlightedTextColor forKey:NSForegroundColorAttributeName];
+    [self setNeedsDisplay];
+}
+
+- (void)setHighlighted:(BOOL)highlighted
+{
+    _highlighted = highlighted;
+    
+    if(_highlighted)
+        [_attributes setValue:self.highlightedTextColor forKey:NSForegroundColorAttributeName];
+    else
+        [_attributes setValue:self.textColor forKey:NSForegroundColorAttributeName];
+    
+    [self setNeedsDisplay];
 }
 
 #pragma mark -
