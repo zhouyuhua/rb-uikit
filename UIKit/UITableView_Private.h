@@ -21,6 +21,9 @@
         int tableViewViewForHeaderInSection : 1;
         int tableViewViewForFooterInSection : 1;
         
+        int tableViewTitleForHeaderInSection : 1;
+        int tableViewTitleForFooterInSection : 1;
+        
         int tableViewWillDisplayCellForRowAtIndexPath : 1;
         int tableViewDidEndDisplayingCellForRowAtIndexPath : 1;
         

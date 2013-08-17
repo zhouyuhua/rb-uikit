@@ -9,6 +9,16 @@
 #import "UIViewController.h"
 #import "UITableView.h"
 
-@interface UITableViewController : UIViewController
+@class UIRefreshControl;
+
+@interface UITableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+- (instancetype)initWithStyle:(UITableViewStyle)style;
+
+#pragma mark - Properties
+
+@property (nonatomic) UITableView *tableView;
+@property (nonatomic) BOOL clearsSelectionOnViewWillAppear;
+@property (nonatomic) UIRefreshControl *refreshControl;
 
 @end

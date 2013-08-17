@@ -53,4 +53,5 @@
 #import "UICollectionViewController.h"
 
 #import "UITableView.h"
+#import "UITableViewController.h"
 #import "NSIndexPath+UITableView.h"

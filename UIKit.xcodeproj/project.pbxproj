@@ -191,6 +191,8 @@
 		8BE493421798EAA0002BEA5A /* UIImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE492F81798CF7C002BEA5A /* UIImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BE493431798EAA0002BEA5A /* UIFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4932C1798DFB4002BEA5A /* UIFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4933B1798E481002BEA5A /* UIGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BF0F9E817BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF0F9E617BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png */; };
+		8BF0F9E917BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF0F9E717BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png */; };
 		8BF623F217BDD2A70015ED5C /* UITableViewSectionInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF623F017BDD2A70015ED5C /* UITableViewSectionInfo.h */; };
 		8BF623F317BDD2A70015ED5C /* UITableViewSectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF623F117BDD2A70015ED5C /* UITableViewSectionInfo.m */; };
 /* End PBXBuildFile section */
@@ -397,6 +399,8 @@
 		8BE4933B1798E481002BEA5A /* UIGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIGeometry.h; sourceTree = "<group>"; };
 		8BE4933C1798E564002BEA5A /* UIBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBarButtonItem.h; sourceTree = "<group>"; };
 		8BE4933D1798E564002BEA5A /* UIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBarButtonItem.m; sourceTree = "<group>"; };
+		8BF0F9E617BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewHeaderFooterViewBackground.png; sourceTree = "<group>"; };
+		8BF0F9E717BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITableViewHeaderFooterViewBackground@2x.png"; sourceTree = "<group>"; };
 		8BF623F017BDD2A70015ED5C /* UITableViewSectionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewSectionInfo.h; sourceTree = "<group>"; };
 		8BF623F117BDD2A70015ED5C /* UITableViewSectionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewSectionInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -749,6 +753,8 @@
 		8BE492C11798C44F002BEA5A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8BF0F9E617BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png */,
+				8BF0F9E717BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png */,
 				8B08256517AA264100494FAA /* UIBackButtonChevron@2x.png */,
 				8B08256617AA264100494FAA /* UIBackButtonChevron.png */,
 				8B08256117AA1F7300494FAA /* UISearchBarMagnifyingGlass.png */,
@@ -1059,12 +1065,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BF0F9E817BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png in Resources */,
 				8B5BD7331798F1A200A53E4A /* UINavigationBarBackgroundImage.png in Resources */,
 				8B5AF850179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted.png in Resources */,
 				8B5AF84F179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png in Resources */,
 				8B5AF863179B9B79008B3BF3 /* UITextFieldSquareBackground.png in Resources */,
 				8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */,
 				8B08256417AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png in Resources */,
+				8BF0F9E917BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png in Resources */,
 				8BAE9591179A1D3100562F35 /* UIBarButtonItemBackground.png in Resources */,
 				8B5AF867179B9D15008B3BF3 /* UITextFieldRoundBackground.png in Resources */,
 				8B08256817AA264100494FAA /* UIBackButtonChevron.png in Resources */,

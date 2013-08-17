@@ -106,15 +106,33 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
         }
             
         case UITableViewCellStyleSubtitle: {
-            textLabelFrame.size.height = [self.textLabel sizeThatFits:bounds.size].height;
-            textLabelFrame.size.width = CGRectGetWidth(bounds);
-            textLabelFrame.origin.x = CGRectGetMinX(bounds);
-            textLabelFrame.origin.y = CGRectGetMidY(bounds) - (CGRectGetHeight(textLabelFrame) + kSubtitleStyleInterLabelPadding);
+            BOOL textLabelHasText = (self.textLabel.text.length > 0);
+            BOOL detailTextLabelHasText = (self.detailTextLabel.text.length > 0);
+            BOOL bothLabelsHaveText = (textLabelHasText && detailTextLabelHasText);
             
-            detailTextLabelFrame.size.height = [self.detailTextLabel sizeThatFits:bounds.size].height;
-            detailTextLabelFrame.size.width = CGRectGetWidth(bounds);
-            detailTextLabelFrame.origin.x = CGRectGetMinX(bounds);
-            detailTextLabelFrame.origin.y = CGRectGetMidY(bounds) + kSubtitleStyleInterLabelPadding;
+            if(textLabelHasText) {
+                textLabelFrame.size.height = [self.textLabel sizeThatFits:bounds.size].height;
+                textLabelFrame.size.width = CGRectGetWidth(bounds);
+                textLabelFrame.origin.x = CGRectGetMinX(bounds);
+                if(bothLabelsHaveText)
+                    textLabelFrame.origin.y = CGRectGetMidY(bounds) - (CGRectGetHeight(textLabelFrame) + kSubtitleStyleInterLabelPadding);
+                else
+                    textLabelFrame.origin.y = round(CGRectGetMidY(bounds) - CGRectGetHeight(textLabelFrame) / 2.0);
+            } else {
+                textLabelFrame = CGRectZero;
+            }
+            
+            if(detailTextLabelHasText) {
+                detailTextLabelFrame.size.height = [self.detailTextLabel sizeThatFits:bounds.size].height;
+                detailTextLabelFrame.size.width = CGRectGetWidth(bounds);
+                detailTextLabelFrame.origin.x = CGRectGetMinX(bounds);
+                if(bothLabelsHaveText)
+                    detailTextLabelFrame.origin.y = CGRectGetMidY(bounds) + kSubtitleStyleInterLabelPadding;
+                else
+                    detailTextLabelFrame.origin.y = round(CGRectGetMidY(bounds) - CGRectGetHeight(detailTextLabelFrame) / 2.0);
+            } else {
+                detailTextLabelFrame = CGRectZero;
+            }
             
             break;
         }

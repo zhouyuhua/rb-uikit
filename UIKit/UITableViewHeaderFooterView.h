@@ -8,6 +8,22 @@
 
 #import "UIView.h"
 
+@class UILabel;
+
 @interface UITableViewHeaderFooterView : UIView
+
+- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+
+- (void)prepareForReuse;
+
+#pragma mark - Properties
+
+@property (nonatomic, readonly, copy) NSString *reuseIdentifier;
+
+@property (nonatomic, readonly) UIView *contentView;
+@property (nonatomic) UIView *backgroundView;
+
+@property (nonatomic, readonly) UILabel *textLabel;
+@property (nonatomic, readonly) UILabel *detailTextLabel;
 
 @end

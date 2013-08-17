@@ -10,7 +10,6 @@
 
 #import "UITableViewCell.h"
 #import "UITableViewHeaderFooterView.h"
-#import "UITableViewController.h"
 
 @class UITableView, UINib;
 
@@ -59,6 +58,11 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section;
+
+#pragma mark -
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section;
 
 #pragma mark -
 

@@ -24,7 +24,7 @@
 
 - (id)init
 {
-    if((self = [super init])) {
+    if((self = [super initWithStyle:UITableViewStylePlain])) {
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 400.0) style:UITableViewStylePlain];
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
@@ -76,6 +76,11 @@
 }
 
 #pragma mark - <UITableViewDelegate>
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Test";
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
