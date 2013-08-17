@@ -21,6 +21,8 @@ typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 
+- (void)prepareForReuse;
+
 #pragma mark - Properties
 
 @property (nonatomic, readonly) UITableViewCellStyle style;

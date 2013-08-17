@@ -24,7 +24,10 @@
         int tableViewWillDisplayCellForRowAtIndexPath : 1;
         int tableViewDidEndDisplayingCellForRowAtIndexPath : 1;
         
+        int tableViewWillSelectRowAtIndexPath : 1;
         int tableViewDidSelectRowAtIndexPath : 1;
+        
+        int tableViewWillDeselectRowAtIndexPath : 1;
         int tableViewDidDeselectRowAtIndexPath : 1;
     } _delegateRespondsTo;
     
@@ -37,6 +40,7 @@
     NSMutableArray *_sections;
     NSMutableArray *_allCells;
     
+    NSIndexPath *_highlightedIndexPath;
     NSIndexPath *_selectedIndexPath;
     
     BOOL _needsReload;

@@ -65,6 +65,11 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
     return [self initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 }
 
+- (void)prepareForReuse
+{
+    
+}
+
 #pragma mark - Layout
 
 - (void)layoutSubviews
@@ -203,6 +208,14 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
     
     [self insertSubview:_selectedBackgroundView atIndex:0];
     [self setNeedsLayout];
+}
+
+#pragma mark -
+
+- (void)_setSeparatorStyle:(UITableViewCellSeparatorStyle)separatorStyle color:(UIColor *)color
+{
+    self._separatorView.hidden = (separatorStyle == UITableViewCellSeparatorStyleNone);
+    self._separatorView.backgroundColor = color;
 }
 
 @end

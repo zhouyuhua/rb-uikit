@@ -26,6 +26,12 @@ typedef NS_ENUM(NSUInteger, UITableViewScrollPosition) {
     UITableViewScrollPositionBottom
 };
 
+typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
+    UITableViewCellSeparatorStyleNone,
+    UITableViewCellSeparatorStyleSingleLine,
+    UITableViewCellSeparatorStyleSingleLineEtched
+};
+
 @protocol UITableViewDataSource <NSObject>
 
 @required
@@ -61,7 +67,10 @@ typedef NS_ENUM(NSUInteger, UITableViewScrollPosition) {
 
 #pragma mark -
 
+- (void)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
@@ -76,9 +85,16 @@ typedef NS_ENUM(NSUInteger, UITableViewScrollPosition) {
 
 @property (nonatomic, readonly) UITableViewStyle style;
 
+#pragma mark -
+
 @property (nonatomic) CGFloat rowHeight;
 @property (nonatomic) CGFloat sectionHeaderHeight;
 @property (nonatomic) CGFloat sectionFooterHeight;
+
+#pragma mark -
+
+@property (nonatomic) UITableViewCellSeparatorStyle separatorStyle;
+@property (nonatomic) UIColor *separatorColor;
 
 #pragma mark -
 
@@ -123,7 +139,6 @@ typedef NS_ENUM(NSUInteger, UITableViewScrollPosition) {
 - (NSArray *)visibleCells;
 - (NSIndexPath *)indexPathForRowAtPoint:(CGPoint)point;
 - (UITableViewCell *)cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-
 
 #pragma mark - Managing Selection
 

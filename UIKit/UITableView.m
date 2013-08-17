@@ -47,6 +47,9 @@
         _rowHeight = 40.0;
         _sectionHeaderHeight = 20.0;
         _sectionFooterHeight = 0.0;
+        
+        _separatorColor = [UIColor lightGrayColor];
+        _separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     
     return self;
@@ -90,7 +93,10 @@
     _delegateRespondsTo.tableViewWillDisplayCellForRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)];
     _delegateRespondsTo.tableViewDidEndDisplayingCellForRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:didEndDisplayingCell:forRowAtIndexPath:)];
     
+    _delegateRespondsTo.tableViewWillSelectRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:willSelectRowAtIndexPath:)];
     _delegateRespondsTo.tableViewDidSelectRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)];
+    
+    _delegateRespondsTo.tableViewWillDeselectRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:willDeselectRowAtIndexPath:)];
     _delegateRespondsTo.tableViewDidDeselectRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:didDeselectRowAtIndexPath:)];
     
     [self _setNeedsReload];
@@ -114,6 +120,22 @@
 {
     _sectionFooterHeight = sectionFooterHeight;
     [self _setNeedsReload];
+}
+
+#pragma mark -
+
+- (void)setSeparatorStyle:(UITableViewCellSeparatorStyle)separatorStyle
+{
+    _separatorStyle = separatorStyle;
+    
+    [self setNeedsLayout];
+}
+
+- (void)setSeparatorColor:(UIColor *)separatorColor
+{
+    _separatorColor = separatorColor;
+    
+    [self setNeedsLayout];
 }
 
 #pragma mark - Registering Classes
@@ -193,6 +215,12 @@
         _reusableCells[cell.reuseIdentifier] = cellsForIdentifier;
     }
     
+    if(_delegateRespondsTo.tableViewDidEndDisplayingCellForRowAtIndexPath) {
+        [self.delegate tableView:self didEndDisplayingCell:cell forRowAtIndexPath:cell._indexPath];
+    }
+    
+    cell._indexPath = nil;
+    
     [cellsForIdentifier addObject:cell];
 }
 
@@ -244,15 +272,24 @@
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:sectionIndex];
             CGRect rowFrame = [self rectForRowAtIndexPath:indexPath];
             if(CGRectIntersectsRect(rowFrame, visibleRect) && CGRectGetHeight(rowFrame) > 0.0) {
-                UITableViewCell *cell = _cachedCells[indexPath] ?: [_dataSource tableView:self cellForRowAtIndexPath:indexPath];
+                UITableViewCell *cell = _cachedCells[indexPath];
                 if(!cell) {
-                    [NSException raise:NSInternalInconsistencyException
-                                format:@"-tableView:cellForRowAtIndexPath: returned nil cell"];
+                    cell = [_dataSource tableView:self cellForRowAtIndexPath:indexPath];
+                    if(!cell) {
+                        [NSException raise:NSInternalInconsistencyException
+                                    format:@"-tableView:cellForRowAtIndexPath: returned nil cell"];
+                    }
+                } else {
+                    [cell prepareForReuse];
                 }
                 
                 cell.frame = rowFrame;
                 cell.selected = (_selectedIndexPath && [indexPath isEqual:_selectedIndexPath]);
                 cell._indexPath = indexPath;
+                [cell _setSeparatorStyle:_separatorStyle color:_separatorColor];
+                
+                if(_delegateRespondsTo.tableViewWillDisplayCellForRowAtIndexPath)
+                    [self.delegate tableView:self willDisplayCell:cell forRowAtIndexPath:indexPath];
                 
                 [self addSubview:cell];
                 [_allCells addObject:cell];
@@ -265,9 +302,8 @@
         CGRect cellFrame = cell.frame;
         if(!CGRectIntersectsRect(cellFrame, visibleRect)) {
             [cell removeFromSuperview];
+            [self _recycleCell:cell];
         }
-        
-        [self _recycleCell:cell];
     }
 }
 
@@ -487,6 +523,13 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if(_selectedIndexPath && _delegateRespondsTo.tableViewWillSelectRowAtIndexPath) {
+        [self.delegate tableView:self willSelectRowAtIndexPath:_selectedIndexPath];
+    }
+    
+    [self selectRowAtIndexPath:_highlightedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    _highlightedIndexPath = nil;
+    
     if(_selectedIndexPath && _delegateRespondsTo.tableViewDidSelectRowAtIndexPath) {
         [self.delegate tableView:self didSelectRowAtIndexPath:_selectedIndexPath];
     }
@@ -498,25 +541,46 @@
     CGPoint locationOfTouch = [touch locationInView:self];
     
     NSIndexPath *indexPath = [self indexPathForRowAtPoint:locationOfTouch];
-    if(indexPath) {
-        [self selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    } else {
-        [self deselectRowAtIndexPath:[self indexPathForSelectedRow] animated:NO];
+    
+    if(_highlightedIndexPath) {
+        UITableViewCell *oldCell = [self cellForRowAtIndexPath:_highlightedIndexPath];
+        [oldCell setHighlighted:NO animated:NO];
     }
+    
+    if(indexPath) {
+        UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
+        [cell setHighlighted:YES animated:NO];
+    }
+    
+    _highlightedIndexPath = indexPath;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if(_selectedIndexPath && _delegateRespondsTo.tableViewDidDeselectRowAtIndexPath) {
-        [self.delegate tableView:self didDeselectRowAtIndexPath:_selectedIndexPath];
+    if(_selectedIndexPath && _delegateRespondsTo.tableViewWillDeselectRowAtIndexPath) {
+        [self.delegate tableView:self willDeselectRowAtIndexPath:_selectedIndexPath];
     }
+    
+    [self deselectRowAtIndexPath:_selectedIndexPath animated:NO];
     
     UITouch *touch = [touches anyObject];
     CGPoint locationOfTouch = [touch locationInView:self];
     
     NSIndexPath *indexPath = [self indexPathForRowAtPoint:locationOfTouch];
     if(indexPath) {
-        [self selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        if(_highlightedIndexPath) {
+            UITableViewCell *oldCell = [self cellForRowAtIndexPath:_highlightedIndexPath];
+            [oldCell setHighlighted:NO animated:NO];
+        }
+        
+        UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
+        [cell setHighlighted:YES animated:NO];
+    }
+    
+    _highlightedIndexPath = indexPath;
+    
+    if(_selectedIndexPath && _delegateRespondsTo.tableViewDidDeselectRowAtIndexPath) {
+        [self.delegate tableView:self didDeselectRowAtIndexPath:_selectedIndexPath];
     }
 }
 

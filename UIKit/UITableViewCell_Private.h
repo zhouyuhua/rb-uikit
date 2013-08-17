@@ -7,11 +7,14 @@
 //
 
 #import "UITableViewCell.h"
+#import "UITableView.h"
 
 @interface UITableViewCell ()
 
 @property (nonatomic) NSIndexPath *_indexPath;
 @property (nonatomic) UIView *_separatorView;
+
+- (void)_setSeparatorStyle:(UITableViewCellSeparatorStyle)separatorStyle color:(UIColor *)color;
 
 #pragma mark - readwrite
 
