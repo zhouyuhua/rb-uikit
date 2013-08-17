@@ -486,6 +486,7 @@
     view.superview = self;
     view->_window = self.window;
     view.firstResponderManager = self.window;
+    view.nextResponder = self;
     
     if(_window)
         [view _viewDidMoveToWindow:_window];

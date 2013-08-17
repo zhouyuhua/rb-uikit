@@ -53,8 +53,7 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
         self.backgroundView = [UIView new];
         self.backgroundView.backgroundColor = [UIColor whiteColor];
         
-        self.selectedBackgroundView = [UIView new];
-        self.selectedBackgroundView.backgroundColor = [UIColor alternateSelectedControlColor];
+        self.selectionStyle = UITableViewCellSelectionStyleBlue;
     }
     
     return self;
@@ -150,8 +149,6 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
         [UIView animateWithDuration:0.25 animations:^{
             self.backgroundView.alpha = highlighted? 1.0 : 0.0;
             self.selectedBackgroundView.alpha = !highlighted? 0.0 : 1.0;
-            
-            
         } completion:^(BOOL finished) {
             self.backgroundView.hidden = highlighted;
             self.backgroundView.alpha = 1.0;
@@ -194,7 +191,8 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
     _backgroundView.hidden = _highlighted;
     _backgroundView.userInteractionEnabled = NO;
     
-    [self insertSubview:_backgroundView atIndex:0];
+    if(_backgroundView)
+        [self insertSubview:_backgroundView atIndex:0];
     [self setNeedsLayout];
 }
 
@@ -206,7 +204,8 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
     _selectedBackgroundView.hidden = !_highlighted;
     _selectedBackgroundView.userInteractionEnabled = NO;
     
-    [self insertSubview:_selectedBackgroundView atIndex:0];
+    if(_selectedBackgroundView)
+        [self insertSubview:_selectedBackgroundView atIndex:0];
     [self setNeedsLayout];
 }
 
@@ -216,6 +215,30 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
 {
     self._separatorView.hidden = (separatorStyle == UITableViewCellSeparatorStyleNone);
     self._separatorView.backgroundColor = color;
+}
+
+- (void)setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle
+{
+    _selectionStyle = selectionStyle;
+    
+    self.selectedBackgroundView = [UIView new];
+    
+    switch (selectionStyle) {
+        case UITableViewCellSelectionStyleNone: {
+            self.selectedBackgroundView.backgroundColor = [UIColor clearColor];
+            break;
+        }
+            
+        case UITableViewCellSelectionStyleBlue: {
+            self.selectedBackgroundView.backgroundColor = [UIColor alternateSelectedControlColor];
+            break;
+        }
+            
+        case UITableViewCellSelectionStyleGray: {
+            self.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+            break;
+        }
+    }
 }
 
 @end

@@ -17,6 +17,12 @@ typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
     UITableViewCellStyleSubtitle
 };
 
+typedef NS_ENUM(NSUInteger, UITableViewCellSelectionStyle) {
+    UITableViewCellSelectionStyleNone,
+    UITableViewCellSelectionStyleBlue,
+    UITableViewCellSelectionStyleGray
+};
+
 @interface UITableViewCell : UIView
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
@@ -33,6 +39,8 @@ typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
 @property (nonatomic, readonly) UIView *contentView;
 @property (nonatomic) UIView *backgroundView;
 @property (nonatomic) UIView *selectedBackgroundView;
+
+@property (nonatomic) UITableViewCellSelectionStyle selectionStyle;
 
 #pragma mark -
 
