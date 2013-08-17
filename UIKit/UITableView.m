@@ -10,7 +10,7 @@
 #import "UITableViewCell_Private.h"
 
 #import "NSIndexPath+UITableView.h"
-#import "UITableViewSection.h"
+#import "UITableViewSectionInfo.h"
 
 #import "UITouch.h"
 #import "UIEvent.h"
@@ -230,18 +230,18 @@
 {
     NSUInteger numberOfSections = [self numberOfSections];
     for (NSUInteger section = 0; section < numberOfSections; section++) {
-        UITableViewSection *sectionInformation = [UITableViewSection new];
+        UITableViewSectionInfo *sectionInfo = [UITableViewSectionInfo new];
         
-        sectionInformation.headerHeight = [self _heightForHeaderOfSection:section hasView:_delegateRespondsTo.tableViewViewForHeaderInSection];
-        sectionInformation.footerHeight = [self _heightForFooterOfSection:section hasView:_delegateRespondsTo.tableViewViewForFooterInSection];
-        sectionInformation.numberOfRows = [self numberOfRowsInSection:section];
+        sectionInfo.headerHeight = [self _heightForHeaderOfSection:section hasView:_delegateRespondsTo.tableViewViewForHeaderInSection];
+        sectionInfo.footerHeight = [self _heightForFooterOfSection:section hasView:_delegateRespondsTo.tableViewViewForFooterInSection];
+        sectionInfo.numberOfRows = [self numberOfRowsInSection:section];
         
-        for (NSUInteger row = 0, numberOfRows = sectionInformation.numberOfRows; row < numberOfRows; row++) {
+        for (NSUInteger row = 0, numberOfRows = sectionInfo.numberOfRows; row < numberOfRows; row++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-            sectionInformation.rowHeights[row] = [self _heightForRowAtIndexPath:indexPath];
+            sectionInfo.rowHeights[row] = [self _heightForRowAtIndexPath:indexPath];
         }
         
-        [_sections addObject:sectionInformation];
+        [_sections addObject:sectionInfo];
     }
 }
 
@@ -249,8 +249,8 @@
 {
     CGFloat totalHeight = 0.0;
     
-    for (UITableViewSection *section in _sections)
-        totalHeight += section.totalHeight;
+    for (UITableViewSectionInfo *sectionInfo in _sections)
+        totalHeight += sectionInfo.totalHeight;
     
     self.contentSize = CGSizeMake(0.0, totalHeight);
 }
@@ -261,15 +261,15 @@
     
     CGRect visibleRect = CGRectMake(0.0, self.contentOffset.y,
                                     CGRectGetWidth(bounds), CGRectGetHeight(bounds));
-    [_sections enumerateObjectsUsingBlock:^(UITableViewSection *sectionInformation, NSUInteger sectionIndex, BOOL *stop) {
-        CGRect headerFrame = [self rectForHeaderInSection:sectionIndex];
-        sectionInformation.headerView.frame = headerFrame;
+    [_sections enumerateObjectsUsingBlock:^(UITableViewSectionInfo *sectionInfo, NSUInteger section, BOOL *stop) {
+        CGRect headerFrame = [self rectForHeaderInSection:section];
+        sectionInfo.headerView.frame = headerFrame;
         
-        CGRect footerFrame = [self rectForFooterInSection:sectionIndex];
-        sectionInformation.footerView.frame = footerFrame;
+        CGRect footerFrame = [self rectForFooterInSection:section];
+        sectionInfo.footerView.frame = footerFrame;
         
-        for (NSUInteger row = 0, numberOfRows = sectionInformation.numberOfRows; row < numberOfRows; row++) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:sectionIndex];
+        for (NSUInteger row = 0, numberOfRows = sectionInfo.numberOfRows; row < numberOfRows; row++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
             CGRect rowFrame = [self rectForRowAtIndexPath:indexPath];
             if(CGRectIntersectsRect(rowFrame, visibleRect) && CGRectGetHeight(rowFrame) > 0.0) {
                 UITableViewCell *cell = _cachedCells[indexPath];
@@ -328,9 +328,9 @@
 
 - (void)reloadData
 {
-    for (UITableViewSection *section in _sections) {
-        [section.headerView removeFromSuperview];
-        [section.footerView removeFromSuperview];
+    for (UITableViewSectionInfo *sectionInfo in _sections) {
+        [sectionInfo.headerView removeFromSuperview];
+        [sectionInfo.footerView removeFromSuperview];
     }
     
     [_allCells makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -367,18 +367,18 @@
 
 - (CGRect)rectForSection:(NSInteger)section
 {
-    UITableViewSection *sectionInformation = _sections[section];
+    UITableViewSectionInfo *sectionInfo = _sections[section];
     CGFloat offset = [self _offsetForSection:section];
-    return [self _rectForOffset:offset height:sectionInformation.totalHeight];
+    return [self _rectForOffset:offset height:sectionInfo.totalHeight];
 }
 
 - (CGRect)rectForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewSection *sectionInformation = _sections[indexPath.section];
+    UITableViewSectionInfo *sectionInfo = _sections[indexPath.section];
     CGFloat offset = [self _offsetForSection:indexPath.section];
-    offset += sectionInformation.headerHeight;
+    offset += sectionInfo.headerHeight;
     
-    CGFloat *rowHeights = sectionInformation.rowHeights;
+    CGFloat *rowHeights = sectionInfo.rowHeights;
     for (NSUInteger index = 0, row = indexPath.row; index < row; index++) {
         offset += rowHeights[row];
     }
@@ -388,16 +388,16 @@
 
 - (CGRect)rectForHeaderInSection:(NSInteger)section
 {
-    UITableViewSection *sectionInformation = _sections[section];
+    UITableViewSectionInfo *sectionInfo = _sections[section];
     CGFloat offset = [self _offsetForSection:section];
-    return [self _rectForOffset:offset height:sectionInformation.headerHeight];
+    return [self _rectForOffset:offset height:sectionInfo.headerHeight];
 }
 
 - (CGRect)rectForFooterInSection:(NSInteger)section
 {
-    UITableViewSection *sectionInformation = _sections[section];
+    UITableViewSectionInfo *sectionInfo = _sections[section];
     CGFloat offset = [self _offsetForSection:section];
-    return [self _rectForOffset:offset height:sectionInformation.totalHeight - sectionInformation.footerHeight];
+    return [self _rectForOffset:offset height:sectionInfo.totalHeight - sectionInfo.footerHeight];
 }
 
 #pragma mark -
@@ -407,8 +407,8 @@
     CGFloat offset = 0.0;
     
     for (NSUInteger row = 0; row < section; row++) {
-        UITableViewSection *sectionInformation = _sections[row];
-        offset += sectionInformation.totalHeight;
+        UITableViewSectionInfo *sectionInfo = _sections[row];
+        offset += sectionInfo.totalHeight;
     }
     
     return offset;
@@ -457,18 +457,18 @@
 - (NSIndexPath *)indexPathForRowAtPoint:(CGPoint)point
 {
     __block NSIndexPath *indexPath = nil;
-    [_sections enumerateObjectsUsingBlock:^(UITableViewSection *section, NSUInteger sectionIndex, BOOL *stop) {
-        CGFloat offset = [self _offsetForSection:sectionIndex];
-        for (NSUInteger row = 0, numberOfRows = section.numberOfRows; row < numberOfRows; row++) {
-            CGFloat rowHeight = section.rowHeights[row];
+    [_sections enumerateObjectsUsingBlock:^(UITableViewSectionInfo *sectionInfo, NSUInteger section, BOOL *stop) {
+        CGFloat offset = [self _offsetForSection:section];
+        for (NSUInteger row = 0, numberOfRows = sectionInfo.numberOfRows; row < numberOfRows; row++) {
+            CGFloat rowHeight = sectionInfo.rowHeights[row];
             if((point.y >= offset) && (point.y - offset) < rowHeight) {
-                indexPath = [NSIndexPath indexPathForRow:row inSection:sectionIndex];
+                indexPath = [NSIndexPath indexPathForRow:row inSection:section];
                 
                 *stop = YES;
                 return;
             }
             
-            offset += section.rowHeights[row];
+            offset += sectionInfo.rowHeights[row];
         }
     }];
     

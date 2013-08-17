@@ -191,8 +191,8 @@
 		8BE493421798EAA0002BEA5A /* UIImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE492F81798CF7C002BEA5A /* UIImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BE493431798EAA0002BEA5A /* UIFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4932C1798DFB4002BEA5A /* UIFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4933B1798E481002BEA5A /* UIGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8BF623F217BDD2A70015ED5C /* UITableViewSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF623F017BDD2A70015ED5C /* UITableViewSection.h */; };
-		8BF623F317BDD2A70015ED5C /* UITableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF623F117BDD2A70015ED5C /* UITableViewSection.m */; };
+		8BF623F217BDD2A70015ED5C /* UITableViewSectionInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF623F017BDD2A70015ED5C /* UITableViewSectionInfo.h */; };
+		8BF623F317BDD2A70015ED5C /* UITableViewSectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF623F117BDD2A70015ED5C /* UITableViewSectionInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -397,8 +397,8 @@
 		8BE4933B1798E481002BEA5A /* UIGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIGeometry.h; sourceTree = "<group>"; };
 		8BE4933C1798E564002BEA5A /* UIBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBarButtonItem.h; sourceTree = "<group>"; };
 		8BE4933D1798E564002BEA5A /* UIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBarButtonItem.m; sourceTree = "<group>"; };
-		8BF623F017BDD2A70015ED5C /* UITableViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewSection.h; sourceTree = "<group>"; };
-		8BF623F117BDD2A70015ED5C /* UITableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewSection.m; sourceTree = "<group>"; };
+		8BF623F017BDD2A70015ED5C /* UITableViewSectionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewSectionInfo.h; sourceTree = "<group>"; };
+		8BF623F117BDD2A70015ED5C /* UITableViewSectionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewSectionInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -460,8 +460,8 @@
 				8B515C4417BB39E5003065D2 /* UITableView.h */,
 				8B515C4517BB39E5003065D2 /* UITableView.m */,
 				8B515C5817BB3CEE003065D2 /* UITableView_Private.h */,
-				8BF623F017BDD2A70015ED5C /* UITableViewSection.h */,
-				8BF623F117BDD2A70015ED5C /* UITableViewSection.m */,
+				8BF623F017BDD2A70015ED5C /* UITableViewSectionInfo.h */,
+				8BF623F117BDD2A70015ED5C /* UITableViewSectionInfo.m */,
 				8B515C4817BB39ED003065D2 /* UITableViewCell.h */,
 				8B515C4917BB39ED003065D2 /* UITableViewCell.m */,
 				8B515C5A17BB3D38003065D2 /* UITableViewCell_Private.h */,
@@ -916,7 +916,7 @@
 				8B6AEDE617AB638B00D6858A /* UIGestureRecognizer.h in Headers */,
 				8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */,
 				8BB4BD5517B1E860009B7708 /* UIScrollView.h in Headers */,
-				8BF623F217BDD2A70015ED5C /* UITableViewSection.h in Headers */,
+				8BF623F217BDD2A70015ED5C /* UITableViewSectionInfo.h in Headers */,
 				8BB4BD6F17B35AF7009B7708 /* UIScrollViewScrollAnimator.h in Headers */,
 				8BB4BD6017B1ED5E009B7708 /* UIPanGestureRecognizer.h in Headers */,
 				8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */,
@@ -1109,7 +1109,7 @@
 				8B54A03E17B9CD7B0068775C /* UICollectionViewCell.m in Sources */,
 				8B08256E17AA2ACF00494FAA /* UIAlertView.m in Sources */,
 				8B54A04317B9CD7B0068775C /* UICollectionViewData.m in Sources */,
-				8BF623F317BDD2A70015ED5C /* UITableViewSection.m in Sources */,
+				8BF623F317BDD2A70015ED5C /* UITableViewSectionInfo.m in Sources */,
 				8BE492E91798C52F002BEA5A /* UIResponder.m in Sources */,
 				8B91076317A8B6B7008D9DF0 /* UIWindowAppKitHostView.m in Sources */,
 				8B515C5317BB3A25003065D2 /* UITableViewController.m in Sources */,

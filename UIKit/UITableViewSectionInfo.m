@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UITableViewSection.h"
+#import "UITableViewSectionInfo.h"
 
-@implementation UITableViewSection
+@implementation UITableViewSectionInfo
 
 - (void)dealloc
 {

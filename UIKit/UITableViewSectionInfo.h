@@ -8,7 +8,7 @@
 
 #import "UIView.h"
 
-@interface UITableViewSection : NSObject
+@interface UITableViewSectionInfo : NSObject
 
 @property (nonatomic) NSUInteger numberOfRows;
 @property (nonatomic, readonly) CGFloat *rowHeights;
