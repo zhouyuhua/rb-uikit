@@ -372,7 +372,7 @@
     
     for (NSUInteger row = 0; row < section; row++) {
         UITableViewSection *sectionInformation = _sections[row];
-        offset += sectionInformation.totalHeight;;
+        offset += sectionInformation.totalHeight;
     }
     
     return offset;
@@ -420,13 +420,23 @@
 
 - (NSIndexPath *)indexPathForRowAtPoint:(CGPoint)point
 {
-    for (UITableViewCell *cell in self.visibleCells) {
-        CGPoint convertedPoint = [cell convertPoint:point fromView:self];
-        if([cell pointInside:convertedPoint withEvent:nil])
-            return cell._indexPath;
-    }
+    __block NSIndexPath *indexPath = nil;
+    [_sections enumerateObjectsUsingBlock:^(UITableViewSection *section, NSUInteger sectionIndex, BOOL *stop) {
+        CGFloat offset = [self _offsetForSection:sectionIndex];
+        for (NSUInteger row = 0, numberOfRows = section.numberOfRows; row < numberOfRows; row++) {
+            CGFloat rowHeight = section.rowHeights[row];
+            if((point.y >= offset) && (point.y - offset) < rowHeight) {
+                indexPath = [NSIndexPath indexPathForRow:row inSection:sectionIndex];
+                
+                *stop = YES;
+                return;
+            }
+            
+            offset += section.rowHeights[row];
+        }
+    }];
     
-    return nil;
+    return indexPath;
 }
 
 - (UITableViewCell *)cellForRowAtIndexPath:(NSIndexPath *)indexPath
