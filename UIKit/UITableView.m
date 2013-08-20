@@ -178,8 +178,16 @@
 
 - (id)dequeueReusableHeaderFooterViewWithIdentifier:(NSString *)identifier
 {
-    UIKitUnimplementedMethod();
-    return nil;
+    if(!_registeredHeaderFooterClasses[identifier])
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"%s called with reuse identifier %@ that has no registered class", __PRETTY_FUNCTION__, identifier];
+    
+    Class cellClass = _registeredHeaderFooterClasses[identifier];
+    if(cellClass) {
+        return [[cellClass alloc] initWithReuseIdentifier:identifier];
+    } else {
+        return nil;
+    }
 }
 
 - (id)dequeueReusableCellWithIdentifier:(NSString *)identifier
@@ -203,7 +211,8 @@
 - (id)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath
 {
     if(!_registeredCellClasses[identifier])
-        [NSException raise:NSInternalInconsistencyException format:@"%s called with reuse identifier %@ that has no registered class", __PRETTY_FUNCTION__, identifier];
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"%s called with reuse identifier %@ that has no registered class", __PRETTY_FUNCTION__, identifier];
     
     UITableViewCell *cell = [self dequeueReusableCellWithIdentifier:identifier];
     
