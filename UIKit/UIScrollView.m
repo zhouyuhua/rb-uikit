@@ -262,13 +262,21 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
 
 - (void)_bringScrollersToFront
 {
-    [self bringSubviewToFront:_horizontalScroller];
-    [self bringSubviewToFront:_verticalScroller];
+    [super bringSubviewToFront:_horizontalScroller];
+    [super bringSubviewToFront:_verticalScroller];
 }
 
 - (void)insertSubview:(UIView *)view atIndex:(NSInteger)index
 {
     [super insertSubview:view atIndex:index];
+    
+    if(view != _horizontalScroller && view != _verticalScroller)
+        [self _bringScrollersToFront];
+}
+
+- (void)bringSubviewToFront:(UIView *)view
+{
+    [super bringSubviewToFront:view];
     
     if(view != _horizontalScroller && view != _verticalScroller)
         [self _bringScrollersToFront];

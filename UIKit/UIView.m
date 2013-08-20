@@ -540,6 +540,9 @@
 
 - (void)bringSubviewToFront:(UIView *)view
 {
+    if(!view)
+        return;
+    
     NSAssert(view.superview == self, @"Cannot bring view to front that is not child of receiver.");
     
     [view.layer removeFromSuperlayer];
@@ -548,6 +551,9 @@
 
 - (void)sendSubviewToBack:(UIView *)view
 {
+    if(!view)
+        return;
+    
     NSAssert(view.superview == self, @"Cannot send view to bacl that is not child of receiver.");
     
     [view.layer removeFromSuperlayer];

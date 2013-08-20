@@ -186,9 +186,10 @@
 {
     NSParameterAssert(identifier);
     
-    UITableViewCell *cell = _reusableCells[identifier];
+    NSMutableArray *cellsForIdentifier = _reusableCells[identifier];
+    UITableViewCell *cell = [cellsForIdentifier firstObject];
     if(cell) {
-        [_reusableCells removeObjectForKey:identifier];
+        [cellsForIdentifier removeObject:cell];
     }
     
     Class cellClass = _registeredCellClasses[identifier];
@@ -258,6 +259,10 @@
         }
         
         [_sections addObject:sectionInfo];
+        
+        //-[UITableView rectForSection:] won't work until after the
+        //section info object is placed into the `_sections` array.
+        sectionInfo.sectionFrame = [self rectForSection:section];
     }
 }
 
@@ -273,10 +278,7 @@
 
 - (void)_layoutContents
 {
-    CGRect bounds = UIEdgeInsetsInsetRect(self.bounds, self.contentInset);
-    
-    CGRect visibleRect = CGRectMake(0.0, self.contentOffset.y,
-                                    CGRectGetWidth(bounds), CGRectGetHeight(bounds));
+    CGRect visibleRect = [self _visibleBounds];
     [_sections enumerateObjectsUsingBlock:^(UITableViewSectionInfo *sectionInfo, NSUInteger section, BOOL *stop) {
         CGRect headerFrame = [self rectForHeaderInSection:section];
         sectionInfo.headerView.frame = headerFrame;
@@ -311,6 +313,9 @@
                 [_allCells addObject:cell];
                 _cachedCells[indexPath] = cell;
             }
+            
+            [self bringSubviewToFront:sectionInfo.headerView];
+            [self bringSubviewToFront:sectionInfo.footerView];
         }
     }];
     
@@ -406,7 +411,12 @@
 {
     UITableViewSectionInfo *sectionInfo = _sections[section];
     CGFloat offset = [self _offsetForSection:section];
-    return [self _rectForOffset:offset height:sectionInfo.headerHeight];
+    CGRect headerFrame = [self _rectForOffset:offset height:sectionInfo.headerHeight];
+    if([self _sectionWithStickyHeader] == section) {
+        headerFrame.origin.y = self.contentOffset.y;
+    }
+    
+    return headerFrame;
 }
 
 - (CGRect)rectForFooterInSection:(NSInteger)section
@@ -417,6 +427,28 @@
 }
 
 #pragma mark -
+
+- (CGRect)_visibleBounds
+{
+    CGRect bounds = UIEdgeInsetsInsetRect(self.bounds, self.contentInset);
+    
+    return CGRectMake(CGRectGetMinX(bounds), self.contentOffset.y, CGRectGetWidth(bounds), CGRectGetHeight(bounds));
+}
+
+- (NSInteger)_sectionWithStickyHeader
+{
+    if(self.contentOffset.y < 0.0 || _style != UITableViewStylePlain)
+        return NSNotFound;
+    
+    CGRect visibleBounds = [self _visibleBounds];
+    for (NSUInteger section = 0, count = self.numberOfSections; section < count; section++) {
+        UITableViewSectionInfo *sectionInfo = _sections[section];
+        if(CGRectIntersectsRect(visibleBounds, sectionInfo.sectionFrame))
+            return section;
+    }
+    
+    return NSNotFound;
+}
 
 - (CGFloat)_offsetForSection:(NSInteger)section
 {
