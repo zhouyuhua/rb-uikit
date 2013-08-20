@@ -9,10 +9,22 @@
 #import "UIView.h"
 #import "UIResponder_Private.h"
 
+@class UIViewController;
+
 @interface UIView ()
 
 - (void)_viewWillMoveToWindow:(UIWindow *)window;
 - (void)_viewDidMoveToWindow:(UIWindow *)window;
+
+#pragma mark -
+
+/* The following two methods just forward to their subviews. */
+- (void)_windowDidBecomeKey;
+- (void)_windowDidResignKey;
+
+#pragma mark -
+
+@property (nonatomic, weak) UIViewController *_viewController;
 
 #pragma mark - readwrite
 

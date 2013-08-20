@@ -8,6 +8,7 @@
 
 #import "UIViewController.h"
 #import "UIViewController_Private.h"
+#import "UIView_Private.h"
 #import "UIResponder_Private.h"
 #import "UINavigationController.h"
 #import "UINavigationItem.h"
@@ -164,8 +165,10 @@
 
 - (void)setView:(UIView *)view
 {
+    _view._viewController = nil;
+    
     _view = view;
-    self.nextResponder = view;
+    _view._viewController = self;
     self.isViewLoaded = YES;
 }
 

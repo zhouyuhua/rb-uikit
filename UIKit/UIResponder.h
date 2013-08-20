@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "UIKitDefines.h"
 #import "UIEvent.h"
+#import "UIKeyEvent.h"
 
 @interface UIResponder : NSObject
 
@@ -35,6 +36,15 @@
 - (id)targetForAction:(SEL)action withSender:(id)sender;
 
 @property (nonatomic, readonly) NSUndoManager *undoManager;
+
+@end
+
+#pragma mark -
+
+@interface UIResponder (UIMacAdditions)
+
+- (void)keyDown:(UIKeyEvent *)event;
+- (void)keyUp:(UIKeyEvent *)event;
 
 @end
 

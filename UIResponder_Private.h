@@ -6,20 +6,16 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "UIResponder.h"
 
 @protocol UIFirstResponderManager <NSObject>
 
-@property (nonatomic, unsafe_unretained) UIResponder *firstResponder;
+@property (nonatomic, unsafe_unretained) UIResponder *currentFirstResponder;
 
 @end
 
 @interface UIResponder ()
 
 @property (nonatomic) id <UIFirstResponderManager> firstResponderManager;
-
-#pragma mark - readwrite
-
-@property (nonatomic, weak, readwrite) UIResponder *nextResponder;
 
 @end

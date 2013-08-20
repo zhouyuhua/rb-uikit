@@ -132,6 +132,9 @@
 		8B91077817A979F9008D9DF0 /* UIWindow_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91077717A979F9008D9DF0 /* UIWindow_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91077D17A97EF7008D9DF0 /* UIAppKitView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91077E17A97EF7008D9DF0 /* UIAppKitView.m */; };
+		8B95506817C316D600B8E4F9 /* UIKeyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B95506617C316D600B8E4F9 /* UIKeyEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B95506917C316D600B8E4F9 /* UIKeyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B95506717C316D600B8E4F9 /* UIKeyEvent.m */; };
+		8B95506B17C3189600B8E4F9 /* UIKeyEvent_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B95506A17C3189600B8E4F9 /* UIKeyEvent_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BAE9590179A1D3100562F35 /* UIBarButtonItemBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE958E179A1D3100562F35 /* UIBarButtonItemBackground@2x.png */; };
 		8BAE9591179A1D3100562F35 /* UIBarButtonItemBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAE958F179A1D3100562F35 /* UIBarButtonItemBackground.png */; };
 		8BB4BD5517B1E860009B7708 /* UIScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB4BD5317B1E860009B7708 /* UIScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -193,7 +196,7 @@
 		8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4933B1798E481002BEA5A /* UIGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BF0F9E817BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF0F9E617BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png */; };
 		8BF0F9E917BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF0F9E717BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png */; };
-		8BF623F217BDD2A70015ED5C /* UITableViewSectionInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF623F017BDD2A70015ED5C /* UITableViewSectionInfo.h */; };
+		8BF623F217BDD2A70015ED5C /* UITableViewSectionInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF623F017BDD2A70015ED5C /* UITableViewSectionInfo.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BF623F317BDD2A70015ED5C /* UITableViewSectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF623F117BDD2A70015ED5C /* UITableViewSectionInfo.m */; };
 /* End PBXBuildFile section */
 
@@ -334,6 +337,9 @@
 		8B91077717A979F9008D9DF0 /* UIWindow_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWindow_Private.h; sourceTree = "<group>"; };
 		8B91077D17A97EF7008D9DF0 /* UIAppKitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitView.h; sourceTree = "<group>"; };
 		8B91077E17A97EF7008D9DF0 /* UIAppKitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitView.m; sourceTree = "<group>"; };
+		8B95506617C316D600B8E4F9 /* UIKeyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIKeyEvent.h; sourceTree = "<group>"; };
+		8B95506717C316D600B8E4F9 /* UIKeyEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKeyEvent.m; sourceTree = "<group>"; };
+		8B95506A17C3189600B8E4F9 /* UIKeyEvent_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIKeyEvent_Private.h; sourceTree = "<group>"; };
 		8BAE958E179A1D3100562F35 /* UIBarButtonItemBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemBackground@2x.png"; sourceTree = "<group>"; };
 		8BAE958F179A1D3100562F35 /* UIBarButtonItemBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemBackground.png; sourceTree = "<group>"; };
 		8BB4BD5317B1E860009B7708 /* UIScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScrollView.h; sourceTree = "<group>"; };
@@ -591,6 +597,9 @@
 				8B91076817A8B883008D9DF0 /* UITouch.h */,
 				8B91076917A8B883008D9DF0 /* UITouch.m */,
 				8B91076C17A8B8BC008D9DF0 /* UITouch_Private.h */,
+				8B95506617C316D600B8E4F9 /* UIKeyEvent.h */,
+				8B95506717C316D600B8E4F9 /* UIKeyEvent.m */,
+				8B95506A17C3189600B8E4F9 /* UIKeyEvent_Private.h */,
 				8BB4BD5D17B1ED53009B7708 /* UIGestureRecognizer */,
 			);
 			name = "Event Handling";
@@ -922,7 +931,6 @@
 				8B6AEDE617AB638B00D6858A /* UIGestureRecognizer.h in Headers */,
 				8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */,
 				8BB4BD5517B1E860009B7708 /* UIScrollView.h in Headers */,
-				8BF623F217BDD2A70015ED5C /* UITableViewSectionInfo.h in Headers */,
 				8BB4BD6F17B35AF7009B7708 /* UIScrollViewScrollAnimator.h in Headers */,
 				8BB4BD6017B1ED5E009B7708 /* UIPanGestureRecognizer.h in Headers */,
 				8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */,
@@ -943,6 +951,7 @@
 				8B54A04B17B9CD7B0068775C /* UICollectionViewUpdateItem.h in Headers */,
 				8B515C4E17BB3A04003065D2 /* UITableViewHeaderFooterView.h in Headers */,
 				8B515C4617BB39E5003065D2 /* UITableView.h in Headers */,
+				8B95506817C316D600B8E4F9 /* UIKeyEvent.h in Headers */,
 				8B515C4A17BB39ED003065D2 /* UITableViewCell.h in Headers */,
 				8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */,
 				8B515C5217BB3A25003065D2 /* UITableViewController.h in Headers */,
@@ -974,6 +983,8 @@
 				8B6AEDEF17AB6BF600D6858A /* UIApplication_Private.h in Headers */,
 				8BE492FB1798CFAB002BEA5A /* UIBezierPath.h in Headers */,
 				8BE493431798EAA0002BEA5A /* UIFont.h in Headers */,
+				8B95506B17C3189600B8E4F9 /* UIKeyEvent_Private.h in Headers */,
+				8BF623F217BDD2A70015ED5C /* UITableViewSectionInfo.h in Headers */,
 				8B515C5B17BB3D4D003065D2 /* UITableViewCell_Private.h in Headers */,
 				8B5BD742179903AB00A53E4A /* UIButtonRoundRectBackgroundView.h in Headers */,
 				8B5BD7491799040E00A53E4A /* UIButton_Private.h in Headers */,
@@ -1165,6 +1176,7 @@
 				8B5BD74F179908EC00A53E4A /* UIButtonBarBackgroundView.m in Sources */,
 				8B5BD7391798FA9B00A53E4A /* UIButton.m in Sources */,
 				8B1EC8DB17A9F2B10035369C /* UIAppKitAdaptorView.m in Sources */,
+				8B95506917C316D600B8E4F9 /* UIKeyEvent.m in Sources */,
 				8B01140F179A19C500C8594C /* UIConcreteAppearance.m in Sources */,
 				8B08255C17AA18B100494FAA /* UISearchBar.m in Sources */,
 				8B5BD743179903AB00A53E4A /* UIButtonRoundRectBackgroundView.m in Sources */,

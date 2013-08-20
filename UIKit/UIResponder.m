@@ -10,6 +10,13 @@
 
 @implementation UIResponder
 
+- (UIResponder *)nextResponder
+{
+    return nil;
+}
+
+#pragma mark -
+
 - (BOOL)canBecomeFirstResponder
 {
     return NO;
@@ -18,7 +25,7 @@
 - (BOOL)becomeFirstResponder
 {
     if([self canBecomeFirstResponder]) {
-        self.firstResponderManager.firstResponder = self;
+        self.firstResponderManager.currentFirstResponder = self;
         return YES;
     }
     
@@ -33,7 +40,7 @@
 - (BOOL)resignFirstResponder
 {
     if([self canResignFirstResponder]) {
-        self.firstResponderManager.firstResponder = [self nextResponder];
+        self.firstResponderManager.currentFirstResponder = [self nextResponder];
         return YES;
     }
     
@@ -104,6 +111,25 @@
 - (NSUndoManager *)undoManager
 {
     return nil;
+}
+
+@end
+
+#pragma mark -
+
+@implementation UIResponder (UIMacAdditions)
+
+- (void)keyDown:(UIKeyEvent *)event
+{
+    if(self.nextResponder)
+        [self.nextResponder keyDown:event];
+    else
+        NSBeep();
+}
+
+- (void)keyUp:(UIKeyEvent *)event
+{
+    [self.nextResponder keyUp:event];
 }
 
 @end

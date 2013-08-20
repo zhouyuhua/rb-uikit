@@ -16,9 +16,4 @@
 @property (nonatomic) NSWindow *underlyingWindow;
 @property (nonatomic) UIWindowAppKitHostView *hostView;
 
-#pragma mark -
-
-- (void)_handleKeyUp:(NSEvent *)event;
-- (void)_handleKeyDown:(NSEvent *)event;
-
 @end

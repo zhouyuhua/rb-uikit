@@ -128,7 +128,6 @@
     
     [self.visibleViewController viewWillDisappear:animated];
     [viewController viewWillAppear:animated];
-    self.nextResponder = self.visibleViewController;
     if(animated) {
         [self replaceVisibleViewWithViewPushingFromRight:viewController.view completionHandler:^{
             [self.visibleViewController viewDidDisappear:animated];
@@ -169,7 +168,6 @@
     
     [previousViewController viewWillDisappear:animated];
     [self.visibleViewController viewWillAppear:animated];
-    self.nextResponder = self.visibleViewController;
     if(animated) {
         [self replaceVisibleViewWithViewPushingFromLeft:self.visibleViewController.view completionHandler:^{
             [previousViewController viewDidDisappear:animated];
@@ -201,7 +199,6 @@
     
     [self.visibleViewController viewWillDisappear:animated];
     [viewController viewWillAppear:animated];
-    self.nextResponder = self.visibleViewController;
     if(animated) {
         [self replaceVisibleViewWithViewPushingFromLeft:viewController.view completionHandler:^{
             [self.visibleViewController viewDidDisappear:animated];
@@ -234,7 +231,6 @@
     
     [self.visibleViewController viewWillDisappear:animated];
     [topViewController viewWillAppear:animated];
-    self.nextResponder = self.visibleViewController;
     if(animated) {
         [self replaceVisibleViewWithViewPushingFromLeft:topViewController.view completionHandler:^{
             [self.visibleViewController viewDidDisappear:animated];

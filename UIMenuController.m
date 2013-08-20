@@ -13,6 +13,8 @@
 #import "UIWindow_Private.h"
 #import "UIWindowAppKitHostView.h"
 
+#import "UIApplication.h"
+
 @implementation UIMenuController
 
 + (UIMenuController *)sharedMenuController

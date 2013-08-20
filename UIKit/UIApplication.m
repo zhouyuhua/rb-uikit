@@ -14,6 +14,7 @@
 
 #import "UIWindowAppKitHostView.h"
 #import "UIEvent_Private.h"
+#import "UIKeyEvent_Private.h"
 #import "UITouch_Private.h"
 #import "UIGestureRecognizer_Private.h"
 
@@ -258,12 +259,14 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 - (void)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView
 {
     switch (event.type) {
-        case NSKeyDown:
-            [hostView.kitWindow _handleKeyDown:event];
+        case NSKeyDown: {
+            [hostView.kitWindow keyDown:[[UIKeyEvent alloc] initWithNSEvent:event]];
+            
             break;
+        }
             
         case NSKeyUp:
-            [hostView.kitWindow _handleKeyUp:event];
+            [hostView.kitWindow keyUp:[[UIKeyEvent alloc] initWithNSEvent:event]];
             break;
     }
 }

@@ -461,11 +461,18 @@
     return YES;
 }
 
+#pragma mark - Responder Chain
+
+- (UIResponder *)nextResponder
+{
+    return (UIResponder *)self._viewController ?: (UIResponder *)self.superview;
+}
+
 #pragma mark - Subviews
 
 - (NSArray *)subviews
 {
-    return _subviews;
+    return self.subviews;
 }
 
 #pragma mark -
@@ -486,8 +493,7 @@
     view.superview = self;
     view->_window = self.window;
     view.firstResponderManager = self.window;
-    view.nextResponder = self;
-    
+
     if(_window)
         [view _viewDidMoveToWindow:_window];
     [view didMoveToSuperview];
@@ -661,6 +667,20 @@
 {
     _window = window;
     self.contentScaleFactor = window.screen.scale;
+}
+
+#pragma mark -
+
+- (void)_windowDidBecomeKey
+{
+    for (UIView *subview in _subviews)
+        [subview _windowDidBecomeKey];
+}
+
+- (void)_windowDidResignKey
+{
+    for (UIView *subview in _subviews)
+        [subview _windowDidResignKey];
 }
 
 #pragma mark - <CALayerDelegate>

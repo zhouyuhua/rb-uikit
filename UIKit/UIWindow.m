@@ -46,6 +46,7 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     
     return self;
 }
+
 #pragma mark -
 
 - (void)setWindowLevel:(UIWindowLevel)windowLevel
@@ -65,12 +66,16 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     
     [self.underlyingWindow becomeKeyWindow];
     [[NSNotificationCenter defaultCenter] postNotificationName:UIWindowDidBecomeKeyNotification object:self];
+    
+    [self _windowDidBecomeKey];
 }
 
 - (void)resignKeyWindow
 {
     [self.underlyingWindow resignKeyWindow];
     [[NSNotificationCenter defaultCenter] postNotificationName:UIWindowDidResignKeyNotification object:self];
+    
+    [self _windowDidResignKey];
 }
 
 #pragma mark -
@@ -138,7 +143,6 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     [_rootViewController.view removeFromSuperview];
     
     _rootViewController = rootViewController;
-    self.nextResponder = _rootViewController;
     
     [_rootViewController.view _viewWillMoveToWindow:self];
     _rootViewController.view.frame = self.bounds;
@@ -153,17 +157,26 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     }
 }
 
+#pragma mark - Responder Chain
+
+- (UIResponder *)nextResponder
+{
+    return UIApp;
+}
+
 #pragma mark - Events
 
-- (void)_handleKeyUp:(NSEvent *)event
+- (void)keyDown:(UIKeyEvent *)event
 {
-    
+    [self.rootViewController keyDown:event];
 }
 
-- (void)_handleKeyDown:(NSEvent *)event
+- (void)keyUp:(UIKeyEvent *)event
 {
-    
+    [self.rootViewController keyUp:event];
 }
+
+#pragma mark -
 
 - (void)sendEvent:(UIEvent *)event
 {
@@ -229,10 +242,10 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 
 #pragma mark - <UIFirstResponderManager>
 
-@synthesize firstResponder = _firstResponder;
-- (void)setFirstResponder:(UIResponder *)firstResponder
+@synthesize currentFirstResponder = _currentFirstResponder;
+- (void)setCurrentFirstResponder:(UIResponder *)currentFirstResponder
 {
-    _firstResponder = firstResponder;
+    _currentFirstResponder = currentFirstResponder;
 }
 
 #pragma mark - <NSWindowDelegate>

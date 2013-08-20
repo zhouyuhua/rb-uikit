@@ -10,6 +10,7 @@
 #import "UIColor.h"
 #import "UIWindow_Private.h"
 #import "UIEvent_Private.h"
+#import "UIKeyEvent_Private.h"
 #import "UITouch_Private.h"
 #import "UIApplication_Private.h"
 #import "UIGestureRecognizer_Private.h"
@@ -58,12 +59,12 @@
 
 - (void)keyUp:(NSEvent *)event
 {
-    [_kitWindow _handleKeyUp:event];
+    [_kitWindow keyUp:[[UIKeyEvent alloc] initWithNSEvent:event]];
 }
 
 - (void)keyDown:(NSEvent *)event
 {
-    [_kitWindow _handleKeyDown:event];
+    [_kitWindow keyDown:[[UIKeyEvent alloc] initWithNSEvent:event]];
 }
 
 #pragma mark -
