@@ -9,6 +9,23 @@
 #import "UIAnimationCollection.h"
 #import <objc/message.h>
 
+static CAMediaTimingFunction *CAMediaTimingFunctionFromUIViewAnimationCurve(UIViewAnimationCurve curve)
+{
+    switch (curve) {
+        case UIViewAnimationCurveEaseInOut:
+            return [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            
+        case UIViewAnimationCurveEaseIn:
+            return [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+            
+        case UIViewAnimationCurveEaseOut:
+            return [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+            
+        case UIViewAnimationCurveLinear:
+            return [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    }
+}
+
 @implementation UIAnimationCollection {
     NSUInteger _animationCount;
 }
@@ -42,11 +59,12 @@
         animation.duration = self.duration * 2.0;
     else
         animation.duration = self.duration;
-    animation.timeOffset = self.delay;
-    animation.beginTime = [self.startDate timeIntervalSince1970];
+    animation.beginTime = self.delay;
+    animation.timeOffset = [self.startDate timeIntervalSince1970];
     
     animation.repeatCount = self.repeatCount;
     animation.autoreverses = self.repeatAutoreverses;
+    animation.timingFunction = CAMediaTimingFunctionFromUIViewAnimationCurve(self.curve);
     
     return animation;
 }
@@ -54,8 +72,8 @@
 #pragma mark - Animation Delegate
 
 /*
- -animationWillStart:(NSString *)animationID context:(void *)context
- -animationDidStop:(NSString *)animationID finished:(NSNumber *)finished
+ - (void)animationWillStart:(NSString *)animationID context:(void *)context
+ - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished
  */
 
 - (void)animationDidStart:(CAAnimation *)anim
