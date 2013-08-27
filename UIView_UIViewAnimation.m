@@ -130,8 +130,8 @@ static BOOL AnimationsEnabled = YES;
 
 - (id <CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event
 {
-    if([UIView areAnimationsEnabled] && TopAnimation() != nil && !self.hidden && self.superview) {
-        return [TopAnimation() actionForLayer:layer forKey:event];
+    if([UIView areAnimationsEnabled] && TopAnimation() != nil && layer == self.layer) {
+        return [TopAnimation() actionForLayer:layer forKey:event] ?: (id <CAAction>)[NSNull null];
     } else {
         return (id <CAAction>)[NSNull null];
     }

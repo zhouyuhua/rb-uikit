@@ -67,6 +67,12 @@
     return [CALayer class];
 }
 
+- (void)dealloc
+{
+    for (UIView *subview in _subviews)
+        [subview removeFromSuperview];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     if((self = [super init])) {
@@ -551,6 +557,9 @@
     
     NSAssert(view.superview == self, @"Cannot bring view to front that is not child of receiver.");
     
+    [_subviews removeObject:view];
+    [_subviews addObject:view];
+    
     [view.layer removeFromSuperlayer];
     [self.layer addSublayer:view.layer];
 }
@@ -561,6 +570,9 @@
         return;
     
     NSAssert(view.superview == self, @"Cannot send view to bacl that is not child of receiver.");
+    
+    [_subviews removeObject:view];
+    [_subviews insertObject:view atIndex:0];
     
     [view.layer removeFromSuperlayer];
     [self.layer insertSublayer:view.layer atIndex:0];
