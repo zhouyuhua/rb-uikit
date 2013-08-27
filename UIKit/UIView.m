@@ -278,15 +278,12 @@
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor
 {
-    if([backgroundColor isEqual:[UIColor clearColor]])
-        self.layer.backgroundColor = nil;
-    else
-        self.layer.backgroundColor = backgroundColor.CGColor;
+    self.layer.backgroundColor = backgroundColor.CGColor;
 }
 
 - (UIColor *)backgroundColor
 {
-    return self.layer.backgroundColor? [UIColor colorWithCGColor:self.layer.backgroundColor] : [UIColor clearColor];
+    return self.layer.backgroundColor? [UIColor colorWithCGColor:self.layer.backgroundColor] : nil;
 }
 
 - (void)setAlpha:(CGFloat)alpha
@@ -707,9 +704,9 @@
         CGContextClearRect(ctx, drawingRect);
     }
     
-    CGContextSetAllowsFontSmoothing(ctx, true);
+    CGContextSetShouldSmoothFonts(ctx, false);
     CGContextSetShouldSubpixelPositionFonts(ctx, true);
-    CGContextSetAllowsFontSubpixelPositioning(ctx, true);
+    CGContextSetShouldSubpixelQuantizeFonts(ctx, true);
     
     [[UIColor blackColor] set];
     [self drawRect:drawingRect];
