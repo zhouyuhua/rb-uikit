@@ -7,16 +7,20 @@
 //
 
 #import "UIGraphics.h"
+#import "UIScreen.h"
+
+#import "UIImage_Private.h"
 
 static NSMutableArray *GetContextStack()
 {
-    static NSMutableArray *ContextStack = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        ContextStack = [NSMutableArray array];
-    });
+    NSMutableDictionary *threadStorage = [[NSThread currentThread] threadDictionary];
+    NSMutableArray *contextStack = threadStorage[@"contextStack"];
+    if(!contextStack) {
+        contextStack = [NSMutableArray array];
+        threadStorage[@"contextStack"] = contextStack;
+    }
     
-    return ContextStack;
+    return contextStack;
 }
 
 CGContextRef UIGraphicsGetCurrentContext(void)
@@ -43,6 +47,12 @@ void UIGraphicsPopContext(void)
         [NSGraphicsContext setCurrentContext:[stack lastObject]];
         [stack removeLastObject];
     }
+}
+
+CGContextRef UIGraphicsPeakContext(void)
+{
+    NSMutableArray *stack = GetContextStack();
+    return [[stack lastObject] graphicsPort];
 }
 
 #pragma mark -
@@ -95,76 +105,144 @@ void UIRectClip(CGRect rect)
 
 void UIGraphicsBeginImageContext(CGSize size)
 {
-    UIKitUnimplementedMethod();
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
 }
 
 void UIGraphicsBeginImageContextWithOptions(CGSize size, BOOL opaque, CGFloat scale)
 {
-    UIKitUnimplementedMethod();
+    if(scale == 0.0)
+        scale = [UIScreen mainScreen].scale;
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef imageContext = CGBitmapContextCreate(/* in data */ NULL,
+                                                      /* in width */ size.width,
+                                                      /* in height */ size.height,
+                                                      /* in bitsPerComponent */ 8,
+                                                      /* in bytesPerRow */ 0,
+                                                      /* in colorSpace */ colorSpace,
+                                                      /* in bitmapInfo */ (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
+    
+    UIGraphicsPushContext(imageContext);
+    
+    CGColorSpaceRelease(colorSpace);
+    CGContextRelease(imageContext);
 }
 
 UIImage *UIGraphicsGetImageFromCurrentImageContext(void)
 {
-    UIKitUnimplementedMethod();
-    return nil;
+    CGImageRef CGImage = CGBitmapContextCreateImage(UIGraphicsPeakContext());
+    UIImage *image = [[UIImage alloc] initWithCGImage:CGImage];
+    CGImageRelease(CGImage);
+    return image;
 }
 
 void UIGraphicsEndImageContext(void)
 {
-    UIKitUnimplementedMethod();
+    UIGraphicsPopContext();
 }
 
-#pragma mark -PDF context
+#pragma mark - PDF context
 
 BOOL UIGraphicsBeginPDFContextToFile(NSString *path, CGRect bounds, NSDictionary *documentInfo)
 {
-    UIKitUnimplementedMethod();
-    return NO;
+    NSCParameterAssert(path);
+    
+    if(!CGPointEqualToPoint(bounds.origin, CGPointZero))
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"Cannot pass a bounds with a non-zero origin to %s", __PRETTY_FUNCTION__];
+    
+    if(CGRectIsNull(bounds))
+        bounds = CGRectMake(0.0, 0.0, 612.0, 792.0); //Per docs.
+    
+    CGContextRef context = CGPDFContextCreateWithURL((__bridge CFURLRef)[NSURL fileURLWithPath:path], &bounds, (__bridge CFDictionaryRef)documentInfo);
+    if(context) {
+        UIGraphicsPushContext(context);
+        CGContextRelease(context);
+        
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 void UIGraphicsBeginPDFContextToData(NSMutableData *data, CGRect bounds, NSDictionary *documentInfo)
 {
-    UIKitUnimplementedMethod();
+    NSCParameterAssert(data);
+    
+    if(!CGPointEqualToPoint(bounds.origin, CGPointZero))
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"Cannot pass a bounds with a non-zero origin to %s", __PRETTY_FUNCTION__];
+    
+    if(CGRectIsNull(bounds))
+        bounds = CGRectMake(0.0, 0.0, 612.0, 792.0); //Per docs.
+    
+    CGDataConsumerRef dataConsumer = CGDataConsumerCreateWithCFData((__bridge CFMutableDataRef)data);
+    CGContextRef context = CGPDFContextCreate(dataConsumer, &bounds, (__bridge CFDictionaryRef)documentInfo);
+    
+    UIGraphicsPushContext(context);
+    
+    CGContextRelease(context);
+    CGDataConsumerRelease(dataConsumer);
 }
 
 void UIGraphicsEndPDFContext(void)
 {
-    UIKitUnimplementedMethod();
+    CGContextRef context = UIGraphicsPeakContext();
+    
+    CGPDFContextClose(context);
+    
+    UIGraphicsPopContext();
 }
 
 #pragma mark -
 
 void UIGraphicsBeginPDFPage(void)
 {
-    UIKitUnimplementedMethod();
+    UIGraphicsBeginPDFPageWithInfo(CGRectZero, nil);
 }
 
 void UIGraphicsBeginPDFPageWithInfo(CGRect bounds, NSDictionary *pageInfo)
 {
-    UIKitUnimplementedMethod();
+    CGContextRef context = UIGraphicsPeakContext();
+    
+    NSMutableDictionary *fullPageInfo = [NSMutableDictionary dictionary];
+    if(!CGRectIsNull(bounds)) {
+        fullPageInfo[(__bridge id)kCGPDFContextMediaBox] = [NSValue valueWithRect:bounds];
+    }
+    
+    if(pageInfo) {
+        [fullPageInfo addEntriesFromDictionary:pageInfo];
+    }
+    
+    CGPDFContextBeginPage(context, (__bridge CFDictionaryRef)fullPageInfo);
 }
 
 #pragma mark -
 
 CGRect UIGraphicsGetPDFContextBounds(void)
 {
-    UIKitUnimplementedMethod();
-    return CGRectZero;
+    CGContextRef context = UIGraphicsPeakContext();
+    return CGContextGetClipBoundingBox(context);
 }
 
 #pragma mark -
 
 void UIGraphicsSetPDFContextURLForRect(NSURL *url, CGRect rect)
 {
-    UIKitUnimplementedMethod();
+    NSCParameterAssert(url);
+    
+    CGContextRef context = UIGraphicsPeakContext();
+    CGPDFContextSetURLForRect(context, (__bridge CFURLRef)url, rect);
 }
 
 void UIGraphicsAddPDFContextDestinationAtPoint(NSString *name, CGPoint point)
 {
-    UIKitUnimplementedMethod();
+    CGContextRef context = UIGraphicsPeakContext();
+    CGPDFContextAddDestinationAtPoint(context, (__bridge CFStringRef)name, point);
 }
 
 void UIGraphicsSetPDFContextDestinationForRect(NSString *name, CGRect rect)
 {
-    UIKitUnimplementedMethod();
+    CGContextRef context = UIGraphicsPeakContext();
+    CGPDFContextSetDestinationForRect(context, (__bridge CFStringRef)name, rect);
 }
