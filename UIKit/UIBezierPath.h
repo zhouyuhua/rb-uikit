@@ -11,6 +11,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+/* All compatibility aliases also have corresponding runtime subclasses */
 @compatibility_alias UIBezierPath NSBezierPath;
 
 #endif

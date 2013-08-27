@@ -196,6 +196,8 @@
 		8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4933B1798E481002BEA5A /* UIGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BF0F9E817BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF0F9E617BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png */; };
 		8BF0F9E917BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF0F9E717BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png */; };
+		8BF0F9EC17CD22E000DAFD92 /* UIBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0F9EB17CD22E000DAFD92 /* UIBezierPath.m */; };
+		8BF0F9EE17CD23AB00DAFD92 /* UIFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0F9ED17CD23AB00DAFD92 /* UIFont.m */; };
 		8BF623F217BDD2A70015ED5C /* UITableViewSectionInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF623F017BDD2A70015ED5C /* UITableViewSectionInfo.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BF623F317BDD2A70015ED5C /* UITableViewSectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF623F117BDD2A70015ED5C /* UITableViewSectionInfo.m */; };
 /* End PBXBuildFile section */
@@ -407,6 +409,8 @@
 		8BE4933D1798E564002BEA5A /* UIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBarButtonItem.m; sourceTree = "<group>"; };
 		8BF0F9E617BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewHeaderFooterViewBackground.png; sourceTree = "<group>"; };
 		8BF0F9E717BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITableViewHeaderFooterViewBackground@2x.png"; sourceTree = "<group>"; };
+		8BF0F9EB17CD22E000DAFD92 /* UIBezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBezierPath.m; sourceTree = "<group>"; };
+		8BF0F9ED17CD23AB00DAFD92 /* UIFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFont.m; sourceTree = "<group>"; };
 		8BF623F017BDD2A70015ED5C /* UITableViewSectionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewSectionInfo.h; sourceTree = "<group>"; };
 		8BF623F117BDD2A70015ED5C /* UITableViewSectionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewSectionInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -742,13 +746,13 @@
 				8BE493211798DA2C002BEA5A /* Device */,
 				8BE493001798D620002BEA5A /* Responders */,
 				8BE4931F1798D663002BEA5A /* Navigation Stack */,
+				8BE492F91798CF9D002BEA5A /* Graphic Types */,
 				8B5AF852179B8F2A008B3BF3 /* Text & Images */,
 				8BE493361798E3FA002BEA5A /* Bars */,
 				8BE493201798D668002BEA5A /* Controls */,
 				8BB4BD5217B1E856009B7708 /* Scroll View */,
 				8B5AF848179B67C3008B3BF3 /* Appearances */,
 				8B6AEDE317AB606B00D6858A /* Event Handling */,
-				8BE492F91798CF9D002BEA5A /* Graphic Types */,
 				8B91077C17A97EBA008D9DF0 /* Adaptors */,
 				8B08256A17AA2ABF00494FAA /* Alerts */,
 				8B515C4317BB39D0003065D2 /* Table View */,
@@ -810,7 +814,9 @@
 				8BE492F01798CF0C002BEA5A /* UIColor.h */,
 				8BE492F11798CF0C002BEA5A /* UIColor.m */,
 				8BE492FA1798CFAB002BEA5A /* UIBezierPath.h */,
+				8BF0F9EB17CD22E000DAFD92 /* UIBezierPath.m */,
 				8BE4932C1798DFB4002BEA5A /* UIFont.h */,
+				8BF0F9ED17CD23AB00DAFD92 /* UIFont.m */,
 				8BE4933B1798E481002BEA5A /* UIGeometry.h */,
 				8B5BD75D179B348700A53E4A /* UIGraphics.h */,
 				8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */,
@@ -1156,12 +1162,14 @@
 				8B515C4717BB39E5003065D2 /* UITableView.m in Sources */,
 				8BB4BD6C17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.m in Sources */,
 				8BE492F31798CF0C002BEA5A /* UIColor.m in Sources */,
+				8BF0F9EC17CD22E000DAFD92 /* UIBezierPath.m in Sources */,
 				8B5E725B17B9EFFB006A16B9 /* UIMenuItem.m in Sources */,
 				8B5E725717B9EFF5006A16B9 /* UIMenuController.m in Sources */,
 				8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */,
 				8BE493311798E39A002BEA5A /* UILabel.m in Sources */,
 				8B54A04C17B9CD7B0068775C /* UICollectionViewUpdateItem.m in Sources */,
 				8B91077417A8C62D008D9DF0 /* UIAnimationCollection.m in Sources */,
+				8BF0F9EE17CD23AB00DAFD92 /* UIFont.m in Sources */,
 				8B54A05417B9CD7B0068775C /* UIGridLayoutSection.m in Sources */,
 				8B5BD762179B3A8500A53E4A /* UIThreePartImageProvider.m in Sources */,
 				8B91076B17A8B883008D9DF0 /* UITouch.m in Sources */,

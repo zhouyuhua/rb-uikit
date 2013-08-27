@@ -9,9 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "UIImage.h"
 
+/* All compatibility aliases also have corresponding runtime subclasses */
 @compatibility_alias UIColor NSColor;
 
-@interface NSColor (UIColor)
+@interface NSColor (UIColor_Interface) //Separated into _Interface and _Implementation to prevent warnings.
 
 + (UIColor *)colorWithWhite:(CGFloat)white alpha:(CGFloat)alpha;
 + (UIColor *)colorWithHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha;
