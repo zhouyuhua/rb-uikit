@@ -198,6 +198,8 @@
 		8BF0F9E917BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF0F9E717BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png */; };
 		8BF0F9EC17CD22E000DAFD92 /* UIBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0F9EB17CD22E000DAFD92 /* UIBezierPath.m */; };
 		8BF0F9EE17CD23AB00DAFD92 /* UIFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0F9ED17CD23AB00DAFD92 /* UIFont.m */; };
+		8BF0F9F217CE636000DAFD92 /* UIStringDrawing.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF0F9F017CE636000DAFD92 /* UIStringDrawing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BF0F9F317CE636000DAFD92 /* UIStringDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0F9F117CE636000DAFD92 /* UIStringDrawing.m */; };
 		8BF623F217BDD2A70015ED5C /* UITableViewSectionInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BF623F017BDD2A70015ED5C /* UITableViewSectionInfo.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BF623F317BDD2A70015ED5C /* UITableViewSectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF623F117BDD2A70015ED5C /* UITableViewSectionInfo.m */; };
 /* End PBXBuildFile section */
@@ -411,6 +413,8 @@
 		8BF0F9E717BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITableViewHeaderFooterViewBackground@2x.png"; sourceTree = "<group>"; };
 		8BF0F9EB17CD22E000DAFD92 /* UIBezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBezierPath.m; sourceTree = "<group>"; };
 		8BF0F9ED17CD23AB00DAFD92 /* UIFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFont.m; sourceTree = "<group>"; };
+		8BF0F9F017CE636000DAFD92 /* UIStringDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIStringDrawing.h; sourceTree = "<group>"; };
+		8BF0F9F117CE636000DAFD92 /* UIStringDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIStringDrawing.m; sourceTree = "<group>"; };
 		8BF623F017BDD2A70015ED5C /* UITableViewSectionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewSectionInfo.h; sourceTree = "<group>"; };
 		8BF623F117BDD2A70015ED5C /* UITableViewSectionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewSectionInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -547,6 +551,8 @@
 				8B08255F17AA1A3500494FAA /* UITextInputTraits.h */,
 				8B08255717AA189C00494FAA /* UITextField */,
 				8B08255817AA18A200494FAA /* UISearchBar */,
+				8BF0F9F017CE636000DAFD92 /* UIStringDrawing.h */,
+				8BF0F9F117CE636000DAFD92 /* UIStringDrawing.m */,
 			);
 			name = "Text & Images";
 			path = ..;
@@ -960,6 +966,7 @@
 				8B95506817C316D600B8E4F9 /* UIKeyEvent.h in Headers */,
 				8B515C4A17BB39ED003065D2 /* UITableViewCell.h in Headers */,
 				8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */,
+				8BF0F9F217CE636000DAFD92 /* UIStringDrawing.h in Headers */,
 				8B515C5217BB3A25003065D2 /* UITableViewController.h in Headers */,
 				8BE492F21798CF0C002BEA5A /* UIColor.h in Headers */,
 				8B5E725A17B9EFFB006A16B9 /* UIMenuItem.h in Headers */,
@@ -1182,6 +1189,7 @@
 				8B1EC8E517A9F8280035369C /* UITextField.m in Sources */,
 				8BE493251798DA39002BEA5A /* UIScreen.m in Sources */,
 				8B5BD74F179908EC00A53E4A /* UIButtonBarBackgroundView.m in Sources */,
+				8BF0F9F317CE636000DAFD92 /* UIStringDrawing.m in Sources */,
 				8B5BD7391798FA9B00A53E4A /* UIButton.m in Sources */,
 				8B1EC8DB17A9F2B10035369C /* UIAppKitAdaptorView.m in Sources */,
 				8B95506917C316D600B8E4F9 /* UIKeyEvent.m in Sources */,

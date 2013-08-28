@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIFont.h"
 #import "UIColor.h"
+#import "UIStringDrawing.h"
 
 @implementation UILabel {
     NSMutableDictionary *_attributes;
