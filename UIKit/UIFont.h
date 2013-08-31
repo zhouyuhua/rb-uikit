@@ -14,4 +14,12 @@
 /* All compatibility aliases also have corresponding runtime subclasses */
 @compatibility_alias UIFont NSFont;
 
+@interface NSFont (UIFont)
+
+- (CGFloat)lineHeight;
+
+- (UIFont *)fontWithSize:(CGFloat)size;
+
+@end
+
 #endif

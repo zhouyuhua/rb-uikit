@@ -49,12 +49,6 @@ void UIGraphicsPopContext(void)
     }
 }
 
-CGContextRef UIGraphicsPeakContext(void)
-{
-    NSMutableArray *stack = GetContextStack();
-    return [[stack lastObject] graphicsPort];
-}
-
 #pragma mark -
 
 void UIRectFillUsingBlendMode(CGRect rect, CGBlendMode blendMode)
@@ -130,7 +124,7 @@ void UIGraphicsBeginImageContextWithOptions(CGSize size, BOOL opaque, CGFloat sc
 
 UIImage *UIGraphicsGetImageFromCurrentImageContext(void)
 {
-    CGImageRef CGImage = CGBitmapContextCreateImage(UIGraphicsPeakContext());
+    CGImageRef CGImage = CGBitmapContextCreateImage(UIGraphicsGetCurrentContext());
     UIImage *image = [[UIImage alloc] initWithCGImage:CGImage];
     CGImageRelease(CGImage);
     return image;
@@ -187,7 +181,7 @@ void UIGraphicsBeginPDFContextToData(NSMutableData *data, CGRect bounds, NSDicti
 
 void UIGraphicsEndPDFContext(void)
 {
-    CGContextRef context = UIGraphicsPeakContext();
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGPDFContextClose(context);
     
@@ -203,7 +197,7 @@ void UIGraphicsBeginPDFPage(void)
 
 void UIGraphicsBeginPDFPageWithInfo(CGRect bounds, NSDictionary *pageInfo)
 {
-    CGContextRef context = UIGraphicsPeakContext();
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
     NSMutableDictionary *fullPageInfo = [NSMutableDictionary dictionary];
     if(!CGRectIsNull(bounds)) {
@@ -221,7 +215,7 @@ void UIGraphicsBeginPDFPageWithInfo(CGRect bounds, NSDictionary *pageInfo)
 
 CGRect UIGraphicsGetPDFContextBounds(void)
 {
-    CGContextRef context = UIGraphicsPeakContext();
+    CGContextRef context = UIGraphicsGetCurrentContext();
     return CGContextGetClipBoundingBox(context);
 }
 
@@ -231,18 +225,18 @@ void UIGraphicsSetPDFContextURLForRect(NSURL *url, CGRect rect)
 {
     NSCParameterAssert(url);
     
-    CGContextRef context = UIGraphicsPeakContext();
+    CGContextRef context = UIGraphicsGetCurrentContext();
     CGPDFContextSetURLForRect(context, (__bridge CFURLRef)url, rect);
 }
 
 void UIGraphicsAddPDFContextDestinationAtPoint(NSString *name, CGPoint point)
 {
-    CGContextRef context = UIGraphicsPeakContext();
+    CGContextRef context = UIGraphicsGetCurrentContext();
     CGPDFContextAddDestinationAtPoint(context, (__bridge CFStringRef)name, point);
 }
 
 void UIGraphicsSetPDFContextDestinationForRect(NSString *name, CGRect rect)
 {
-    CGContextRef context = UIGraphicsPeakContext();
+    CGContextRef context = UIGraphicsGetCurrentContext();
     CGPDFContextSetDestinationForRect(context, (__bridge CFStringRef)name, rect);
 }

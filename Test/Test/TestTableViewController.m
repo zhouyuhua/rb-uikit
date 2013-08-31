@@ -36,7 +36,7 @@ static NSString *const kItemDescription = @"itemDescription";
         
         self.view = self.tableView;
         
-        self.navigationItem.title = @"Colors";
+        self.navigationItem.title = @"Colors that I really, really, really like a lot today";
         
         NSArray *prettyColors = @[ @{kItemTitle: @"Blue", kItemDescription: @"like the sky"},
                                    @{kItemTitle: @"Green", kItemDescription: @"like the grass"},

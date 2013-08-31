@@ -14,12 +14,15 @@
 
 @implementation UILabel {
     NSMutableDictionary *_attributes;
+    NSStringDrawingOptions _stringDrawingOptions;
 }
 
 - (id)initWithFrame:(NSRect)frame
 {
     if((self = [super initWithFrame:frame])) {
         NSShadow *shadow = [NSShadow new];
+        
+        _stringDrawingOptions = NSStringDrawingUsesLineFragmentOrigin;
         
         _attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                        [NSMutableParagraphStyle new], NSParagraphStyleAttributeName,
@@ -30,6 +33,7 @@
         self.lineBreakMode = NSLineBreakByTruncatingTail;
         
         self.userInteractionEnabled = NO;
+        self.contentMode = UIViewContentModeRedraw;
     }
     
     return self;
@@ -141,6 +145,23 @@
 
 - (void)setLineBreakMode:(NSLineBreakMode)lineBreakMode
 {
+    switch (lineBreakMode) {
+        case NSLineBreakByWordWrapping:
+        case NSLineBreakByCharWrapping:
+        case NSLineBreakByClipping: {
+            if((_stringDrawingOptions & NSStringDrawingTruncatesLastVisibleLine) == NSStringDrawingTruncatesLastVisibleLine)
+                _stringDrawingOptions ^= NSStringDrawingTruncatesLastVisibleLine;
+            break;
+        }
+            
+        case NSLineBreakByTruncatingHead:
+        case NSLineBreakByTruncatingTail:
+        case NSLineBreakByTruncatingMiddle: {
+            _stringDrawingOptions |= NSStringDrawingTruncatesLastVisibleLine;
+            break;
+        }
+    }
+    
     NSMutableParagraphStyle *paragraphStyle = _attributes[NSParagraphStyleAttributeName];
     paragraphStyle.lineBreakMode = lineBreakMode;
     [self setNeedsDisplay];
@@ -168,18 +189,16 @@
     
     CGRect textFrame;
     if(_attributedText) {
-        textFrame = [_attributedText boundingRectWithSize:rect.size options:NSStringDrawingUsesLineFragmentOrigin];
+        textFrame = [_attributedText boundingRectWithSize:rect.size options:_stringDrawingOptions];
     } else if(_text) {
-        textFrame = [_text boundingRectWithSize:rect.size options:NSStringDrawingUsesLineFragmentOrigin attributes:_attributes];
+        textFrame = [_text boundingRectWithSize:rect.size options:_stringDrawingOptions attributes:_attributes];
     }
     
-    if(self.textAlignment == NSTextAlignmentCenter) {
-        if(CGRectGetWidth(textFrame) > CGRectGetWidth(rect)) {
-            textFrame.origin.x = 0.0;
-            textFrame.size.width = CGRectGetWidth(rect);
-        } else {
-            textFrame.origin.x = round(CGRectGetMidX(rect) - CGRectGetWidth(textFrame) / 2.0);
-        }
+    if(CGRectGetWidth(textFrame) > CGRectGetWidth(rect) && ((_stringDrawingOptions & NSStringDrawingTruncatesLastVisibleLine) == NSStringDrawingTruncatesLastVisibleLine)) {
+        textFrame.origin.x = CGRectGetMinX(rect);
+        textFrame.size.width = CGRectGetWidth(rect);
+    } else if(self.textAlignment == NSTextAlignmentCenter) {
+        textFrame.origin.x = round(CGRectGetMidX(rect) - CGRectGetWidth(textFrame) / 2.0);
     }
     
     textFrame.origin.y = round(CGRectGetMidY(rect) - CGRectGetHeight(textFrame) / 2.0);
@@ -190,9 +209,9 @@
 - (void)drawTextInRect:(CGRect)rect
 {
     if(_attributedText) {
-        [_attributedText drawWithRect:rect options:NSStringDrawingUsesLineFragmentOrigin];
+        [_attributedText drawWithRect:rect options:_stringDrawingOptions];
     } else if(_text) {
-        [_text drawWithRect:rect options:NSStringDrawingUsesLineFragmentOrigin attributes:_attributes];
+        [_text drawWithRect:rect options:_stringDrawingOptions attributes:_attributes];
     }
 }
 

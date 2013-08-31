@@ -32,15 +32,15 @@ typedef NS_ENUM(NSInteger, UIBaselineAdjustment) {
 
 #pragma mark - Drawing Strings on a Single Line
 
-- (void)drawAtPoint:(CGPoint)point withFont:(UIFont *)font;
-- (void)drawAtPoint:(CGPoint)point forWidth:(CGFloat)width withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode;
-- (void)drawAtPoint:(CGPoint)point forWidth:(CGFloat)width withFont:(UIFont *)font fontSize:(CGFloat)fontSize lineBreakMode:(NSLineBreakMode)lineBreakMode baselineAdjustment:(UIBaselineAdjustment)baselineAdjustment;
-- (void)drawAtPoint:(CGPoint)point forWidth:(CGFloat)width withFont:(UIFont *)font minFontSize:(CGFloat)minFontSize actualFontSize:(out CGFloat *)actualFontSize lineBreakMode:(NSLineBreakMode)lineBreakMode baselineAdjustment:(UIBaselineAdjustment)baselineAdjustment;
+- (CGSize)drawAtPoint:(CGPoint)point withFont:(UIFont *)font;
+- (CGSize)drawAtPoint:(CGPoint)point forWidth:(CGFloat)width withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode;
+- (CGSize)drawAtPoint:(CGPoint)point forWidth:(CGFloat)width withFont:(UIFont *)font fontSize:(CGFloat)fontSize lineBreakMode:(NSLineBreakMode)lineBreakMode baselineAdjustment:(UIBaselineAdjustment)baselineAdjustment;
+- (CGSize)drawAtPoint:(CGPoint)point forWidth:(CGFloat)width withFont:(UIFont *)font minFontSize:(CGFloat)minFontSize actualFontSize:(out CGFloat *)actualFontSize lineBreakMode:(NSLineBreakMode)lineBreakMode baselineAdjustment:(UIBaselineAdjustment)baselineAdjustment;
 
 #pragma mark - Drawing Strings in a Given Area
 
-- (void)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font;
-- (void)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode;
-- (void)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode alignment:(NSTextAlignment)textAlignment;
+- (CGSize)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font;
+- (CGSize)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode;
+- (CGSize)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode alignment:(NSTextAlignment)textAlignment;
 
 @end

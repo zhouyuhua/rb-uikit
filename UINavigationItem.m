@@ -26,7 +26,7 @@
     if((self = [super initWithFrame:frame])) {
         _titleLabel = [UILabel new];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.lineBreakMode = NSLineBreakByClipping;
+        _titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         
         [self addSubview:_titleLabel];
     }

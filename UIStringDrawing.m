@@ -9,23 +9,102 @@
 #import "UIStringDrawing.h"
 
 #import <CoreText/CoreText.h>
+#import "UIGraphics.h"
 
-static NSLayoutManager *NSLayoutManagerForString(NSString *string, UIFont *font, CGRect boundingFrame, NSLineBreakMode lineBreakMode)
+static float NSTextAlignmentToFlushFactor(NSTextAlignment textAlignment)
 {
-    NSLayoutManager *layoutManager = [NSLayoutManager new];
+    if(textAlignment == NSTextAlignmentCenter)
+        return 0.5;
+    else if(textAlignment == NSTextAlignmentRight)
+        return 1.0;
     
-    NSTextContainer *textContainer = [[NSTextContainer alloc] initWithContainerSize:boundingFrame.size];
-    textContainer.lineFragmentPadding = 0.0;
-    [layoutManager addTextContainer:textContainer];
+    return 0.0; //Left
+}
+
+static CTLineRef GetSharedElipsisLine(void)
+{
+    static CTLineRef elipsis = NULL;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        elipsis = CTLineCreateWithAttributedString((CFAttributedStringRef)[[NSAttributedString alloc] initWithString:@"…"]);
+    });
     
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.lineBreakMode = lineBreakMode;
+    return elipsis;
+}
+
+static NSArray *CreateLinesForString(NSString *string, UIFont *font, NSLineBreakMode lineBreakMode, CGSize boundingSize, CGSize *outRenderSize)
+{
+    NSDictionary *attributes = @{ (id)kCTForegroundColorFromContextAttributeName: @YES,
+                                  (id)kCTFontAttributeName: font };
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:string attributes:attributes];
     
-    NSTextStorage *textStorage = [[NSTextStorage alloc] initWithString:string attributes:@{NSFontAttributeName: font,
-                                                                                           NSParagraphStyleAttributeName: paragraphStyle}];
-    [layoutManager setTextStorage:textStorage];
+    NSMutableArray *lines = [NSMutableArray array];
+    CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((CFAttributedStringRef)attributedString);
     
-    return layoutManager;
+    CGSize renderSize = CGSizeZero;
+    CGFloat lineHeight = font.lineHeight;
+    CFIndex stringLength = attributedString.length;
+    CFIndex stringOffset = 0;
+    while (stringOffset < stringLength) {
+        renderSize.height += lineHeight;
+        
+        CFIndex consumedCharacters = 0;
+        CTLineRef line = NULL;
+        
+        switch (lineBreakMode) {
+            case NSLineBreakByClipping:
+            case NSLineBreakByWordWrapping: {
+                consumedCharacters = CTTypesetterSuggestClusterBreak(typesetter, stringOffset, boundingSize.width);
+                line = CTTypesetterCreateLine(typesetter, CFRangeMake(stringOffset, consumedCharacters));
+                
+                break;
+            }
+                
+            case NSLineBreakByCharWrapping: {
+                consumedCharacters = CTTypesetterSuggestLineBreak(typesetter, stringOffset, boundingSize.width);
+                line = CTTypesetterCreateLine(typesetter, CFRangeMake(stringOffset, consumedCharacters));
+                
+                break;
+            }
+            
+            case NSLineBreakByTruncatingHead:
+            case NSLineBreakByTruncatingTail:
+            case NSLineBreakByTruncatingMiddle: {
+                CTLineTruncationType truncationType;
+                if(lineBreakMode == NSLineBreakByTruncatingHead)
+                    truncationType = kCTLineTruncationStart;
+                else if(lineBreakMode == NSLineBreakByTruncatingTail)
+                    truncationType = kCTLineTruncationEnd;
+                else
+                    truncationType = kCTLineTruncationMiddle;
+                
+                consumedCharacters = stringLength - stringOffset;
+                CTLineRef lineToTruncate = CTTypesetterCreateLine(typesetter, CFRangeMake(stringOffset, consumedCharacters));
+                line = CTLineCreateTruncatedLine(lineToTruncate, boundingSize.width, truncationType, GetSharedElipsisLine());
+                CFRelease(lineToTruncate);
+                
+                break;
+            }
+        }
+        
+        if(line) {
+            renderSize.width = MAX(renderSize.width, CTLineGetTypographicBounds(line, NULL, NULL, NULL));
+            
+            [lines addObject:(__bridge id)line];
+            CFRelease(line);
+        }
+        
+        stringOffset += consumedCharacters;
+        
+        if(renderSize.height > boundingSize.height)
+            break;
+    }
+    
+    CFRelease(typesetter);
+    
+    if(outRenderSize) *outRenderSize = renderSize;
+    
+    return lines;
 }
 
 #pragma mark -
@@ -59,72 +138,96 @@ static NSLayoutManager *NSLayoutManagerForString(NSString *string, UIFont *font,
 
 - (CGSize)sizeWithFont:(UIFont *)font constrainedToSize:(CGSize)boundingSize lineBreakMode:(NSLineBreakMode)lineBreakMode
 {
-    NSLayoutManager *layoutManager = NSLayoutManagerForString(self, font, CGRectMake(0.0, 0.0, boundingSize.width, boundingSize.height), lineBreakMode);
-    
-    NSTextContainer *textContainer = layoutManager.textContainers.firstObject;
-    [layoutManager glyphRangeForTextContainer:textContainer]; //Force layout.
-    
-    return [layoutManager usedRectForTextContainer:textContainer].size;
+    CGSize renderSize;
+    (void)CreateLinesForString(self, font, lineBreakMode, boundingSize, &renderSize);
+    return renderSize;
 }
 
 #pragma mark - Drawing Strings on a Single Line
 
-- (void)drawAtPoint:(CGPoint)point withFont:(UIFont *)font
+- (CGSize)drawAtPoint:(CGPoint)point withFont:(UIFont *)font
 {
-    [self drawAtPoint:point forWidth:CGFLOAT_MAX withFont:font lineBreakMode:NSLineBreakByClipping];
+    return [self drawAtPoint:point forWidth:CGFLOAT_MAX withFont:font lineBreakMode:NSLineBreakByClipping];
 }
 
-- (void)drawAtPoint:(CGPoint)point forWidth:(CGFloat)width withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode
+- (CGSize)drawAtPoint:(CGPoint)point forWidth:(CGFloat)width withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode
 {
-    [self drawAtPoint:point forWidth:width
-             withFont:font
-             fontSize:font.pointSize
-        lineBreakMode:lineBreakMode
-   baselineAdjustment:UIBaselineAdjustmentAlignBaselines];
+    return [self drawAtPoint:point forWidth:width
+                    withFont:font
+                    fontSize:font.pointSize
+               lineBreakMode:lineBreakMode
+          baselineAdjustment:UIBaselineAdjustmentAlignBaselines];
 }
 
-- (void)drawAtPoint:(CGPoint)point
-           forWidth:(CGFloat)width
-           withFont:(UIFont *)font
-           fontSize:(CGFloat)fontSize
-      lineBreakMode:(NSLineBreakMode)lineBreakMode
- baselineAdjustment:(UIBaselineAdjustment)baselineAdjustment
+- (CGSize)drawAtPoint:(CGPoint)point
+             forWidth:(CGFloat)width
+             withFont:(UIFont *)font
+             fontSize:(CGFloat)fontSize
+        lineBreakMode:(NSLineBreakMode)lineBreakMode
+   baselineAdjustment:(UIBaselineAdjustment)baselineAdjustment
+{
+#pragma unused(baselineAdjustment)
+    
+    UIFont *adjustedFont = font.pointSize == fontSize? font : [font fontWithSize:fontSize];
+    return [self drawInRect:CGRectMake(point.x, point.y, width, font.lineHeight)
+                   withFont:adjustedFont
+              lineBreakMode:lineBreakMode 
+                  alignment:NSTextAlignmentLeft];
+}
+
+- (CGSize)drawAtPoint:(CGPoint)point
+             forWidth:(CGFloat)width
+             withFont:(UIFont *)font
+          minFontSize:(CGFloat)minFontSize
+       actualFontSize:(out CGFloat *)actualFontSize
+        lineBreakMode:(NSLineBreakMode)lineBreakMode
+   baselineAdjustment:(UIBaselineAdjustment)baselineAdjustment
 {
     UIKitUnimplementedMethod();
-}
-
-- (void)drawAtPoint:(CGPoint)point
-           forWidth:(CGFloat)width
-           withFont:(UIFont *)font
-        minFontSize:(CGFloat)minFontSize
-     actualFontSize:(out CGFloat *)actualFontSize
-      lineBreakMode:(NSLineBreakMode)lineBreakMode
- baselineAdjustment:(UIBaselineAdjustment)baselineAdjustment
-{
-    UIKitUnimplementedMethod();
+    return CGSizeZero;
 }
 
 #pragma mark - Drawing Strings in a Given Area
 
-- (void)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font
+- (CGSize)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font
 {
-    [self drawInRect:drawingRect withFont:font lineBreakMode:NSLineBreakByClipping];
+    return [self drawInRect:drawingRect withFont:font lineBreakMode:NSLineBreakByClipping];
 }
 
-- (void)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode
+- (CGSize)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode
 {
-    [self drawInRect:drawingRect withFont:font lineBreakMode:lineBreakMode alignment:NSTextAlignmentLeft];
+    return [self drawInRect:drawingRect withFont:font lineBreakMode:lineBreakMode alignment:NSTextAlignmentLeft];
 }
 
-- (void)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode alignment:(NSTextAlignment)textAlignment
+- (CGSize)drawInRect:(CGRect)drawingRect withFont:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode alignment:(NSTextAlignment)textAlignment
 {
-    NSLayoutManager *layoutManager = NSLayoutManagerForString(self, font, drawingRect, lineBreakMode);
+    CGSize renderSize;
+    NSArray *lines = CreateLinesForString(self, font, lineBreakMode, drawingRect.size, &renderSize);
     
-    NSTextStorage *textStorage = layoutManager.textStorage;
-    NSMutableParagraphStyle *paragraphStyle = [textStorage attribute:NSParagraphStyleAttributeName atIndex:0 effectiveRange:NULL];
-    paragraphStyle.alignment = textAlignment;
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    {
+        CGContextTranslateCTM(context, CGRectGetMinX(drawingRect), CGRectGetMinY(drawingRect) + font.ascender);
+        CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
+        
+        CGFloat textOffset = 0.0;
+        CGFloat lineHeight = font.lineHeight;
+        CGFloat flushFactor = NSTextAlignmentToFlushFactor(textAlignment);
+        
+        for (id untypedLine in lines) {
+            CTLineRef line = (__bridge CTLineRef)untypedLine;
+            
+            double penOffset = CTLineGetPenOffsetForFlush(line, flushFactor, CGRectGetWidth(drawingRect));
+            CGContextSetTextPosition(context, penOffset, textOffset);
+            
+            CTLineDraw(line, context);
+            
+            textOffset += lineHeight;
+        }
+    }
+    CGContextRestoreGState(context);
     
-    [layoutManager drawGlyphsForGlyphRange:NSMakeRange(0, textStorage.length) atPoint:drawingRect.origin];
+    return renderSize;
 }
 
 @end
