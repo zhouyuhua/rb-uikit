@@ -11,7 +11,7 @@
 
 @interface UINavigationBarAppearance : UIConcreteAppearance
 
-@property (nonatomic) UIColor *tintColor;
+@property (nonatomic) UIColor *barTintColor;
 @property (nonatomic) UIImage *backgroundImage;
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics;

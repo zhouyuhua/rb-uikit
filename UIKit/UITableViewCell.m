@@ -248,7 +248,7 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
         }
             
         case UITableViewCellSelectionStyleBlue: {
-            self.selectedBackgroundView.backgroundColor = [UIColor alternateSelectedControlColor];
+            self.selectedBackgroundView.backgroundColor = self.tintColor;
             break;
         }
             
@@ -257,6 +257,17 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
             break;
         }
     }
+}
+
+#pragma mark - Tint Color
+
+- (void)tintColorDidChange
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [super tintColorDidChange];
+    
+    if(_selectionStyle == UITableViewCellSelectionStyleBlue)
+        self.selectedBackgroundView.backgroundColor = self.tintColor;
 }
 
 @end

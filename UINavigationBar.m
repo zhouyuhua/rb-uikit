@@ -100,10 +100,10 @@
 
 #pragma mark -
 
-- (void)setTintColor:(UIColor *)tintColor
+- (void)setBarTintColor:(NSColor *)barTintColor
 {
-    _tintColor = tintColor;
-    self.backgroundColor = tintColor;
+    _barTintColor = barTintColor;
+    self.backgroundColor = barTintColor;
 }
 
 #pragma mark -

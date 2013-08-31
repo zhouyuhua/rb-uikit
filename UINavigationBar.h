@@ -29,7 +29,7 @@
 #pragma mark - Appearances
 
 @property (nonatomic, assign, getter=isTranslucent) BOOL translucent;
-@property (nonatomic) UIColor *tintColor;
+@property (nonatomic) UIColor *barTintColor;
 
 #pragma mark -
 

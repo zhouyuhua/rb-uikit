@@ -78,6 +78,13 @@ typedef NS_OPTIONS(NSUInteger, UIViewAnimationOptions) {
     UIViewAnimationOptionTransitionFlipFromBottom  = 7 << 20,
 };
 
+typedef NS_ENUM(NSInteger, UIViewTintAdjustmentMode) {
+    UIViewTintAdjustmentModeAutomatic,
+    
+    UIViewTintAdjustmentModeNormal,
+    UIViewTintAdjustmentModeDimmed,
+};
+
 @class UIWindow, UIGestureRecognizer;
 
 @interface UIView : UIResponder <UIAppearance, NSCoding>
@@ -175,6 +182,19 @@ typedef NS_OPTIONS(NSUInteger, UIViewAnimationOptions) {
 @property (nonatomic, readonly, copy) NSArray *gestureRecognizers;
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)sender;
+
+#pragma mark - Tint Colors
+
+@property (nonatomic, retain) UIColor *tintColor;
+
+/*
+ This property is automatically updated on UIWindow so that
+ OS X style non-key-window dimming can take effect. Subclasses
+ that need this information should override -[UIView tintColorDidChange].
+ */
+@property (nonatomic) UIViewTintAdjustmentMode tintAdjustmentMode;
+
+- (void)tintColorDidChange;
 
 @end
 

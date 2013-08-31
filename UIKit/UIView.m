@@ -10,6 +10,7 @@
 #import "UIWindow.h"
 #import "UIConcreteAppearance.h"
 #import "UIGraphics.h"
+#import "UIColor.h"
 #import "UIWindow_Private.h"
 #import "UIGestureRecognizer_Private.h"
 
@@ -44,6 +45,9 @@
 #pragma mark -
 
 @implementation UIView {
+    UIColor *_tintColor;
+    UIViewTintAdjustmentMode _tintAdjustmentMode;
+    
     UIViewContentMode _contentMode;
     NSMutableArray *_subviews;
     NSMutableArray *_gestureRecognizers;
@@ -464,6 +468,60 @@
     return YES;
 }
 
+#pragma mark - Tint Color
+
+- (void)setTintAdjustmentMode:(UIViewTintAdjustmentMode)tintAdjustmentMode
+{
+    _tintAdjustmentMode = tintAdjustmentMode;
+    
+    [self tintColorDidChange];
+}
+
+- (UIViewTintAdjustmentMode)tintAdjustmentMode
+{
+    if(_tintAdjustmentMode) {
+        return _tintAdjustmentMode;
+    } else {
+        return _superview.tintAdjustmentMode ?: UIViewTintAdjustmentModeNormal;
+    }
+}
+
+- (void)setTintColor:(UIColor *)tintColor
+{
+    _tintColor = tintColor;
+    
+    [self tintColorDidChange];
+}
+
+- (UIColor *)tintColor
+{
+    UIColor *tintColor;
+    if(_tintColor) {
+        tintColor = _tintColor;
+    } else if(_superview) {
+        tintColor = _superview.tintColor;
+    } else {
+        tintColor = [UIColor alternateSelectedControlColor];
+    }
+    
+    if(self.tintAdjustmentMode == UIViewTintAdjustmentModeDimmed) {
+        //This is special cased to ensure system-matching
+        if([tintColor isEqual:[UIColor alternateSelectedControlColor]]) {
+            return [UIColor secondarySelectedControlColor];
+        }
+        
+        return [tintColor colorUsingColorSpace:[NSColorSpace genericGrayColorSpace]];
+    } else {
+        return tintColor;
+    }
+}
+
+- (void)tintColorDidChange
+{
+    for (UIView *subview in _subviews)
+        [subview tintColorDidChange];
+}
+
 #pragma mark - Responder Chain
 
 - (UIResponder *)nextResponder
@@ -682,12 +740,16 @@
 
 - (void)_windowDidBecomeKey
 {
+    self.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
+    
     for (UIView *subview in _subviews)
         [subview _windowDidBecomeKey];
 }
 
 - (void)_windowDidResignKey
 {
+    self.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
+    
     for (UIView *subview in _subviews)
         [subview _windowDidResignKey];
 }

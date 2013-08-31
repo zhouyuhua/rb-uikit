@@ -95,7 +95,7 @@ static NSString *const kItemDescription = @"itemDescription";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
