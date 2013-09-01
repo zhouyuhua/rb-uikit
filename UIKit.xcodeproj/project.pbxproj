@@ -49,6 +49,8 @@
 		8B54687217D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54687017D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m */; };
 		8B54687517D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B54687317D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png */; };
 		8B54687617D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B54687417D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png */; };
+		8B54687A17D2BF2700D7E338 /* UITemplateImageProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54687817D2BF2700D7E338 /* UITemplateImageProvider.h */; };
+		8B54687B17D2BF2700D7E338 /* UITemplateImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54687917D2BF2700D7E338 /* UITemplateImageProvider.m */; };
 		8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */; };
 		8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -264,6 +266,8 @@
 		8B54687017D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonBorderlessBackgroundView.m; sourceTree = "<group>"; };
 		8B54687317D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewCellAccessoryDisclosureIndicator.png; sourceTree = "<group>"; };
 		8B54687417D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITableViewCellAccessoryDisclosureIndicator@2x.png"; sourceTree = "<group>"; };
+		8B54687817D2BF2700D7E338 /* UITemplateImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITemplateImageProvider.h; sourceTree = "<group>"; };
+		8B54687917D2BF2700D7E338 /* UITemplateImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITemplateImageProvider.m; sourceTree = "<group>"; };
 		8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+UICollectionViewAdditions.h"; sourceTree = "<group>"; };
 		8B549FFD17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+UICollectionViewAdditions.m"; sourceTree = "<group>"; };
 		8B549FFE17B9C8790068775C /* UICollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionView.h; sourceTree = "<group>"; };
@@ -595,6 +599,8 @@
 				8B5BD75A179B2CA700A53E4A /* UIImageProvider.m */,
 				8B5BD75F179B3A8500A53E4A /* UIThreePartImageProvider.h */,
 				8B5BD760179B3A8500A53E4A /* UIThreePartImageProvider.m */,
+				8B54687817D2BF2700D7E338 /* UITemplateImageProvider.h */,
+				8B54687917D2BF2700D7E338 /* UITemplateImageProvider.m */,
 			);
 			name = UIImage;
 			sourceTree = "<group>";
@@ -990,6 +996,7 @@
 				8B5E725A17B9EFFB006A16B9 /* UIMenuItem.h in Headers */,
 				8B5E725617B9EFF5006A16B9 /* UIMenuController.h in Headers */,
 				8B54686A17D2B33E00D7E338 /* UIKitConfigurationManager.h in Headers */,
+				8B54687A17D2BF2700D7E338 /* UITemplateImageProvider.h in Headers */,
 				8B5AF84B179B67F7008B3BF3 /* UINavigationBarAppearance.h in Headers */,
 				8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */,
 				8B54A04217B9CD7B0068775C /* UICollectionViewData.h in Headers */,
@@ -1156,6 +1163,7 @@
 				8B5BD758179B24D400A53E4A /* UIImage.m in Sources */,
 				8B54A05217B9CD7B0068775C /* UIGridLayoutRow.m in Sources */,
 				8B54A04917B9CD7B0068775C /* UICollectionViewLayout.m in Sources */,
+				8B54687B17D2BF2700D7E338 /* UITemplateImageProvider.m in Sources */,
 				8BE493351798E3F3002BEA5A /* UIBarItem.m in Sources */,
 				8BE492ED1798C888002BEA5A /* UIView.m in Sources */,
 				8B5BD75C179B2CA700A53E4A /* UIImageProvider.m in Sources */,

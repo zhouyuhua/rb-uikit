@@ -292,7 +292,7 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
         }
             
         case UITableViewCellAccessoryDetailDisclosureButton: {
-            UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"UITableViewCellAccessoryDetailDisclosureButton");
+            accessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             break;
         }
             

@@ -8,8 +8,11 @@
 
 #import "UIImage_Private.h"
 #import "UIScreen.h"
+
 #import "UIImageProvider.h"
 #import "UIThreePartImageProvider.h"
+#import "UITemplateImageProvider.h"
+
 #import "UIGraphics.h"
 
 @implementation UIImage
@@ -245,6 +248,29 @@
 - (BOOL)_isResizable
 {
     return [self.provider isKindOfClass:[UIThreePartImageProvider class]];
+}
+
+#pragma mark - Rendering Modes
+
+- (UIImage *)imageWithRenderingMode:(UIImageRenderingMode)renderingMode
+{
+    if(renderingMode == self.renderingMode) {
+        return [self copy];
+    } else if(renderingMode != UIImageRenderingModeAlwaysTemplate) {
+        if(self.renderingMode != UIImageRenderingModeAlwaysTemplate) {
+            UIImage *newImage = [self copy];
+            newImage.renderingMode = renderingMode;
+            return newImage;
+        } else {
+            UITemplateImageProvider *templateProvider = (UITemplateImageProvider *)self.provider;
+            return templateProvider.originalImage;
+        }
+    } else {
+        UITemplateImageProvider *imageProvider = [[UITemplateImageProvider alloc] initWithOriginalImage:self];
+        UIImage *newImage = [[UIImage alloc] initWithProvider:imageProvider];
+        newImage.renderingMode = UIImageRenderingModeAlwaysTemplate;
+        return newImage;
+    }
 }
 
 @end

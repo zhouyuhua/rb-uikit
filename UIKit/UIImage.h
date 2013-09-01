@@ -28,6 +28,13 @@ typedef NS_ENUM(NSInteger, UIImageResizingMode) {
     UIImageResizingModeStretch,
 };
 
+typedef NS_ENUM(NSInteger, UIImageRenderingMode) {
+    UIImageRenderingModeAutomatic,
+    
+    UIImageRenderingModeAlwaysOriginal,
+    UIImageRenderingModeAlwaysTemplate,
+};
+
 @interface UIImage : NSObject
 
 + (UIImage *)imageNamed:(NSString *)name;
@@ -80,6 +87,11 @@ typedef NS_ENUM(NSInteger, UIImageResizingMode) {
 
 - (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets;
 - (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode;
+
+#pragma mark - Rendering Modes
+
+@property (nonatomic, readonly) UIImageRenderingMode renderingMode;
+- (UIImage *)imageWithRenderingMode:(UIImageRenderingMode)renderingMode;
 
 @end
 

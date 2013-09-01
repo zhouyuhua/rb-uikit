@@ -27,6 +27,7 @@
 @property (nonatomic, readwrite) UIImageOrientation imageOrientation;
 @property (nonatomic, readwrite) UIEdgeInsets capInsets;
 @property (nonatomic, readwrite) UIImageResizingMode resizingMode;
+@property (nonatomic, readwrite) UIImageRenderingMode renderingMode;
 
 @end
 
