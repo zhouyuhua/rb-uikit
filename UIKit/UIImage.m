@@ -149,6 +149,11 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    return [[UIImage alloc] initWithProvider:self.provider];
+}
+
 #pragma mark - Properties
 
 - (CGSize)size

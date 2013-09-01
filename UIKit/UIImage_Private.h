@@ -10,7 +10,7 @@
 
 @class UIImageProvider;
 
-@interface UIImage ()
+@interface UIImage () <NSCopying>
 
 + (UIImage *)imageNamed:(NSString *)name inBundle:(NSBundle *)bundle;
 

@@ -6,13 +6,11 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UIImageView.h"
+#import "UIImageView_Private.h"
 #import "UIImage_Private.h"
+#import "UIGraphics.h"
 
-@implementation UIImageView {
-    UIImage *_displayedImage;
-    BOOL _manuallyDrawingImage;
-}
+@implementation UIImageView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -61,7 +59,21 @@
 
 #pragma mark - Properties
 
-- (void)update
+- (UIImage *)_prerenderImage:(UIImage *)image
+{
+    if(image.renderingMode == UIImageRenderingModeAlwaysTemplate) {
+        UIGraphicsBeginImageContextWithOptions(_displayedImage.size, NO, _displayedImage.scale);
+        
+        [self.tintColor setFill];
+        [image drawAtPoint:CGPointZero];
+        
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    return image;
+}
+
+- (void)_update
 {
     if(_highlighted && _highlightedImage)
         _displayedImage = _highlightedImage;
@@ -75,6 +87,8 @@
         
         [self setNeedsDisplay];
     } else {
+        _displayedImage = [self _prerenderImage:_displayedImage];
+        
         self.layer.needsDisplayOnBoundsChange = NO;
         self.layer.contents = (__bridge id)_displayedImage.CGImage;
     }
@@ -84,14 +98,20 @@
 
 - (void)setImage:(UIImage *)image
 {
+    if(self._prefersToRenderTemplateImages && image.renderingMode == UIImageRenderingModeAutomatic)
+        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
     _image = image;
-    [self update];
+    [self _update];
 }
 
 - (void)setHighlightedImage:(UIImage *)highlightedImage
 {
+    if(self._prefersToRenderTemplateImages && highlightedImage.renderingMode == UIImageRenderingModeAutomatic)
+        highlightedImage = [highlightedImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
     _highlightedImage = highlightedImage;
-    [self update];
+    [self _update];
 }
 
 #pragma mark -
@@ -99,7 +119,16 @@
 - (void)setHighlighted:(BOOL)highlighted
 {
     _highlighted = highlighted;
-    [self update];
+    [self _update];
+}
+
+#pragma mark - Tinting
+
+- (void)tintColorDidChange
+{
+    [super tintColorDidChange];
+    
+    [self _update];
 }
 
 @end

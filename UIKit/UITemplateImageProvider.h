@@ -8,6 +8,8 @@
 
 #import "UIImageProvider.h"
 
+#import "UIColor.h"
+
 @class UIImage;
 
 @interface UITemplateImageProvider : UIImageProvider

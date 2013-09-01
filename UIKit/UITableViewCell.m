@@ -297,7 +297,8 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
         }
             
         case UITableViewCellAccessoryDisclosureIndicator: {
-            accessoryView = [[UIImageView alloc] initWithImage:UIKitImageNamed(@"UITableViewCellAccessoryDisclosureIndicator", UIImageResizingModeStretch)];
+            UIImage *disclosureIndicatorImage = UIKitImageNamed(@"UITableViewCellAccessoryDisclosureIndicator", UIImageResizingModeStretch);
+            accessoryView = [[UIImageView alloc] initWithImage:disclosureIndicatorImage];
             break;
         }
     }

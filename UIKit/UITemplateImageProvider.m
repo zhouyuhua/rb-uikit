@@ -8,6 +8,49 @@
 
 #import "UITemplateImageProvider.h"
 #import "UIImage_Private.h"
+#import "UIGraphics.h"
+
+#define ROUND_UP(N, S) ((((N) + (S) - 1) / (S)) * (S))
+
+//From <http://stackoverflow.com/questions/8126276/how-to-convert-uiimage-cgimagerefs-alpha-channel-to-mask>
+static CGImageRef CreateMaskWithImage(CGImageRef originalMaskImage)
+{
+    CGFloat width = CGImageGetWidth(originalMaskImage);
+    CGFloat height = CGImageGetHeight(originalMaskImage);
+    
+    NSUInteger strideLength = ROUND_UP(width * 1, 4);
+    unsigned char *alphaData = calloc(strideLength * height, sizeof(unsigned char));
+    CGContextRef alphaOnlyContext = CGBitmapContextCreate(alphaData,
+                                                          width,
+                                                          height,
+                                                          8,
+                                                          strideLength,
+                                                          NULL,
+                                                          (CGBitmapInfo)kCGImageAlphaOnly);
+    
+    CGContextDrawImage(alphaOnlyContext, CGRectMake(0, 0, width, height), originalMaskImage);
+    
+    for (NSUInteger y = 0; y < height; y++) {
+        for (NSUInteger x = 0; x < width; x++) {
+            unsigned char val = alphaData[y*strideLength + x];
+            val = 255 - val;
+            alphaData[y * strideLength + x] = val;
+        }
+    }
+    
+    CGImageRef alphaMaskImage = CGBitmapContextCreateImage(alphaOnlyContext);
+    CGContextRelease(alphaOnlyContext);
+    free(alphaData);
+    
+    return CGImageMaskCreate(CGImageGetWidth(alphaMaskImage),
+                             CGImageGetHeight(alphaMaskImage),
+                             CGImageGetBitsPerComponent(alphaMaskImage),
+                             CGImageGetBitsPerPixel(alphaMaskImage),
+                             CGImageGetBytesPerRow(alphaMaskImage),
+                             CGImageGetDataProvider(alphaMaskImage),
+                             NULL,
+                             false);
+}
 
 @implementation UITemplateImageProvider
 
@@ -15,25 +58,22 @@
 {
     NSParameterAssert(originalImage);
     
-    self.originalImage = originalImage;
+    CGImageRef maskImage = CreateMaskWithImage(originalImage.CGImage);
     
-    CGImageRef underlyingImage = originalImage.CGImage;
-    CGSize size = originalImage.size;
-    
-    CGImageRef maskImage = CGImageMaskCreate(size.width,
-                                             size.height,
-                                             CGImageGetBitsPerComponent(underlyingImage),
-                                             CGImageGetBitsPerPixel(underlyingImage),
-                                             CGImageGetBytesPerRow(underlyingImage),
-                                             CGImageGetDataProvider(underlyingImage),
-                                             NULL, 
-                                             true);
-    
-    self = [super initWithCGImage:maskImage scale:self.originalImage.scale];
+    if((self = [super initWithCGImage:maskImage scale:originalImage.scale])) {
+        self.originalImage = originalImage;
+    }
     
     CGImageRelease(maskImage);
     
     return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    UITemplateImageProvider *providerCopy = [super copyWithZone:zone];
+    providerCopy->_originalImage = _originalImage;
+    return providerCopy;
 }
 
 @end

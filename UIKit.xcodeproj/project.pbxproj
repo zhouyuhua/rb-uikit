@@ -45,12 +45,13 @@
 		8B515C5B17BB3D4D003065D2 /* UITableViewCell_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B515C5A17BB3D38003065D2 /* UITableViewCell_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54686A17D2B33E00D7E338 /* UIKitConfigurationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54686817D2B33E00D7E338 /* UIKitConfigurationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54686B17D2B33E00D7E338 /* UIKitConfigurationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54686917D2B33E00D7E338 /* UIKitConfigurationManager.m */; };
-		8B54687117D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54686F17D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h */; };
+		8B54687117D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54686F17D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54687217D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54687017D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m */; };
 		8B54687517D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B54687317D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png */; };
 		8B54687617D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B54687417D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png */; };
-		8B54687A17D2BF2700D7E338 /* UITemplateImageProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54687817D2BF2700D7E338 /* UITemplateImageProvider.h */; };
+		8B54687A17D2BF2700D7E338 /* UITemplateImageProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54687817D2BF2700D7E338 /* UITemplateImageProvider.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54687B17D2BF2700D7E338 /* UITemplateImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54687917D2BF2700D7E338 /* UITemplateImageProvider.m */; };
+		8B54687E17D2C26800D7E338 /* UIImageView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54687D17D2C26800D7E338 /* UIImageView_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */; };
 		8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -268,6 +269,7 @@
 		8B54687417D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITableViewCellAccessoryDisclosureIndicator@2x.png"; sourceTree = "<group>"; };
 		8B54687817D2BF2700D7E338 /* UITemplateImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITemplateImageProvider.h; sourceTree = "<group>"; };
 		8B54687917D2BF2700D7E338 /* UITemplateImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITemplateImageProvider.m; sourceTree = "<group>"; };
+		8B54687D17D2C26800D7E338 /* UIImageView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageView_Private.h; sourceTree = "<group>"; };
 		8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+UICollectionViewAdditions.h"; sourceTree = "<group>"; };
 		8B549FFD17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+UICollectionViewAdditions.m"; sourceTree = "<group>"; };
 		8B549FFE17B9C8790068775C /* UICollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionView.h; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 			children = (
 				8B5BD72C1798F05C00A53E4A /* UIImageView.h */,
 				8B5BD72D1798F05C00A53E4A /* UIImageView.m */,
+				8B54687D17D2C26800D7E338 /* UIImageView_Private.h */,
 				8BE4932E1798E39A002BEA5A /* UILabel.h */,
 				8BE4932F1798E39A002BEA5A /* UILabel.m */,
 				8B08255F17AA1A3500494FAA /* UITextInputTraits.h */,
@@ -996,13 +999,11 @@
 				8B5E725A17B9EFFB006A16B9 /* UIMenuItem.h in Headers */,
 				8B5E725617B9EFF5006A16B9 /* UIMenuController.h in Headers */,
 				8B54686A17D2B33E00D7E338 /* UIKitConfigurationManager.h in Headers */,
-				8B54687A17D2BF2700D7E338 /* UITemplateImageProvider.h in Headers */,
 				8B5AF84B179B67F7008B3BF3 /* UINavigationBarAppearance.h in Headers */,
 				8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */,
 				8B54A04217B9CD7B0068775C /* UICollectionViewData.h in Headers */,
 				8B54A04A17B9CD7B0068775C /* UICollectionViewLayout_Private.h in Headers */,
 				8B54A05117B9CD7B0068775C /* UIGridLayoutRow.h in Headers */,
-				8B54687117D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h in Headers */,
 				8B54A04F17B9CD7B0068775C /* UIGridLayoutItem.h in Headers */,
 				8B54A05317B9CD7B0068775C /* UIGridLayoutSection.h in Headers */,
 				8B54A04D17B9CD7B0068775C /* UIGridLayoutInfo.h in Headers */,
@@ -1027,6 +1028,9 @@
 				8BF623F217BDD2A70015ED5C /* UITableViewSectionInfo.h in Headers */,
 				8B515C5B17BB3D4D003065D2 /* UITableViewCell_Private.h in Headers */,
 				8B5BD742179903AB00A53E4A /* UIButtonRoundRectBackgroundView.h in Headers */,
+				8B54687A17D2BF2700D7E338 /* UITemplateImageProvider.h in Headers */,
+				8B54687117D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h in Headers */,
+				8B54687E17D2C26800D7E338 /* UIImageView_Private.h in Headers */,
 				8B5BD7491799040E00A53E4A /* UIButton_Private.h in Headers */,
 				8B5BD75E179B348700A53E4A /* UIGraphics.h in Headers */,
 				8B515C5917BB3CEE003065D2 /* UITableView_Private.h in Headers */,

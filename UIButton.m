@@ -10,7 +10,7 @@
 #import "UIButton_Private.h"
 
 #import "UIImage_Private.h"
-#import "UIImageView.h"
+#import "UIImageView_Private.h"
 #import "UILabel.h"
 #import "UIBezierPath.h"
 
@@ -107,12 +107,16 @@
     BOOL wantsBorderlessButtons = [UIKitConfigurationManager sharedConfigurationManager].wantsBorderlessButtons;
     
     [_backgroundView removeFromSuperview];
-    if(buttonType == UIButtonTypeRoundedRect) {
+    if(buttonType == UIButtonTypeSystem) {
+        self.imageView._prefersToRenderTemplateImages = wantsBorderlessButtons;
+        
         if(wantsBorderlessButtons)
             _backgroundView = [UIButtonBorderlessBackgroundView new];
         else
             _backgroundView = [UIButtonRoundRectBackgroundView new];
     } else if((NSInteger)buttonType == UIButtonType_Private_BarButton) {
+        self.imageView._prefersToRenderTemplateImages = wantsBorderlessButtons;
+        
         if(wantsBorderlessButtons)
             _backgroundView = [UIButtonBorderlessBackgroundView new];
         else
@@ -121,6 +125,8 @@
         self.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     } else if((NSInteger)buttonType == UIButtonType_Private_BackBarButton) {
+        self.imageView._prefersToRenderTemplateImages = wantsBorderlessButtons;
+        
         if(wantsBorderlessButtons)
             _backgroundView = [UIButtonBorderlessBackgroundView new];
         else
