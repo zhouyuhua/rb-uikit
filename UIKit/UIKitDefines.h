@@ -27,6 +27,14 @@ UIKIT_INLINE void UIKitUnimplementedMethod()
                                  userInfo:nil];
 }
 
+UIKIT_INLINE void UIKitWarnUnimplementedMethod(const char *prettyFunction, NSString *functionSubset)
+{
+    if(functionSubset)
+        NSLog(@"*** Warning, %s (%@) is unimplemented", prettyFunction, functionSubset);
+    else
+        NSLog(@"*** Warning, %s is unimplemented", prettyFunction);
+}
+
 //For compatibility
 enum {
     NSTextAlignmentLeft = NSLeftTextAlignment,

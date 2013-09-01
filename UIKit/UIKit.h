@@ -8,6 +8,7 @@
 
 #import "UIKitDefines.h"
 
+#import "UIKitConfigurationManager.h"
 #import "UIApplication.h"
 #import "UIScreen.h"
 #import "UIDevice.h"

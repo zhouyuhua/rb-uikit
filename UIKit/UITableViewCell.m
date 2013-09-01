@@ -8,6 +8,8 @@
 
 #import "UITableViewCell_Private.h"
 
+#import "UIImage_Private.h"
+
 #import "UILabel.h"
 #import "UIImageView.h"
 
@@ -76,7 +78,20 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
     [super layoutSubviews];
     
     CGRect bounds = self.bounds;
-    self.contentView.frame = bounds;
+    
+    if(_accessoryView) {
+        CGRect accessoryViewFrame = _accessoryView.frame;
+        accessoryViewFrame.origin.x = CGRectGetMaxX(bounds) - CGRectGetWidth(accessoryViewFrame) - kContentInsets.right;
+        accessoryViewFrame.origin.y = round(CGRectGetMidY(bounds) - CGRectGetHeight(accessoryViewFrame) / 2.0);
+        _accessoryView.frame = accessoryViewFrame;
+        
+        CGRect contentViewFrame = bounds;
+        contentViewFrame.size.width -= CGRectGetWidth(accessoryViewFrame) + kContentInsets.right + 5.0;
+        self.contentView.frame = contentViewFrame;
+    } else {
+        self.contentView.frame = bounds;
+    }
+    
     self.backgroundView.frame = bounds;
     self.selectedBackgroundView.frame = bounds;
     
@@ -259,11 +274,53 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
     }
 }
 
+#pragma mark - Accessory Views
+
+- (void)setAccessoryType:(UITableViewCellAccessoryType)accessoryType
+{
+    _accessoryType = accessoryType;
+    
+    UIView *accessoryView = nil;
+    switch (accessoryType) {
+        case UITableViewCellAccessoryNone: {
+            break;
+        }
+            
+        case UITableViewCellAccessoryCheckmark: {
+            UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"UITableViewCellAccessoryCheckmark");
+            break;
+        }
+            
+        case UITableViewCellAccessoryDetailDisclosureButton: {
+            UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"UITableViewCellAccessoryDetailDisclosureButton");
+            break;
+        }
+            
+        case UITableViewCellAccessoryDisclosureIndicator: {
+            accessoryView = [[UIImageView alloc] initWithImage:UIKitImageNamed(@"UITableViewCellAccessoryDisclosureIndicator", UIImageResizingModeStretch)];
+            break;
+        }
+    }
+    
+    self.accessoryView = accessoryView;
+}
+
+- (void)setAccessoryView:(UIView *)accessoryView
+{
+    [_accessoryView removeFromSuperview];
+    
+    _accessoryView = accessoryView;
+    
+    if(_accessoryView)
+        [self addSubview:_accessoryView];
+    
+    [self setNeedsLayout];
+}
+
 #pragma mark - Tint Color
 
 - (void)tintColorDidChange
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     [super tintColorDidChange];
     
     if(_selectionStyle == UITableViewCellSelectionStyleBlue)

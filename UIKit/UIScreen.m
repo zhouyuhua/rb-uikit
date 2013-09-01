@@ -11,6 +11,7 @@
 @interface UIScreen ()
 
 @property (nonatomic) NSScreen *underlyingScreen;
+@property (nonatomic) BOOL _isMainScreen;
 
 @end
 
@@ -49,6 +50,7 @@
     
     if((self = [super init])) {
         self.underlyingScreen = underlyingScreen;
+        self._isMainScreen = [underlyingScreen isEqual:[NSScreen mainScreen]];
     }
     
     return self;
@@ -56,14 +58,35 @@
 
 #pragma mark - Properties
 
+- (BOOL)_useHardwareSizing
+{
+    if(!self._isMainScreen)
+        return YES;
+    
+    UIKitConfigurationManager *sharedConfigurationManager = [UIKitConfigurationManager sharedConfigurationManager];
+    return (sharedConfigurationManager.mainScreenWidth == 0.0 || sharedConfigurationManager.mainScreenHeight == 0.0);
+}
+
+#pragma mark -
+
 - (CGRect)bounds
 {
-    return self.underlyingScreen.frame;
+    if(self._useHardwareSizing) {
+        return self.underlyingScreen.frame;
+    } else {
+        UIKitConfigurationManager *sharedConfigurationManager = [UIKitConfigurationManager sharedConfigurationManager];
+        return CGRectMake(0.0, 0.0, sharedConfigurationManager.mainScreenWidth, sharedConfigurationManager.mainScreenHeight);
+    }
 }
 
 - (CGRect)applicationFrame
 {
-    return self.underlyingScreen.visibleFrame;
+    if(self._useHardwareSizing) {
+        return self.underlyingScreen.visibleFrame;
+    } else {
+        UIKitConfigurationManager *sharedConfigurationManager = [UIKitConfigurationManager sharedConfigurationManager];
+        return CGRectMake(0.0, 0.0, sharedConfigurationManager.mainScreenWidth, sharedConfigurationManager.mainScreenHeight);
+    }
 }
 
 - (CGFloat)scale

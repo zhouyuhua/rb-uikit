@@ -34,7 +34,12 @@ static Class _SharedApplicationClass = Nil;
 
 + (Class)_sharedApplicationClass
 {
-    return _SharedApplicationClass ?: [UIApplication class];
+    if(_SharedApplicationClass) {
+        return _SharedApplicationClass;
+    } else {
+        NSString *principleClassName = [UIKitConfigurationManager sharedConfigurationManager].principleClassName;
+        return principleClassName? NSClassFromString(principleClassName) : [UIApplication class];
+    }
 }
 
 + (UIApplication *)sharedApplication

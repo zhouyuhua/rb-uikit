@@ -50,7 +50,7 @@ NSString *const UIDeviceProximityStateDidChangeNotification = @"UIDeviceProximit
 
 - (NSString *)systemVersion
 {
-    return @"6.0";
+    return @"7.0";
 }
 
 - (UIDeviceOrientation)orientation

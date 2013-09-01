@@ -23,7 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 500.0)];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:[TestTableViewController new]];
     self.window.rootViewController = self.navigationController;

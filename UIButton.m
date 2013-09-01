@@ -15,6 +15,7 @@
 #import "UIBezierPath.h"
 
 #import "UIButtonBackgroundView.h"
+#import "UIButtonBorderlessBackgroundView.h"
 #import "UIButtonRoundRectBackgroundView.h"
 #import "UIButtonBarBackgroundView.h"
 
@@ -103,15 +104,28 @@
 {
     _buttonType = buttonType;
     
+    BOOL wantsBorderlessButtons = [UIKitConfigurationManager sharedConfigurationManager].wantsBorderlessButtons;
+    
     [_backgroundView removeFromSuperview];
     if(buttonType == UIButtonTypeRoundedRect) {
-        _backgroundView = [UIButtonRoundRectBackgroundView new];
+        if(wantsBorderlessButtons)
+            _backgroundView = [UIButtonBorderlessBackgroundView new];
+        else
+            _backgroundView = [UIButtonRoundRectBackgroundView new];
     } else if((NSInteger)buttonType == UIButtonType_Private_BarButton) {
-        _backgroundView = [UIButtonBarBackgroundView new];
+        if(wantsBorderlessButtons)
+            _backgroundView = [UIButtonBorderlessBackgroundView new];
+        else
+            _backgroundView = [UIButtonBarBackgroundView new];
+        
         self.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     } else if((NSInteger)buttonType == UIButtonType_Private_BackBarButton) {
-        _backgroundView = [UIButtonBarBackgroundView new];
+        if(wantsBorderlessButtons)
+            _backgroundView = [UIButtonBorderlessBackgroundView new];
+        else
+            _backgroundView = [UIButtonBarBackgroundView new];
+        
         self.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
         [self setTitleColor:[UIColor colorWithWhite:0.15 alpha:1.0] forState:UIControlStateNormal];
         [self setImage:UIKitImageNamed(@"UIBackButtonChevron", UIImageResizingModeStretch) forState:UIControlStateNormal];

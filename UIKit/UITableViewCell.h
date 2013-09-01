@@ -22,6 +22,12 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSelectionStyle) {
     UITableViewCellSelectionStyleBlue,
     UITableViewCellSelectionStyleGray
 };
+typedef NS_ENUM(NSUInteger, UITableViewCellAccessoryType) {
+    UITableViewCellAccessoryNone,
+    UITableViewCellAccessoryDisclosureIndicator,
+    UITableViewCellAccessoryDetailDisclosureButton,
+    UITableViewCellAccessoryCheckmark
+};
 
 @interface UITableViewCell : UIView
 
@@ -55,5 +61,10 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSelectionStyle) {
 
 @property (nonatomic, getter=isSelected) BOOL selected;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animate;
+
+#pragma mark - Accessories
+
+@property (nonatomic) UITableViewCellAccessoryType accessoryType;
+@property (nonatomic) UIView *accessoryView;
 
 @end

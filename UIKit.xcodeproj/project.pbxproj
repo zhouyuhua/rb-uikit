@@ -43,6 +43,12 @@
 		8B515C5717BB3AAA003065D2 /* NSIndexPath+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B515C5517BB3AAA003065D2 /* NSIndexPath+UITableView.m */; };
 		8B515C5917BB3CEE003065D2 /* UITableView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B515C5817BB3CEE003065D2 /* UITableView_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B515C5B17BB3D4D003065D2 /* UITableViewCell_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B515C5A17BB3D38003065D2 /* UITableViewCell_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B54686A17D2B33E00D7E338 /* UIKitConfigurationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54686817D2B33E00D7E338 /* UIKitConfigurationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54686B17D2B33E00D7E338 /* UIKitConfigurationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54686917D2B33E00D7E338 /* UIKitConfigurationManager.m */; };
+		8B54687117D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54686F17D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h */; };
+		8B54687217D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54687017D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m */; };
+		8B54687517D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B54687317D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png */; };
+		8B54687617D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B54687417D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png */; };
 		8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */; };
 		8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -252,6 +258,12 @@
 		8B515C5517BB3AAA003065D2 /* NSIndexPath+UITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+UITableView.m"; sourceTree = "<group>"; };
 		8B515C5817BB3CEE003065D2 /* UITableView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableView_Private.h; sourceTree = "<group>"; };
 		8B515C5A17BB3D38003065D2 /* UITableViewCell_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITableViewCell_Private.h; sourceTree = "<group>"; };
+		8B54686817D2B33E00D7E338 /* UIKitConfigurationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIKitConfigurationManager.h; sourceTree = "<group>"; };
+		8B54686917D2B33E00D7E338 /* UIKitConfigurationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKitConfigurationManager.m; sourceTree = "<group>"; };
+		8B54686F17D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonBorderlessBackgroundView.h; sourceTree = "<group>"; };
+		8B54687017D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonBorderlessBackgroundView.m; sourceTree = "<group>"; };
+		8B54687317D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITableViewCellAccessoryDisclosureIndicator.png; sourceTree = "<group>"; };
+		8B54687417D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITableViewCellAccessoryDisclosureIndicator@2x.png"; sourceTree = "<group>"; };
 		8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+UICollectionViewAdditions.h"; sourceTree = "<group>"; };
 		8B549FFD17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+UICollectionViewAdditions.m"; sourceTree = "<group>"; };
 		8B549FFE17B9C8790068775C /* UICollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionView.h; sourceTree = "<group>"; };
@@ -567,6 +579,8 @@
 				8B5BD741179903AB00A53E4A /* UIButtonRoundRectBackgroundView.m */,
 				8B5BD74C179908EC00A53E4A /* UIButtonBarBackgroundView.h */,
 				8B5BD74D179908EC00A53E4A /* UIButtonBarBackgroundView.m */,
+				8B54686F17D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h */,
+				8B54687017D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m */,
 			);
 			name = "UIButton Background Views";
 			sourceTree = "<group>";
@@ -772,6 +786,8 @@
 		8BE492C11798C44F002BEA5A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8B54687317D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png */,
+				8B54687417D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png */,
 				8BF0F9E617BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png */,
 				8BF0F9E717BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png */,
 				8B08256517AA264100494FAA /* UIBackButtonChevron@2x.png */,
@@ -886,6 +902,8 @@
 				8B6AEDEA17AB642A00D6858A /* UIApplication.h */,
 				8B6AEDEB17AB642A00D6858A /* UIApplication.m */,
 				8B6AEDEE17AB6BF600D6858A /* UIApplication_Private.h */,
+				8B54686817D2B33E00D7E338 /* UIKitConfigurationManager.h */,
+				8B54686917D2B33E00D7E338 /* UIKitConfigurationManager.m */,
 			);
 			name = Device;
 			sourceTree = "<group>";
@@ -971,11 +989,13 @@
 				8BE492F21798CF0C002BEA5A /* UIColor.h in Headers */,
 				8B5E725A17B9EFFB006A16B9 /* UIMenuItem.h in Headers */,
 				8B5E725617B9EFF5006A16B9 /* UIMenuController.h in Headers */,
+				8B54686A17D2B33E00D7E338 /* UIKitConfigurationManager.h in Headers */,
 				8B5AF84B179B67F7008B3BF3 /* UINavigationBarAppearance.h in Headers */,
 				8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */,
 				8B54A04217B9CD7B0068775C /* UICollectionViewData.h in Headers */,
 				8B54A04A17B9CD7B0068775C /* UICollectionViewLayout_Private.h in Headers */,
 				8B54A05117B9CD7B0068775C /* UIGridLayoutRow.h in Headers */,
+				8B54687117D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h in Headers */,
 				8B54A04F17B9CD7B0068775C /* UIGridLayoutItem.h in Headers */,
 				8B54A05317B9CD7B0068775C /* UIGridLayoutSection.h in Headers */,
 				8B54A04D17B9CD7B0068775C /* UIGridLayoutInfo.h in Headers */,
@@ -1098,12 +1118,14 @@
 				8B08256417AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png in Resources */,
 				8BF0F9E917BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png in Resources */,
 				8BAE9591179A1D3100562F35 /* UIBarButtonItemBackground.png in Resources */,
+				8B54687617D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png in Resources */,
 				8B5AF867179B9D15008B3BF3 /* UITextFieldRoundBackground.png in Resources */,
 				8B08256817AA264100494FAA /* UIBackButtonChevron.png in Resources */,
 				8B5AF864179B9B79008B3BF3 /* UITextFieldSquareBackground@2x.png in Resources */,
 				8B08256717AA264100494FAA /* UIBackButtonChevron@2x.png in Resources */,
 				8BAE9590179A1D3100562F35 /* UIBarButtonItemBackground@2x.png in Resources */,
 				8B08256317AA1F7300494FAA /* UISearchBarMagnifyingGlass.png in Resources */,
+				8B54687517D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png in Resources */,
 				8B5BD7351798F3E100A53E4A /* UINavigationBarBackgroundImage@2x.png in Resources */,
 				8B5AF868179B9D15008B3BF3 /* UITextFieldRoundBackground@2x.png in Resources */,
 			);
@@ -1125,6 +1147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B54A05017B9CD7B0068775C /* UIGridLayoutItem.m in Sources */,
+				8B54687217D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m in Sources */,
 				8B91075F17A8B1EA008D9DF0 /* UIGraphics.m in Sources */,
 				8B5BD72F1798F05C00A53E4A /* UIImageView.m in Sources */,
 				8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */,
@@ -1191,6 +1214,7 @@
 				8B5BD74F179908EC00A53E4A /* UIButtonBarBackgroundView.m in Sources */,
 				8BF0F9F317CE636000DAFD92 /* UIStringDrawing.m in Sources */,
 				8B5BD7391798FA9B00A53E4A /* UIButton.m in Sources */,
+				8B54686B17D2B33E00D7E338 /* UIKitConfigurationManager.m in Sources */,
 				8B1EC8DB17A9F2B10035369C /* UIAppKitAdaptorView.m in Sources */,
 				8B95506917C316D600B8E4F9 /* UIKeyEvent.m in Sources */,
 				8B01140F179A19C500C8594C /* UIConcreteAppearance.m in Sources */,

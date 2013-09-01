@@ -81,6 +81,8 @@ static NSString *const kItemDescription = @"itemDescription";
     cell.textLabel.text = sectionItem[kItemTitle];
     cell.detailTextLabel.text = sectionItem[kItemDescription];
     
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     return cell;
 }
 
@@ -95,7 +97,7 @@ static NSString *const kItemDescription = @"itemDescription";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

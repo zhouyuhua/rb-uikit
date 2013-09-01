@@ -12,13 +12,15 @@
 @class UIImageView, UILabel;
 
 typedef NS_ENUM(NSInteger, UIButtonType) {
-    UIButtonTypeCustom = 0, 
-    UIButtonTypeRoundedRect, 
+    UIButtonTypeCustom = 0,
+    UIButtonTypeSystem,
     
     UIButtonTypeDetailDisclosure, 
     UIButtonTypeInfoLight, 
     UIButtonTypeInfoDark, 
-    UIButtonTypeContactAdd, 
+    UIButtonTypeContactAdd,
+    
+    UIButtonTypeRoundedRect = UIButtonTypeSystem,
 };
 
 @interface UIButton : UIControl
