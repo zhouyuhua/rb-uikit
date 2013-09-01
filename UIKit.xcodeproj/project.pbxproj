@@ -52,6 +52,10 @@
 		8B54687A17D2BF2700D7E338 /* UITemplateImageProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54687817D2BF2700D7E338 /* UITemplateImageProvider.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54687B17D2BF2700D7E338 /* UITemplateImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54687917D2BF2700D7E338 /* UITemplateImageProvider.m */; };
 		8B54687E17D2C26800D7E338 /* UIImageView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54687D17D2C26800D7E338 /* UIImageView_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B54688217D2C86E00D7E338 /* UITabBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54688017D2C86E00D7E338 /* UITabBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54688317D2C86E00D7E338 /* UITabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54688117D2C86E00D7E338 /* UITabBar.m */; };
+		8B54688617D2C87700D7E338 /* UITabBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54688417D2C87700D7E338 /* UITabBarController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54688717D2C87700D7E338 /* UITabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54688517D2C87700D7E338 /* UITabBarController.m */; };
 		8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */; };
 		8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -270,6 +274,10 @@
 		8B54687817D2BF2700D7E338 /* UITemplateImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITemplateImageProvider.h; sourceTree = "<group>"; };
 		8B54687917D2BF2700D7E338 /* UITemplateImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITemplateImageProvider.m; sourceTree = "<group>"; };
 		8B54687D17D2C26800D7E338 /* UIImageView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageView_Private.h; sourceTree = "<group>"; };
+		8B54688017D2C86E00D7E338 /* UITabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITabBar.h; sourceTree = "<group>"; };
+		8B54688117D2C86E00D7E338 /* UITabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITabBar.m; sourceTree = "<group>"; };
+		8B54688417D2C87700D7E338 /* UITabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITabBarController.h; sourceTree = "<group>"; };
+		8B54688517D2C87700D7E338 /* UITabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITabBarController.m; sourceTree = "<group>"; };
 		8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+UICollectionViewAdditions.h"; sourceTree = "<group>"; };
 		8B549FFD17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+UICollectionViewAdditions.m"; sourceTree = "<group>"; };
 		8B549FFE17B9C8790068775C /* UICollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionView.h; sourceTree = "<group>"; };
@@ -509,6 +517,17 @@
 				8B515C5517BB3AAA003065D2 /* NSIndexPath+UITableView.m */,
 			);
 			name = "Table View";
+			sourceTree = "<group>";
+		};
+		8B54687F17D2C85200D7E338 /* Tab Bars */ = {
+			isa = PBXGroup;
+			children = (
+				8B54688017D2C86E00D7E338 /* UITabBar.h */,
+				8B54688117D2C86E00D7E338 /* UITabBar.m */,
+				8B54688417D2C87700D7E338 /* UITabBarController.h */,
+				8B54688517D2C87700D7E338 /* UITabBarController.m */,
+			);
+			name = "Tab Bars";
 			sourceTree = "<group>";
 		};
 		8B549FFB17B9C86C0068775C /* Collection View */ = {
@@ -787,6 +806,7 @@
 				8B515C4317BB39D0003065D2 /* Table View */,
 				8B549FFB17B9C86C0068775C /* Collection View */,
 				8B5E725317B9EFC3006A16B9 /* Menus */,
+				8B54687F17D2C85200D7E338 /* Tab Bars */,
 				8BE492C11798C44F002BEA5A /* Supporting Files */,
 			);
 			path = UIKit;
@@ -989,6 +1009,8 @@
 				8B515C5617BB3AAA003065D2 /* NSIndexPath+UITableView.h in Headers */,
 				8B54A04B17B9CD7B0068775C /* UICollectionViewUpdateItem.h in Headers */,
 				8B515C4E17BB3A04003065D2 /* UITableViewHeaderFooterView.h in Headers */,
+				8B54688617D2C87700D7E338 /* UITabBarController.h in Headers */,
+				8B54688217D2C86E00D7E338 /* UITabBar.h in Headers */,
 				8B515C4617BB39E5003065D2 /* UITableView.h in Headers */,
 				8B95506817C316D600B8E4F9 /* UIKeyEvent.h in Headers */,
 				8B515C4A17BB39ED003065D2 /* UITableViewCell.h in Headers */,
@@ -1162,6 +1184,7 @@
 				8B91075F17A8B1EA008D9DF0 /* UIGraphics.m in Sources */,
 				8B5BD72F1798F05C00A53E4A /* UIImageView.m in Sources */,
 				8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */,
+				8B54688717D2C87700D7E338 /* UITabBarController.m in Sources */,
 				8B5BD73E1799037400A53E4A /* UIButtonBackgroundView.m in Sources */,
 				8BE4931B1798D65C002BEA5A /* UINavigationItem.m in Sources */,
 				8B5BD758179B24D400A53E4A /* UIImage.m in Sources */,
@@ -1196,6 +1219,7 @@
 				8B515C5717BB3AAA003065D2 /* NSIndexPath+UITableView.m in Sources */,
 				8BB4BD7017B35AF7009B7708 /* UIScrollViewScrollAnimator.m in Sources */,
 				8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */,
+				8B54688317D2C86E00D7E338 /* UITabBar.m in Sources */,
 				8B54A03A17B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.m in Sources */,
 				8B6AEDE717AB638B00D6858A /* UIGestureRecognizer.m in Sources */,
 				8BE4932B1798DBD5002BEA5A /* UIDevice.m in Sources */,

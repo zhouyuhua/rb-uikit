@@ -45,5 +45,6 @@ extern UIApplication *UIApp;
 
 - (void)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView;
 - (void)_dispatchMouseEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView;
+- (void)_dispatchIdleScrollEvent:(NSEvent *)event ofPhase:(NSEventPhase)phase fromHostView:(UIWindowAppKitHostView *)hostView;
 
 @end

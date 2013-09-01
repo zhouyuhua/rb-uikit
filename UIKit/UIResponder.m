@@ -132,4 +132,21 @@
     [self.nextResponder keyUp:event];
 }
 
+#pragma mark -
+
+- (void)idleScrollTouchesBegan
+{
+    [self.nextResponder idleScrollTouchesBegan];
+}
+
+- (void)idleScrollTouchesEnded
+{
+    [self.nextResponder idleScrollTouchesEnded];
+}
+
+- (void)idleScrollTouchesCanceled
+{
+    [self.nextResponder idleScrollTouchesCanceled];
+}
+
 @end

@@ -56,3 +56,6 @@
 #import "UITableView.h"
 #import "UITableViewController.h"
 #import "NSIndexPath+UITableView.h"
+
+#import "UITabBar.h"
+#import "UITabBarController.h"

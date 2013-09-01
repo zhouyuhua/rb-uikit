@@ -467,4 +467,35 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
     }
 }
 
+#pragma mark - Events
+
+- (void)idleScrollTouchesBegan
+{
+    [self _showScrollers];
+}
+
+- (void)idleScrollTouchesEnded
+{
+    if(self.dragging)
+        return;
+    
+    self.hideScrollersTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                               target:self
+                                                             selector:@selector(_hideScrollers)
+                                                             userInfo:nil
+                                                              repeats:NO];
+}
+
+- (void)idleScrollTouchesCanceled
+{
+    if(self.dragging)
+        return;
+    
+    self.hideScrollersTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                               target:self
+                                                             selector:@selector(_hideScrollers)
+                                                             userInfo:nil
+                                                              repeats:NO];
+}
+
 @end

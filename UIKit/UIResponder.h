@@ -46,6 +46,12 @@
 - (void)keyDown:(UIKeyEvent *)event;
 - (void)keyUp:(UIKeyEvent *)event;
 
+#pragma mark -
+
+- (void)idleScrollTouchesBegan;
+- (void)idleScrollTouchesEnded;
+- (void)idleScrollTouchesCanceled;
+
 @end
 
 #pragma mark -

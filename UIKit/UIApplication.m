@@ -345,6 +345,34 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     }
 }
 
+- (void)_dispatchIdleScrollEvent:(NSEvent *)event ofPhase:(NSEventPhase)phase fromHostView:(UIWindowAppKitHostView *)hostView
+{
+    CGPoint mouseLocation = [[hostView window] convertScreenToBase:[NSEvent mouseLocation]];
+    CGPoint locationInWindow = [hostView convertPoint:mouseLocation fromView:nil];
+    UIView *targetView = [hostView.kitWindow hitTest:locationInWindow withEvent:nil];
+    
+    switch (phase) {
+        case NSEventPhaseBegan: {
+            [targetView idleScrollTouchesBegan];
+            break;
+        }
+            
+        case NSEventPhaseEnded: {
+            [targetView idleScrollTouchesEnded];
+            break;
+        }
+            
+        case NSEventPhaseCancelled: {
+            [targetView idleScrollTouchesCanceled];
+            break;
+        }
+            
+        default: {
+            break;
+        }
+    }
+}
+
 #pragma mark - Notifications
 
 - (void)registerForRemoteNotificationTypes:(UIRemoteNotificationType)types

@@ -24,9 +24,28 @@
 {
     if((self = [super initWithFrame:frame])) {
         self.wantsLayer = YES;
+        self.acceptsTouchEvents = YES;
+        self.wantsRestingTouches = YES;
     }
     
     return self;
+}
+
+#pragma mark - Forwarding
+
+- (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)item
+{
+    return ([_kitWindow targetForAction:item.action withSender:nil] != nil);
+}
+
+- (BOOL)respondsToSelector:(SEL)selector
+{
+    return [super respondsToSelector:selector] || ([_kitWindow targetForAction:selector withSender:nil] != nil);
+}
+
+- (id)forwardingTargetForSelector:(SEL)selector
+{
+    return [_kitWindow targetForAction:selector withSender:nil];
 }
 
 #pragma mark - Properties
@@ -99,6 +118,32 @@
 - (void)endGestureWithEvent:(NSEvent *)event
 {
     [UIApp _dispatchMouseEvent:event fromHostView:self];
+}
+
+#pragma mark -
+
+- (void)touchesBeganWithEvent:(NSEvent *)event
+{
+    NSSet *matchingTouches = [event touchesMatchingPhase:NSTouchPhaseBegan inView:self];
+    if(matchingTouches.count == 2) {
+        [UIApp _dispatchIdleScrollEvent:event ofPhase:NSEventPhaseBegan fromHostView:self];
+    }
+}
+
+- (void)touchesEndedWithEvent:(NSEvent *)event
+{
+    NSSet *matchingTouches = [event touchesMatchingPhase:NSTouchPhaseEnded inView:self];
+    if(matchingTouches.count != 0) {
+        [UIApp _dispatchIdleScrollEvent:event ofPhase:NSEventPhaseEnded fromHostView:self];
+    }
+}
+
+- (void)touchesCancelledWithEvent:(NSEvent *)event
+{
+    NSSet *matchingTouches = [event touchesMatchingPhase:NSTouchPhaseCancelled inView:self];
+    if(matchingTouches.count != 0) {
+        [UIApp _dispatchIdleScrollEvent:event ofPhase:NSEventPhaseCancelled fromHostView:self];
+    }
 }
 
 @end
