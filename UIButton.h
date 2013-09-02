@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, UIButtonType) {
     UIButtonTypeInfoDark, 
     UIButtonTypeContactAdd,
     
-    UIButtonTypeRoundedRect = UIButtonTypeSystem,
+    UIButtonTypeRoundedRect UI_DEPRECATED_SINCE(7_0, "Use UIButtonTypeSystem instead") = UIButtonTypeSystem,
 };
 
 @interface UIButton : UIControl

@@ -8,7 +8,7 @@
 
 #import "UIWindow_Private.h"
 #import "UIView_Private.h"
-#import "UIViewController.h"
+#import "UIViewController_Private.h"
 #import "UINavigationController.h"
 
 #import "UIApplication_Private.h"
@@ -141,9 +141,11 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 {
     [self.underlyingWindow unbind:@"title"];
     [_rootViewController.view removeFromSuperview];
+    _rootViewController._rootViewController = NO;
     
     _rootViewController = rootViewController;
     
+    _rootViewController._rootViewController = YES;
     [_rootViewController.view _viewWillMoveToWindow:self];
     _rootViewController.view.frame = self.bounds;
     _rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

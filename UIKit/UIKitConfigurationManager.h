@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UIAvailability.h"
 
 UIKIT_EXTERN NSString *const UIKitConfigurationResourceFileName;
 
@@ -21,7 +22,7 @@ UIKIT_EXTERN NSString *const UIKitConfigurationResourceFileName;
 ///Returns the shared configuration manager, creating it if it does not already exist.
 + (UIKitConfigurationManager *)sharedConfigurationManager;
 
-#pragma mark - Properties
+#pragma mark - UIApplication
 
 ///The principle class to use when instantiating `UIApplication`
 ///from a `UIApplicationMain` function call that does not specify
@@ -31,7 +32,7 @@ UIKIT_EXTERN NSString *const UIKitConfigurationResourceFileName;
 ///Corresponding key is `UIPrincipleClassName`.
 @property NSString *principleClassName;
 
-#pragma mark -
+#pragma mark - UIScreen
 
 ///The width value that `+[UIScreen mainScreen]` should return.
 ///If unspecified, UIScreen will return the actual hardware screen width.
@@ -55,7 +56,7 @@ UIKIT_EXTERN NSString *const UIKitConfigurationResourceFileName;
 ///Corresponding key is `UIMainScreenHeight`.
 @property CGFloat mainScreenHeight;
 
-#pragma mark -
+#pragma mark - UIButton
 
 ///Whether or not UIKit should use iOS 7 style borderless
 ///buttons in bars and for UIButtons of type UIButtonTypeSystem.
@@ -67,5 +68,17 @@ UIKIT_EXTERN NSString *const UIKitConfigurationResourceFileName;
 ///
 ///Corresponding key is `UIWantsBorderlessButtons`.
 @property BOOL wantsBorderlessButtons;
+
+#pragma mark - UINavigationController
+
+///Specifies a logo to use in place of navigation level titles
+///for instances of UINavigationController that are used as
+///`rootViewController`s in instances of `UIWindow`.
+///
+///This property does not apply to navigation controllers which
+///are not placed at the root of a window.
+///
+///Corresponding key is `UINavigationControllerBarLogoImageName`
+@property NSString *navigationControllerBarLogoImageName;
 
 @end

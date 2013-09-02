@@ -44,4 +44,6 @@ enum {
     NSTextAlignmentNatural = NSNaturalTextAlignment
 };
 
+#import "UIKitConfigurationManager.h"
+
 #endif

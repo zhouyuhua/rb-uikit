@@ -6,24 +6,14 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UINavigationController.h"
+#import "UINavigationController_Private.h"
+#import "UINavigationBar_Private.h"
 #import "UIViewController_Private.h"
 #import "UIResponder_Private.h"
 #import "UIView.h"
 #import "UIBarButtonItem_Private.h"
 
-@interface UINavigationController ()
-
-///The view that holds the contents of the controller's children.
-@property (nonatomic) UIView *contentView;
-
-@end
-
-@implementation UINavigationController {
-    NSMutableArray *_viewControllers;
-    UIView *_visibleView;
-    UINavigationBar *_navigationBar;
-}
+@implementation UINavigationController
 
 - (id)init
 {
@@ -43,6 +33,7 @@
         
         _navigationBar = [[UINavigationBar alloc] initWithFrame:NSMakeRect(0.0, 0.0, 320.0, 40.0)];
         _navigationBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        _navigationBar._navigationController = self;
         [self.view addSubview:_navigationBar];
         
         [self layoutViews];

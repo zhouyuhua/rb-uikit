@@ -6,18 +6,13 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UINavigationBar.h"
+#import "UINavigationBar_Private.h"
+#import "UINavigationController_Private.h"
 #import "UIImageView.h"
 #import "UIImage_Private.h"
 #import "UINavigationBarAppearance.h"
 
-@implementation UINavigationBar {
-    UINavigationItem *_topItem;
-    NSMutableArray *_items;
-    
-    UIImageView *_backgroundImageView;
-    CGFloat _titleVerticalPositionAdjustment;
-}
+@implementation UINavigationBar
 
 + (instancetype)appearance
 {

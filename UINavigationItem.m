@@ -6,20 +6,18 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UINavigationItem.h"
+#import "UINavigationItem_Private.h"
+
+#import "UIViewController_Private.h"
+#import "UINavigationController_Private.h"
+
 #import "UILabel.h"
+#import "UIImageView.h"
+
 #import "UIBarButtonItem_Private.h"
-#import "UINavigationBar.h"
+#import "UINavigationBar_Private.h"
 
-@interface UINavigationItem ()
-
-@property (nonatomic) CGFloat titleVerticalPositionAdjustment;
-
-@end
-
-@implementation UINavigationItem {
-    UILabel *_titleLabel;
-}
+@implementation UINavigationItem
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -81,20 +79,27 @@
         contentFrame.size.width -= CGRectGetWidth(rightButtonFrame) + 10.0;
     }
     
-    CGRect titleLabelFrame;
-    titleLabelFrame.size = [_titleLabel sizeThatFits:self.bounds.size];
-    titleLabelFrame.origin.y = round(CGRectGetMidY(self.bounds) - CGRectGetHeight(titleLabelFrame) / 2.0) + _titleVerticalPositionAdjustment;
-    titleLabelFrame.origin.x = round(CGRectGetMidX(self.bounds) - CGRectGetWidth(titleLabelFrame) / 2.0);
-    
-    if(CGRectGetMinX(titleLabelFrame) < CGRectGetMinX(contentFrame)) {
-        titleLabelFrame.origin.x = CGRectGetMinX(contentFrame) + 5.0;
+    if(_logoImageView) {
+        CGRect logoImageViewFrame = _logoImageView.frame;
+        logoImageViewFrame.origin.y = round(CGRectGetMidY(contentFrame) - CGRectGetHeight(logoImageViewFrame) / 2.0) + _titleVerticalPositionAdjustment;
+        logoImageViewFrame.origin.x = round(CGRectGetMidX(contentFrame) - CGRectGetWidth(logoImageViewFrame) / 2.0);
+        _logoImageView.frame = logoImageViewFrame;
+    } else {
+        CGRect titleLabelFrame;
+        titleLabelFrame.size = [_titleLabel sizeThatFits:contentFrame.size];
+        titleLabelFrame.origin.y = round(CGRectGetMidY(contentFrame) - CGRectGetHeight(titleLabelFrame) / 2.0) + _titleVerticalPositionAdjustment;
+        titleLabelFrame.origin.x = round(CGRectGetMidX(contentFrame) - CGRectGetWidth(titleLabelFrame) / 2.0);
+        
+        if(CGRectGetMinX(titleLabelFrame) < CGRectGetMinX(contentFrame)) {
+            titleLabelFrame.origin.x = CGRectGetMinX(contentFrame) + 5.0;
+        }
+        
+        if(CGRectGetMaxX(titleLabelFrame) >= (CGRectGetMaxX(contentFrame) - 5.0)) {
+            titleLabelFrame.size.width = CGRectGetWidth(contentFrame) - 15.0;
+        }
+        
+        _titleLabel.frame = titleLabelFrame;
     }
-    
-    if(CGRectGetMaxX(titleLabelFrame) >= (CGRectGetMaxX(contentFrame) - 5.0)) {
-        titleLabelFrame.size.width = CGRectGetWidth(contentFrame) - 15.0;
-    }
-    
-    _titleLabel.frame = titleLabelFrame;
 }
 
 #pragma mark - Appearance
@@ -119,6 +124,26 @@
     }
     
     self.titleVerticalPositionAdjustment = [newNavigationBar titleVerticalPositionAdjustmentForBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow
+{
+    UINavigationBar *navigationBar = (UINavigationBar *)self.superview;
+    if(navigationBar._navigationController._rootViewController) {
+        NSString *navigationControllerBarLogoImageName = [UIKitConfigurationManager sharedConfigurationManager].navigationControllerBarLogoImageName;
+        if(navigationControllerBarLogoImageName) {
+            _titleLabel.hidden = YES;
+            
+            _logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:navigationControllerBarLogoImageName]];
+            [self addSubview:_logoImageView];
+        } else {
+            _titleLabel.hidden = NO;
+            [_logoImageView removeFromSuperview];
+        }
+    } else {
+        _titleLabel.hidden = NO;
+        [_logoImageView removeFromSuperview];
+    }
 }
 
 #pragma mark - Properties
