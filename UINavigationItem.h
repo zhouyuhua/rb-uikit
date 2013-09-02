@@ -1,17 +1,15 @@
 //
-//  RKNavigationItem.h
-//  Pinna
+//  UINavigationItem.h
+//  UIKit
 //
-//  Created by Kevin MacWhinnie on 12/6/12.
-//  Copyright (c) 2013 Roundabout Software,  LLC. All rights reserved.
+//  Created by Kevin MacWhinnie on 9/1/13.
+//  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
 #import "UIView.h"
 #import "UIBarButtonItem.h"
 
-@class UIBarButtonItem;
-
-@interface UINavigationItem : UIView
+@interface UINavigationItem : NSObject
 
 - (id)initWithTitle:(NSString *)title;
 

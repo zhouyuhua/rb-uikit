@@ -57,9 +57,11 @@
 		8B54688617D2C87700D7E338 /* UITabBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54688417D2C87700D7E338 /* UITabBarController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54688717D2C87700D7E338 /* UITabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54688517D2C87700D7E338 /* UITabBarController.m */; };
 		8B54688A17D40F3F00D7E338 /* UIAvailability.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54688917D40F3F00D7E338 /* UIAvailability.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B54689117D4157C00D7E338 /* UINavigationController_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54689017D4157C00D7E338 /* UINavigationController_Private.h */; };
-		8B54689317D4161300D7E338 /* UINavigationBar_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54689217D4161300D7E338 /* UINavigationBar_Private.h */; };
-		8B54689517D4168800D7E338 /* UINavigationItem_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54689417D4168800D7E338 /* UINavigationItem_Private.h */; };
+		8B54689117D4157C00D7E338 /* UINavigationController_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54689017D4157C00D7E338 /* UINavigationController_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B54689317D4161300D7E338 /* UINavigationBar_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54689217D4161300D7E338 /* UINavigationBar_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B54689E17D41B7B00D7E338 /* UINavigationItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54689C17D41B7B00D7E338 /* UINavigationItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B54689F17D41B7B00D7E338 /* UINavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54689D17D41B7B00D7E338 /* UINavigationItem.m */; };
+		8B5468A117D41C5E00D7E338 /* UINavigationItem_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5468A017D41C5E00D7E338 /* UINavigationItem_Private.h */; };
 		8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */; };
 		8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -189,8 +191,8 @@
 		8BE493171798D65C002BEA5A /* UINavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4930A1798D65C002BEA5A /* UINavigationBar.m */; };
 		8BE493181798D65C002BEA5A /* UINavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4930B1798D65C002BEA5A /* UINavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BE493191798D65C002BEA5A /* UINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4930C1798D65C002BEA5A /* UINavigationController.m */; };
-		8BE4931A1798D65C002BEA5A /* UINavigationItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4930D1798D65C002BEA5A /* UINavigationItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8BE4931B1798D65C002BEA5A /* UINavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4930E1798D65C002BEA5A /* UINavigationItem.m */; };
+		8BE4931A1798D65C002BEA5A /* _UINavigationItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4930D1798D65C002BEA5A /* _UINavigationItemView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8BE4931B1798D65C002BEA5A /* _UINavigationItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4930E1798D65C002BEA5A /* _UINavigationItemView.m */; };
 		8BE4931C1798D65C002BEA5A /* UIViewController_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE4930F1798D65C002BEA5A /* UIViewController_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BE4931D1798D65C002BEA5A /* UIViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BE493101798D65C002BEA5A /* UIViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BE4931E1798D65C002BEA5A /* UIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE493111798D65C002BEA5A /* UIViewController.m */; };
@@ -285,7 +287,9 @@
 		8B54688917D40F3F00D7E338 /* UIAvailability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAvailability.h; sourceTree = "<group>"; };
 		8B54689017D4157C00D7E338 /* UINavigationController_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationController_Private.h; sourceTree = "<group>"; };
 		8B54689217D4161300D7E338 /* UINavigationBar_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationBar_Private.h; sourceTree = "<group>"; };
-		8B54689417D4168800D7E338 /* UINavigationItem_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationItem_Private.h; sourceTree = "<group>"; };
+		8B54689C17D41B7B00D7E338 /* UINavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationItem.h; sourceTree = "<group>"; };
+		8B54689D17D41B7B00D7E338 /* UINavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationItem.m; sourceTree = "<group>"; };
+		8B5468A017D41C5E00D7E338 /* UINavigationItem_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationItem_Private.h; sourceTree = "<group>"; };
 		8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+UICollectionViewAdditions.h"; sourceTree = "<group>"; };
 		8B549FFD17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+UICollectionViewAdditions.m"; sourceTree = "<group>"; };
 		8B549FFE17B9C8790068775C /* UICollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionView.h; sourceTree = "<group>"; };
@@ -424,8 +428,8 @@
 		8BE4930A1798D65C002BEA5A /* UINavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationBar.m; sourceTree = "<group>"; };
 		8BE4930B1798D65C002BEA5A /* UINavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationController.h; sourceTree = "<group>"; };
 		8BE4930C1798D65C002BEA5A /* UINavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationController.m; sourceTree = "<group>"; };
-		8BE4930D1798D65C002BEA5A /* UINavigationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINavigationItem.h; sourceTree = "<group>"; };
-		8BE4930E1798D65C002BEA5A /* UINavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINavigationItem.m; sourceTree = "<group>"; };
+		8BE4930D1798D65C002BEA5A /* _UINavigationItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _UINavigationItemView.h; sourceTree = "<group>"; };
+		8BE4930E1798D65C002BEA5A /* _UINavigationItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UINavigationItemView.m; sourceTree = "<group>"; };
 		8BE4930F1798D65C002BEA5A /* UIViewController_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewController_Private.h; sourceTree = "<group>"; };
 		8BE493101798D65C002BEA5A /* UIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewController.h; sourceTree = "<group>"; };
 		8BE493111798D65C002BEA5A /* UIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewController.m; sourceTree = "<group>"; };
@@ -909,9 +913,11 @@
 				8BE4930B1798D65C002BEA5A /* UINavigationController.h */,
 				8BE4930C1798D65C002BEA5A /* UINavigationController.m */,
 				8B54689017D4157C00D7E338 /* UINavigationController_Private.h */,
-				8BE4930D1798D65C002BEA5A /* UINavigationItem.h */,
-				8BE4930E1798D65C002BEA5A /* UINavigationItem.m */,
-				8B54689417D4168800D7E338 /* UINavigationItem_Private.h */,
+				8B54689C17D41B7B00D7E338 /* UINavigationItem.h */,
+				8B54689D17D41B7B00D7E338 /* UINavigationItem.m */,
+				8B5468A017D41C5E00D7E338 /* UINavigationItem_Private.h */,
+				8BE4930D1798D65C002BEA5A /* _UINavigationItemView.h */,
+				8BE4930E1798D65C002BEA5A /* _UINavigationItemView.m */,
 				8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */,
 				8B5AF84A179B67F7008B3BF3 /* UINavigationBarAppearance.m */,
 			);
@@ -984,7 +990,6 @@
 				8BE4931D1798D65C002BEA5A /* UIViewController.h in Headers */,
 				8BE493161798D65C002BEA5A /* UINavigationBar.h in Headers */,
 				8BE493181798D65C002BEA5A /* UINavigationController.h in Headers */,
-				8BE4931A1798D65C002BEA5A /* UINavigationItem.h in Headers */,
 				8B5BD74E179908EC00A53E4A /* UIButtonBarBackgroundView.h in Headers */,
 				8BE493341798E3F3002BEA5A /* UIBarItem.h in Headers */,
 				8BE4933E1798E564002BEA5A /* UIBarButtonItem.h in Headers */,
@@ -992,9 +997,9 @@
 				8B0114041799FDC300C8594C /* UIEvent.h in Headers */,
 				8B01140E179A19C500C8594C /* UIConcreteAppearance.h in Headers */,
 				8B5BD75B179B2CA700A53E4A /* UIImageProvider.h in Headers */,
+				8B5468A117D41C5E00D7E338 /* UINavigationItem_Private.h in Headers */,
 				8B91076217A8B6B7008D9DF0 /* UIWindowAppKitHostView.h in Headers */,
 				8B91076A17A8B883008D9DF0 /* UITouch.h in Headers */,
-				8B54689317D4161300D7E338 /* UINavigationBar_Private.h in Headers */,
 				8B08255B17AA18B100494FAA /* UISearchBar.h in Headers */,
 				8B08256017AA1A3500494FAA /* UITextInputTraits.h in Headers */,
 				8B1EC8E417A9F8280035369C /* UITextField.h in Headers */,
@@ -1015,7 +1020,6 @@
 				8BB4BD6B17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h in Headers */,
 				8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */,
 				8BB4BD5B17B1EC51009B7708 /* UIScroller.h in Headers */,
-				8B54689117D4157C00D7E338 /* UINavigationController_Private.h in Headers */,
 				8B39CBFA17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.h in Headers */,
 				8BB4BD6717B359BC009B7708 /* UIAnimator.h in Headers */,
 				8B6AEDEC17AB642A00D6858A /* UIApplication.h in Headers */,
@@ -1023,6 +1027,7 @@
 				8B54688A17D40F3F00D7E338 /* UIAvailability.h in Headers */,
 				8B515C5617BB3AAA003065D2 /* NSIndexPath+UITableView.h in Headers */,
 				8B54A04B17B9CD7B0068775C /* UICollectionViewUpdateItem.h in Headers */,
+				8B54689E17D41B7B00D7E338 /* UINavigationItem.h in Headers */,
 				8B515C4E17BB3A04003065D2 /* UITableViewHeaderFooterView.h in Headers */,
 				8B54688617D2C87700D7E338 /* UITabBarController.h in Headers */,
 				8B54688217D2C86E00D7E338 /* UITabBar.h in Headers */,
@@ -1042,6 +1047,7 @@
 				8B54A04A17B9CD7B0068775C /* UICollectionViewLayout_Private.h in Headers */,
 				8B54A05117B9CD7B0068775C /* UIGridLayoutRow.h in Headers */,
 				8B54A04F17B9CD7B0068775C /* UIGridLayoutItem.h in Headers */,
+				8BE4931A1798D65C002BEA5A /* _UINavigationItemView.h in Headers */,
 				8B54A05317B9CD7B0068775C /* UIGridLayoutSection.h in Headers */,
 				8B54A04D17B9CD7B0068775C /* UIGridLayoutInfo.h in Headers */,
 				8B54A04617B9CD7B0068775C /* UICollectionViewItemKey.h in Headers */,
@@ -1068,13 +1074,14 @@
 				8B54687A17D2BF2700D7E338 /* UITemplateImageProvider.h in Headers */,
 				8B54687117D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h in Headers */,
 				8B54687E17D2C26800D7E338 /* UIImageView_Private.h in Headers */,
+				8B54689317D4161300D7E338 /* UINavigationBar_Private.h in Headers */,
+				8B54689117D4157C00D7E338 /* UINavigationController_Private.h in Headers */,
 				8B5BD7491799040E00A53E4A /* UIButton_Private.h in Headers */,
 				8B5BD75E179B348700A53E4A /* UIGraphics.h in Headers */,
 				8B515C5917BB3CEE003065D2 /* UITableView_Private.h in Headers */,
 				8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */,
 				8B515C4017BB1715003065D2 /* UICollectionViewUpdateItem_Private.h in Headers */,
 				8B5E725F17B9F83B006A16B9 /* UIMenuController_Private.h in Headers */,
-				8B54689517D4168800D7E338 /* UINavigationItem_Private.h in Headers */,
 				8B5E726117B9F9C1006A16B9 /* UICollectionView_Internal.h in Headers */,
 				8B5BD73D1799037400A53E4A /* UIButtonBackgroundView.h in Headers */,
 				8BE4931C1798D65C002BEA5A /* UIViewController_Private.h in Headers */,
@@ -1202,7 +1209,7 @@
 				8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */,
 				8B54688717D2C87700D7E338 /* UITabBarController.m in Sources */,
 				8B5BD73E1799037400A53E4A /* UIButtonBackgroundView.m in Sources */,
-				8BE4931B1798D65C002BEA5A /* UINavigationItem.m in Sources */,
+				8BE4931B1798D65C002BEA5A /* _UINavigationItemView.m in Sources */,
 				8B5BD758179B24D400A53E4A /* UIImage.m in Sources */,
 				8B54A05217B9CD7B0068775C /* UIGridLayoutRow.m in Sources */,
 				8B54A04917B9CD7B0068775C /* UICollectionViewLayout.m in Sources */,
@@ -1211,6 +1218,7 @@
 				8BE492ED1798C888002BEA5A /* UIView.m in Sources */,
 				8B5BD75C179B2CA700A53E4A /* UIImageProvider.m in Sources */,
 				8BE493171798D65C002BEA5A /* UINavigationBar.m in Sources */,
+				8B54689F17D41B7B00D7E338 /* UINavigationItem.m in Sources */,
 				8B515C4B17BB39ED003065D2 /* UITableViewCell.m in Sources */,
 				8B54A03E17B9CD7B0068775C /* UICollectionViewCell.m in Sources */,
 				8B08256E17AA2ACF00494FAA /* UIAlertView.m in Sources */,

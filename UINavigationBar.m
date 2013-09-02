@@ -8,6 +8,8 @@
 
 #import "UINavigationBar_Private.h"
 #import "UINavigationController_Private.h"
+#import "_UINavigationItemView.h"
+#import "UINavigationItem_Private.h"
 #import "UIImageView.h"
 #import "UIImage_Private.h"
 #import "UINavigationBarAppearance.h"
@@ -47,7 +49,6 @@
     [super layoutSubviews];
     
     _backgroundImageView.frame = self.bounds;
-    _topItem.frame = self.bounds;
 }
 
 #pragma mark - Properties
@@ -67,12 +68,12 @@
     return [_items copy];
 }
 
-- (UINavigationItem *)backItem
+- (_UINavigationItemView *)backItem
 {
     return _items[_items.count - 2];
 }
 
-- (UINavigationItem *)topItem
+- (_UINavigationItemView *)topItem
 {
     return [_items lastObject];
 }
@@ -182,43 +183,45 @@
 
 #pragma mark - Changing Frame Views
 
-- (void)replaceVisibleNavigationItemWith:(UINavigationItem *)view
+- (void)replaceVisibleNavigationItemWith:(UINavigationItem *)item
 {
     if(_topItem) {
-        [_topItem removeFromSuperview];
+        [_topItem._itemView removeFromSuperview];
         _topItem = nil;
     }
     
-    _topItem = view;
+    _topItem = item;
     
     if(_topItem) {
-        [_topItem setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-        [_topItem setFrame:self.bounds];
-        [self addSubview:_topItem];
+        _topItem._itemView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _topItem._itemView.frame = self.bounds;
+        [self addSubview:_topItem._itemView];
     }
 }
 
-- (void)replaceVisibleNavigationItemPushingFromLeft:(UINavigationItem *)newView
+- (void)replaceVisibleNavigationItemPushingFromLeft:(UINavigationItem *)newItem
 {
     if(!_topItem) {
-        [self replaceVisibleNavigationItemWith:newView];
+        [self replaceVisibleNavigationItemWith:newItem];
         return;
     }
     
+    UIView *newView = newItem._itemView;
+    
     NSRect initialNewViewFrame = self.bounds;
     initialNewViewFrame.origin.x = -NSWidth(initialNewViewFrame);
-    [newView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-    [newView setFrame:initialNewViewFrame];
-    [self addSubview:newView];
+    newView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    newView.frame = initialNewViewFrame;
+    [self addSubview:newItem._itemView];
     
-    UIView *oldView = _topItem;
+    UIView *oldView = _topItem._itemView;
     NSRect oldViewTargetFrame = oldView.frame;
     oldViewTargetFrame.origin.x = NSMaxX(oldViewTargetFrame);
     
     NSRect newViewTargetFrame = initialNewViewFrame;
     newViewTargetFrame.origin.x = 0;
     
-    _topItem = newView;
+    _topItem = newItem;
     [UIView animateWithDuration:0.2 animations:^{
         [oldView setAlpha:0.0];
         [oldView setFrame:oldViewTargetFrame];
@@ -229,12 +232,14 @@
     }];
 }
 
-- (void)replaceVisibleNavigationItemPushingFromRight:(UINavigationItem *)newView
+- (void)replaceVisibleNavigationItemPushingFromRight:(UINavigationItem *)newItem
 {
     if(!_topItem) {
-        [self replaceVisibleNavigationItemWith:newView];
+        [self replaceVisibleNavigationItemWith:newItem];
         return;
     }
+    
+    UIView *newView = newItem._itemView;
     
     NSRect initialNewViewFrame = self.bounds;
     initialNewViewFrame.origin.x = NSWidth(initialNewViewFrame);
@@ -242,14 +247,14 @@
     [newView setFrame:initialNewViewFrame];
     [self addSubview:newView];
     
-    UIView *oldView = _topItem;
+    UIView *oldView = _topItem._itemView;
     NSRect oldViewTargetFrame = oldView.frame;
     oldViewTargetFrame.origin.x = -NSWidth(oldViewTargetFrame);
     
     NSRect newViewTargetFrame = initialNewViewFrame;
     newViewTargetFrame.origin.x = 0;
     
-    _topItem = newView;
+    _topItem = newItem;
     [UIView animateWithDuration:0.2 animations:^{
         [oldView setAlpha:0.0];
         [oldView setFrame:oldViewTargetFrame];

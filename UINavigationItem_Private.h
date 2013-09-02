@@ -8,13 +8,14 @@
 
 #import "UINavigationItem.h"
 
-@class UILabel, UIImageView, UINavigationBar;
+@class _UINavigationItemView;
 
 @interface UINavigationItem () {
-    UILabel *_titleLabel;
-    UIImageView *_logoImageView;
+    _UINavigationItemView *_itemView;
 }
 
-@property (nonatomic) CGFloat titleVerticalPositionAdjustment;
+@property (nonatomic, readonly) _UINavigationItemView *_itemView;
+
+
 
 @end
