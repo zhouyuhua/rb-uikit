@@ -11,6 +11,7 @@
 #import "UIEvent.h"
 #import "UITouch.h"
 #import "UIWindow_Private.h"
+#import "UIView_Private.h"
 
 #import "UIWindowAppKitHostView.h"
 #import "UIEvent_Private.h"

@@ -16,6 +16,6 @@
 
 @interface UIResponder ()
 
-@property (nonatomic) id <UIFirstResponderManager> firstResponderManager;
+@property (nonatomic, unsafe_unretained) id <UIFirstResponderManager> firstResponderManager;
 
 @end

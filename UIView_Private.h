@@ -11,7 +11,9 @@
 
 @class UIViewController;
 
-@interface UIView ()
+@interface UIView () <UIFirstResponderManager> {
+    __unsafe_unretained UIResponder *_currentFirstResponder;
+}
 
 - (void)_viewWillMoveToWindow:(UIWindow *)window;
 - (void)_viewDidMoveToWindow:(UIWindow *)window;

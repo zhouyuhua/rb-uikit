@@ -11,7 +11,7 @@
 
 @class UIWindowAppKitHostView;
 
-@interface UIWindow () <UIFirstResponderManager, NSWindowDelegate>
+@interface UIWindow () <NSWindowDelegate>
 
 @property (nonatomic) NSWindow *underlyingWindow;
 @property (nonatomic) UIWindowAppKitHostView *hostView;

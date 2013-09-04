@@ -242,14 +242,6 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     return self.underlyingWindow.undoManager;
 }
 
-#pragma mark - <UIFirstResponderManager>
-
-@synthesize currentFirstResponder = _currentFirstResponder;
-- (void)setCurrentFirstResponder:(UIResponder *)currentFirstResponder
-{
-    _currentFirstResponder = currentFirstResponder;
-}
-
 #pragma mark - <NSWindowDelegate>
 
 - (void)windowDidBecomeMain:(NSNotification *)notification

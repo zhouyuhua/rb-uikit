@@ -91,6 +91,8 @@
         self.contentMode = UIViewContentModeScaleToFill;
         _subviews = [NSMutableArray array];
         
+        self.firstResponderManager = self;
+        
         self.frame = frame;
         
         [self setNeedsDisplay];
@@ -529,6 +531,19 @@
     return (UIResponder *)self._viewController ?: (UIResponder *)self.superview;
 }
 
+- (void)setCurrentFirstResponder:(UIResponder *)currentFirstResponder
+{
+    if(_superview)
+        _superview.currentFirstResponder = currentFirstResponder;
+    else
+        _currentFirstResponder = currentFirstResponder;
+}
+
+- (UIResponder *)currentFirstResponder
+{
+    return _superview? _superview.currentFirstResponder : _currentFirstResponder;
+}
+
 #pragma mark - Subviews
 
 - (NSArray *)subviews
@@ -553,8 +568,7 @@
     [self.layer insertSublayer:view.layer atIndex:(unsigned int)index];
     view.superview = self;
     view.window = self.window;
-    view.firstResponderManager = self.firstResponderManager;
-
+    
     if(_window)
         [view _viewDidMoveToWindow:_window];
     [view didMoveToSuperview];
@@ -649,7 +663,6 @@
     self.superview = nil;
     
     _window = nil;
-    self.firstResponderManager = nil;
     
     [self didMoveToWindow];
     [self didMoveToSuperview];
@@ -716,7 +729,10 @@
     [self willMoveToWindow:newWindow];
     
     _window = newWindow;
-    self.firstResponderManager = newWindow;
+    
+    UIResponder *currentFirstResponder = self.currentFirstResponder;
+    if(currentFirstResponder && !newWindow.currentFirstResponder)
+        newWindow.currentFirstResponder = self.currentFirstResponder;
     
     for (UIView *subview in _subviews)
         [subview _viewWillMoveToWindow:newWindow];
