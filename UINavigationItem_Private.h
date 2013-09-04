@@ -12,10 +12,17 @@
 
 @interface UINavigationItem () {
     _UINavigationItemView *_itemView;
+    NSArray *_allLeftItems;
+    
+    UIBarButtonItem *_backBarButtonItem;
 }
 
 @property (nonatomic, readonly) _UINavigationItemView *_itemView;
 
+- (void)_invalidateAllLeftItems;
+@property (nonatomic, readonly) NSArray *_allLeftItems;
+@property (nonatomic, readonly) NSArray *_allRightItems;
 
+@property (nonatomic) UIBarButtonItem *_backItem;
 
 @end

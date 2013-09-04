@@ -9,10 +9,11 @@
 #import "UIView.h"
 #import "UINavigationItem.h"
 #import "UIBarCommon.h"
+#import "UIAppearance.h"
 
 @protocol UINavigationBarDelegate;
 
-@interface UINavigationBar : UIView
+@interface UINavigationBar : UIView <UIAppearance>
 
 #pragma mark - Properties
 
@@ -29,21 +30,21 @@
 #pragma mark - Appearances
 
 @property (nonatomic, assign, getter=isTranslucent) BOOL translucent;
-@property (nonatomic) UIColor *barTintColor;
+@property (nonatomic) UIColor *barTintColor UI_APPEARANCE_SELECTOR;
 
 #pragma mark -
 
-- (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics;
-- (UIImage *)backgroundImageForBarMetrics:(UIBarMetrics)barMetrics;
+- (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics UI_APPEARANCE_SELECTOR;
+- (UIImage *)backgroundImageForBarMetrics:(UIBarMetrics)barMetrics UI_APPEARANCE_SELECTOR;
 
-@property (nonatomic, retain) UIImage *shadowImage;
+@property (nonatomic, retain) UIImage *shadowImage UI_APPEARANCE_SELECTOR;
 
 #pragma mark -
 
-@property (nonatomic, copy) NSDictionary *titleTextAttributes;
+@property (nonatomic, copy) NSDictionary *titleTextAttributes UI_APPEARANCE_SELECTOR;
 
-- (void)setTitleVerticalPositionAdjustment:(CGFloat)adjustment forBarMetrics:(UIBarMetrics)barMetrics;
-- (CGFloat)titleVerticalPositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics;
+- (void)setTitleVerticalPositionAdjustment:(CGFloat)adjustment forBarMetrics:(UIBarMetrics)barMetrics UI_APPEARANCE_SELECTOR;
+- (CGFloat)titleVerticalPositionAdjustmentForBarMetrics:(UIBarMetrics)barMetrics UI_APPEARANCE_SELECTOR;
 
 #pragma mark - Pushing and Popping Items
 

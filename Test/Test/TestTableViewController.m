@@ -36,7 +36,7 @@ static NSString *const kItemDescription = @"itemDescription";
         
         self.view = self.tableView;
         
-        self.navigationItem.title = @"Colors that I really, really, really like a lot today";
+        self.navigationItem.title = @"Colors";
         
         NSArray *prettyColors = @[ @{kItemTitle: @"Blue", kItemDescription: @"like the sky"},
                                    @{kItemTitle: @"Green", kItemDescription: @"like the grass"},
@@ -49,9 +49,35 @@ static NSString *const kItemDescription = @"itemDescription";
                                   @{kItemTitle: @"Auburn", kItemDescription: @"like the hair"} ];
         self.sections = @[ @{kSectionTitle: @"Pretty Colors", kSectionItems: prettyColors},
                            @{kSectionTitle: @"Other Colors", kSectionItems: otherColors} ];
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Test"
+                                                                                 style:UIBarButtonItemStyleBordered
+                                                                                target:self
+                                                                                action:@selector(test:)];
     }
     
     return self;
+}
+
+#pragma mark - Actions
+
+- (IBAction)test:(id)sender
+{
+    self.navigationItem.leftBarButtonItems = @[ [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(untest:)],
+                                                [[UIBarButtonItem alloc] initWithTitle:@"Beep" style:UIBarButtonItemStyleBordered target:self action:@selector(beep:)] ];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Beep" style:UIBarButtonItemStyleBordered target:self action:@selector(beep:)];
+}
+
+- (IBAction)untest:(id)sender
+{
+    self.navigationItem.leftBarButtonItems = nil;
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+- (IBAction)beep:(id)sender
+{
+    NSBeep();
 }
 
 #pragma mark - <UITableViewDataSource>
@@ -97,6 +123,10 @@ static NSString *const kItemDescription = @"itemDescription";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    UIViewController *stupidTest = [UIViewController new];
+    [self.navigationController pushViewController:stupidTest animated:YES];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

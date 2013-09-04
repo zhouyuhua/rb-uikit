@@ -9,6 +9,8 @@
 #import "UIAppearance.h"
 #import "UIColor.h"
 
+#define UIConcreteAppearanceGeneratePropertyGetter(type, propertyName, ...) - (type)propertyName { return _ ## propertyName ?: ((type)__VA_ARGS__); }
+
 @interface UIConcreteAppearance : NSObject
 
 + (instancetype)appearanceForClass:(Class)class;

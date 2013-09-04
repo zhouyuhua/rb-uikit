@@ -16,6 +16,7 @@
 
 #import "UIBarButtonItem_Private.h"
 #import "UINavigationBar_Private.h"
+#import "UINavigationItem_Private.h"
 
 @interface _UINavigationItemView () {
     UILabel *_titleLabel;
@@ -55,6 +56,9 @@
         [_titleLabel bind:@"text" toObject:_navigationItem withKeyPath:@"title" options:nil];
         
         [self addSubview:_titleLabel];
+        
+        [self titleViewDidChange];
+        [self barButtonItemsDidChange];
     }
     
     return self;
@@ -69,7 +73,7 @@
     CGRect contentFrame = self.bounds;
     
     CGRect leftButtonFrame = CGRectMake(5.0, 0.0, 0.0, 0.0);
-    for (UIBarButtonItem *item in _navigationItem.leftBarButtonItems) {
+    for (UIBarButtonItem *item in _navigationItem._allLeftItems) {
         UIView *buttonView = item.view;
         
         leftButtonFrame.size = [buttonView sizeThatFits:contentFrame.size];
@@ -77,14 +81,14 @@
         
         buttonView.frame = leftButtonFrame;
         
-        leftButtonFrame.origin.x += CGRectGetWidth(leftButtonFrame);
+        leftButtonFrame.origin.x += CGRectGetWidth(leftButtonFrame) + 5.0;
         
         contentFrame.origin.x += CGRectGetWidth(leftButtonFrame) + 10.0;
         contentFrame.size.width -= CGRectGetWidth(leftButtonFrame) + 10.0;
     }
     
-    CGRect rightButtonFrame = CGRectMake(CGRectGetMaxX(contentFrame) - 10.0, 0.0, 0.0, 0.0);
-    for (UIBarButtonItem *item in _navigationItem.rightBarButtonItems) {
+    CGRect rightButtonFrame = CGRectMake(CGRectGetMaxX(contentFrame) - 5.0, 0.0, 0.0, 0.0);
+    for (UIBarButtonItem *item in _navigationItem._allRightItems) {
         UIView *buttonView = item.view;
         
         rightButtonFrame.size = [buttonView sizeThatFits:contentFrame.size];
@@ -98,16 +102,36 @@
         contentFrame.size.width -= CGRectGetWidth(rightButtonFrame) + 10.0;
     }
     
-    if(_logoImageView) {
+    if(_navigationItem.titleView) {
+        CGRect titleViewFrame = _navigationItem.titleView.frame;
+        titleViewFrame.origin.y = round(CGRectGetMidY(self.bounds) - CGRectGetHeight(titleViewFrame) / 2.0) + _titleVerticalPositionAdjustment;
+        titleViewFrame.origin.x = round(CGRectGetMidX(self.bounds) - CGRectGetWidth(titleViewFrame) / 2.0);
+        
+        if(CGRectGetMinX(titleViewFrame) < CGRectGetMinX(contentFrame)) {
+            titleViewFrame.origin.x = CGRectGetMinX(contentFrame) + 5.0;
+        }
+        
+        _navigationItem.titleView.frame = titleViewFrame;
+        
+        _titleLabel.frame = CGRectZero;
+        _logoImageView.frame = CGRectZero;
+    } else if(_logoImageView) {
         CGRect logoImageViewFrame = _logoImageView.frame;
-        logoImageViewFrame.origin.y = round(CGRectGetMidY(contentFrame) - CGRectGetHeight(logoImageViewFrame) / 2.0) + _titleVerticalPositionAdjustment;
-        logoImageViewFrame.origin.x = round(CGRectGetMidX(contentFrame) - CGRectGetWidth(logoImageViewFrame) / 2.0);
+        logoImageViewFrame.origin.y = round(CGRectGetMidY(self.bounds) - CGRectGetHeight(logoImageViewFrame) / 2.0) + _titleVerticalPositionAdjustment;
+        logoImageViewFrame.origin.x = round(CGRectGetMidX(self.bounds) - CGRectGetWidth(logoImageViewFrame) / 2.0);
+        
+        if(CGRectGetMinX(logoImageViewFrame) < CGRectGetMinX(contentFrame)) {
+            logoImageViewFrame.origin.x = CGRectGetMinX(contentFrame) + 5.0;
+        }
+        
         _logoImageView.frame = logoImageViewFrame;
+        
+        _titleLabel.frame = CGRectZero;
     } else {
         CGRect titleLabelFrame;
         titleLabelFrame.size = [_titleLabel sizeThatFits:contentFrame.size];
-        titleLabelFrame.origin.y = round(CGRectGetMidY(contentFrame) - CGRectGetHeight(titleLabelFrame) / 2.0) + _titleVerticalPositionAdjustment;
-        titleLabelFrame.origin.x = round(CGRectGetMidX(contentFrame) - CGRectGetWidth(titleLabelFrame) / 2.0);
+        titleLabelFrame.origin.y = round(CGRectGetMidY(self.bounds) - CGRectGetHeight(titleLabelFrame) / 2.0) + _titleVerticalPositionAdjustment;
+        titleLabelFrame.origin.x = round(CGRectGetMidX(self.bounds) - CGRectGetWidth(titleLabelFrame) / 2.0);
         
         if(CGRectGetMinX(titleLabelFrame) < CGRectGetMinX(contentFrame)) {
             titleLabelFrame.origin.x = CGRectGetMinX(contentFrame) + 5.0;
@@ -118,6 +142,8 @@
         }
         
         _titleLabel.frame = titleLabelFrame;
+        
+        _logoImageView.frame = CGRectZero;
     }
 }
 
@@ -166,13 +192,45 @@
 
 #pragma mark - Responding to Changes
 
+- (void)titleViewWillChange
+{
+    [_navigationItem.titleView removeFromSuperview];
+    
+    [self setNeedsLayout];
+}
+
 - (void)titleViewDidChange
 {
+    if(_navigationItem.titleView) {
+        [self addSubview:_navigationItem.titleView];
+    }
+    
     [self setNeedsLayout];
+}
+
+#pragma mark -
+
+- (void)barButtonItemsWillChange
+{
+    for (UIBarButtonItem *leftItem in _navigationItem._allLeftItems) {
+        [leftItem.view removeFromSuperview];
+    }
+    
+    for (UIBarButtonItem *rightItem in _navigationItem._allRightItems) {
+        [rightItem.view removeFromSuperview];
+    }
 }
 
 - (void)barButtonItemsDidChange
 {
+    for (UIBarButtonItem *leftItem in _navigationItem._allLeftItems) {
+        [self addSubview:leftItem.view];
+    }
+    
+    for (UIBarButtonItem *rightItem in _navigationItem._allRightItems) {
+        [self addSubview:rightItem.view];
+    }
+    
     [self setNeedsLayout];
 }
 

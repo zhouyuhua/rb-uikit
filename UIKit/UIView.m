@@ -73,8 +73,8 @@
 
 - (void)dealloc
 {
-    for (UIView *subview in _subviews)
-        [subview removeFromSuperview];
+    while (_subviews.count > 0)
+        [_subviews.lastObject removeFromSuperview];
 }
 
 - (id)initWithFrame:(CGRect)frame

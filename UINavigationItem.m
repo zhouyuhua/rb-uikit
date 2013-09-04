@@ -8,6 +8,7 @@
 
 #import "UINavigationItem_Private.h"
 #import "_UINavigationItemView.h"
+#import "UIBarButtonItem_Private.h"
 
 @implementation UINavigationItem
 
@@ -15,6 +16,8 @@
 {
     if((self = [super init])) {
         self.title = title;
+        
+        _allLeftItems = [NSMutableArray array];
     }
     
     return self;
@@ -35,7 +38,10 @@
 
 - (void)setTitleView:(UIView *)titleView
 {
-    _titleView = titleView;
+    [_itemView titleViewWillChange];
+    {
+        _titleView = titleView;
+    }
     [_itemView titleViewDidChange];
 }
 
@@ -43,21 +49,43 @@
 
 - (void)setHidesBackButton:(BOOL)hidesBackButton animated:(BOOL)animated
 {
-    UIKitUnimplementedMethod();
+    [_itemView barButtonItemsWillChange];
+    {
+        _hidesBackButton = hidesBackButton;
+        [self _invalidateAllLeftItems];
+    }
     [_itemView barButtonItemsDidChange];
 }
 
 #pragma mark -
 
+- (void)setLeftBarButtonItems:(NSArray *)leftBarButtonItems
+{
+    [self setLeftBarButtonItems:leftBarButtonItems animated:NO];
+}
+
 - (void)setLeftBarButtonItems:(NSArray *)items animated:(BOOL)animated
 {
-    _leftBarButtonItems = [items copy];
+    [_itemView barButtonItemsWillChange];
+    {
+        _leftBarButtonItems = [items copy];
+        [self _invalidateAllLeftItems];
+    }
     [_itemView barButtonItemsDidChange];
+}
+
+- (void)setRightBarButtonItems:(NSArray *)rightBarButtonItems
+{
+    [self setRightBarButtonItems:rightBarButtonItems animated:NO];
 }
 
 - (void)setRightBarButtonItems:(NSArray *)items animated:(BOOL)animated
 {
-    _rightBarButtonItems = [items copy];
+    [_itemView barButtonItemsWillChange];
+    {
+        _rightBarButtonItems = [items copy];
+        [self _invalidateAllLeftItems];
+    }
     [_itemView barButtonItemsDidChange];
 }
 
@@ -65,8 +93,31 @@
 
 - (void)setLeftItemsSupplementBackButton:(BOOL)leftItemsSupplementBackButton
 {
-    _leftItemsSupplementBackButton = leftItemsSupplementBackButton;
+    [_itemView barButtonItemsWillChange];
+    {
+        _leftItemsSupplementBackButton = leftItemsSupplementBackButton;
+    }
     [_itemView barButtonItemsDidChange];
+}
+
+#pragma mark -
+
+- (void)setBackBarButtonItem:(UIBarButtonItem *)backBarButtonItem
+{
+    [_itemView barButtonItemsWillChange];
+    {
+        _backBarButtonItem = backBarButtonItem;
+        [self _invalidateAllLeftItems];
+    }
+    [_itemView barButtonItemsDidChange];
+}
+
+- (UIBarButtonItem *)backBarButtonItem
+{
+    return _backBarButtonItem ?: [[UIBarButtonItem alloc] initWithTitle:nil
+                                                                  style:UIBarButtonItemStyle_Private_Back
+                                                                 target:nil
+                                                                 action:nil];
 }
 
 #pragma mark -
@@ -101,6 +152,43 @@
 - (UIBarButtonItem *)rightBarButtonItem
 {
     return [self.rightBarButtonItems firstObject];
+}
+
+#pragma mark - Internal
+
+- (void)_invalidateAllLeftItems
+{
+    _allLeftItems = nil;
+}
+
+- (NSArray *)_allLeftItems
+{
+    if(!_allLeftItems) {
+        NSMutableArray *allLeftItems = [self.leftBarButtonItems mutableCopy] ?: [NSMutableArray array];
+        if(self._backItem && !self.hidesBackButton) {
+            [allLeftItems insertObject:self._backItem atIndex:0];
+        }
+        _allLeftItems = allLeftItems;
+    }
+    
+    return _allLeftItems;
+}
+
+- (NSArray *)_allRightItems
+{
+    return self.rightBarButtonItems;
+}
+
+#pragma mark -
+
+- (void)set_backItem:(UIBarButtonItem *)_backItem
+{
+    [self._itemView barButtonItemsWillChange];
+    {
+        __backItem = _backItem;
+        [self _invalidateAllLeftItems];
+    }
+    [self._itemView barButtonItemsDidChange];
 }
 
 @end

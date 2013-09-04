@@ -21,7 +21,12 @@
 
 #pragma mark - Responding to Changes
 
+- (void)titleViewWillChange;
 - (void)titleViewDidChange;
+
+#pragma mark -
+
+- (void)barButtonItemsWillChange;
 - (void)barButtonItemsDidChange;
 
 @end

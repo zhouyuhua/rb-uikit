@@ -12,6 +12,7 @@
 #import "UIResponder_Private.h"
 #import "UIView.h"
 #import "UIBarButtonItem_Private.h"
+#import "UINavigationItem_Private.h"
 
 @implementation UINavigationController
 
@@ -131,16 +132,15 @@
         [viewController viewDidAppear:animated];
     }
     
-    if([self.viewControllers count] > 1) {
-        NSString *backButtonTitle = [self.viewControllers[self.viewControllers.count - 2] navigationItem].title;
-        if([backButtonTitle length] > 15)
-            backButtonTitle = @"Back";
-        
-        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:backButtonTitle
-                                                                       style:UIBarButtonItemStyle_Private_Back
-                                                                      target:self
-                                                                      action:@selector(popFromNavigationController:)];
-        viewController.navigationItem.backBarButtonItem = backButton;
+    if(self.viewControllers.count > 1) {
+        UIViewController *previousController = self.viewControllers[self.viewControllers.count - 2];
+        UIBarButtonItem *backItem = previousController.navigationItem.backBarButtonItem;
+        backItem.target = self;
+        backItem.action = @selector(popFromNavigationController:);
+        if(backItem.title == nil) {
+            backItem.title = previousController.navigationItem.title;
+        }
+        viewController.navigationItem._backItem = backItem;
     }
     
     [_navigationBar pushNavigationItem:viewController.navigationItem animated:animated];

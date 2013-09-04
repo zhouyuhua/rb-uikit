@@ -24,13 +24,6 @@ static const char *kClassAppearanceKey = "Class/appearance";
     return appearance;
 }
 
-- (id)init
-{
-    if((self = [super init])) {
-        self.backgroundColor = [UIColor clearColor];
-    }
-    
-    return self;
-}
+UIConcreteAppearanceGeneratePropertyGetter(UIColor *, backgroundColor, [UIColor clearColor])
 
 @end
