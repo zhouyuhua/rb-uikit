@@ -25,6 +25,15 @@ typedef NS_ENUM(NSUInteger, UIKeyEventType) {
     UIKeyEventTypeKeyUp = NSKeyUp
 };
 
+enum UIKeys : short {
+    UIKeyUpArrow = 126,
+    UIKeyDownArrow = 125,
+    UIKeyLeftArrow = 123,
+    UIKeyRightArrow = 124,
+    UIKeyEnter = 36,
+    UIKeyEscape = 53,
+};
+
 @interface UIKeyEvent : NSObject
 
 @property (nonatomic, readonly) NSTimeInterval timestamp;

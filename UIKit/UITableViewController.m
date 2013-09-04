@@ -37,6 +37,13 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [_tableView becomeFirstResponder];
+}
+
 #pragma mark - Loading
 
 - (void)viewDidLoad

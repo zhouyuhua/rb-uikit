@@ -78,12 +78,12 @@
 
 - (void)keyUp:(NSEvent *)event
 {
-    [_kitWindow keyUp:[[UIKeyEvent alloc] initWithNSEvent:event]];
+    [UIApp _dispatchKeyEvent:event fromHostView:self];
 }
 
 - (void)keyDown:(NSEvent *)event
 {
-    [_kitWindow keyDown:[[UIKeyEvent alloc] initWithNSEvent:event]];
+    [UIApp _dispatchKeyEvent:event fromHostView:self];
 }
 
 #pragma mark -

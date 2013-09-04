@@ -552,8 +552,8 @@
     [_subviews insertObject:view atIndex:index];
     [self.layer insertSublayer:view.layer atIndex:(unsigned int)index];
     view.superview = self;
-    view->_window = self.window;
-    view.firstResponderManager = self.window;
+    view.window = self.window;
+    view.firstResponderManager = self.firstResponderManager;
 
     if(_window)
         [view _viewDidMoveToWindow:_window];

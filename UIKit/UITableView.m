@@ -63,6 +63,18 @@
     return [self initWithFrame:frame style:UITableViewStylePlain];
 }
 
+#pragma mark - Responderness
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (BOOL)canResignFirstResponder
+{
+    return YES;
+}
+
 #pragma mark - Properties
 
 - (void)setDataSource:(id <UITableViewDataSource>)dataSource
@@ -564,7 +576,11 @@
 
 - (UIView *)_footerViewForSection:(NSInteger)section
 {
-    return nil;
+    UIView *footerView = nil;
+    if(_delegateRespondsTo.tableViewViewForFooterInSection)
+        footerView = [self.delegate tableView:self viewForFooterInSection:section];
+    
+    return footerView;
 }
 
 #pragma mark - Managing Selection
@@ -602,6 +618,66 @@
     
     if([_selectedIndexPath isEqual:indexPath])
         _selectedIndexPath = nil;
+}
+
+#pragma mark - Actions
+
+- (NSIndexPath *)indexPathPrecedingIndexPath:(NSIndexPath *)indexPath
+{
+    if(!indexPath)
+        return [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    NSUInteger section = indexPath.section;
+    NSUInteger row = indexPath.row;
+    if(row == 0) {
+        if(section > 0) {
+            section--;
+            row = [self numberOfRowsInSection:section] - 1;
+        } else {
+            return nil;
+        }
+    } else {
+        row--;
+    }
+    
+    return [NSIndexPath indexPathForRow:row inSection:section];
+}
+
+- (NSIndexPath *)indexPathFollowingIndexPath:(NSIndexPath *)indexPath
+{
+    if(!indexPath)
+        return [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    NSUInteger section = indexPath.section;
+    NSUInteger row = indexPath.row + 1;
+    if(row >= [self numberOfRowsInSection:section]) {
+        section++;
+        row = 0;
+        
+        if(section >= [self numberOfSections] || [self numberOfRowsInSection:section] == 0)
+            return nil;
+    }
+    
+    return [NSIndexPath indexPathForRow:row inSection:section];
+}
+
+- (IBAction)selectNextRow:(id)sender
+{
+    [self selectRowAtIndexPath:[self indexPathFollowingIndexPath:self.indexPathForSelectedRow] animated:NO scrollPosition:UITableViewScrollPositionTop];
+}
+
+- (IBAction)selectPreviousRow:(id)sender
+{
+    [self selectRowAtIndexPath:[self indexPathPrecedingIndexPath:self.indexPathForSelectedRow] animated:NO scrollPosition:UITableViewScrollPositionTop];
+}
+
+- (IBAction)deselectAll:(id)sender
+{
+    if(self.indexPathForSelectedRow != nil) {
+        [self deselectRowAtIndexPath:self.indexPathForSelectedRow animated:NO];
+    } else {
+        NSBeep();
+    }
 }
 
 #pragma mark - Event Handling
@@ -642,6 +718,8 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [self becomeFirstResponder];
+    
     if(_selectedIndexPath && _delegateRespondsTo.tableViewWillDeselectRowAtIndexPath) {
         [self.delegate tableView:self willDeselectRowAtIndexPath:_selectedIndexPath];
     }
@@ -666,6 +744,40 @@
     
     if(_selectedIndexPath && _delegateRespondsTo.tableViewDidDeselectRowAtIndexPath) {
         [self.delegate tableView:self didDeselectRowAtIndexPath:_selectedIndexPath];
+    }
+}
+
+#pragma mark -
+
+- (void)keyDown:(UIKeyEvent *)event
+{
+    switch (event.keyCode) {
+        case UIKeyUpArrow: {
+            [self selectPreviousRow:nil];
+            
+            break;
+        }
+            
+        case UIKeyDownArrow: {
+            [self selectNextRow:nil];
+            
+            break;
+        }
+            
+        case UIKeyRightArrow:
+        case UIKeyEnter: {
+            if(self.indexPathForSelectedRow && _delegateRespondsTo.tableViewDidSelectRowAtIndexPath) {
+                [self.delegate tableView:self didSelectRowAtIndexPath:self.indexPathForSelectedRow];
+            }
+            
+            break;
+        }
+            
+        case UIKeyEscape: {
+            [self deselectAll:nil];
+            
+            break;
+        }
     }
 }
 
