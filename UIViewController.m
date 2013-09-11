@@ -13,6 +13,8 @@
 #import "UINavigationController.h"
 #import "UINavigationItem.h"
 
+#import "UIWindow.h"
+
 @implementation UIViewController {
     UINavigationItem *_navigationItem;
     NSMutableArray *_childViewControllers;
@@ -159,6 +161,13 @@
     [self willMoveToParentViewController:nil];
     [self.parentViewController->_childViewControllers removeObject:self];
     [self didMoveToParentViewController:nil];
+}
+
+#pragma mark - Responder
+
+- (UIResponder *)nextResponder
+{
+    return _parentViewController ?: self.view.window;
 }
 
 #pragma mark - Properties

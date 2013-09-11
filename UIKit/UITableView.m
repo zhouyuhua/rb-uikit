@@ -778,6 +778,12 @@
             
             break;
         }
+            
+        default: {
+            [super keyDown:event];
+            
+            break;
+        }
     }
 }
 

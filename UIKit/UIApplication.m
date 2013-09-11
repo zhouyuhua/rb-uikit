@@ -264,17 +264,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 
 - (void)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView
 {
-    switch (event.type) {
-        case NSKeyDown: {
-            [hostView.kitWindow.currentFirstResponder keyDown:[[UIKeyEvent alloc] initWithNSEvent:event]];
-            
-            break;
-        }
-            
-        case NSKeyUp:
-            [hostView.kitWindow.currentFirstResponder keyUp:[[UIKeyEvent alloc] initWithNSEvent:event]];
-            break;
-    }
+    [hostView.kitWindow sendKeyEvent:[[UIKeyEvent alloc] initWithNSEvent:event]];
 }
 
 - (void)_dispatchMouseEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView

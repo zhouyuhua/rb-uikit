@@ -299,4 +299,32 @@ static Class _NativeWindowClass = Nil;
     return _NativeWindowClass ?: [NSWindow class];
 }
 
+#pragma mark -
+
+- (void)keyDown:(UIKeyEvent *)event
+{
+    if(event.keyCode == UIKeyTab) {
+        NSArray *possibleFirstResponders = [self _descendentViewsMatchingTest:^BOOL(UIView *view, BOOL *stop) {
+            return view.canBecomeFirstResponder;
+        }];
+        
+        NSLog(@"%@", possibleFirstResponders);
+    } else {
+        [super keyDown:event];
+    }
+}
+
+- (void)sendKeyEvent:(UIKeyEvent *)keyEvent
+{
+    switch (keyEvent.type) {
+        case UIKeyEventTypeKeyDown:
+            [self.currentFirstResponder keyDown:keyEvent];
+            break;
+            
+        case UIKeyEventTypeKeyUp:
+            [self.currentFirstResponder keyUp:keyEvent];
+            break;
+    }
+}
+
 @end

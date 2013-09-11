@@ -53,7 +53,6 @@
 		8B54A05C17B9E1FD0068775C /* TestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
 		8B789CD717D6EBA700E7CE4C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8B789CD917D6EBA700E7CE4C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		8B789CDB17D6EBA700E7CE4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		8B789CDF17D6EBA700E7CE4C /* Test-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Test-iOS-Info.plist"; sourceTree = "<group>"; };
 		8B789CE117D6EBA700E7CE4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8B789CE517D6EBA700E7CE4C /* Test-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Test-iOS-Prefix.pch"; sourceTree = "<group>"; };
@@ -136,7 +135,6 @@
 				8BE493701798EAE9002BEA5A /* XCTest.framework */,
 				8B789CD717D6EBA700E7CE4C /* Foundation.framework */,
 				8B789CD917D6EBA700E7CE4C /* CoreGraphics.framework */,
-				8B789CDB17D6EBA700E7CE4C /* UIKit.framework */,
 				8BE493531798EAE9002BEA5A /* Other Frameworks */,
 			);
 			name = Frameworks;

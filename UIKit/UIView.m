@@ -548,7 +548,7 @@
 
 - (NSArray *)subviews
 {
-    return self.subviews;
+    return _subviews;
 }
 
 #pragma mark -
@@ -720,6 +720,28 @@
         result = self;
     
     return result;
+}
+
+#pragma mark -
+
+- (NSArray *)_descendentViewsMatchingTest:(BOOL(^)(UIView *view, BOOL *stop))test
+{
+    NSMutableArray *descendents = [NSMutableArray array];
+    
+    BOOL stop = NO;
+    for (UIView *subview in _subviews) {
+        if(test(subview, &stop)) {
+            [descendents addObject:descendents];
+        }
+        
+        if(stop)
+            break;
+        
+        if(subview.subviews.count > 0)
+            [descendents addObjectsFromArray:[subview _descendentViewsMatchingTest:test]];
+    }
+    
+    return descendents;
 }
 
 #pragma mark - Window

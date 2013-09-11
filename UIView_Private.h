@@ -28,6 +28,10 @@
 
 @property (nonatomic, weak) UIViewController *_viewController;
 
+#pragma mark -
+
+- (NSArray *)_descendentViewsMatchingTest:(BOOL(^)(UIView *view, BOOL *stop))test;
+
 #pragma mark - readwrite
 
 @property (nonatomic, readwrite, unsafe_unretained) UIView *superview;

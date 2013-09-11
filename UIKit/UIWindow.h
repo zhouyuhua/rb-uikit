@@ -58,6 +58,8 @@ typedef NS_ENUM(NSUInteger, UIWindowLevel) {
 + (void)setNativeWindowClass:(Class)nativeWindowClass;
 + (Class)nativeWindowClass;
 
+- (void)sendKeyEvent:(UIKeyEvent *)keyEvent;
+
 @end
 
 UIKIT_EXTERN NSString *const UIWindowDidBecomeVisibleNotification;
