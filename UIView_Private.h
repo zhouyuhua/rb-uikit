@@ -13,6 +13,7 @@
 
 @interface UIView () <_UIFirstResponderManager> {
     __unsafe_unretained UIResponder *__firstResponder;
+    NSMutableArray *_registeredDraggingTypes;
 }
 
 - (void)_viewWillMoveToWindow:(UIWindow *)window;

@@ -26,6 +26,8 @@
         self.wantsLayer = YES;
         self.acceptsTouchEvents = YES;
         self.wantsRestingTouches = YES;
+        
+        [self registerForDraggedTypes:@[ (id)kUTTypeItem ]]; //We want it all
     }
     
     return self;
@@ -144,6 +146,43 @@
     if(matchingTouches.count != 0) {
         [UIApp _dispatchIdleScrollEvent:event ofPhase:NSEventPhaseCancelled fromHostView:self];
     }
+}
+
+#pragma mark - Drag and Drop
+
+- (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
+{
+    return NSDragOperationNone;
+}
+
+- (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
+{
+    return NSDragOperationNone;
+}
+
+- (void)draggingExited:(id <NSDraggingInfo>)sender
+{
+    
+}
+
+- (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender
+{
+    return YES;
+}
+
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
+{
+    return YES;
+}
+
+- (void)concludeDragOperation:(id <NSDraggingInfo>)sender
+{
+    
+}
+
+- (void)draggingEnded:(id <NSDraggingInfo>)sender
+{
+    
 }
 
 @end

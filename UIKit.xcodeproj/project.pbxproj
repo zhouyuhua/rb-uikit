@@ -61,7 +61,7 @@
 		8B54689317D4161300D7E338 /* UINavigationBar_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54689217D4161300D7E338 /* UINavigationBar_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54689E17D41B7B00D7E338 /* UINavigationItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54689C17D41B7B00D7E338 /* UINavigationItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54689F17D41B7B00D7E338 /* UINavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54689D17D41B7B00D7E338 /* UINavigationItem.m */; };
-		8B5468A117D41C5E00D7E338 /* UINavigationItem_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5468A017D41C5E00D7E338 /* UINavigationItem_Private.h */; };
+		8B5468A117D41C5E00D7E338 /* UINavigationItem_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B5468A017D41C5E00D7E338 /* UINavigationItem_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */; };
 		8B54A03917B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B549FFC17B9C8790068775C /* NSIndexPath+UICollectionViewAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -135,6 +135,11 @@
 		8B6AEDED17AB642A00D6858A /* UIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B6AEDEB17AB642A00D6858A /* UIApplication.m */; };
 		8B6AEDEF17AB6BF600D6858A /* UIApplication_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDEE17AB6BF600D6858A /* UIApplication_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6AEDFE17AC614100D6858A /* UIGestureRecognizerSubclass.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B755AF417E02FC3006BBA4F /* UIView+UIDraggingDestination.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B755AF217E02FC3006BBA4F /* UIView+UIDraggingDestination.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B755AF517E02FC3006BBA4F /* UIView+UIDraggingDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B755AF317E02FC3006BBA4F /* UIView+UIDraggingDestination.m */; };
+		8B755AF917E032FA006BBA4F /* UIPasteboard.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B755AF717E032FA006BBA4F /* UIPasteboard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B755AFA17E032FA006BBA4F /* UIPasteboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B755AF817E032FA006BBA4F /* UIPasteboard.m */; };
+		8B755AFC17E03648006BBA4F /* UIPasteboard_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B755AFB17E03648006BBA4F /* UIPasteboard_Private.h */; };
 		8B91075B17A8A8A8008D9DF0 /* UIResponder_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075C17A8A971008D9DF0 /* UIView_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91075F17A8B1EA008D9DF0 /* UIGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */; };
@@ -363,6 +368,11 @@
 		8B6AEDEB17AB642A00D6858A /* UIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIApplication.m; sourceTree = "<group>"; };
 		8B6AEDEE17AB6BF600D6858A /* UIApplication_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIApplication_Private.h; sourceTree = "<group>"; };
 		8B6AEDFE17AC614100D6858A /* UIGestureRecognizerSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGestureRecognizerSubclass.h; sourceTree = "<group>"; };
+		8B755AF217E02FC3006BBA4F /* UIView+UIDraggingDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UIDraggingDestination.h"; sourceTree = "<group>"; };
+		8B755AF317E02FC3006BBA4F /* UIView+UIDraggingDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UIDraggingDestination.m"; sourceTree = "<group>"; };
+		8B755AF717E032FA006BBA4F /* UIPasteboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPasteboard.h; sourceTree = "<group>"; };
+		8B755AF817E032FA006BBA4F /* UIPasteboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPasteboard.m; sourceTree = "<group>"; };
+		8B755AFB17E03648006BBA4F /* UIPasteboard_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPasteboard_Private.h; sourceTree = "<group>"; };
 		8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIResponder_Private.h; sourceTree = "<group>"; };
 		8B91075C17A8A971008D9DF0 /* UIView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIView_Private.h; sourceTree = "<group>"; };
 		8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIGraphics.m; sourceTree = "<group>"; };
@@ -669,6 +679,18 @@
 			name = "Event Handling";
 			sourceTree = "<group>";
 		};
+		8B755AF617E032EC006BBA4F /* Drag & Drop */ = {
+			isa = PBXGroup;
+			children = (
+				8B755AF217E02FC3006BBA4F /* UIView+UIDraggingDestination.h */,
+				8B755AF317E02FC3006BBA4F /* UIView+UIDraggingDestination.m */,
+				8B755AF717E032FA006BBA4F /* UIPasteboard.h */,
+				8B755AF817E032FA006BBA4F /* UIPasteboard.m */,
+				8B755AFB17E03648006BBA4F /* UIPasteboard_Private.h */,
+			);
+			name = "Drag & Drop";
+			sourceTree = "<group>";
+		};
 		8B91077517A8C6C4008D9DF0 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,6 +708,7 @@
 				8BE492EB1798C888002BEA5A /* UIView.m */,
 				8B91075C17A8A971008D9DF0 /* UIView_Private.h */,
 				8B91077517A8C6C4008D9DF0 /* Animation */,
+				8B755AF617E032EC006BBA4F /* Drag & Drop */,
 			);
 			name = UIView;
 			sourceTree = "<group>";
@@ -980,6 +1003,7 @@
 				8BE493411798EAA0002BEA5A /* UIKitDefines.h in Headers */,
 				8BE493241798DA39002BEA5A /* UIScreen.h in Headers */,
 				8BE4932A1798DBD5002BEA5A /* UIDevice.h in Headers */,
+				8B755AF417E02FC3006BBA4F /* UIView+UIDraggingDestination.h in Headers */,
 				8BE492E81798C52F002BEA5A /* UIResponder.h in Headers */,
 				8BE492EC1798C888002BEA5A /* UIView.h in Headers */,
 				8B5BD764179B404C00A53E4A /* UIImage_Private.h in Headers */,
@@ -989,6 +1013,7 @@
 				8B5BD761179B3A8500A53E4A /* UIThreePartImageProvider.h in Headers */,
 				8BE4931D1798D65C002BEA5A /* UIViewController.h in Headers */,
 				8BE493161798D65C002BEA5A /* UINavigationBar.h in Headers */,
+				8B755AFC17E03648006BBA4F /* UIPasteboard_Private.h in Headers */,
 				8BE493181798D65C002BEA5A /* UINavigationController.h in Headers */,
 				8B5BD74E179908EC00A53E4A /* UIButtonBarBackgroundView.h in Headers */,
 				8BE493341798E3F3002BEA5A /* UIBarItem.h in Headers */,
@@ -997,7 +1022,6 @@
 				8B0114041799FDC300C8594C /* UIEvent.h in Headers */,
 				8B01140E179A19C500C8594C /* UIConcreteAppearance.h in Headers */,
 				8B5BD75B179B2CA700A53E4A /* UIImageProvider.h in Headers */,
-				8B5468A117D41C5E00D7E338 /* UINavigationItem_Private.h in Headers */,
 				8B91076217A8B6B7008D9DF0 /* UIWindowHostNativeView.h in Headers */,
 				8B91076A17A8B883008D9DF0 /* UITouch.h in Headers */,
 				8B08255B17AA18B100494FAA /* UISearchBar.h in Headers */,
@@ -1033,6 +1057,7 @@
 				8B54688217D2C86E00D7E338 /* UITabBar.h in Headers */,
 				8B515C4617BB39E5003065D2 /* UITableView.h in Headers */,
 				8B95506817C316D600B8E4F9 /* UIKeyEvent.h in Headers */,
+				8B755AF917E032FA006BBA4F /* UIPasteboard.h in Headers */,
 				8B515C4A17BB39ED003065D2 /* UITableViewCell.h in Headers */,
 				8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */,
 				8BF0F9F217CE636000DAFD92 /* UIStringDrawing.h in Headers */,
@@ -1081,6 +1106,7 @@
 				8B515C5917BB3CEE003065D2 /* UITableView_Private.h in Headers */,
 				8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */,
 				8B515C4017BB1715003065D2 /* UICollectionViewUpdateItem_Private.h in Headers */,
+				8B5468A117D41C5E00D7E338 /* UINavigationItem_Private.h in Headers */,
 				8B5E725F17B9F83B006A16B9 /* UIMenuController_Private.h in Headers */,
 				8B5E726117B9F9C1006A16B9 /* UICollectionView_Internal.h in Headers */,
 				8B5BD73D1799037400A53E4A /* UIButtonBackgroundView.h in Headers */,
@@ -1235,6 +1261,7 @@
 				8BE4931E1798D65C002BEA5A /* UIViewController.m in Sources */,
 				8BE4933A1798E44D002BEA5A /* UIControl.m in Sources */,
 				8B39CBFB17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.m in Sources */,
+				8B755AF517E02FC3006BBA4F /* UIView+UIDraggingDestination.m in Sources */,
 				8BB4BD5617B1E860009B7708 /* UIScrollView.m in Sources */,
 				8BE493191798D65C002BEA5A /* UINavigationController.m in Sources */,
 				8B54A04E17B9CD7B0068775C /* UIGridLayoutInfo.m in Sources */,
@@ -1245,6 +1272,7 @@
 				8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */,
 				8B54688317D2C86E00D7E338 /* UITabBar.m in Sources */,
 				8B54A03A17B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.m in Sources */,
+				8B755AFA17E032FA006BBA4F /* UIPasteboard.m in Sources */,
 				8B6AEDE717AB638B00D6858A /* UIGestureRecognizer.m in Sources */,
 				8BE4932B1798DBD5002BEA5A /* UIDevice.m in Sources */,
 				8BB4BD6817B359BC009B7708 /* UIAnimator.m in Sources */,
