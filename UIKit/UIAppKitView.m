@@ -8,12 +8,12 @@
 
 #import "UIAppKitView.h"
 #import "UIWindow_Private.h"
-#import "UIWindowAppKitHostView.h"
-#import "UIAppKitAdaptorView.h"
+#import "UIWindowHostNativeView.h"
+#import "UIAppKitViewAdaptorNativeView.h"
 
 @interface UIAppKitView ()
 
-@property (nonatomic, readwrite) UIAppKitAdaptorView *adaptorView;
+@property (nonatomic, readwrite) UIAppKitViewAdaptorNativeView *adaptorView;
 
 @end
 
@@ -33,7 +33,7 @@
     
     if((self = [super initWithFrame:view.frame])) {
         view.wantsLayer = YES;
-        self.adaptorView = [[UIAppKitAdaptorView alloc] initWithView:view appKitView:self];
+        self.adaptorView = [[UIAppKitViewAdaptorNativeView alloc] initWithView:view appKitView:self];
         
         [self.layer addObserver:self forKeyPath:@"position" options:0 context:NULL];
     }
@@ -100,20 +100,20 @@
         [self.adaptorView removeFromSuperviewWithoutNeedingDisplay];
         [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:NSViewFrameDidChangeNotification
-                                                      object:newWindow.hostView];
+                                                      object:newWindow._hostNativeView];
     }
 }
 
 - (void)didMoveToWindow
 {
     if(self.window) {
-        self.window.hostView.postsFrameChangedNotifications = YES;
+        self.window._hostNativeView.postsFrameChangedNotifications = YES;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(layoutSubviews)
                                                      name:NSViewFrameDidChangeNotification
-                                                   object:self.window.hostView];
+                                                   object:self.window._hostNativeView];
         
-        [self.window.hostView addSubview:self.adaptorView];
+        [self.window._hostNativeView addSubview:self.adaptorView];
         [self.adaptorView.layer removeFromSuperlayer];
         [self.layer addSublayer:self.adaptorView.layer];
         

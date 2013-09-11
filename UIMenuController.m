@@ -11,7 +11,7 @@
 
 #import "UIView.h"
 #import "UIWindow_Private.h"
-#import "UIWindowAppKitHostView.h"
+#import "UIWindowHostNativeView.h"
 
 #import "UIApplication.h"
 
@@ -59,19 +59,19 @@
     _menuVisible = menuVisible;
     
     if(menuVisible) {
-        UIWindowAppKitHostView *hostView = self.targetView.window.hostView;
+        UIWindowHostNativeView *hostNativeView = self.targetView.window._hostNativeView;
         
         CGPoint popUpPoint;
         if(CGRectEqualToRect(self.targetRect, CGRectZero)) {
-            CGPoint pointInWindow = [hostView.window convertScreenToBase:[NSEvent mouseLocation]];
-            popUpPoint = [hostView convertPoint:pointInWindow fromView:nil];
+            CGPoint pointInWindow = [hostNativeView.window convertScreenToBase:[NSEvent mouseLocation]];
+            popUpPoint = [hostNativeView convertPoint:pointInWindow fromView:nil];
         } else {
             CGRect convertedTargetRect = [self.targetView.window convertRect:self.targetView.bounds fromView:self.targetView];
             popUpPoint = convertedTargetRect.origin;
         }
         [self.nativeMenu popUpMenuPositioningItem:nil
                                        atLocation:popUpPoint
-                                           inView:hostView];
+                                           inView:hostNativeView];
     } else {
         [self.nativeMenu cancelTracking];
     }

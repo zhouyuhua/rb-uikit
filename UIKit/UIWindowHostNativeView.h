@@ -10,7 +10,7 @@
 
 @class UIWindow;
 
-@interface UIWindowAppKitHostView : NSView <NSUserInterfaceValidations>
+@interface UIWindowHostNativeView : NSView <NSUserInterfaceValidations>
 
 @property (nonatomic, unsafe_unretained) UIWindow *kitWindow;
 

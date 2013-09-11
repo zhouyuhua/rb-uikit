@@ -8,7 +8,7 @@
 
 #import "UIEvent.h"
 
-@class UIWindowAppKitHostView;
+@class UIWindowHostNativeView;
 
 @interface UIEvent ()
 

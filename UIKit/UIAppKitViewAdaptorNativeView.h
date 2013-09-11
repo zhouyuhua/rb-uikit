@@ -10,7 +10,7 @@
 
 @class UIAppKitView;
 
-@interface UIAppKitAdaptorView : NSView
+@interface UIAppKitViewAdaptorNativeView : NSView
 
 - (instancetype)initWithView:(NSView *)view appKitView:(UIAppKitView *)appKitView;
 

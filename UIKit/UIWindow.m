@@ -12,7 +12,7 @@
 #import "UINavigationController.h"
 
 #import "UIApplication_Private.h"
-#import "UIWindowAppKitHostView.h"
+#import "UIWindowHostNativeView.h"
 #import "UITouch.h"
 #import "UIGestureRecognizer_Private.h"
 
@@ -26,22 +26,22 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 - (id)initWithFrame:(CGRect)frame
 {
     if((self = [super initWithFrame:frame])) {
-        self.underlyingWindow = [[self.class.nativeWindowClass alloc] initWithContentRect:frame
-                                                                                styleMask:self.class.nativeWindowStyleMask
-                                                                                  backing:NSBackingStoreBuffered
-                                                                                    defer:NO];
+        self._nativeWindow = [[self.class.nativeWindowClass alloc] initWithContentRect:frame
+                                                                             styleMask:self.class.nativeWindowStyleMask
+                                                                               backing:NSBackingStoreBuffered
+                                                                                 defer:NO];
         
-        [self.underlyingWindow center];
-        self.underlyingWindow.delegate = self;
-        self.underlyingWindow.level = NSNormalWindowLevel;
-        self.underlyingWindow.animationBehavior = NSWindowAnimationBehaviorDocumentWindow;
+        [self._nativeWindow center];
+        self._nativeWindow.delegate = self;
+        self._nativeWindow.level = NSNormalWindowLevel;
+        self._nativeWindow.animationBehavior = NSWindowAnimationBehaviorDocumentWindow;
         
-        self.hostView = [[UIWindowAppKitHostView alloc] initWithFrame:frame];
-        self.hostView.kitWindow = self;
-        self.underlyingWindow.contentView = self.hostView;
+        self._hostNativeView = [[UIWindowHostNativeView alloc] initWithFrame:frame];
+        self._hostNativeView.kitWindow = self;
+        self._nativeWindow.contentView = self._hostNativeView;
         
-        [self.underlyingWindow setAutorecalculatesContentBorderThickness:NO forEdge:NSMaxYEdge];
-        [self.underlyingWindow setContentBorderThickness:50.0 forEdge:NSMaxYEdge];
+        [self._nativeWindow setAutorecalculatesContentBorderThickness:NO forEdge:NSMaxYEdge];
+        [self._nativeWindow setContentBorderThickness:50.0 forEdge:NSMaxYEdge];
     }
     
     return self;
@@ -52,7 +52,7 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 - (void)setWindowLevel:(UIWindowLevel)windowLevel
 {
     _windowLevel = windowLevel;
-    self.underlyingWindow.level = CGWindowLevelForKey(windowLevel);
+    self._nativeWindow.level = CGWindowLevelForKey(windowLevel);
 }
 
 - (BOOL)isKeyWindow
@@ -64,7 +64,7 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 {
     UIApp.keyWindow = self;
     
-    [self.underlyingWindow becomeKeyWindow];
+    [self._nativeWindow becomeKeyWindow];
     [[NSNotificationCenter defaultCenter] postNotificationName:UIWindowDidBecomeKeyNotification object:self];
     
     [self _windowDidBecomeKey];
@@ -72,7 +72,7 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 
 - (void)resignKeyWindow
 {
-    [self.underlyingWindow resignKeyWindow];
+    [self._nativeWindow resignKeyWindow];
     [[NSNotificationCenter defaultCenter] postNotificationName:UIWindowDidResignKeyNotification object:self];
     
     [self _windowDidResignKey];
@@ -82,7 +82,7 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 
 - (void)makeKeyWindow
 {
-    [self.underlyingWindow makeKeyWindow];
+    [self._nativeWindow makeKeyWindow];
 }
 
 - (void)makeKeyAndVisible
@@ -91,8 +91,8 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
         NSLog(@"*** Warning, UIWindow shown without a root view controller");
     }
     
-    [self.underlyingWindow orderFront:nil];
-    [self.underlyingWindow makeKeyWindow];
+    [self._nativeWindow orderFront:nil];
+    [self._nativeWindow makeKeyWindow];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UIWindowDidBecomeVisibleNotification object:self];
 }
@@ -102,7 +102,7 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 - (void)setHidden:(BOOL)hidden
 {
     if(hidden) {
-        [self.underlyingWindow close];
+        [self._nativeWindow close];
     } else {
         [self makeKeyAndVisible];
     }
@@ -110,7 +110,7 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 
 - (BOOL)isHidden
 {
-    return !self.underlyingWindow.isVisible;
+    return !self._nativeWindow.isVisible;
 }
 
 #pragma mark -
@@ -139,7 +139,7 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 
 - (void)setRootViewController:(UIViewController *)rootViewController
 {
-    [self.underlyingWindow unbind:@"title"];
+    [self._nativeWindow unbind:@"title"];
     [_rootViewController.view removeFromSuperview];
     _rootViewController._rootViewController = NO;
     
@@ -153,9 +153,9 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     [_rootViewController.view _viewDidMoveToWindow:self];
     
     if([_rootViewController respondsToSelector:@selector(visibleViewController)]) {
-        [self.underlyingWindow bind:@"title" toObject:_rootViewController withKeyPath:@"visibleViewController.navigationItem.title" options:nil];
+        [self._nativeWindow bind:@"title" toObject:_rootViewController withKeyPath:@"visibleViewController.navigationItem.title" options:nil];
     } else {
-        [self.underlyingWindow bind:@"title" toObject:_rootViewController withKeyPath:@"navigationItem.title" options:nil];
+        [self._nativeWindow bind:@"title" toObject:_rootViewController withKeyPath:@"navigationItem.title" options:nil];
     }
 }
 
@@ -166,19 +166,31 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     return UIApp;
 }
 
+#pragma mark - Key View Loop
+
+- (void)_recalculateKeyViewLoop
+{
+    NSMutableArray *views = [NSMutableArray array];
+    
+    [self _enumerateSubviews:^(UIView *subview, NSUInteger depth, BOOL *stop) {
+        if(![subview isKindOfClass:[UIWindow class]] && subview.canBecomeFirstResponder && subview.canResignFirstResponder)
+            [views addObject:subview];
+    }];
+    
+    self._possibleKeyViews = views;
+}
+
+- (void)_viewWasAddedToWindow:(UIView *)view
+{
+    [self _recalculateKeyViewLoop];
+}
+
+- (void)_viewWasRemovedFromWindow:(UIView *)view
+{
+    [self _recalculateKeyViewLoop];
+}
+
 #pragma mark - Events
-
-- (void)keyDown:(UIKeyEvent *)event
-{
-    [self.rootViewController keyDown:event];
-}
-
-- (void)keyUp:(UIKeyEvent *)event
-{
-    [self.rootViewController keyUp:event];
-}
-
-#pragma mark -
 
 - (void)sendEvent:(UIEvent *)event
 {
@@ -239,7 +251,7 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 
 - (NSUndoManager *)undoManager
 {
-    return self.underlyingWindow.undoManager;
+    return self._nativeWindow.undoManager;
 }
 
 #pragma mark - <NSWindowDelegate>
@@ -304,11 +316,19 @@ static Class _NativeWindowClass = Nil;
 - (void)keyDown:(UIKeyEvent *)event
 {
     if(event.keyCode == UIKeyTab) {
-        NSArray *possibleFirstResponders = [self _descendentViewsMatchingTest:^BOOL(UIView *view, BOOL *stop) {
-            return view.canBecomeFirstResponder;
-        }];
-        
-        NSLog(@"%@", possibleFirstResponders);
+        NSUInteger indexOfKeyView = [self._possibleKeyViews indexOfObject:(UIView *)self._firstResponder];
+        if(indexOfKeyView == NSNotFound) {
+            [self._possibleKeyViews.firstObject becomeFirstResponder];
+        } else if(self._possibleKeyViews.count > 0) {
+            NSUInteger newKeyViewIndex = indexOfKeyView + 1;
+            if(newKeyViewIndex >= self._possibleKeyViews.count) {
+                newKeyViewIndex = 0;
+            }
+            
+            if(newKeyViewIndex != indexOfKeyView) {
+                [self._possibleKeyViews[newKeyViewIndex] becomeFirstResponder];
+            }
+        }
     } else {
         [super keyDown:event];
     }
@@ -318,11 +338,11 @@ static Class _NativeWindowClass = Nil;
 {
     switch (keyEvent.type) {
         case UIKeyEventTypeKeyDown:
-            [self.currentFirstResponder keyDown:keyEvent];
+            [self._firstResponder ?: self keyDown:keyEvent];
             break;
             
         case UIKeyEventTypeKeyUp:
-            [self.currentFirstResponder keyUp:keyEvent];
+            [self._firstResponder ?: self keyUp:keyEvent];
             break;
     }
 }

@@ -8,14 +8,14 @@
 
 #import "UIResponder.h"
 
-@protocol UIFirstResponderManager <NSObject>
+@protocol _UIFirstResponderManager <NSObject>
 
-@property (nonatomic, unsafe_unretained) UIResponder *currentFirstResponder;
+@property (nonatomic, unsafe_unretained, setter=_setFirstResponder:) UIResponder *_firstResponder;
 
 @end
 
 @interface UIResponder ()
 
-@property (nonatomic, unsafe_unretained) id <UIFirstResponderManager> firstResponderManager;
+@property (nonatomic, unsafe_unretained, setter=_setFirstResponderManager:) id <_UIFirstResponderManager> _firstResponderManager;
 
 @end

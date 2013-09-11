@@ -33,7 +33,7 @@ typedef struct MethodPair {
     MethodPair const methodPairs[] = {
         { @selector(colorWithWhite:alpha:), @selector(colorWithDeviceWhite:alpha:) },
         { @selector(colorWithHue:saturation:brightness:alpha:), @selector(colorWithDeviceHue:saturation:brightness:alpha:) },
-        { @selector(colorWithRed:green:blue:), @selector(colorWithDeviceRed:green:blue:alpha:) },
+        { @selector(colorWithRed:green:blue:alpha:), @selector(colorWithDeviceRed:green:blue:alpha:) },
     };
     
     Class metaclass = object_getClass(self);

@@ -21,8 +21,8 @@
 		8B08256817AA264100494FAA /* UIBackButtonChevron.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B08256617AA264100494FAA /* UIBackButtonChevron.png */; };
 		8B08256D17AA2ACF00494FAA /* UIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B08256B17AA2ACF00494FAA /* UIAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B08256E17AA2ACF00494FAA /* UIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B08256C17AA2ACF00494FAA /* UIAlertView.m */; };
-		8B1EC8DA17A9F2B10035369C /* UIAppKitAdaptorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8D817A9F2B10035369C /* UIAppKitAdaptorView.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		8B1EC8DB17A9F2B10035369C /* UIAppKitAdaptorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8D917A9F2B10035369C /* UIAppKitAdaptorView.m */; };
+		8B1EC8DA17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B1EC8DB17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */; };
 		8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B1EC8E217A9F8280035369C /* UINSTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8DD17A9F8280035369C /* UINSTextFieldCell.m */; };
 		8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DE17A9F8280035369C /* UITextField_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -138,8 +138,8 @@
 		8B91075B17A8A8A8008D9DF0 /* UIResponder_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075C17A8A971008D9DF0 /* UIView_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91075F17A8B1EA008D9DF0 /* UIGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */; };
-		8B91076217A8B6B7008D9DF0 /* UIWindowAppKitHostView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91076017A8B6B7008D9DF0 /* UIWindowAppKitHostView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B91076317A8B6B7008D9DF0 /* UIWindowAppKitHostView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91076117A8B6B7008D9DF0 /* UIWindowAppKitHostView.m */; };
+		8B91076217A8B6B7008D9DF0 /* UIWindowHostNativeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91076017A8B6B7008D9DF0 /* UIWindowHostNativeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B91076317A8B6B7008D9DF0 /* UIWindowHostNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91076117A8B6B7008D9DF0 /* UIWindowHostNativeView.m */; };
 		8B91076517A8B772008D9DF0 /* UIEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91076417A8B772008D9DF0 /* UIEvent.m */; };
 		8B91076717A8B7B1008D9DF0 /* UIEvent_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91076617A8B7B1008D9DF0 /* UIEvent_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91076A17A8B883008D9DF0 /* UITouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91076817A8B883008D9DF0 /* UITouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -248,8 +248,8 @@
 		8B08256617AA264100494FAA /* UIBackButtonChevron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBackButtonChevron.png; sourceTree = "<group>"; };
 		8B08256B17AA2ACF00494FAA /* UIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertView.h; sourceTree = "<group>"; };
 		8B08256C17AA2ACF00494FAA /* UIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAlertView.m; sourceTree = "<group>"; };
-		8B1EC8D817A9F2B10035369C /* UIAppKitAdaptorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitAdaptorView.h; sourceTree = "<group>"; };
-		8B1EC8D917A9F2B10035369C /* UIAppKitAdaptorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitAdaptorView.m; sourceTree = "<group>"; };
+		8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitViewAdaptorNativeView.h; sourceTree = "<group>"; };
+		8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitViewAdaptorNativeView.m; sourceTree = "<group>"; };
 		8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINSTextFieldCell.h; sourceTree = "<group>"; };
 		8B1EC8DD17A9F8280035369C /* UINSTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINSTextFieldCell.m; sourceTree = "<group>"; };
 		8B1EC8DE17A9F8280035369C /* UITextField_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextField_Private.h; sourceTree = "<group>"; };
@@ -366,8 +366,8 @@
 		8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIResponder_Private.h; sourceTree = "<group>"; };
 		8B91075C17A8A971008D9DF0 /* UIView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIView_Private.h; sourceTree = "<group>"; };
 		8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIGraphics.m; sourceTree = "<group>"; };
-		8B91076017A8B6B7008D9DF0 /* UIWindowAppKitHostView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWindowAppKitHostView.h; sourceTree = "<group>"; };
-		8B91076117A8B6B7008D9DF0 /* UIWindowAppKitHostView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWindowAppKitHostView.m; sourceTree = "<group>"; };
+		8B91076017A8B6B7008D9DF0 /* UIWindowHostNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWindowHostNativeView.h; sourceTree = "<group>"; };
+		8B91076117A8B6B7008D9DF0 /* UIWindowHostNativeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWindowHostNativeView.m; sourceTree = "<group>"; };
 		8B91076417A8B772008D9DF0 /* UIEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIEvent.m; sourceTree = "<group>"; };
 		8B91076617A8B7B1008D9DF0 /* UIEvent_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIEvent_Private.h; sourceTree = "<group>"; };
 		8B91076817A8B883008D9DF0 /* UITouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouch.h; sourceTree = "<group>"; };
@@ -713,12 +713,12 @@
 		8B91077C17A97EBA008D9DF0 /* Adaptors */ = {
 			isa = PBXGroup;
 			children = (
-				8B91076017A8B6B7008D9DF0 /* UIWindowAppKitHostView.h */,
-				8B91076117A8B6B7008D9DF0 /* UIWindowAppKitHostView.m */,
+				8B91076017A8B6B7008D9DF0 /* UIWindowHostNativeView.h */,
+				8B91076117A8B6B7008D9DF0 /* UIWindowHostNativeView.m */,
 				8B91077D17A97EF7008D9DF0 /* UIAppKitView.h */,
 				8B91077E17A97EF7008D9DF0 /* UIAppKitView.m */,
-				8B1EC8D817A9F2B10035369C /* UIAppKitAdaptorView.h */,
-				8B1EC8D917A9F2B10035369C /* UIAppKitAdaptorView.m */,
+				8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */,
+				8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */,
 			);
 			name = Adaptors;
 			sourceTree = "<group>";
@@ -998,7 +998,7 @@
 				8B01140E179A19C500C8594C /* UIConcreteAppearance.h in Headers */,
 				8B5BD75B179B2CA700A53E4A /* UIImageProvider.h in Headers */,
 				8B5468A117D41C5E00D7E338 /* UINavigationItem_Private.h in Headers */,
-				8B91076217A8B6B7008D9DF0 /* UIWindowAppKitHostView.h in Headers */,
+				8B91076217A8B6B7008D9DF0 /* UIWindowHostNativeView.h in Headers */,
 				8B91076A17A8B883008D9DF0 /* UITouch.h in Headers */,
 				8B08255B17AA18B100494FAA /* UISearchBar.h in Headers */,
 				8B08256017AA1A3500494FAA /* UITextInputTraits.h in Headers */,
@@ -1059,7 +1059,7 @@
 				8B91077317A8C62D008D9DF0 /* UIAnimationCollection.h in Headers */,
 				8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */,
 				8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */,
-				8B1EC8DA17A9F2B10035369C /* UIAppKitAdaptorView.h in Headers */,
+				8B1EC8DA17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h in Headers */,
 				8B54A05617B9D6CC0068775C /* UIScrollView_Private.h in Headers */,
 				8B91077817A979F9008D9DF0 /* UIWindow_Private.h in Headers */,
 				8B6AEDE917AB639400D6858A /* UIGestureRecognizer_Private.h in Headers */,
@@ -1225,7 +1225,7 @@
 				8B54A04317B9CD7B0068775C /* UICollectionViewData.m in Sources */,
 				8BF623F317BDD2A70015ED5C /* UITableViewSectionInfo.m in Sources */,
 				8BE492E91798C52F002BEA5A /* UIResponder.m in Sources */,
-				8B91076317A8B6B7008D9DF0 /* UIWindowAppKitHostView.m in Sources */,
+				8B91076317A8B6B7008D9DF0 /* UIWindowHostNativeView.m in Sources */,
 				8B515C5317BB3A25003065D2 /* UITableViewController.m in Sources */,
 				8BB4BD5C17B1EC51009B7708 /* UIScroller.m in Sources */,
 				8B91076517A8B772008D9DF0 /* UIEvent.m in Sources */,
@@ -1275,7 +1275,7 @@
 				8BF0F9F317CE636000DAFD92 /* UIStringDrawing.m in Sources */,
 				8B5BD7391798FA9B00A53E4A /* UIButton.m in Sources */,
 				8B54686B17D2B33E00D7E338 /* UIKitConfigurationManager.m in Sources */,
-				8B1EC8DB17A9F2B10035369C /* UIAppKitAdaptorView.m in Sources */,
+				8B1EC8DB17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m in Sources */,
 				8B95506917C316D600B8E4F9 /* UIKeyEvent.m in Sources */,
 				8B01140F179A19C500C8594C /* UIConcreteAppearance.m in Sources */,
 				8B08255C17AA18B100494FAA /* UISearchBar.m in Sources */,

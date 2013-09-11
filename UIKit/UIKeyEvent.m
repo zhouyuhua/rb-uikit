@@ -18,6 +18,8 @@
         self.modifierFlags = [event modifierFlags];
         self.repeat = [event isARepeat];
         self.type = [event type];
+        
+        self._event = event;
     }
     
     return self;

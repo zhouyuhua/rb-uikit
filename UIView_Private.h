@@ -11,8 +11,8 @@
 
 @class UIViewController;
 
-@interface UIView () <UIFirstResponderManager> {
-    __unsafe_unretained UIResponder *_currentFirstResponder;
+@interface UIView () <_UIFirstResponderManager> {
+    __unsafe_unretained UIResponder *__firstResponder;
 }
 
 - (void)_viewWillMoveToWindow:(UIWindow *)window;
@@ -30,7 +30,8 @@
 
 #pragma mark -
 
-- (NSArray *)_descendentViewsMatchingTest:(BOOL(^)(UIView *view, BOOL *stop))test;
+- (void)_enumerateSubviews:(void(^)(UIView *subview, NSUInteger depth, BOOL *stop))block;
+- (void)_printSubviews;
 
 #pragma mark - readwrite
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UIWindowAppKitHostView.h"
+#import "UIWindowHostNativeView.h"
 #import "UIColor.h"
 #import "UIWindow_Private.h"
 #import "UIEvent_Private.h"
@@ -15,7 +15,7 @@
 #import "UIApplication_Private.h"
 #import "UIGestureRecognizer_Private.h"
 
-@implementation UIWindowAppKitHostView {
+@implementation UIWindowHostNativeView {
     UIEvent *_currentEvent;
     UITouch *_currentTouch;
 }

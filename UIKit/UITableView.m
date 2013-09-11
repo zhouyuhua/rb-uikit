@@ -595,8 +595,6 @@
     if(!indexPath)
         return;
     
-    //TODO: Scroll position
-    
     if(_selectedIndexPath) {
         UITableViewCell *cell = [self cellForRowAtIndexPath:_selectedIndexPath];
         [cell setSelected:NO animated:animated];
@@ -606,6 +604,23 @@
     
     UITableViewCell *cell = [self cellForRowAtIndexPath:_selectedIndexPath];
     [cell setSelected:YES animated:animated];
+    
+    if(scrollPosition == UITableViewScrollPositionNone) {
+        CGRect visibleFrame = self.bounds;
+        
+        CGRect cellFrame = [self rectForRowAtIndexPath:indexPath];
+        if(CGRectGetMaxY(cellFrame) > CGRectGetMaxY(visibleFrame)) {
+            CGPoint contentOffset = self.contentOffset;
+            contentOffset.y = CGRectGetMaxY(cellFrame) - CGRectGetHeight(visibleFrame);
+            self.contentOffset = contentOffset;
+        } else if(CGRectGetMinY(cellFrame) < CGRectGetMinY(visibleFrame)) {
+            CGPoint contentOffset = self.contentOffset;
+            contentOffset.y = CGRectGetMinY(cellFrame);
+            self.contentOffset = contentOffset;
+        }
+    } else {
+        UIKitUnimplementedMethod();
+    }
 }
 
 - (void)deselectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated
@@ -663,12 +678,12 @@
 
 - (IBAction)selectNextRow:(id)sender
 {
-    [self selectRowAtIndexPath:[self indexPathFollowingIndexPath:self.indexPathForSelectedRow] animated:NO scrollPosition:UITableViewScrollPositionTop];
+    [self selectRowAtIndexPath:[self indexPathFollowingIndexPath:self.indexPathForSelectedRow] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (IBAction)selectPreviousRow:(id)sender
 {
-    [self selectRowAtIndexPath:[self indexPathPrecedingIndexPath:self.indexPathForSelectedRow] animated:NO scrollPosition:UITableViewScrollPositionTop];
+    [self selectRowAtIndexPath:[self indexPathPrecedingIndexPath:self.indexPathForSelectedRow] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (IBAction)deselectAll:(id)sender

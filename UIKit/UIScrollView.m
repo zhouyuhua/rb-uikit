@@ -177,7 +177,12 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
 
 - (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated
 {
-    [self setContentOffset:rect.origin animated:animated];
+    CGRect contentRect = CGRectMake(0.0, 0.0, _contentSize.width, _contentSize.height);
+    CGRect visibleRect = self.bounds;
+    CGRect intersection = CGRectIntersection(rect, contentRect);
+    if(!CGRectIsNull(intersection) && !CGRectContainsRect(visibleRect, intersection)) {
+        [self setContentOffset:intersection.origin animated:animated];
+    }
 }
 
 #pragma mark -

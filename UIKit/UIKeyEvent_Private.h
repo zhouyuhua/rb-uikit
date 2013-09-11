@@ -12,6 +12,8 @@
 
 - (instancetype)initWithNSEvent:(NSEvent *)event;
 
+@property (nonatomic, copy) NSEvent *_event;
+
 #pragma mark - readwrite
 
 @property (nonatomic, readwrite) NSTimeInterval timestamp;

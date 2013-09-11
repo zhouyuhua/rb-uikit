@@ -9,11 +9,18 @@
 #import "UIWindow.h"
 #import "UIResponder_Private.h"
 
-@class UIWindowAppKitHostView;
+@class UIWindowHostNativeView;
 
 @interface UIWindow () <NSWindowDelegate>
 
-@property (nonatomic) NSWindow *underlyingWindow;
-@property (nonatomic) UIWindowAppKitHostView *hostView;
+@property (nonatomic) NSWindow *_nativeWindow;
+@property (nonatomic) UIWindowHostNativeView *_hostNativeView;
+
+#pragma mark -
+
+- (void)_viewWasAddedToWindow:(UIView *)view;
+- (void)_viewWasRemovedFromWindow:(UIView *)view;
+
+@property (nonatomic, copy) NSArray *_possibleKeyViews;
 
 @end

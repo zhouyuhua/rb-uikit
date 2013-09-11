@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UIAppKitAdaptorView.h"
+#import "UIAppKitViewAdaptorNativeView.h"
 #import "UIAppKitView.h"
 #import "UIWindow_Private.h"
-#import "UIWindowAppKitHostView.h"
+#import "UIWindowHostNativeView.h"
 
-@interface UIAppKitAdaptorView ()
+@interface UIAppKitViewAdaptorNativeView ()
 
 @property (nonatomic, weak, readwrite) UIAppKitView *appKitView;
 @property (nonatomic, readwrite, assign) NSView *view;
@@ -20,7 +20,7 @@
 
 #pragma mark -
 
-@implementation UIAppKitAdaptorView
+@implementation UIAppKitViewAdaptorNativeView
 
 - (void)dealloc
 {

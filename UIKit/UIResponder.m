@@ -25,7 +25,7 @@
 - (BOOL)becomeFirstResponder
 {
     if([self canBecomeFirstResponder]) {
-        self.firstResponderManager.currentFirstResponder = self;
+        self._firstResponderManager._firstResponder = self;
         return YES;
     }
     
@@ -40,7 +40,7 @@
 - (BOOL)resignFirstResponder
 {
     if([self canResignFirstResponder]) {
-        self.firstResponderManager.currentFirstResponder = [self nextResponder];
+        self._firstResponderManager._firstResponder = [self nextResponder];
         return YES;
     }
     

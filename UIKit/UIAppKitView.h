@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AppKit/AppKit.h>
 
-@class UIAppKitAdaptorView;
+@class UIAppKitViewAdaptorNativeView;
 
 @interface UIAppKitView : UIView
 
@@ -17,6 +17,6 @@
 
 #pragma mark - Properties
 
-@property (nonatomic, readonly) UIAppKitAdaptorView *adaptorView;
+@property (nonatomic, readonly) UIAppKitViewAdaptorNativeView *adaptorView;
 
 @end

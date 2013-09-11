@@ -7,7 +7,7 @@
 //
 
 #import "UIEvent_Private.h"
-#import "UIWindowAppKitHostView.h"
+#import "UIWindowHostNativeView.h"
 #import "UIWindow.h"
 #import "UITouch_Private.h"
 

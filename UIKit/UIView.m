@@ -91,7 +91,7 @@
         self.contentMode = UIViewContentModeScaleToFill;
         _subviews = [NSMutableArray array];
         
-        self.firstResponderManager = self;
+        self._firstResponderManager = self;
         
         self.frame = frame;
         
@@ -531,17 +531,17 @@
     return (UIResponder *)self._viewController ?: (UIResponder *)self.superview;
 }
 
-- (void)setCurrentFirstResponder:(UIResponder *)currentFirstResponder
+- (void)_setFirstResponder:(UIResponder *)_firstResponder
 {
     if(_superview)
-        _superview.currentFirstResponder = currentFirstResponder;
+        _superview._firstResponder = _firstResponder;
     else
-        _currentFirstResponder = currentFirstResponder;
+        __firstResponder = _firstResponder;
 }
 
-- (UIResponder *)currentFirstResponder
+- (UIResponder *)_firstResponder
 {
-    return _superview? _superview.currentFirstResponder : _currentFirstResponder;
+    return _superview? _superview._firstResponder : __firstResponder;
 }
 
 #pragma mark - Subviews
@@ -569,8 +569,18 @@
     view.superview = self;
     view.window = self.window;
     
-    if(_window)
+    if(_window) {
         [view _viewDidMoveToWindow:_window];
+        [_window _viewWasAddedToWindow:self];
+        
+        UIResponder *currentFirstResponder = self._firstResponder;
+        self._firstResponderManager = _window;
+        
+        if(currentFirstResponder) {
+            _window._firstResponder = currentFirstResponder;
+        }
+    }
+    
     [view didMoveToSuperview];
     
     [self didAddSubview:view];
@@ -662,6 +672,9 @@
     [self.superview->_subviews removeObject:self];
     self.superview = nil;
     
+    self._firstResponderManager = _superview ?: self;
+    
+    [_window _viewWasRemovedFromWindow:self];
     _window = nil;
     
     [self didMoveToWindow];
@@ -724,24 +737,31 @@
 
 #pragma mark -
 
-- (NSArray *)_descendentViewsMatchingTest:(BOOL(^)(UIView *view, BOOL *stop))test
+static void EnumerateSubviews(UIView *view, void(^block)(UIView *subview, NSUInteger depth, BOOL *stop), NSUInteger depth, BOOL *stop)
 {
-    NSMutableArray *descendents = [NSMutableArray array];
-    
-    BOOL stop = NO;
-    for (UIView *subview in _subviews) {
-        if(test(subview, &stop)) {
-            [descendents addObject:descendents];
-        }
-        
-        if(stop)
+    for (UIView *subview in view.subviews) {
+        block(subview, depth, stop);
+        if(*stop)
             break;
         
-        if(subview.subviews.count > 0)
-            [descendents addObjectsFromArray:[subview _descendentViewsMatchingTest:test]];
+        EnumerateSubviews(subview, block, depth + 1, stop);
     }
-    
-    return descendents;
+}
+
+- (void)_enumerateSubviews:(void(^)(UIView *subview, NSUInteger depth, BOOL *stop))block
+{
+    BOOL stop = NO;
+    EnumerateSubviews(self, block, 0, &stop);
+}
+
+- (void)_printSubviews
+{
+    [self _enumerateSubviews:^(UIView *subview, NSUInteger depth, BOOL *stop) {
+        NSMutableString *indentation = [NSMutableString stringWithString:@"+"];
+        for (NSUInteger i = 0; i < depth; i++)
+            [indentation appendString:@"-"];
+        NSLog(@"%@%@", indentation, subview);
+    }];
 }
 
 #pragma mark - Window
@@ -752,9 +772,9 @@
     
     _window = newWindow;
     
-    UIResponder *currentFirstResponder = self.currentFirstResponder;
-    if(currentFirstResponder && !newWindow.currentFirstResponder)
-        newWindow.currentFirstResponder = self.currentFirstResponder;
+    UIResponder *currentFirstResponder = self._firstResponder;
+    if(currentFirstResponder && !newWindow._firstResponder)
+        newWindow._firstResponder = self._firstResponder;
     
     for (UIView *subview in _subviews)
         [subview _viewWillMoveToWindow:newWindow];

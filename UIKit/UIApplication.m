@@ -13,7 +13,7 @@
 #import "UIWindow_Private.h"
 #import "UIView_Private.h"
 
-#import "UIWindowAppKitHostView.h"
+#import "UIWindowHostNativeView.h"
 #import "UIEvent_Private.h"
 #import "UIKeyEvent_Private.h"
 #import "UITouch_Private.h"
@@ -161,7 +161,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     return delta;
 }
 
-- (void)_beginTrackingNativeMouseEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView
+- (void)_beginTrackingNativeMouseEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
     _currentEvent = [UIEvent new];
     _currentEvent.type = UIEventTypeTouches;
@@ -188,7 +188,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     _currentTouch.gestureRecognizers = gestureRecognizers;
 }
 
-- (void)_updateTrackingPhase:(UITouchPhase)phase withNativeMouseEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView
+- (void)_updateTrackingPhase:(UITouchPhase)phase withNativeMouseEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
     _currentEvent.timestamp = event.timestamp;
     
@@ -201,7 +201,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 
 #pragma mark -
 
-- (void)_beginTrackingNativeGestureEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView
+- (void)_beginTrackingNativeGestureEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
     _currentTouch = [UITouch new];
     _currentTouch.timestamp = event.timestamp;
@@ -226,7 +226,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     _currentTouch.gestureRecognizers = gestureRecognizers;
 }
 
-- (void)_trackingUpdateForNativeGestureEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView
+- (void)_trackingUpdateForNativeGestureEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
     _currentEvent.timestamp = event.timestamp;
     
@@ -243,7 +243,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     _currentTouch.phase = _UITouchPhaseGestureMoved;
 }
 
-- (void)_endTrackingNativeGestureEvent:(NSEvent *)event fromHostview:(UIWindowAppKitHostView *)hostView
+- (void)_endTrackingNativeGestureEvent:(NSEvent *)event fromHostview:(UIWindowHostNativeView *)hostView
 {
     _currentEvent.timestamp = event.timestamp;
     
@@ -262,12 +262,12 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 
 #pragma mark -
 
-- (void)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView
+- (void)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
     [hostView.kitWindow sendKeyEvent:[[UIKeyEvent alloc] initWithNSEvent:event]];
 }
 
-- (void)_dispatchMouseEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView
+- (void)_dispatchMouseEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
     switch (event.type) {
         case NSLeftMouseDown: {
@@ -336,7 +336,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     }
 }
 
-- (void)_dispatchIdleScrollEvent:(NSEvent *)event ofPhase:(NSEventPhase)phase fromHostView:(UIWindowAppKitHostView *)hostView
+- (void)_dispatchIdleScrollEvent:(NSEvent *)event ofPhase:(NSEventPhase)phase fromHostView:(UIWindowHostNativeView *)hostView
 {
     CGPoint mouseLocation = [[hostView window] convertScreenToBase:[NSEvent mouseLocation]];
     CGPoint locationInWindow = [hostView convertPoint:mouseLocation fromView:nil];

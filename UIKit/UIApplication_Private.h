@@ -8,7 +8,7 @@
 
 #import "UIApplication.h"
 
-@class UIWindowAppKitHostView, UIEvent, UITouch;
+@class UIWindowHostNativeView, UIEvent, UITouch;
 
 extern UIApplication *UIApp;
 
@@ -43,8 +43,8 @@ extern UIApplication *UIApp;
 
 #pragma mark - Event Handling
 
-- (void)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView;
-- (void)_dispatchMouseEvent:(NSEvent *)event fromHostView:(UIWindowAppKitHostView *)hostView;
-- (void)_dispatchIdleScrollEvent:(NSEvent *)event ofPhase:(NSEventPhase)phase fromHostView:(UIWindowAppKitHostView *)hostView;
+- (void)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView;
+- (void)_dispatchMouseEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView;
+- (void)_dispatchIdleScrollEvent:(NSEvent *)event ofPhase:(NSEventPhase)phase fromHostView:(UIWindowHostNativeView *)hostView;
 
 @end
