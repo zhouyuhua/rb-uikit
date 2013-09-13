@@ -51,6 +51,8 @@
 
 - (CGSize)sizeThatFits:(CGSize)size
 {
+    if(CGSizeEqualToSize(size, CGSizeZero))
+        size = self.superview? self.superview.bounds.size : CGSizeMake(CGFLOAT_MAX, CGFLOAT_MIN);
     return [self textRectForBounds:(CGRect){ CGPointZero, size } limitedToNumberOfLines:_numberOfLines].size;
 }
 
@@ -203,7 +205,7 @@
     
     textFrame.origin.y = round(CGRectGetMidY(rect) - CGRectGetHeight(textFrame) / 2.0);
     
-    return CGRectIntegral(textFrame);
+    return textFrame;
 }
 
 - (void)drawTextInRect:(CGRect)rect

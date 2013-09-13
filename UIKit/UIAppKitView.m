@@ -82,6 +82,11 @@
     return self.adaptorView.view.acceptsFirstResponder;
 }
 
+- (BOOL)canResignFirstResponder
+{
+    return YES;
+}
+
 - (BOOL)becomeFirstResponder
 {
     return [self.adaptorView.view becomeFirstResponder];

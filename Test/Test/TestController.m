@@ -23,7 +23,6 @@
     testLabel.shadowOffset = CGSizeMake(0.0, 1.0);
     testLabel.shadowColor = [UIColor yellowColor];
     testLabel.text = @"aren't I beautiful?";
-    testLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     [testLabel sizeToFit];
     [self.view addSubview:testLabel];
     
@@ -31,10 +30,9 @@
     button.frame = CGRectMake(50.0, 120.0, 100.0, 44.0);
     [button setTitle:@"Test Title" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(testPush:) forControlEvents:UIControlEventTouchUpInside];
-    button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     [self.view addSubview:button];
     
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 50.0)];
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.bounds), 50.0)];
     searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     searchBar.placeholder = @"Search";
     [self.view addSubview:searchBar];

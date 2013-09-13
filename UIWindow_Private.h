@@ -16,11 +16,13 @@
 @property (nonatomic) NSWindow *_nativeWindow;
 @property (nonatomic) UIWindowHostNativeView *_hostNativeView;
 
-#pragma mark -
+#pragma mark - Key View Loop
 
 - (void)_viewWasAddedToWindow:(UIView *)view;
 - (void)_viewWasRemovedFromWindow:(UIView *)view;
 
 @property (nonatomic, copy) NSArray *_possibleKeyViews;
+
+- (void)_selectNextKeyView;
 
 @end

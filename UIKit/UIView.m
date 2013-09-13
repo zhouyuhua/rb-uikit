@@ -250,7 +250,9 @@
 
 - (void)sizeToFit
 {
-    self.bounds = (CGRect){ .origin = CGPointZero, .size = [self sizeThatFits:CGSizeZero] };
+    CGRect frame = self.frame;
+    frame.size = [self sizeThatFits:CGSizeZero];
+    self.frame = frame;
 }
 
 #pragma mark - Rendering

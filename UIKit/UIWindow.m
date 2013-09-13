@@ -157,6 +157,8 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     } else {
         [self._nativeWindow bind:@"title" toObject:_rootViewController withKeyPath:@"navigationItem.title" options:nil];
     }
+    
+    [self _recalculateKeyViewLoop];
 }
 
 #pragma mark - Responder Chain
@@ -180,6 +182,8 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     self._possibleKeyViews = views;
 }
 
+#pragma mark -
+
 - (void)_viewWasAddedToWindow:(UIView *)view
 {
     [self _recalculateKeyViewLoop];
@@ -188,6 +192,25 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 - (void)_viewWasRemovedFromWindow:(UIView *)view
 {
     [self _recalculateKeyViewLoop];
+}
+
+#pragma mark -
+
+- (void)_selectNextKeyView
+{
+    NSUInteger indexOfKeyView = [self._possibleKeyViews indexOfObject:(UIView *)self._firstResponder];
+    if(indexOfKeyView == NSNotFound) {
+        [self._possibleKeyViews.firstObject becomeFirstResponder];
+    } else if(self._possibleKeyViews.count > 0) {
+        NSUInteger newKeyViewIndex = indexOfKeyView + 1;
+        if(newKeyViewIndex >= self._possibleKeyViews.count) {
+            newKeyViewIndex = 0;
+        }
+        
+        if(newKeyViewIndex != indexOfKeyView) {
+            [self._possibleKeyViews[newKeyViewIndex] becomeFirstResponder];
+        }
+    }
 }
 
 #pragma mark - Events
@@ -316,19 +339,7 @@ static Class _NativeWindowClass = Nil;
 - (void)keyDown:(UIKeyEvent *)event
 {
     if(event.keyCode == UIKeyTab) {
-        NSUInteger indexOfKeyView = [self._possibleKeyViews indexOfObject:(UIView *)self._firstResponder];
-        if(indexOfKeyView == NSNotFound) {
-            [self._possibleKeyViews.firstObject becomeFirstResponder];
-        } else if(self._possibleKeyViews.count > 0) {
-            NSUInteger newKeyViewIndex = indexOfKeyView + 1;
-            if(newKeyViewIndex >= self._possibleKeyViews.count) {
-                newKeyViewIndex = 0;
-            }
-            
-            if(newKeyViewIndex != indexOfKeyView) {
-                [self._possibleKeyViews[newKeyViewIndex] becomeFirstResponder];
-            }
-        }
+        [self _selectNextKeyView];
     } else {
         [super keyDown:event];
     }

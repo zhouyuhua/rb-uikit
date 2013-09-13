@@ -10,6 +10,7 @@
 #import "UIAppKitView.h"
 #import "UINSTextFieldCell.h"
 #import "UIImage_Private.h"
+#import "UIWindow_Private.h"
 
 NSString *const UITextFieldTextDidBeginEditingNotification = @"UITextFieldTextDidBeginEditingNotification";
 NSString *const UITextFieldTextDidEndEditingNotification = @"UITextFieldTextDidEndEditingNotification";
@@ -105,14 +106,19 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
     return self.textFieldHost.canBecomeFirstResponder;
 }
 
+- (BOOL)canResignFirstResponder
+{
+    return self.textFieldHost.canResignFirstResponder;
+}
+
 - (BOOL)becomeFirstResponder
 {
-    return [self.textFieldHost becomeFirstResponder];
+    return [self.textFieldHost becomeFirstResponder] && [super becomeFirstResponder];
 }
 
 - (BOOL)resignFirstResponder
 {
-    return [self.textFieldHost resignFirstResponder];
+    return [self.textFieldHost resignFirstResponder] && [super resignFirstResponder];
 }
 
 #pragma mark - Properties
@@ -493,6 +499,23 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
 - (void)controlTextDidChange:(NSNotification *)notification
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidChangeNotification object:self];
+}
+
+#pragma mark -
+
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector
+{
+    if(commandSelector == @selector(insertTab:)) {
+        if(([NSEvent modifierFlags] & NSAlternateKeyMask) == NSAlternateKeyMask) {
+            [textView insertTabIgnoringFieldEditor:nil];
+        } else {
+            [self.window _selectNextKeyView];
+        }
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 #pragma mark -
