@@ -7,9 +7,27 @@
 //
 
 #import "UIAppKitView.h"
+#import <objc/runtime.h>
+
 #import "UIWindow_Private.h"
 #import "UIWindowHostNativeView.h"
 #import "UIAppKitViewAdaptorNativeView.h"
+
+static const char *kAdaptorViewKey = "com.roundabout.uikit.UIAppKitView/adaptor";
+
+UIView *NSViewToUIView(NSView *view)
+{
+    if(!view)
+        return nil;
+    
+    UIAppKitView *adaptor = objc_getAssociatedObject(view, kAdaptorViewKey);
+    if(!adaptor) {
+        adaptor = [[UIAppKitView alloc] initWithNativeView:view];
+        objc_setAssociatedObject(view, kAdaptorViewKey, adaptor, OBJC_ASSOCIATION_ASSIGN);
+    }
+    
+    return adaptor;
+}
 
 @interface UIAppKitView ()
 
@@ -25,9 +43,11 @@
 {
     [self.layer removeObserver:self forKeyPath:@"position"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    objc_setAssociatedObject(self.nativeView, kAdaptorViewKey, nil, OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (instancetype)initWithView:(NSView *)view
+- (instancetype)initWithNativeView:(NSView *)view
 {
     NSParameterAssert(view);
     
@@ -49,7 +69,7 @@
 
 - (id)init
 {
-    return [self initWithView:[NSView new]];
+    return [self initWithNativeView:[NSView new]];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -84,17 +104,17 @@
 
 - (BOOL)canResignFirstResponder
 {
-    return YES;
+    return self.adaptorView.view.acceptsFirstResponder;
 }
 
 - (BOOL)becomeFirstResponder
 {
-    return [self.adaptorView.view becomeFirstResponder];
+    return [self.adaptorView.view becomeFirstResponder] && [super becomeFirstResponder];
 }
 
 - (BOOL)resignFirstResponder
 {
-    return [self.adaptorView.view resignFirstResponder];
+    return [self.adaptorView.view resignFirstResponder] && [super resignFirstResponder];
 }
 
 #pragma mark - Responding To Movements
@@ -136,6 +156,13 @@
 - (void)insertSubview:(UIView *)view atIndex:(NSInteger)index
 {
     [NSException raise:NSInternalInconsistencyException format:@"You cannot put subviews inside of a %@", NSStringFromClass(self.class)];
+}
+
+#pragma mark - Properties
+
+- (NSView *)nativeView
+{
+    return _adaptorView.view;
 }
 
 @end

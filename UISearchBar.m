@@ -10,8 +10,16 @@
 #import "UITextField.h"
 #import "UIImageView.h"
 #import "UIImage_Private.h"
+#import "UIView_Private.h"
+
+static id MakeIconImagesKey(UISearchBarIcon icon, UIControlState state)
+{
+    return @(icon + state);
+}
 
 @interface UISearchBar () <UITextFieldDelegate> {
+    NSMutableDictionary *_iconImages;
+    
     struct {
         int searchBarShouldBeginEditing : 1;
         int searchBarTextDidBeginEditing : 1;
@@ -34,6 +42,7 @@
 @property (nonatomic) UITextField *textField;
 
 @property (nonatomic) UIImageView *magnifyingGlassImageView;
+@property (nonatomic) UIButton *_clearButton;
 
 @end
 
@@ -47,12 +56,23 @@
         
         self.textField = [UITextField new];
         self.textField.delegate = self;
+        self.textField.background = [UIKitImageNamed(@"UISearchBarBackground", UIImageResizingModeStretch) resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 15.0)];
         [self addSubview:self.textField];
         
         self.magnifyingGlassImageView = [[UIImageView alloc] initWithImage:UIKitImageNamed(@"UISearchBarMagnifyingGlass", UIImageResizingModeStretch)];
         self.textField.leftView = self.magnifyingGlassImageView;
         
+        _iconImages = [NSMutableDictionary dictionary];
+        _iconImages[MakeIconImagesKey(UISearchBarIconSearch, UIControlStateNormal)] = self.magnifyingGlassImageView.image;
+        
+        self._clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self._clearButton setImage:UIKitImageNamed(@"UISearchBarClearButtonIcon", UIImageResizingModeStretch) forState:UIControlStateNormal];
+        [self._clearButton addTarget:self action:@selector(_clearButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [self._clearButton sizeToFit];
+        
         self.tintColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.00];
+        
+        [self setImage:UIKitImageNamed(@"UISearchBarClearButtonIcon", UIImageResizingModeStretch) forSearchBarIcon:UISearchBarIconClear state:UIControlStateNormal];
     }
     
     return self;
@@ -72,6 +92,28 @@
     textFieldFrame.origin.x = 10.0;
     textFieldFrame.origin.y = round(CGRectGetMidY(bounds) - CGRectGetHeight(textFieldFrame) / 2.0);
     self.textField.frame = textFieldFrame;
+}
+
+#pragma mark - First Responder
+
+- (BOOL)canBecomeFirstResponder
+{
+    return self.textField.canBecomeFirstResponder;
+}
+
+- (BOOL)canResignFirstResponder
+{
+    return self.textField.canResignFirstResponder;
+}
+
+- (BOOL)becomeFirstResponder
+{
+    return [self.textField becomeFirstResponder];
+}
+
+- (BOOL)resignFirstResponder
+{
+    return [self.textField resignFirstResponder];
 }
 
 #pragma mark - Properties
@@ -170,6 +212,9 @@
 
 - (void)setSearchFieldBackgroundImage:(UIImage *)backgroundImage forState:(UIControlState)state
 {
+    if(state != UIControlStateNormal && state != UIControlStateDisabled)
+        UIKitInvalidParameter(@"state", @"must be either UIControlStateNormal or UIControlStateDisabled");
+    
     if(state == UIControlStateNormal)
         self.textField.background = backgroundImage;
     else if(state == UIControlStateDisabled)
@@ -178,6 +223,9 @@
 
 - (UIImage *)searchFieldBackgroundImageForState:(UIControlState)state
 {
+    if(state != UIControlStateNormal && state != UIControlStateDisabled)
+        UIKitInvalidParameter(@"state", @"must be either UIControlStateNormal or UIControlStateDisabled");
+    
     if(state == UIControlStateNormal)
         return self.textField.background;
     else if(state == UIControlStateDisabled)
@@ -188,13 +236,32 @@
 
 - (void)setImage:(UIImage *)iconImage forSearchBarIcon:(UISearchBarIcon)icon state:(UIControlState)state
 {
-    UIKitUnimplementedMethod();
+    if(iconImage)
+        _iconImages[MakeIconImagesKey(icon, state)] = iconImage;
+    else
+        [_iconImages removeObjectForKey:MakeIconImagesKey(icon, state)];
+    
+    switch (icon) {
+        case UISearchBarIconClear: {
+            [self._clearButton setImage:iconImage forState:state];
+            break;
+        }
+            
+        case UISearchBarIconSearch: {
+            self.magnifyingGlassImageView.image = iconImage;
+            break;
+        }
+            
+        case UISearchBarIconBookmark:
+        case UISearchBarIconResultsList: {
+            break;
+        }
+    }
 }
 
 - (UIImage *)imageForSearchBarIcon:(UISearchBarIcon)icon state:(UIControlState)state
 {
-    UIKitUnimplementedMethod();
-    return nil;
+    return _iconImages[MakeIconImagesKey(icon, state)] ?: _iconImages[MakeIconImagesKey(icon, UIControlStateNormal)];
 }
 
 #pragma mark -
@@ -327,6 +394,31 @@
     return _textField.spellCheckingType;
 }
 
+#pragma mark - Clear Button
+
+- (void)_showClearButton
+{
+    self.textField.rightView = self._clearButton;
+}
+
+- (void)_hideClearButton
+{
+    self.textField.rightView = nil;
+}
+
+- (void)_clearButtonTapped:(UIButton *)sender
+{
+    if(_delegateRespondsTo.searchBarShouldChangeTextInRangeReplacementText) {
+        if(![self.delegate searchBar:self shouldChangeTextInRange:NSMakeRange(0, self.text.length) replacementText:@""])
+            return;
+    }
+    
+    self.text = nil;
+    [self becomeFirstResponder];
+    
+    [self _hideClearButton];
+}
+
 #pragma mark - <UITextFieldDelegate>
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -355,16 +447,26 @@
 {
     if(_delegateRespondsTo.searchBarTextDidEndEditing)
         [_delegate searchBarTextDidEndEditing:self];
+    
+    if(self.text.length == 0)
+        [self _hideClearButton];
 }
 
 #pragma mark -
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
+    BOOL changeText = YES;
     if(_delegateRespondsTo.searchBarShouldChangeTextInRangeReplacementText)
-        return [_delegate searchBar:self shouldChangeTextInRange:range replacementText:string];
+        changeText = [_delegate searchBar:self shouldChangeTextInRange:range replacementText:string];
     
-    return YES;
+    if(changeText && [self.text stringByReplacingCharactersInRange:range withString:string].length > 0) {
+        [self _showClearButton];
+    } else {
+        [self _hideClearButton];
+    }
+    
+    return changeText;
 }
 
 #pragma mark -

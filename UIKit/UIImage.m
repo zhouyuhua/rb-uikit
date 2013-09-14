@@ -188,6 +188,31 @@
     return [[NSImage alloc] initWithCGImage:_provider.image size:_provider.imageSize];
 }
 
+#pragma mark -
+
+- (UIImage *)_tintedImageWithColor:(UIColor *)color
+{
+    NSParameterAssert(color);
+    
+    CGSize size = self.size;
+    CGRect drawingRect = CGRectMake(0.0, 0.0, size.width, size.height);
+    UIGraphicsBeginImageContext(size);
+    {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        CGContextClipToMask(context, drawingRect, self.CGImage);
+        
+        CGContextSetFillColor(context, CGColorGetComponents(color.CGColor));
+        CGContextFillRect(context, drawingRect);
+        
+        [self drawAtPoint:CGPointZero blendMode:kCGBlendModeOverlay alpha:1.0];
+    }
+    UIImage *tintedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return tintedImage;
+}
+
 #pragma mark - Drawing
 
 - (void)drawAtPoint:(CGPoint)point

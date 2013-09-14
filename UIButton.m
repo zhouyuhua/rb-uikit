@@ -19,6 +19,9 @@
 #import "UIButtonRoundRectBackgroundView.h"
 #import "UIButtonBarBackgroundView.h"
 
+#define INTER_VIEW_PADDING      20.0
+#define MIN_PREFERRED_HEIGHT    30.0
+
 @implementation UIButton {
     BOOL _mouseDown;
     
@@ -202,6 +205,10 @@
     else
         [_images removeObjectForKey:@(state)];
     
+    if(state == UIControlStateNormal && _images[@(UIControlStateHighlighted)] == nil) {
+        [self setImage:[image _tintedImageWithColor:[UIColor colorWithWhite:0.0 alpha:0.2]] forState:UIControlStateHighlighted];
+    }
+    
     [self updateViews];
 }
 
@@ -325,9 +332,22 @@
 
 - (CGSize)sizeThatFits:(CGSize)size
 {
+    CGSize buttonSize;
+    
     CGSize imageViewSize = [self.imageView sizeThatFits:size];
-    return CGSizeMake(imageViewSize.width + [self.titleLabel sizeThatFits:size].width + 20.0,
-                      MAX(31.0, imageViewSize.height));
+    CGSize titleLabelSize = [self.titleLabel sizeThatFits:size];
+    
+    if(imageViewSize.width > 0.0 && titleLabelSize.width > 0.0) {
+        buttonSize.width = INTER_VIEW_PADDING + imageViewSize.width + titleLabelSize.width;
+        buttonSize.height = MAX(imageViewSize.height, buttonSize.height);
+    } else if(imageViewSize.width > 0.0) {
+        buttonSize = imageViewSize;
+    } else if(titleLabelSize.width > 0.0) {
+        buttonSize.width = titleLabelSize.width;
+        buttonSize.height = MAX(MIN_PREFERRED_HEIGHT, buttonSize.height);
+    }
+    
+    return buttonSize;
 }
 
 - (void)layoutSubviews

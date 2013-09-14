@@ -7,6 +7,7 @@
 //
 
 #import "UIImage.h"
+#import "UIColor.h"
 
 @class UIImageProvider;
 
@@ -21,6 +22,8 @@
 @property (nonatomic) UIImageProvider *provider;
 
 - (BOOL)_isResizable;
+
+- (UIImage *)_tintedImageWithColor:(UIColor *)color;
 
 #pragma mark - readwrite
 

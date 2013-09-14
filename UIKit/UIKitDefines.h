@@ -20,6 +20,11 @@
 
 #define UIKIT_INLINE        static inline
 
+UIKIT_INLINE void UIKitInvalidParameter(NSString *parameterName, NSString *message)
+{
+    [NSException raise:NSInvalidArgumentException format:@"Parameter %@ unsatisfied: %@", parameterName, message];
+}
+
 UIKIT_INLINE void UIKitUnimplementedMethod()
 {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException

@@ -25,8 +25,8 @@
     } _delegateRespondsTo;
 }
 
-@property (nonatomic) UIAppKitView *textFieldHost;
-@property (nonatomic, assign) UINSTextField *underlyingTextField;
+@property (nonatomic) UIAppKitView *_nativeTextFieldAdaptor;
+@property (nonatomic, assign) UINSTextField *_nativeTextField;
 @property (nonatomic) UIImageView *backgroundView;
 
 #pragma mark - readwrite

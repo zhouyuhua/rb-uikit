@@ -11,6 +11,7 @@
 #import "UINSTextFieldCell.h"
 #import "UIImage_Private.h"
 #import "UIWindow_Private.h"
+#import "UIView_Private.h"
 
 NSString *const UITextFieldTextDidBeginEditingNotification = @"UITextFieldTextDidBeginEditingNotification";
 NSString *const UITextFieldTextDidEndEditingNotification = @"UITextFieldTextDidEndEditingNotification";
@@ -30,36 +31,36 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
 
 - (void)setupUnderlyingInputView
 {
-    UINSTextField *underlyingTextField = [UINSTextField new];
-    underlyingTextField.textField = self;
+    UINSTextField *nativeTextField = [UINSTextField new];
+    nativeTextField.textField = self;
     
-    underlyingTextField.editable = YES;
-    underlyingTextField.bordered = NO;
-    underlyingTextField.drawsBackground = NO;
-    underlyingTextField.focusRingType = NSFocusRingTypeNone;
-    underlyingTextField.bezelStyle = NSTextFieldSquareBezel;
-    underlyingTextField.action = @selector(textFieldEntered:);
-    underlyingTextField.target = self;
-    underlyingTextField.delegate = self;
-    [underlyingTextField.cell setWraps:NO];
-    [underlyingTextField.cell setScrollable:YES];
+    nativeTextField.editable = YES;
+    nativeTextField.bordered = NO;
+    nativeTextField.drawsBackground = NO;
+    nativeTextField.focusRingType = NSFocusRingTypeNone;
+    nativeTextField.bezelStyle = NSTextFieldSquareBezel;
+    nativeTextField.action = @selector(textFieldEntered:);
+    nativeTextField.target = self;
+    nativeTextField.delegate = self;
+    [nativeTextField.cell setWraps:NO];
+    [nativeTextField.cell setScrollable:YES];
     
-    self.underlyingTextField = underlyingTextField;
-    self.textFieldHost = [[UIAppKitView alloc] initWithView:underlyingTextField];
-    [self addSubview:self.textFieldHost];
+    self._nativeTextField = nativeTextField;
+    self._nativeTextFieldAdaptor = [[UIAppKitView alloc] initWithNativeView:nativeTextField];
+    [self addSubview:self._nativeTextFieldAdaptor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(controlTextDidBeginEditing:)
                                                  name:NSControlTextDidBeginEditingNotification
-                                               object:self.underlyingTextField];
+                                               object:self._nativeTextField];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(controlTextDidEndEditing:)
                                                  name:NSControlTextDidEndEditingNotification
-                                               object:self.underlyingTextField];
+                                               object:self._nativeTextField];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(controlTextDidChange:)
                                                  name:NSControlTextDidChangeNotification
-                                               object:self.underlyingTextField];
+                                               object:self._nativeTextField];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -88,14 +89,14 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
     CGRect bounds = self.bounds;
     
     self.backgroundView.frame = [self borderRectForBounds:bounds];
-    self.textFieldHost.frame = bounds;
+    self._nativeTextFieldAdaptor.frame = bounds;
     
     if([self _isLeftViewVisible]) {
         self.leftView.frame = [self leftViewRectForBounds:bounds];
     }
     
     if([self _isRightViewVisible]) {
-        self.leftView.frame = [self rightViewRectForBounds:bounds];
+        self.rightView.frame = [self rightViewRectForBounds:bounds];
     }
 }
 
@@ -103,22 +104,22 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
 
 - (BOOL)canBecomeFirstResponder
 {
-    return self.textFieldHost.canBecomeFirstResponder;
+    return __nativeTextFieldAdaptor.nativeView.canBecomeKeyView;
 }
 
 - (BOOL)canResignFirstResponder
 {
-    return self.textFieldHost.canResignFirstResponder;
+    return YES;
 }
 
 - (BOOL)becomeFirstResponder
 {
-    return [self.textFieldHost becomeFirstResponder] && [super becomeFirstResponder];
+    return [__nativeTextFieldAdaptor.nativeView becomeFirstResponder] && [super becomeFirstResponder];
 }
 
 - (BOOL)resignFirstResponder
 {
-    return [self.textFieldHost resignFirstResponder] && [super resignFirstResponder];
+    return [__nativeTextFieldAdaptor.nativeView resignFirstResponder] && [super resignFirstResponder];
 }
 
 #pragma mark - Properties
@@ -142,52 +143,52 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
 
 - (void)setText:(NSString *)text
 {
-    self.underlyingTextField.stringValue = text ?: @"";
+    self._nativeTextField.stringValue = text ?: @"";
 }
 
 - (NSString *)text
 {
-    return self.underlyingTextField.stringValue;
+    return self._nativeTextField.stringValue;
 }
 
 - (void)setAttributedText:(NSAttributedString *)attributedText
 {
-    self.underlyingTextField.attributedStringValue = attributedText;
+    self._nativeTextField.attributedStringValue = attributedText;
 }
 
 - (NSAttributedString *)attributedText
 {
-    return self.underlyingTextField.attributedStringValue;
+    return self._nativeTextField.attributedStringValue;
 }
 
 - (void)setTextColor:(UIColor *)textColor
 {
-    self.underlyingTextField.textColor = textColor;
+    self._nativeTextField.textColor = textColor;
 }
 
 - (UIColor *)textColor
 {
-    return self.underlyingTextField.textColor;
+    return self._nativeTextField.textColor;
 }
 
 - (void)setFont:(UIFont *)font
 {
-    self.underlyingTextField.font = font;
+    self._nativeTextField.font = font;
 }
 
 - (UIFont *)font
 {
-    return self.underlyingTextField.font;
+    return self._nativeTextField.font;
 }
 
 - (void)setTextAlignment:(NSTextAlignment)textAlignment
 {
-    self.underlyingTextField.alignment = textAlignment;
+    self._nativeTextField.alignment = textAlignment;
 }
 
 - (NSTextAlignment)textAlignment
 {
-    return self.underlyingTextField.alignment;
+    return self._nativeTextField.alignment;
 }
 
 - (void)setBorderStyle:(UITextBorderStyle)borderStyle
@@ -222,22 +223,22 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
 
 - (void)setPlaceholder:(NSString *)placeholder
 {
-    [(NSTextFieldCell *)self.underlyingTextField.cell setPlaceholderString:placeholder];
+    [(NSTextFieldCell *)self._nativeTextField.cell setPlaceholderString:placeholder];
 }
 
 - (NSString *)placeholder
 {
-    return [(NSTextFieldCell *)self.underlyingTextField.cell placeholderString];
+    return [(NSTextFieldCell *)self._nativeTextField.cell placeholderString];
 }
 
 - (void)setAttributedPlaceholder:(NSAttributedString *)attributedPlaceholder
 {
-    [(NSTextFieldCell *)self.underlyingTextField.cell setPlaceholderAttributedString:attributedPlaceholder];
+    [(NSTextFieldCell *)self._nativeTextField.cell setPlaceholderAttributedString:attributedPlaceholder];
 }
 
 - (NSAttributedString *)attributedPlaceholder
 {
-    return [(NSTextFieldCell *)self.underlyingTextField.cell placeholderAttributedString];
+    return [(NSTextFieldCell *)self._nativeTextField.cell placeholderAttributedString];
 }
 
 #pragma mark -
@@ -262,7 +263,7 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
 - (void)setEnabled:(BOOL)enabled
 {
     [super setEnabled:enabled];
-    self.underlyingTextField.enabled = enabled;
+    self._nativeTextField.enabled = enabled;
     
     if(self.enabled)
         _backgroundView.image = self.background;
@@ -387,7 +388,7 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
 
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
-    CGSize cellSize = [self.underlyingTextField.cell cellSizeForBounds:bounds];
+    CGSize cellSize = [self._nativeTextField.cell cellSizeForBounds:bounds];
     CGRect leftViewFrame = [self leftViewRectForBounds:bounds];
     CGRect rightViewFrame = [self rightViewRectForBounds:bounds];
     CGFloat rightViewArea = CGRectGetWidth(rightViewFrame) > 0.0? CGRectGetWidth(rightViewFrame) + VIEW_MARGIN : 0.0;
@@ -433,7 +434,7 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
 {
     if([self _isRightViewVisible]) {
         CGRect rightViewFrame = self.rightView.frame;
-        rightViewFrame.origin.x = CGRectGetMaxX(bounds) - (CGRectGetWidth(rightViewFrame) + VIEW_MARGIN);
+        rightViewFrame.origin.x = CGRectGetMaxX(bounds) - CGRectGetWidth(rightViewFrame) - VIEW_MARGIN * 1.5;
         rightViewFrame.origin.y = round(CGRectGetMidY(bounds) - CGRectGetHeight(rightViewFrame) / 2.0);
         return rightViewFrame;
     }

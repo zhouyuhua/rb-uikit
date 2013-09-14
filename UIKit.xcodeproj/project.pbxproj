@@ -21,6 +21,10 @@
 		8B08256817AA264100494FAA /* UIBackButtonChevron.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B08256617AA264100494FAA /* UIBackButtonChevron.png */; };
 		8B08256D17AA2ACF00494FAA /* UIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B08256B17AA2ACF00494FAA /* UIAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B08256E17AA2ACF00494FAA /* UIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B08256C17AA2ACF00494FAA /* UIAlertView.m */; };
+		8B1255A317E418C80063454E /* UISearchBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1255A117E418C80063454E /* UISearchBarBackground@2x.png */; };
+		8B1255A417E418C80063454E /* UISearchBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1255A217E418C80063454E /* UISearchBarBackground.png */; };
+		8B1255A717E41D580063454E /* UISearchBarClearButtonIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1255A517E41D580063454E /* UISearchBarClearButtonIcon@2x.png */; };
+		8B1255A817E41D580063454E /* UISearchBarClearButtonIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1255A617E41D580063454E /* UISearchBarClearButtonIcon.png */; };
 		8B1EC8DA17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B1EC8DB17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */; };
 		8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -253,6 +257,10 @@
 		8B08256617AA264100494FAA /* UIBackButtonChevron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBackButtonChevron.png; sourceTree = "<group>"; };
 		8B08256B17AA2ACF00494FAA /* UIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertView.h; sourceTree = "<group>"; };
 		8B08256C17AA2ACF00494FAA /* UIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAlertView.m; sourceTree = "<group>"; };
+		8B1255A117E418C80063454E /* UISearchBarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UISearchBarBackground@2x.png"; sourceTree = "<group>"; };
+		8B1255A217E418C80063454E /* UISearchBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UISearchBarBackground.png; sourceTree = "<group>"; };
+		8B1255A517E41D580063454E /* UISearchBarClearButtonIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UISearchBarClearButtonIcon@2x.png"; sourceTree = "<group>"; };
+		8B1255A617E41D580063454E /* UISearchBarClearButtonIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UISearchBarClearButtonIcon.png; sourceTree = "<group>"; };
 		8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitViewAdaptorNativeView.h; sourceTree = "<group>"; };
 		8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitViewAdaptorNativeView.m; sourceTree = "<group>"; };
 		8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINSTextFieldCell.h; sourceTree = "<group>"; };
@@ -859,8 +867,12 @@
 				8BF0F9E717BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png */,
 				8B08256517AA264100494FAA /* UIBackButtonChevron@2x.png */,
 				8B08256617AA264100494FAA /* UIBackButtonChevron.png */,
+				8B1255A517E41D580063454E /* UISearchBarClearButtonIcon@2x.png */,
+				8B1255A617E41D580063454E /* UISearchBarClearButtonIcon.png */,
 				8B08256117AA1F7300494FAA /* UISearchBarMagnifyingGlass.png */,
 				8B08256217AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png */,
+				8B1255A117E418C80063454E /* UISearchBarBackground@2x.png */,
+				8B1255A217E418C80063454E /* UISearchBarBackground.png */,
 				8B5AF861179B9B79008B3BF3 /* UITextFieldSquareBackground.png */,
 				8B5AF862179B9B79008B3BF3 /* UITextFieldSquareBackground@2x.png */,
 				8B5AF865179B9D15008B3BF3 /* UITextFieldRoundBackground.png */,
@@ -1205,11 +1217,15 @@
 				8B08256817AA264100494FAA /* UIBackButtonChevron.png in Resources */,
 				8B5AF864179B9B79008B3BF3 /* UITextFieldSquareBackground@2x.png in Resources */,
 				8B08256717AA264100494FAA /* UIBackButtonChevron@2x.png in Resources */,
+				8B1255A317E418C80063454E /* UISearchBarBackground@2x.png in Resources */,
 				8BAE9590179A1D3100562F35 /* UIBarButtonItemBackground@2x.png in Resources */,
 				8B08256317AA1F7300494FAA /* UISearchBarMagnifyingGlass.png in Resources */,
 				8B54687517D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png in Resources */,
+				8B1255A417E418C80063454E /* UISearchBarBackground.png in Resources */,
+				8B1255A717E41D580063454E /* UISearchBarClearButtonIcon@2x.png in Resources */,
 				8B5BD7351798F3E100A53E4A /* UINavigationBarBackgroundImage@2x.png in Resources */,
 				8B5AF868179B9D15008B3BF3 /* UITextFieldRoundBackground@2x.png in Resources */,
+				8B1255A817E41D580063454E /* UISearchBarClearButtonIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
