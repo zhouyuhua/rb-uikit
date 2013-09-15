@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class UIButtonBackgroundView;
+
 enum : NSInteger {
     UIButtonType_Private_BarButton = 100,
     UIButtonType_Private_BackBarButton = 101,
@@ -15,8 +17,7 @@ enum : NSInteger {
 
 @interface UIButton ()
 
-@property (nonatomic) UIView *backgroundView;
-@property (nonatomic) UIOffset _backgroundViewSizeOffsets;
+@property (nonatomic) UIButtonBackgroundView *backgroundView;
 
 #pragma mark - readwrite
 

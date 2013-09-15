@@ -32,11 +32,13 @@
     [stretchableBackgroundImage drawInRect:rect];
 }
 
-#pragma mark - Properties
-
-- (UIOffset)sizeOffsets
+- (CGSize)constrainButtonSize:(CGSize)size withTitle:(NSString *)title image:(UIImage *)image
 {
-    return UIOffsetMake(10.0, 16.0);
+    size.height = 30.0;
+    if(title || image)
+        size.width += 20.0;
+    
+    return size;
 }
 
 @end

@@ -10,11 +10,14 @@
 
 @implementation UIButtonBorderlessBackgroundView
 
-#pragma mark - Properties
-
-- (UIOffset)sizeOffsets
+- (CGSize)constrainButtonSize:(CGSize)size withTitle:(NSString *)title image:(UIImage *)image
 {
-    return UIOffsetMake(10.0, 16.0);
+    if(size.height < 40.0)
+        size.height = 40.0;
+    
+    size.width += 30.0;
+    
+    return size;
 }
 
 @end

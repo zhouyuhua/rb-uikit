@@ -25,9 +25,9 @@
     [self setNeedsDisplay];
 }
 
-- (UIOffset)sizeOffsets
+- (CGSize)constrainButtonSize:(CGSize)size withTitle:(NSString *)title image:(UIImage *)image
 {
-    return UIOffsetZero;
+    return size;
 }
 
 @end

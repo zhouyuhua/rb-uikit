@@ -25,6 +25,8 @@
 		8B1255A417E418C80063454E /* UISearchBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1255A217E418C80063454E /* UISearchBarBackground.png */; };
 		8B1255A717E41D580063454E /* UISearchBarClearButtonIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1255A517E41D580063454E /* UISearchBarClearButtonIcon@2x.png */; };
 		8B1255A817E41D580063454E /* UISearchBarClearButtonIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1255A617E41D580063454E /* UISearchBarClearButtonIcon.png */; };
+		8B1255AF17E563270063454E /* UIButtonImageBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1255AD17E563270063454E /* UIButtonImageBackgroundView.h */; };
+		8B1255B017E563270063454E /* UIButtonImageBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1255AE17E563270063454E /* UIButtonImageBackgroundView.m */; };
 		8B1EC8DA17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B1EC8DB17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */; };
 		8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -261,6 +263,8 @@
 		8B1255A217E418C80063454E /* UISearchBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UISearchBarBackground.png; sourceTree = "<group>"; };
 		8B1255A517E41D580063454E /* UISearchBarClearButtonIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UISearchBarClearButtonIcon@2x.png"; sourceTree = "<group>"; };
 		8B1255A617E41D580063454E /* UISearchBarClearButtonIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UISearchBarClearButtonIcon.png; sourceTree = "<group>"; };
+		8B1255AD17E563270063454E /* UIButtonImageBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonImageBackgroundView.h; sourceTree = "<group>"; };
+		8B1255AE17E563270063454E /* UIButtonImageBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonImageBackgroundView.m; sourceTree = "<group>"; };
 		8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitViewAdaptorNativeView.h; sourceTree = "<group>"; };
 		8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitViewAdaptorNativeView.m; sourceTree = "<group>"; };
 		8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINSTextFieldCell.h; sourceTree = "<group>"; };
@@ -637,6 +641,8 @@
 				8B5BD74D179908EC00A53E4A /* UIButtonBarBackgroundView.m */,
 				8B54686F17D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.h */,
 				8B54687017D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m */,
+				8B1255AD17E563270063454E /* UIButtonImageBackgroundView.h */,
+				8B1255AE17E563270063454E /* UIButtonImageBackgroundView.m */,
 			);
 			name = "UIButton Background Views";
 			sourceTree = "<group>";
@@ -1064,6 +1070,7 @@
 				8B515C5617BB3AAA003065D2 /* NSIndexPath+UITableView.h in Headers */,
 				8B54A04B17B9CD7B0068775C /* UICollectionViewUpdateItem.h in Headers */,
 				8B54689E17D41B7B00D7E338 /* UINavigationItem.h in Headers */,
+				8B1255AF17E563270063454E /* UIButtonImageBackgroundView.h in Headers */,
 				8B515C4E17BB3A04003065D2 /* UITableViewHeaderFooterView.h in Headers */,
 				8B54688617D2C87700D7E338 /* UITabBarController.h in Headers */,
 				8B54688217D2C86E00D7E338 /* UITabBar.h in Headers */,
@@ -1294,6 +1301,7 @@
 				8BB4BD6817B359BC009B7708 /* UIAnimator.m in Sources */,
 				8BE4933F1798E564002BEA5A /* UIBarButtonItem.m in Sources */,
 				8B515C4717BB39E5003065D2 /* UITableView.m in Sources */,
+				8B1255B017E563270063454E /* UIButtonImageBackgroundView.m in Sources */,
 				8BB4BD6C17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.m in Sources */,
 				8BE492F31798CF0C002BEA5A /* UIColor.m in Sources */,
 				8BF0F9EC17CD22E000DAFD92 /* UIBezierPath.m in Sources */,

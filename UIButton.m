@@ -15,6 +15,7 @@
 #import "UIBezierPath.h"
 
 #import "UIButtonBackgroundView.h"
+#import "UIButtonImageBackgroundView.h"
 #import "UIButtonBorderlessBackgroundView.h"
 #import "UIButtonRoundRectBackgroundView.h"
 #import "UIButtonBarBackgroundView.h"
@@ -57,7 +58,7 @@
         [self setTitleColor:[UIColor alternateSelectedControlTextColor] forState:UIControlStateHighlighted];
         [self setTitleColor:[UIColor disabledControlTextColor] forState:UIControlStateDisabled];
         
-        self.backgroundView = [UIImageView new];
+        self.backgroundView = [UIButtonImageBackgroundView new];
         [self addSubview:self.backgroundView];
         
         self.imageView = [UIImageView new];
@@ -74,10 +75,10 @@
 
 - (void)updateViews
 {
-    if([_backgroundView isKindOfClass:[UIImageView class]]) {
-        ((UIImageView *)self.backgroundView).image = [self currentBackgroundImage];
+    if([_backgroundView isKindOfClass:[UIButtonImageBackgroundView class]]) {
+        ((UIButtonImageBackgroundView *)self.backgroundView).imageView.image = [self currentBackgroundImage];
     } else if([_backgroundView isKindOfClass:[UIButtonBackgroundView class]]) {
-        ((UIButtonBackgroundView *)_backgroundView).highlighted = (self.state == UIControlStateHighlighted);
+        _backgroundView.highlighted = (self.state == UIControlStateHighlighted);
     }
     
     _titleLabel.text = [self currentTitle];
@@ -117,8 +118,6 @@
             _backgroundView = [UIButtonBorderlessBackgroundView new];
         else
             _backgroundView = [UIButtonRoundRectBackgroundView new];
-        
-        self._backgroundViewSizeOffsets = ((UIButtonBackgroundView *)_backgroundView).sizeOffsets;
     } else if((NSInteger)buttonType == UIButtonType_Private_BarButton) {
         self.imageView._prefersToRenderTemplateImages = wantsBorderlessButtons;
         
@@ -129,8 +128,6 @@
         
         self.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
-        self._backgroundViewSizeOffsets = ((UIButtonBackgroundView *)_backgroundView).sizeOffsets;
     } else if((NSInteger)buttonType == UIButtonType_Private_BackBarButton) {
         self.imageView._prefersToRenderTemplateImages = wantsBorderlessButtons;
         
@@ -142,12 +139,8 @@
         self.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
         [self setTitleColor:[UIColor colorWithWhite:0.15 alpha:1.0] forState:UIControlStateNormal];
         [self setImage:UIKitImageNamed(@"UIBackButtonChevron", UIImageResizingModeStretch) forState:UIControlStateNormal];
-        
-        self._backgroundViewSizeOffsets = ((UIButtonBackgroundView *)_backgroundView).sizeOffsets;
     } else {
-        _backgroundView = [UIImageView new];
-        
-        self._backgroundViewSizeOffsets = UIOffsetZero;
+        _backgroundView = [UIButtonImageBackgroundView new];
     }
     [self insertSubview:_backgroundView atIndex:0];
     
@@ -330,7 +323,7 @@
 - (CGRect)imageRectForContentRect:(CGRect)contentRect
 {
     CGSize preferredSize = [self.imageView sizeThatFits:contentRect.size];
-    return CGRectMake(5.0,
+    return CGRectMake(10.0,
                       round(CGRectGetMidY(contentRect) - preferredSize.height / 2.0),
                       preferredSize.width,
                       preferredSize.height);
@@ -352,13 +345,12 @@
         buttonSize = imageViewSize;
     } else if(titleLabelSize.width > 0.0) {
         buttonSize.width = titleLabelSize.width;
-        buttonSize.height = MAX(MIN_PREFERRED_HEIGHT, buttonSize.height);
+        buttonSize.height = buttonSize.height;
     }
     
-    buttonSize.width += self._backgroundViewSizeOffsets.horizontal;
-    buttonSize.height += self._backgroundViewSizeOffsets.vertical;
-    
-    return buttonSize;
+    return [self.backgroundView constrainButtonSize:buttonSize
+                                          withTitle:[self currentTitle]
+                                              image:[self currentImage]];
 }
 
 - (void)layoutSubviews

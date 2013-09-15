@@ -7,6 +7,8 @@
 //
 
 #import "UIButtonRoundRectBackgroundView.h"
+#import "UIBezierPath.h"
+#import "UIColor.h"
 
 @implementation UIButtonRoundRectBackgroundView
 
@@ -26,11 +28,14 @@
     [bezierPath stroke];
 }
 
-#pragma mark - Properties
-
-- (UIOffset)sizeOffsets
+- (CGSize)constrainButtonSize:(CGSize)size withTitle:(NSString *)title image:(UIImage *)image
 {
-    return UIOffsetMake(30.0, 10.0);
+    if(size.height < 40.0)
+        size.height = 40.0;
+    
+    size.width += 30.0;
+    
+    return size;
 }
 
 @end

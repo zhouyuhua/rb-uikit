@@ -6,11 +6,15 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "UIView.h"
+#import "UIGeometry.h"
+
+@class UIImage;
 
 @interface UIButtonBackgroundView : UIView
 
 @property (nonatomic, getter=isHighlighted) BOOL highlighted;
-@property (nonatomic, readonly) UIOffset sizeOffsets;
+
+- (CGSize)constrainButtonSize:(CGSize)size withTitle:(NSString *)title image:(UIImage *)image;
 
 @end
