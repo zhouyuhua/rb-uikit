@@ -72,7 +72,7 @@ typedef NS_ENUM(NSUInteger, AnimationPhase) {
         CGSize contentSize = scrollView.contentSize;
         self.targetContentOffset = CGPointMake(Constrain(_initialContentOffset.x + velocity.x, -MaxBounceBack, (contentSize.width - CGRectGetWidth(scrollView.frame)) + MaxBounceBack),
                                                Constrain(_initialContentOffset.y + velocity.y, -MaxBounceBack, (contentSize.height - CGRectGetHeight(scrollView.frame)) + MaxBounceBack));
-        self.constrainedTargetContentOffset = [scrollView _constrainContentOffset:_targetContentOffset];
+        self.constrainedTargetContentOffset = [scrollView _constrainContentOffset:_targetContentOffset forBounceBack:YES];
         
         self.bounceX = scrollView.bounces && scrollView.alwaysBounceHorizontal && velocity.x != 0.0 && _targetContentOffset.x != _constrainedTargetContentOffset.x;
         self.bounceY = scrollView.bounces && scrollView.alwaysBounceVertical && velocity.y != 0.0 && _targetContentOffset.y != _constrainedTargetContentOffset.y;

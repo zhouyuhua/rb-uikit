@@ -17,7 +17,7 @@
 const CGFloat UIScrollViewDecelerationRateNormal = 0.33;
 const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
-static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
+static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.35;
 
 @implementation UIScrollView
 
@@ -118,7 +118,7 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
     return self.contentSize.width > CGRectGetWidth(self.bounds);
 }
 
-- (CGPoint)_constrainContentOffset:(CGPoint)contentOffset
+- (CGPoint)_constrainContentOffset:(CGPoint)contentOffset forBounceBack:(BOOL)isForBounceBack
 {
     CGRect bounds = self.bounds;
     
@@ -138,7 +138,7 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
 
 - (void)_constrainContent
 {
-    self.contentOffset = [self _constrainContentOffset:_contentOffset];
+    self.contentOffset = [self _constrainContentOffset:_contentOffset forBounceBack:NO];
 }
 
 - (void)setContentOffset:(CGPoint)contentOffset
@@ -317,7 +317,7 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
 {
     self._shouldBounceBack = NO;
     
-    [self setContentOffset:[self _constrainContentOffset:_contentOffset] animated:YES];
+    [self setContentOffset:[self _constrainContentOffset:_contentOffset forBounceBack:YES] animated:YES];
 }
 
 - (void)_decelerateScrollWithVelocity:(CGPoint)velocity
@@ -329,12 +329,7 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
     
     UIScrollViewDecelerationAnimator *deceleration = [[UIScrollViewDecelerationAnimator alloc] initWithScrollView:self velocity:velocity];
     self.decelerationRate = deceleration.duration;
-    
-    if(_delegateRespondsTo.scrollViewWillEndDraggingWithVelocityTargetContentOffset) {
-        CGPoint targetContentOffset = deceleration.targetContentOffset;
-        [_delegate scrollViewWillEndDragging:self withVelocity:velocity targetContentOffset:&targetContentOffset];
-        deceleration.targetContentOffset = targetContentOffset;
-    }
+    deceleration.targetContentOffset = [self _constrainSnapbackTargetContentOffset:deceleration.targetContentOffset velocity:velocity];
     
     if(_delegateRespondsTo.scrollViewWillBeginDecelerating)
         [_delegate scrollViewWillBeginDecelerating:self];
@@ -348,6 +343,15 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
         if(strongMe->_delegateRespondsTo.scrollViewDidEndDecelerating)
             [strongMe->_delegate scrollViewDidEndDecelerating:self];
     }];
+}
+
+- (CGPoint)_constrainSnapbackTargetContentOffset:(CGPoint)targetContentOffset velocity:(CGPoint)velocity
+{
+    if(_delegateRespondsTo.scrollViewWillEndDraggingWithVelocityTargetContentOffset) {
+        [_delegate scrollViewWillEndDragging:self withVelocity:velocity targetContentOffset:&targetContentOffset];
+    }
+    
+    return targetContentOffset;
 }
 
 #pragma mark - Gestures
@@ -387,7 +391,7 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.15;
     rawOffset.x += delta.x;
     rawOffset.y += delta.y;
     
-    CGPoint constrainedOffset = [self _constrainContentOffset:rawOffset];
+    CGPoint constrainedOffset = [self _constrainContentOffset:rawOffset forBounceBack:NO];
     if(_bounces) {
         BOOL shouldBounceHorizontal = _alwaysBounceHorizontal && (ABS(rawOffset.x - constrainedOffset.x) > 0);
         if(shouldBounceHorizontal) {

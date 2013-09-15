@@ -45,7 +45,8 @@
 
 #pragma mark - Animation
 
-- (CGPoint)_constrainContentOffset:(CGPoint)contentOffset;
+- (CGPoint)_constrainContentOffset:(CGPoint)contentOffset forBounceBack:(BOOL)isForBounceBack;
+- (CGPoint)_constrainSnapbackTargetContentOffset:(CGPoint)contentOffset velocity:(CGPoint)velocity;
 
 #pragma mark - readwrite
 

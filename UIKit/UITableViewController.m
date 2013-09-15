@@ -7,6 +7,7 @@
 //
 
 #import "UITableViewController.h"
+#import "UIRefreshControl.h"
 
 @interface UITableViewController () {
     UITableView *_tableView;
@@ -72,6 +73,19 @@
     }
     
     return _tableView;
+}
+
+#pragma mark -
+
+- (void)setRefreshControl:(UIRefreshControl *)refreshControl
+{
+    [_refreshControl removeFromSuperview];
+    
+    _refreshControl = refreshControl;
+    
+    if(_refreshControl) {
+        [self.tableView addSubview:_refreshControl];
+    }
 }
 
 #pragma mark - <UITableViewDataSource>

@@ -129,7 +129,10 @@
 
 - (void)setLeftBarButtonItem:(UIBarButtonItem *)item animated:(BOOL)animated
 {
-    [self setLeftBarButtonItems:@[ item ] animated:animated];
+    if(item)
+        [self setLeftBarButtonItems:@[ item ] animated:animated];
+    else
+        [self setLeftBarButtonItems:@[] animated:animated];
 }
 
 - (UIBarButtonItem *)leftBarButtonItem
@@ -146,7 +149,10 @@
 
 - (void)setRightBarButtonItem:(UIBarButtonItem *)item animated:(BOOL)animated
 {
-    [self setRightBarButtonItems:@[ item ] animated:animated];
+    if(item)
+        [self setRightBarButtonItems:@[ item ] animated:animated];
+    else
+        [self setRightBarButtonItems:@[] animated:animated];
 }
 
 - (UIBarButtonItem *)rightBarButtonItem

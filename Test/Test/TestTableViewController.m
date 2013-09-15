@@ -39,6 +39,10 @@ static NSString *const kItemDescription = @"itemDescription";
         testFooter.backgroundColor = [UIColor redColor];
         self.tableView.tableFooterView = testFooter;
         
+        self.refreshControl = [UIRefreshControl new];
+        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Release to Refresh"];
+        [self.refreshControl addTarget:self action:@selector(refreshControlPulled:) forControlEvents:UIControlEventValueChanged];
+        
         self.view = self.tableView;
         
         self.navigationItem.title = @"Colors";
@@ -83,6 +87,19 @@ static NSString *const kItemDescription = @"itemDescription";
 - (IBAction)beep:(id)sender
 {
     NSBeep();
+}
+
+- (IBAction)refreshControlPulled:(id)sender
+{
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refreshing"];
+    
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.refreshControl endRefreshing];
+        
+        self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    });
 }
 
 #pragma mark - <UITableViewDataSource>

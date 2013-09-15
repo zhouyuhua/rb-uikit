@@ -176,9 +176,26 @@
 
 #pragma mark -
 
+- (NSAttributedString *)_attributedStringReadyForDrawing:(NSAttributedString *)attributedString
+{
+    if(!attributedString)
+        return nil;
+    
+    NSMutableAttributedString *finalAttributedString = [attributedString mutableCopy];
+    NSRange fullStringRange = NSMakeRange(0, finalAttributedString.length);
+    [_attributes enumerateKeysAndObjectsUsingBlock:^(NSString *key, id object, BOOL *stop) {
+        if(![finalAttributedString attribute:key atIndex:0 effectiveRange:NULL]) {
+            [finalAttributedString addAttribute:key value:object range:fullStringRange];
+        }
+    }];
+    
+    return finalAttributedString;
+}
+
 - (void)setAttributedText:(NSAttributedString *)attributedText
 {
-    _attributedText = attributedText;
+    _attributedText = [self _attributedStringReadyForDrawing:attributedText];
+    
     [self setNeedsDisplay];
 }
 
