@@ -122,6 +122,32 @@
 
 #pragma mark -
 
+- (void)setTableHeaderView:(UIView *)tableHeaderView
+{
+    [_tableHeaderView removeFromSuperview];
+    
+    _tableHeaderView = tableHeaderView;
+    
+    if(_tableHeaderView) {
+        [self addSubview:_tableHeaderView];
+        [self setNeedsLayout];
+    }
+}
+
+- (void)setTableFooterView:(UIView *)tableFooterView
+{
+    [_tableFooterView removeFromSuperview];
+    
+    _tableFooterView = tableFooterView;
+    
+    if(_tableFooterView) {
+        [self addSubview:_tableFooterView];
+        [self setNeedsLayout];
+    }
+}
+
+#pragma mark -
+
 - (void)setRowHeight:(CGFloat)rowHeight
 {
     _rowHeight = rowHeight;
@@ -289,7 +315,7 @@
 
 - (void)_updateContentSize
 {
-    CGFloat totalHeight = 0.0;
+    CGFloat totalHeight = CGRectGetHeight(_tableHeaderView.bounds) + CGRectGetHeight(_tableFooterView.bounds);
     
     for (UITableViewSectionInfo *sectionInfo in _sections)
         totalHeight += sectionInfo.totalHeight;
@@ -300,6 +326,14 @@
 - (void)_layoutContents
 {
     CGRect visibleRect = [self _visibleBounds];
+    
+    if(_tableHeaderView) {
+        CGRect tableHeaderViewFrame = _tableHeaderView.frame;
+        tableHeaderViewFrame.size.width = CGRectGetWidth(visibleRect);
+        tableHeaderViewFrame.origin = CGPointZero;
+        _tableHeaderView.frame = tableHeaderViewFrame;
+    }
+    
     [_sections enumerateObjectsUsingBlock:^(UITableViewSectionInfo *sectionInfo, NSUInteger section, BOOL *stop) {
         CGRect headerFrame = [self rectForHeaderInSection:section];
         sectionInfo.headerView.frame = headerFrame;
@@ -339,6 +373,14 @@
             [self bringSubviewToFront:sectionInfo.footerView];
         }
     }];
+    
+    if(_tableFooterView) {
+        CGRect tableFooterViewFrame = _tableFooterView.frame;
+        tableFooterViewFrame.size.width = CGRectGetWidth(visibleRect);
+        tableFooterViewFrame.origin.x = 0.0;
+        tableFooterViewFrame.origin.y = self.contentSize.height - CGRectGetHeight(tableFooterViewFrame);
+        _tableFooterView.frame = tableFooterViewFrame;
+    }
     
     for (UITableViewCell *cell in _allCells) {
         CGRect cellFrame = cell.frame;
@@ -434,7 +476,7 @@
     CGFloat offset = [self _offsetForSection:section];
     CGRect headerFrame = [self _rectForOffset:offset height:sectionInfo.headerHeight];
     if([self _sectionWithStickyHeader] == section) {
-        headerFrame.origin.y = self.contentOffset.y;
+        headerFrame.origin.y = MAX(CGRectGetHeight(_tableHeaderView.bounds), self.contentOffset.y);
     }
     
     return headerFrame;
@@ -473,7 +515,7 @@
 
 - (CGFloat)_offsetForSection:(NSInteger)section
 {
-    CGFloat offset = 0.0;
+    CGFloat offset = CGRectGetHeight(_tableHeaderView.bounds);
     
     for (NSUInteger row = 0; row < section; row++) {
         UITableViewSectionInfo *sectionInfo = _sections[row];

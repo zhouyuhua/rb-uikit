@@ -33,6 +33,11 @@ static NSString *const kItemDescription = @"itemDescription";
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
         self.tableView.rowHeight = 100.0;
+        self.tableView.tableHeaderView = [UISearchBar new];
+        
+        UIView *testFooter = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 20.0)];
+        testFooter.backgroundColor = [UIColor redColor];
+        self.tableView.tableFooterView = testFooter;
         
         self.view = self.tableView;
         

@@ -91,6 +91,11 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
 
 #pragma mark -
 
+@property (nonatomic) UIView *tableHeaderView;
+@property (nonatomic) UIView *tableFooterView;
+
+#pragma mark -
+
 @property (nonatomic) CGFloat rowHeight;
 @property (nonatomic) CGFloat sectionHeaderHeight;
 @property (nonatomic) CGFloat sectionFooterHeight;

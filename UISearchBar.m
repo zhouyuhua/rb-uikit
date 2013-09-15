@@ -78,6 +78,11 @@ static id MakeIconImagesKey(UISearchBarIcon icon, UIControlState state)
     return self;
 }
 
+- (id)init
+{
+    return [self initWithFrame:CGRectMake(0.0, 0.0, 320.0, 50.0)];
+}
+
 #pragma mark - Layout
 
 - (void)layoutSubviews

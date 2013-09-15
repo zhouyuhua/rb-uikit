@@ -25,7 +25,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:[TestController new]];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:[TestTableViewController new]];
     self.window.rootViewController = self.navigationController;
     
     [self.window makeKeyAndVisible];
