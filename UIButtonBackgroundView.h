@@ -11,5 +11,6 @@
 @interface UIButtonBackgroundView : UIView
 
 @property (nonatomic, getter=isHighlighted) BOOL highlighted;
+@property (nonatomic, readonly) UIOffset sizeOffsets;
 
 @end

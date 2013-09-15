@@ -14,20 +14,23 @@
 {
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:rect xRadius:5.0 yRadius:5.0];
     if(self.isHighlighted) {
-        [[UIColor selectedMenuItemColor] set];
+        [[UIColor alternateSelectedControlColor] set];
     } else {
         [[UIColor whiteColor] set];
     }
     [bezierPath fill];
     
-    if(self.isHighlighted) {
-        [[UIColor colorWithWhite:0.1 alpha:1.0] set];
-    } else {
-        [[UIColor colorWithWhite:0.4 alpha:1.0] set];
-    }
+    [[UIColor colorWithWhite:0.0 alpha:0.5] set];
     [bezierPath setLineWidth:2.0];
     [bezierPath addClip];
     [bezierPath stroke];
+}
+
+#pragma mark - Properties
+
+- (UIOffset)sizeOffsets
+{
+    return UIOffsetMake(30.0, 10.0);
 }
 
 @end

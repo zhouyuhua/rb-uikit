@@ -495,6 +495,8 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
         [_delegate textFieldDidEndEditing:self];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidEndEditingNotification object:self];
+    
+    [self resignFirstResponder];
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification

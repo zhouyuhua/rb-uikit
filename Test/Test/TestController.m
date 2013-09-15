@@ -30,6 +30,7 @@
     button.frame = CGRectMake(50.0, 120.0, 100.0, 44.0);
     [button setTitle:@"Test Title" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(testPush:) forControlEvents:UIControlEventTouchUpInside];
+    [button sizeToFit];
     [self.view addSubview:button];
     
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.bounds), 50.0)];

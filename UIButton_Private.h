@@ -16,6 +16,7 @@ enum : NSInteger {
 @interface UIButton ()
 
 @property (nonatomic) UIView *backgroundView;
+@property (nonatomic) UIOffset _backgroundViewSizeOffsets;
 
 #pragma mark - readwrite
 

@@ -19,7 +19,7 @@
 #import "UIButtonRoundRectBackgroundView.h"
 #import "UIButtonBarBackgroundView.h"
 
-#define INTER_VIEW_PADDING      20.0
+#define INTER_VIEW_PADDING      10.0
 #define MIN_PREFERRED_HEIGHT    30.0
 
 @implementation UIButton {
@@ -53,9 +53,9 @@
         _backgroundImages = [NSMutableDictionary dictionary];
         _attributedTitles = [NSMutableDictionary dictionary];
         
-        [self setTitleColor:[UIColor colorWithRed:0.21 green:0.22 blue:0.36 alpha:1.00] forState:UIControlStateNormal];
-        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-        [self setTitleColor:[UIColor colorWithWhite:0.45 alpha:1.0] forState:UIControlStateDisabled];
+        [self setTitleColor:self.tintColor forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor alternateSelectedControlTextColor] forState:UIControlStateHighlighted];
+        [self setTitleColor:[UIColor disabledControlTextColor] forState:UIControlStateDisabled];
         
         self.backgroundView = [UIImageView new];
         [self addSubview:self.backgroundView];
@@ -117,6 +117,8 @@
             _backgroundView = [UIButtonBorderlessBackgroundView new];
         else
             _backgroundView = [UIButtonRoundRectBackgroundView new];
+        
+        self._backgroundViewSizeOffsets = ((UIButtonBackgroundView *)_backgroundView).sizeOffsets;
     } else if((NSInteger)buttonType == UIButtonType_Private_BarButton) {
         self.imageView._prefersToRenderTemplateImages = wantsBorderlessButtons;
         
@@ -127,6 +129,8 @@
         
         self.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        self._backgroundViewSizeOffsets = ((UIButtonBackgroundView *)_backgroundView).sizeOffsets;
     } else if((NSInteger)buttonType == UIButtonType_Private_BackBarButton) {
         self.imageView._prefersToRenderTemplateImages = wantsBorderlessButtons;
         
@@ -138,8 +142,12 @@
         self.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
         [self setTitleColor:[UIColor colorWithWhite:0.15 alpha:1.0] forState:UIControlStateNormal];
         [self setImage:UIKitImageNamed(@"UIBackButtonChevron", UIImageResizingModeStretch) forState:UIControlStateNormal];
+        
+        self._backgroundViewSizeOffsets = ((UIButtonBackgroundView *)_backgroundView).sizeOffsets;
     } else {
         _backgroundView = [UIImageView new];
+        
+        self._backgroundViewSizeOffsets = UIOffsetZero;
     }
     [self insertSubview:_backgroundView atIndex:0];
     
@@ -346,6 +354,9 @@
         buttonSize.width = titleLabelSize.width;
         buttonSize.height = MAX(MIN_PREFERRED_HEIGHT, buttonSize.height);
     }
+    
+    buttonSize.width += self._backgroundViewSizeOffsets.horizontal;
+    buttonSize.height += self._backgroundViewSizeOffsets.vertical;
     
     return buttonSize;
 }

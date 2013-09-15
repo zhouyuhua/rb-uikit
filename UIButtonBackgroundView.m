@@ -25,4 +25,9 @@
     [self setNeedsDisplay];
 }
 
+- (UIOffset)sizeOffsets
+{
+    return UIOffsetZero;
+}
+
 @end

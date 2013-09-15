@@ -10,4 +10,11 @@
 
 @implementation UIButtonBorderlessBackgroundView
 
+#pragma mark - Properties
+
+- (UIOffset)sizeOffsets
+{
+    return UIOffsetMake(10.0, 16.0);
+}
+
 @end
