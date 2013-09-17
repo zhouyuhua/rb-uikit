@@ -101,16 +101,6 @@ static id MakeIconImagesKey(UISearchBarIcon icon, UIControlState state)
 
 #pragma mark - First Responder
 
-- (BOOL)canBecomeFirstResponder
-{
-    return self.textField.canBecomeFirstResponder;
-}
-
-- (BOOL)canResignFirstResponder
-{
-    return self.textField.canResignFirstResponder;
-}
-
 - (BOOL)becomeFirstResponder
 {
     return [self.textField becomeFirstResponder];

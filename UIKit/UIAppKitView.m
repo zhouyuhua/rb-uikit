@@ -99,22 +99,24 @@ UIView *NSViewToUIView(NSView *view)
 
 - (BOOL)canBecomeFirstResponder
 {
-    return self.adaptorView.view.acceptsFirstResponder;
+    return NO;
 }
 
 - (BOOL)canResignFirstResponder
 {
-    return self.adaptorView.view.acceptsFirstResponder;
+    return NO;
 }
 
 - (BOOL)becomeFirstResponder
 {
-    return [self.adaptorView.view becomeFirstResponder] && [super becomeFirstResponder];
+    NSLog(@"*** Warning, UIAppKitView does not support first responder status manipulation");
+    return NO;
 }
 
 - (BOOL)resignFirstResponder
 {
-    return [self.adaptorView.view resignFirstResponder] && [super resignFirstResponder];
+    NSLog(@"*** Warning, UIAppKitView does not support first responder status manipulation");
+    return NO;
 }
 
 #pragma mark - Responding To Movements

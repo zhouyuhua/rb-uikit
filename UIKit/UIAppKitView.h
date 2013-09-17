@@ -21,6 +21,9 @@
 UIKIT_EXTERN UIView *NSViewToUIView(NSView *view);
 
 ///The UIAppKitView class encapsulates a simple adaptor to place NSViews into a UIView hierarchy.
+///
+///The UIAppKitView class does not itself accept first responder. It is assumed that clients
+///of the class will manage native first responder and emulated first responder state.
 @interface UIAppKitView : UIView
 
 ///Initialize the receiver with a given native NSView object.

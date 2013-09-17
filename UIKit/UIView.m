@@ -14,6 +14,8 @@
 #import "UIWindow_Private.h"
 #import "UIGestureRecognizer_Private.h"
 
+#import "UIAppKitView.h"
+
 @interface UIViewLayoutManager : NSObject
 
 - (id)initWithView:(UIView *)view;
@@ -535,10 +537,11 @@
 
 - (void)_setFirstResponder:(UIResponder *)_firstResponder
 {
-    if(_superview)
+    if(_superview) {
         _superview._firstResponder = _firstResponder;
-    else
+    } else {
         __firstResponder = _firstResponder;
+    }
 }
 
 - (UIResponder *)_firstResponder
