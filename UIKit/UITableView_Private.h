@@ -28,6 +28,8 @@
         
         int tableViewWillDisplayCellForRowAtIndexPath : 1;
         int tableViewDidEndDisplayingCellForRowAtIndexPath : 1;
+        int tableViewDidEndDisplayingHeaderViewForSection : 1;
+        int tableViewDidEndDisplayingFooterViewForSection : 1;
         
         int tableViewWillSelectRowAtIndexPath : 1;
         int tableViewDidSelectRowAtIndexPath : 1;
@@ -45,8 +47,8 @@
     NSMutableArray *_sections;
     NSMutableArray *_allCells;
     
-    NSIndexPath *_highlightedIndexPath;
-    NSIndexPath *_selectedIndexPath;
+    NSMutableArray *_highlightedIndexPaths;
+    NSMutableArray *_selectedIndexPaths;
     
     BOOL _needsReload;
     

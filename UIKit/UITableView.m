@@ -53,8 +53,14 @@
         _sectionHeaderHeight = 20.0;
         _sectionFooterHeight = 0.0;
         
+        _allowsSelection = YES;
+        _allowsMultipleSelection = NO;
+        
         _separatorColor = [UIColor lightGrayColor];
         _separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        
+        _highlightedIndexPaths = [NSMutableArray array];
+        _selectedIndexPaths = [NSMutableArray array];
     }
     
     return self;
@@ -115,6 +121,8 @@
     
     _delegateRespondsTo.tableViewWillSelectRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:willSelectRowAtIndexPath:)];
     _delegateRespondsTo.tableViewDidSelectRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)];
+    _delegateRespondsTo.tableViewDidEndDisplayingHeaderViewForSection = [delegate respondsToSelector:@selector(tableView:didEndDisplayingHeaderView:forSection:)];
+    _delegateRespondsTo.tableViewDidEndDisplayingFooterViewForSection = [delegate respondsToSelector:@selector(tableView:didEndDisplayingFooterView:forSection:)];
     
     _delegateRespondsTo.tableViewWillDeselectRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:willDeselectRowAtIndexPath:)];
     _delegateRespondsTo.tableViewDidDeselectRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:didDeselectRowAtIndexPath:)];
@@ -182,6 +190,18 @@
     _separatorColor = separatorColor;
     
     [self setNeedsLayout];
+}
+
+- (void)setBackgroundView:(UIView *)backgroundView
+{
+    [_backgroundView removeFromSuperview];
+    
+    _backgroundView = backgroundView;
+    
+    if(_backgroundView) {
+        [self insertSubview:_backgroundView atIndex:0];
+        [self setNeedsLayout];
+    }
 }
 
 #pragma mark - Refresh Control
@@ -363,6 +383,8 @@
 {
     CGRect visibleRect = [self _visibleBounds];
     
+    _backgroundView.frame = visibleRect;
+    
     if(_tableHeaderView) {
         CGRect tableHeaderViewFrame = _tableHeaderView.frame;
         tableHeaderViewFrame.size.width = CGRectGetWidth(visibleRect);
@@ -393,7 +415,7 @@
                 }
                 
                 cell.frame = rowFrame;
-                cell.selected = (_selectedIndexPath && [indexPath isEqual:_selectedIndexPath]);
+                cell.selected = [_selectedIndexPaths containsObject:indexPath];
                 cell._indexPath = indexPath;
                 [cell _setSeparatorStyle:_separatorStyle color:_separatorColor];
                 
@@ -463,10 +485,15 @@
 
 - (void)reloadData
 {
-    for (UITableViewSectionInfo *sectionInfo in _sections) {
+    [_sections enumerateObjectsUsingBlock:^(UITableViewSectionInfo *sectionInfo, NSUInteger section, BOOL *stop) {
         [sectionInfo.headerView removeFromSuperview];
+        if(_delegateRespondsTo.tableViewDidEndDisplayingHeaderViewForSection)
+            [self.delegate tableView:self didEndDisplayingHeaderView:sectionInfo.headerView forSection:section];
+        
         [sectionInfo.footerView removeFromSuperview];
-    }
+        if(_delegateRespondsTo.tableViewDidEndDisplayingFooterViewForSection)
+            [self.delegate tableView:self didEndDisplayingFooterView:sectionInfo.headerView forSection:section];
+    }];
     
     [_allCells makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [_allCells removeAllObjects];
@@ -616,6 +643,26 @@
     return _cachedCells.allValues;
 }
 
+- (NSArray *)indexPathsForRowsInRect:(CGRect)rect
+{
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    
+    [_sections enumerateObjectsUsingBlock:^(UITableViewSectionInfo *sectionInfo, NSUInteger section, BOOL *stop) {
+        CGFloat offset = [self _offsetForSection:section] + sectionInfo.headerHeight;
+        for (NSUInteger row = 0, numberOfRows = sectionInfo.numberOfRows; row < numberOfRows; row++) {
+            CGFloat rowHeight = sectionInfo.rowHeights[row];
+            CGRect rowRect = [self _rectForOffset:offset height:rowHeight];
+            NSLog(@"%@ %@", NSStringFromCGRect(rect), NSStringFromCGRect(rowRect));
+            if(CGRectIntersectsRect(rect, rowRect))
+                [indexPaths addObject:[NSIndexPath indexPathForRow:row inSection:section]];
+            
+            offset += rowHeight;
+        }
+    }];
+    
+    return indexPaths;
+}
+
 - (NSIndexPath *)indexPathForRowAtPoint:(CGPoint)point
 {
     __block NSIndexPath *indexPath = nil;
@@ -676,11 +723,67 @@
     return footerView;
 }
 
+#pragma mark - Scrolling the Table View
+
+- (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animate
+{
+    UIKitUnimplementedMethod();
+}
+
+- (void)scrollToNearestSelectedRowAtScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animate
+{
+    UIKitUnimplementedMethod();
+}
+
 #pragma mark - Managing Selection
 
 - (NSIndexPath *)indexPathForSelectedRow
 {
-    return _selectedIndexPath;
+    return _selectedIndexPaths.firstObject;
+}
+
+- (NSArray *)indexPathsForSelectedRows
+{
+    return [_selectedIndexPaths copy];
+}
+
+- (void)_selectRowsAtIndexPaths:(NSArray *)indexPaths animated:(BOOL)animated scrollPosition:(UITableViewScrollPosition)scrollPosition
+{
+    if(indexPaths.count == 0)
+        return;
+    
+    for (NSIndexPath *indexPath in _selectedIndexPaths) {
+        if([indexPaths containsObject:indexPath])
+            continue;
+        
+        UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
+        [cell setSelected:NO animated:animated];
+    }
+    [_selectedIndexPaths setArray:indexPaths];
+    
+    CGRect totalCellFrame = CGRectZero;
+    for (NSIndexPath *indexPath in indexPaths) {
+        UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
+        [cell setSelected:YES animated:animated];
+        
+        totalCellFrame = CGRectUnion(totalCellFrame, [self rectForRowAtIndexPath:indexPath]);
+    }
+    
+    if(scrollPosition == UITableViewScrollPositionNone) {
+        CGRect visibleFrame = self.bounds;
+        
+        if(CGRectGetMaxY(totalCellFrame) > CGRectGetMaxY(visibleFrame)) {
+            CGPoint contentOffset = self.contentOffset;
+            contentOffset.y = CGRectGetMaxY(totalCellFrame) - CGRectGetHeight(visibleFrame);
+            self.contentOffset = contentOffset;
+        } else if(CGRectGetMinY(totalCellFrame) < CGRectGetMinY(visibleFrame)) {
+            CGPoint contentOffset = self.contentOffset;
+            contentOffset.y = CGRectGetMinY(totalCellFrame);
+            self.contentOffset = contentOffset;
+        }
+    } else {
+        UIKitUnimplementedMethod();
+    }
 }
 
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(UITableViewScrollPosition)scrollPosition
@@ -688,32 +791,7 @@
     if(!indexPath)
         return;
     
-    if(_selectedIndexPath) {
-        UITableViewCell *cell = [self cellForRowAtIndexPath:_selectedIndexPath];
-        [cell setSelected:NO animated:animated];
-    }
-    
-    _selectedIndexPath = indexPath;
-    
-    UITableViewCell *cell = [self cellForRowAtIndexPath:_selectedIndexPath];
-    [cell setSelected:YES animated:animated];
-    
-    if(scrollPosition == UITableViewScrollPositionNone) {
-        CGRect visibleFrame = self.bounds;
-        
-        CGRect cellFrame = [self rectForRowAtIndexPath:indexPath];
-        if(CGRectGetMaxY(cellFrame) > CGRectGetMaxY(visibleFrame)) {
-            CGPoint contentOffset = self.contentOffset;
-            contentOffset.y = CGRectGetMaxY(cellFrame) - CGRectGetHeight(visibleFrame);
-            self.contentOffset = contentOffset;
-        } else if(CGRectGetMinY(cellFrame) < CGRectGetMinY(visibleFrame)) {
-            CGPoint contentOffset = self.contentOffset;
-            contentOffset.y = CGRectGetMinY(cellFrame);
-            self.contentOffset = contentOffset;
-        }
-    } else {
-        UIKitUnimplementedMethod();
-    }
+    [self _selectRowsAtIndexPaths:@[ indexPath ] animated:animated scrollPosition:scrollPosition];
 }
 
 - (void)deselectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated
@@ -724,8 +802,27 @@
     UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO animated:animated];
     
-    if([_selectedIndexPath isEqual:indexPath])
-        _selectedIndexPath = nil;
+    [_selectedIndexPaths removeObject:indexPath];
+}
+
+#pragma mark - Managing the Editing of Table Cells
+
+- (void)setEditing:(BOOL)editing
+{
+    [self setEditing:editing animated:NO];
+}
+
+- (BOOL)isEditing
+{
+    return NO;
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animate
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSLog(@"*** Warning, %s is not supported in RB-UIKit", __PRETTY_FUNCTION__);
+    });
 }
 
 #pragma mark - Actions
@@ -792,66 +889,100 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if(_selectedIndexPath && _delegateRespondsTo.tableViewWillSelectRowAtIndexPath) {
-        [self.delegate tableView:self willSelectRowAtIndexPath:_selectedIndexPath];
+    if(!self.allowsSelection)
+        return;
+    
+    for (NSIndexPath *indexPath in _highlightedIndexPaths) {
+        if(_delegateRespondsTo.tableViewWillSelectRowAtIndexPath) {
+            [self.delegate tableView:self willSelectRowAtIndexPath:indexPath];
+        }
     }
     
-    [self selectRowAtIndexPath:_highlightedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    _highlightedIndexPath = nil;
+    [self _selectRowsAtIndexPaths:_highlightedIndexPaths animated:YES scrollPosition:UITableViewScrollPositionNone];
     
-    if(_selectedIndexPath && _delegateRespondsTo.tableViewDidSelectRowAtIndexPath) {
-        [self.delegate tableView:self didSelectRowAtIndexPath:_selectedIndexPath];
+    for (NSIndexPath *indexPath in _highlightedIndexPaths) {
+        if(_delegateRespondsTo.tableViewDidSelectRowAtIndexPath) {
+            [self.delegate tableView:self didSelectRowAtIndexPath:indexPath];
+        }
     }
+    
+    [_highlightedIndexPaths removeAllObjects];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if(!self.allowsSelection)
+        return;
+    
+    BOOL multipleSelectionMode = (([NSEvent modifierFlags] & NSShiftKeyMask) == NSShiftKeyMask && self.allowsMultipleSelection);
+    
     UITouch *touch = [touches anyObject];
     CGPoint locationOfTouch = [touch locationInView:self];
     
     NSIndexPath *indexPath = [self indexPathForRowAtPoint:locationOfTouch];
     
-    if(_highlightedIndexPath) {
-        UITableViewCell *oldCell = [self cellForRowAtIndexPath:_highlightedIndexPath];
-        [oldCell setHighlighted:NO animated:NO];
+    if(!multipleSelectionMode) {
+        for (NSIndexPath *indexPath in _highlightedIndexPaths) {
+            UITableViewCell *oldCell = [self cellForRowAtIndexPath:indexPath];
+            [oldCell setHighlighted:NO animated:NO];
+        }
     }
     
     if(indexPath) {
         UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
-        [cell setHighlighted:YES animated:NO];
+        if(multipleSelectionMode && [_highlightedIndexPaths containsObject:indexPath]) {
+            [cell setHighlighted:NO animated:NO];
+            
+            [_highlightedIndexPaths removeObject:indexPath];
+        } else {
+            [cell setHighlighted:YES animated:NO];
+        }
     }
     
-    _highlightedIndexPath = indexPath;
+    [_highlightedIndexPaths addObject:indexPath];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if(!self.allowsSelection)
+        return;
+    
     [self becomeFirstResponder];
     
-    if(_selectedIndexPath && _delegateRespondsTo.tableViewWillDeselectRowAtIndexPath) {
-        [self.delegate tableView:self willDeselectRowAtIndexPath:_selectedIndexPath];
-    }
+    BOOL multipleSelectionMode = (([NSEvent modifierFlags] & NSShiftKeyMask) == NSShiftKeyMask && self.allowsMultipleSelection);
     
-    [self deselectRowAtIndexPath:_selectedIndexPath animated:NO];
+    if(multipleSelectionMode) {
+        [_highlightedIndexPaths addObjectsFromArray:_selectedIndexPaths];
+    } else {
+        for (NSIndexPath *indexPath in _selectedIndexPaths.copy) {
+            if(_delegateRespondsTo.tableViewWillDeselectRowAtIndexPath)
+                [self.delegate tableView:self willDeselectRowAtIndexPath:indexPath];
+            
+            [self deselectRowAtIndexPath:indexPath animated:NO];
+        }
+    }
     
     UITouch *touch = [touches anyObject];
     CGPoint locationOfTouch = [touch locationInView:self];
     
     NSIndexPath *indexPath = [self indexPathForRowAtPoint:locationOfTouch];
     if(indexPath) {
-        if(_highlightedIndexPath) {
-            UITableViewCell *oldCell = [self cellForRowAtIndexPath:_highlightedIndexPath];
-            [oldCell setHighlighted:NO animated:NO];
-        }
-        
         UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
-        [cell setHighlighted:YES animated:NO];
+        if(multipleSelectionMode && [_highlightedIndexPaths containsObject:indexPath]) {
+            [cell setHighlighted:NO animated:NO];
+            
+            [_highlightedIndexPaths removeObject:indexPath];
+        } else {
+            [cell setHighlighted:YES animated:NO];
+        }
     }
     
-    _highlightedIndexPath = indexPath;
+    [_highlightedIndexPaths addObject:indexPath];
     
-    if(_selectedIndexPath && _delegateRespondsTo.tableViewDidDeselectRowAtIndexPath) {
-        [self.delegate tableView:self didDeselectRowAtIndexPath:_selectedIndexPath];
+    if(_delegateRespondsTo.tableViewDidDeselectRowAtIndexPath) {
+        for (NSIndexPath *indexPath in _selectedIndexPaths) {
+            [self.delegate tableView:self didDeselectRowAtIndexPath:indexPath];
+        }
     }
 }
 

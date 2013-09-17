@@ -167,7 +167,7 @@
 
 - (UIResponder *)nextResponder
 {
-    return _parentViewController ?: self.view.window;
+    return self.view.superview;
 }
 
 #pragma mark - Properties

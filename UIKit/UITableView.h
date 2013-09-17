@@ -69,6 +69,9 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 
+- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section;
+- (void)tableView:(UITableView *)tableView didEndDisplayingFooterView:(UIView *)view forSection:(NSInteger)section;
+
 #pragma mark -
 
 - (void)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -104,6 +107,7 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
 
 @property (nonatomic) UITableViewCellSeparatorStyle separatorStyle;
 @property (nonatomic) UIColor *separatorColor;
+@property (nonatomic) UIView *backgroundView;
 
 #pragma mark -
 
@@ -143,16 +147,34 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
 - (CGRect)rectForFooterInSection:(NSInteger)section;
 - (CGRect)rectForHeaderInSection:(NSInteger)section;
 
+#pragma mark - Scrolling the Table View
+
+- (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animate;
+- (void)scrollToNearestSelectedRowAtScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animate;
+
 #pragma mark - Accessing Rows and Sections
 
 - (NSArray *)visibleCells;
+- (NSArray *)indexPathsForRowsInRect:(CGRect)rect;
 - (NSIndexPath *)indexPathForRowAtPoint:(CGPoint)point;
 - (UITableViewCell *)cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 #pragma mark - Managing Selection
 
 - (NSIndexPath *)indexPathForSelectedRow;
+- (NSArray *)indexPathsForSelectedRows;
+
 - (void)selectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(UITableViewScrollPosition)scrollPosition;
 - (void)deselectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated;
+
+@property (nonatomic) BOOL allowsSelection;
+@property (nonatomic) BOOL allowsMultipleSelection;
+@property (nonatomic) BOOL allowsSelectionDuringEditing;
+@property (nonatomic) BOOL allowsMultipleSelectionDuringEditing;
+
+#pragma mark - Managing the Editing of Table Cells
+
+@property (nonatomic, getter=isEditing) BOOL editing;
+- (void)setEditing:(BOOL)editing animated:(BOOL)animate;
 
 @end
