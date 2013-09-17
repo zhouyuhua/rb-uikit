@@ -31,6 +31,23 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
     UITableViewCellSeparatorStyleSingleLineEtched
 };
 
+typedef NS_ENUM(NSInteger, UITableViewCellEditingStyle) {
+    UITableViewCellEditingStyleNone,
+    UITableViewCellEditingStyleDelete,
+    UITableViewCellEditingStyleInsert
+};
+
+typedef NS_ENUM(NSUInteger, UITableViewRowAnimation) {
+    UITableViewRowAnimationFade,
+    UITableViewRowAnimationRight,
+    UITableViewRowAnimationLeft,
+    UITableViewRowAnimationTop,
+    UITableViewRowAnimationBottom,
+    UITableViewRowAnimationNone,
+    UITableViewRowAnimationMiddle,
+    UITableViewRowAnimationAutomatic = 100
+};
+
 @protocol UITableViewDataSource <NSObject>
 
 @required
@@ -41,6 +58,24 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
 @optional
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+
+#pragma mark -
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView UIKIT_UNIMPLEMENTED;
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index UIKIT_UNIMPLEMENTED;
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section;
+
+#pragma mark - Inserting or Deleting Table Rows
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath UIKIT_UNIMPLEMENTED;
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath UIKIT_UNIMPLEMENTED;
+
+#pragma mark - Reordering Table Rows
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath UIKIT_UNIMPLEMENTED;
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)from toIndexPath:(NSIndexPath *)to UIKIT_UNIMPLEMENTED;
 
 @end
 
@@ -61,11 +96,6 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
 
 #pragma mark -
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section;
-
-#pragma mark -
-
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 
@@ -79,6 +109,10 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
 
 - (void)tableView:(UITableView *)tableView willDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+#pragma mark -
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath UIKIT_UNIMPLEMENTED;
 
 @end
 
@@ -134,6 +168,20 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
 #pragma mark - Reloading Data
 
 - (void)reloadData;
+- (void)reloadRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)rowAnimation;
+- (void)reloadSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)rowAnimation;
+- (void)reloadSectionIndexTitles;
+
+#pragma mark - Inserting, Deleting, and Moving Rows and Sections
+
+- (void)beginUpdates;
+- (void)endUpdates;
+- (void)insertRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)rowAnimation;
+- (void)deleteRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)rowAnimation;
+- (void)moveRowAtIndexPath:(NSIndexPath *)from toIndexPath:(NSIndexPath *)to;
+- (void)insertSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)rowAnimation;
+- (void)deleteSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)rowAnimation;
+- (void)moveSection:(NSInteger)from toSection:(NSInteger)to;
 
 #pragma mark - Layout Information
 
@@ -149,8 +197,8 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
 
 #pragma mark - Scrolling the Table View
 
-- (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animate;
-- (void)scrollToNearestSelectedRowAtScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animate;
+- (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animate UIKIT_UNIMPLEMENTED;
+- (void)scrollToNearestSelectedRowAtScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animate UIKIT_UNIMPLEMENTED;
 
 #pragma mark - Accessing Rows and Sections
 
@@ -174,7 +222,20 @@ typedef NS_ENUM(NSUInteger, UITableViewCellSeparatorStyle) {
 
 #pragma mark - Managing the Editing of Table Cells
 
+/*
+ Our implementation of UITableView does not support an explicit editing mode.
+ A user may at any time delete or reorder the table view through the keyboard
+ and drag and drop. Using these properties/methods will result in a one time
+ runtime warning being printed to the log.
+ */
 @property (nonatomic, getter=isEditing) BOOL editing;
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate;
+
+#pragma marl - Configuring the Table Index
+
+@property (nonatomic) NSInteger sectionIndexMinimumDisplayRowCount UIKIT_UNIMPLEMENTED;
+@property (nonatomic) UIColor *sectionIndexColor UIKIT_UNIMPLEMENTED;
+@property (nonatomic) UIColor *sectionIndexBackgroundColor UIKIT_UNIMPLEMENTED;
+@property (nonatomic) UIColor *sectionIndexTrackingBackgroundColor UIKIT_UNIMPLEMENTED;
 
 @end

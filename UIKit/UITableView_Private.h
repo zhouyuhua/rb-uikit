@@ -13,6 +13,15 @@
 @interface UITableView () {
     struct {
         int numberOfSectionsInTableView : 1;
+        
+        int tableViewTitleForHeaderInSection : 1;
+        int tableViewTitleForFooterInSection : 1;
+        
+        int tableViewCommitEditingStyleForRowAtIndexPath : 1;
+        int tableViewCanEditRowAtIndexPath : 1;
+        
+        int tableViewCanMoveRowAtIndexPath : 1;
+        int tableViewMoveRowAtIndexPathToIndexPath : 1;
     } _dataSourceRespondsTo;
     
     struct {
@@ -22,9 +31,6 @@
         
         int tableViewViewForHeaderInSection : 1;
         int tableViewViewForFooterInSection : 1;
-        
-        int tableViewTitleForHeaderInSection : 1;
-        int tableViewTitleForFooterInSection : 1;
         
         int tableViewWillDisplayCellForRowAtIndexPath : 1;
         int tableViewDidEndDisplayingCellForRowAtIndexPath : 1;
@@ -36,6 +42,8 @@
         
         int tableViewWillDeselectRowAtIndexPath : 1;
         int tableViewDidDeselectRowAtIndexPath : 1;
+        
+        int tableViewEditingStyleForRowAtIndexPath : 1;
     } _delegateRespondsTo;
     
     NSMutableDictionary *_registeredCellClasses;
@@ -49,6 +57,8 @@
     
     NSMutableArray *_highlightedIndexPaths;
     NSMutableArray *_selectedIndexPaths;
+    
+    NSMutableArray *_updateStack;
     
     BOOL _needsReload;
     

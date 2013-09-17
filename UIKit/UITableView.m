@@ -61,6 +61,8 @@
         
         _highlightedIndexPaths = [NSMutableArray array];
         _selectedIndexPaths = [NSMutableArray array];
+        
+        _updateStack = [NSMutableArray array];
     }
     
     return self;
@@ -99,6 +101,15 @@
     
     _dataSourceRespondsTo.numberOfSectionsInTableView = [dataSource respondsToSelector:@selector(numberOfSectionsInTableView:)];
     
+    _dataSourceRespondsTo.tableViewTitleForHeaderInSection = [dataSource respondsToSelector:@selector(tableView:titleForHeaderInSection:)];
+    _dataSourceRespondsTo.tableViewTitleForFooterInSection = [dataSource respondsToSelector:@selector(tableView:titleForFooterInSection:)];
+    
+    _dataSourceRespondsTo.tableViewCommitEditingStyleForRowAtIndexPath = [dataSource respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)];
+    _dataSourceRespondsTo.tableViewCanEditRowAtIndexPath = [dataSource respondsToSelector:@selector(tableView:canEditRowAtIndexPath:)];
+    
+    _dataSourceRespondsTo.tableViewCanMoveRowAtIndexPath = [dataSource respondsToSelector:@selector(tableView:canMoveRowAtIndexPath:)];
+    _dataSourceRespondsTo.tableViewMoveRowAtIndexPathToIndexPath = [dataSource respondsToSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)];
+    
     [self _setNeedsReload];
 }
 
@@ -113,9 +124,6 @@
     _delegateRespondsTo.tableViewViewForHeaderInSection = [delegate respondsToSelector:@selector(tableView:viewForHeaderInSection:)];
     _delegateRespondsTo.tableViewViewForFooterInSection = [delegate respondsToSelector:@selector(tableView:viewForFooterInSection:)];
     
-    _delegateRespondsTo.tableViewTitleForHeaderInSection = [delegate respondsToSelector:@selector(tableView:titleForHeaderInSection:)];
-    _delegateRespondsTo.tableViewTitleForFooterInSection = [delegate respondsToSelector:@selector(tableView:titleForFooterInSection:)];
-    
     _delegateRespondsTo.tableViewWillDisplayCellForRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)];
     _delegateRespondsTo.tableViewDidEndDisplayingCellForRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:didEndDisplayingCell:forRowAtIndexPath:)];
     
@@ -126,6 +134,8 @@
     
     _delegateRespondsTo.tableViewWillDeselectRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:willDeselectRowAtIndexPath:)];
     _delegateRespondsTo.tableViewDidDeselectRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:didDeselectRowAtIndexPath:)];
+    
+    _delegateRespondsTo.tableViewEditingStyleForRowAtIndexPath = [delegate respondsToSelector:@selector(tableView:editingStyleForRowAtIndexPath:)];
     
     [self _setNeedsReload];
 }
@@ -506,6 +516,96 @@
     _needsReload = NO;
 }
 
+- (void)reloadRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)rowAnimation
+{
+    UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"incremental reloading");
+    [self reloadData];
+}
+
+- (void)reloadSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)rowAnimation
+{
+    UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"incremental reloading");
+    [self reloadData];
+}
+
+- (void)reloadSectionIndexTitles
+{
+    UIKitUnimplementedMethod();
+}
+
+#pragma mark - Inserting, Deleting, and Moving Rows and Sections
+
+- (void)beginUpdates
+{
+    [_updateStack addObject:[NSNull null]];
+}
+
+- (void)endUpdates
+{
+    [_updateStack removeLastObject];
+    [self reloadData];
+}
+
+- (void)insertRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)rowAnimation
+{
+    if(_updateStack.count > 0) {
+        
+    } else {
+        UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"incremental reloading");
+        [self reloadData];
+    }
+}
+
+- (void)deleteRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)rowAnimation
+{
+    if(_updateStack.count > 0) {
+        
+    } else {
+        UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"incremental reloading");
+        [self reloadData];
+    }
+}
+
+- (void)moveRowAtIndexPath:(NSIndexPath *)from toIndexPath:(NSIndexPath *)to
+{
+    if(_updateStack.count > 0) {
+        
+    } else {
+        UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"incremental reloading");
+        [self reloadData];
+    }
+}
+
+- (void)insertSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)rowAnimation
+{
+    if(_updateStack.count > 0) {
+        
+    } else {
+        UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"incremental reloading");
+        [self reloadData];
+    }
+}
+
+- (void)deleteSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)rowAnimation
+{
+    if(_updateStack.count > 0) {
+        
+    } else {
+        UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"incremental reloading");
+        [self reloadData];
+    }
+}
+
+- (void)moveSection:(NSInteger)from toSection:(NSInteger)to
+{
+    if(_updateStack.count > 0) {
+        
+    } else {
+        UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"incremental reloading");
+        [self reloadData];
+    }
+}
+
 #pragma mark - Layout Information
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section
@@ -701,8 +801,8 @@
     if(_delegateRespondsTo.tableViewViewForHeaderInSection)
         headerView = [self.delegate tableView:self viewForHeaderInSection:section];
     
-    if(!headerView && _delegateRespondsTo.tableViewTitleForHeaderInSection) {
-        NSString *title = [self.delegate tableView:self titleForHeaderInSection:section];
+    if(!headerView && _dataSourceRespondsTo.tableViewTitleForHeaderInSection) {
+        NSString *title = [self.dataSource tableView:self titleForHeaderInSection:section];
         if(title) {
             UITableViewHeaderFooterView *headerFooterView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:@"<Autogenerated Header>"];
             headerFooterView.textLabel.text = title;
