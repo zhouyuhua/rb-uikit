@@ -160,12 +160,12 @@
 
 - (void)setTransform:(CGAffineTransform)transform
 {
-    self.layer.transform = CATransform3DMakeAffineTransform(transform);
+    self.layer.affineTransform = transform;
 }
 
 - (CGAffineTransform)transform
 {
-    return CATransform3DGetAffineTransform(self.layer.transform);
+    return self.layer.affineTransform;
 }
 
 - (void)setContentScaleFactor:(CGFloat)contentScaleFactor

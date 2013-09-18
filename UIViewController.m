@@ -8,6 +8,7 @@
 
 #import "UIViewController.h"
 #import "UIViewController_Private.h"
+#import "UIViewControllerTransitioning_Private.h"
 #import "UIView_Private.h"
 #import "UIResponder_Private.h"
 #import "UINavigationController.h"
@@ -19,6 +20,8 @@
     UINavigationItem *_navigationItem;
     NSMutableArray *_childViewControllers;
     UIView *_view;
+    
+    _UIViewControllerContextConcreteTransitioning *_currentAnimationContext;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -113,6 +116,14 @@
 
 #pragma mark - Navigation Stack Support
 
+- (UINavigationController *)navigationController
+{
+    if([self.parentViewController isKindOfClass:[UINavigationController class]])
+        return (UINavigationController *)self.parentViewController;
+    else
+        return [self.parentViewController navigationController];
+}
+
 - (UINavigationItem *)navigationItem
 {
     if(!_navigationItem) {
@@ -153,13 +164,15 @@
     
     [childController willMoveToParentViewController:self];
     [[self mutableChildViewControllers] addObject:childController];
+    childController.parentViewController = self;
     [childController didMoveToParentViewController:self];
 }
 
 - (void)removeFromParentViewController
 {
     [self willMoveToParentViewController:nil];
-    [self.parentViewController->_childViewControllers removeObject:self];
+    [[self.parentViewController mutableChildViewControllers] removeObject:self];
+    self.parentViewController = nil;
     [self didMoveToParentViewController:nil];
 }
 
@@ -187,6 +200,138 @@
         [self loadView];
     
     return _view;
+}
+
+#pragma mark - Testing for Specific Kinds of View Transitions
+
+- (BOOL)isMovingFromParentViewController
+{
+    return NO;
+}
+
+- (BOOL)isMovingToParentViewController
+{
+    return NO;
+}
+
+- (BOOL)isBeingPresented
+{
+    return (self.presentingViewController != nil);
+}
+
+- (BOOL)isBeingDismissed
+{
+    return NO;
+}
+
+#pragma mark - Presenting Another View Controller’s Content
+
+- (id <UIViewControllerAnimatedTransitioning>)_animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    if([_transitioningDelegate respondsToSelector:@selector(animationControllerForPresentedController:presentingController:sourceController:)]) {
+        return [_transitioningDelegate animationControllerForPresentedController:presented
+                                                            presentingController:presenting
+                                                                sourceController:source];
+    }
+    
+    return [[_UIViewControllerAnimatedPresentModalTransitioning alloc] initWithPresentedController:presented
+                                                                              presentingController:presenting
+                                                                                  sourceController:presenting];
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)_animationControllerForDismissedController:(UIViewController *)dismissedController
+{
+    if([_transitioningDelegate respondsToSelector:@selector(animationControllerForDismissedController:)]) {
+        return [_transitioningDelegate animationControllerForDismissedController:dismissedController];
+    }
+    
+    return [[_UIViewControllerAnimatedDismissModalTransitioning alloc] initWithDismissingController:dismissedController];
+}
+
+- (UIViewController *)_presentationController
+{
+    return self.navigationController ?: self;
+}
+
+#pragma mark -
+
+- (void)presentViewController:(UIViewController *)childController animated:(BOOL)animated completion:(dispatch_block_t)completionHandler
+{
+    NSParameterAssert(childController);
+    
+    if(self.presentingViewController) {
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"UIViewController %@ cannot present more than one controller at once", self];
+    }
+    
+    dispatch_block_t internalCompletionHandler = ^{
+        _currentAnimationContext = nil;
+        
+        childController.beingPresented = NO;
+        childController.movingToParentViewController = NO;
+        
+        self.presentedViewController = childController;
+        childController.presentingViewController = self;
+        
+        [childController viewDidAppear:animated];
+        
+        if(completionHandler)
+            completionHandler();
+    };
+    UIViewController *presentingController = self._presentationController;
+    NSDictionary *controllers = @{UITransitionContextFromViewControllerKey: self,
+                                  UITransitionContextToViewControllerKey: childController};
+    id <UIViewControllerAnimatedTransitioning> transitioningObject = [self _animationControllerForPresentedController:childController
+                                                                                                 presentingController:presentingController
+                                                                                                     sourceController:self];
+    _currentAnimationContext = [[_UIViewControllerContextConcreteTransitioning alloc] initWithContainerView:presentingController.view
+                                                                                                controllers:controllers
+                                                                                                   animated:animated
+                                                                                           transitionObject:transitioningObject
+                                                                                          completionHandler:internalCompletionHandler];
+    childController.beingPresented = YES;
+    childController.movingToParentViewController = YES;
+    [childController viewWillAppear:animated];
+    [transitioningObject animateTransition:_currentAnimationContext];
+}
+
+- (void)dismissViewControllerAnimated:(BOOL)animated completion:(dispatch_block_t)completionHandler
+{
+    if(self.isBeingPresented) {
+        [self.presentingViewController dismissViewControllerAnimated:animated completion:completionHandler];
+        return;
+    }
+    
+    if(!self.presentedViewController) {
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"Attempting to dismiss modal view controller when none is presented"];
+    }
+    
+    dispatch_block_t internalCompletionHandler = ^{
+        _currentAnimationContext = nil;
+        
+        self.presentedViewController.beingDismissed = NO;
+        self.presentedViewController.movingFromParentViewController = NO;
+        
+        self.presentedViewController.presentingViewController = nil;
+        [self.presentedViewController viewDidDisappear:animated];
+        self.presentedViewController = nil;
+        
+        if(completionHandler)
+            completionHandler();
+    };
+    NSDictionary *controllers = @{UITransitionContextFromViewControllerKey: self.presentedViewController,
+                                  UITransitionContextToViewControllerKey: self};
+    id <UIViewControllerAnimatedTransitioning> transitioningObject = [self _animationControllerForDismissedController:self.presentedViewController];
+    _currentAnimationContext = [[_UIViewControllerContextConcreteTransitioning alloc] initWithContainerView:self.view
+                                                                                                controllers:controllers
+                                                                                                   animated:animated
+                                                                                           transitionObject:transitioningObject
+                                                                                          completionHandler:internalCompletionHandler];
+    self.presentedViewController.beingDismissed = YES;
+    self.presentedViewController.movingFromParentViewController = YES;
+    [self.presentedViewController viewWillDisappear:animated];
+    [transitioningObject animateTransition:_currentAnimationContext];
 }
 
 #pragma mark - Actions

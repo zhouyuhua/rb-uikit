@@ -115,20 +115,25 @@
     
     [self willChangeValueForKey:@"viewControllers"];
     [_viewControllers addObject:viewController];
-    viewController.navigationController = self;
     [self didChangeValueForKey:@"viewControllers"];
     
     [self.visibleViewController viewWillDisappear:animated];
     [viewController viewWillAppear:animated];
     if(animated) {
         [self replaceVisibleViewWithViewPushingFromRight:viewController.view completionHandler:^{
+            [self.visibleViewController removeFromParentViewController];
             [self.visibleViewController viewDidDisappear:animated];
+            
+            [self addChildViewController:viewController];
             [viewController viewDidAppear:animated];
         }];
     } else {
         [self replaceVisibleViewWithView:viewController.view];
         
+        [self.visibleViewController removeFromParentViewController];
         [self.visibleViewController viewDidDisappear:animated];
+        
+        [self addChildViewController:viewController];
         [viewController viewDidAppear:animated];
     }
     
@@ -154,20 +159,25 @@
     [self willChangeValueForKey:@"viewControllers"];
     UIViewController *previousViewController = self.visibleViewController;
     [_viewControllers removeLastObject];
-    previousViewController.navigationController = nil;
     [self didChangeValueForKey:@"viewControllers"];
     
     [previousViewController viewWillDisappear:animated];
     [self.visibleViewController viewWillAppear:animated];
     if(animated) {
         [self replaceVisibleViewWithViewPushingFromLeft:self.visibleViewController.view completionHandler:^{
+            [previousViewController removeFromParentViewController];
             [previousViewController viewDidDisappear:animated];
+            
+            [self addChildViewController:self.visibleViewController];
             [self.visibleViewController viewDidAppear:animated];
         }];
     } else {
         [self replaceVisibleViewWithView:self.visibleViewController.view];
         
+        [previousViewController removeFromParentViewController];
         [previousViewController viewDidDisappear:animated];
+        
+        [self addChildViewController:self.visibleViewController];
         [self.visibleViewController viewDidAppear:animated];
     }
     
@@ -182,9 +192,6 @@
     
     [self willChangeValueForKey:@"viewControllers"];
     NSIndexSet *indexesToRemove = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(indexOfViewController + 1, _viewControllers.count - (indexOfViewController + 1))];
-    [_viewControllers enumerateObjectsAtIndexes:indexesToRemove options:0 usingBlock:^(UIViewController *viewController, NSUInteger index, BOOL *stop) {
-        viewController.navigationController = nil;
-    }];
     [_viewControllers removeObjectsAtIndexes:indexesToRemove];
     [self didChangeValueForKey:@"viewControllers"];
     
@@ -192,13 +199,19 @@
     [viewController viewWillAppear:animated];
     if(animated) {
         [self replaceVisibleViewWithViewPushingFromLeft:viewController.view completionHandler:^{
+            [self.visibleViewController removeFromParentViewController];
             [self.visibleViewController viewDidDisappear:animated];
+            
+            [self addChildViewController:viewController];
             [viewController viewDidAppear:animated];
         }];
     } else {
         [self replaceVisibleViewWithView:viewController.view];
         
+        [self.visibleViewController removeFromParentViewController];
         [self.visibleViewController viewDidDisappear:animated];
+        
+        [self addChildViewController:viewController];
         [viewController viewDidAppear:animated];
     }
     
@@ -214,8 +227,8 @@
     
     [self willChangeValueForKey:@"viewControllers"];
     NSIndexSet *indexesToRemove = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, _viewControllers.count - 1)];
-    [_viewControllers enumerateObjectsAtIndexes:indexesToRemove options:0 usingBlock:^(UIViewController *viewController, NSUInteger index, BOOL *stop) {
-        viewController.navigationController = nil;
+    [_viewControllers enumerateObjectsAtIndexes:indexesToRemove options:0 usingBlock:^(UIViewController *controller, NSUInteger index, BOOL *stop) {
+        [controller removeFromParentViewController];
     }];
     [_viewControllers removeObjectsAtIndexes:indexesToRemove];
     [self didChangeValueForKey:@"viewControllers"];
@@ -225,12 +238,16 @@
     if(animated) {
         [self replaceVisibleViewWithViewPushingFromLeft:topViewController.view completionHandler:^{
             [self.visibleViewController viewDidDisappear:animated];
+            
+            [self addChildViewController:topViewController];
             [topViewController viewDidAppear:animated];
         }];
     } else {
         [self replaceVisibleViewWithView:topViewController.view];
         
         [self.visibleViewController viewDidDisappear:animated];
+        
+        [self addChildViewController:topViewController];
         [topViewController viewDidAppear:animated];
     }
     

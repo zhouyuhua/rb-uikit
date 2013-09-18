@@ -15,8 +15,16 @@
 
 #pragma mark - readwrite
 
+@property (nonatomic, getter=isMovingFromParentViewController) BOOL movingFromParentViewController;
+@property (nonatomic, getter=isMovingToParentViewController) BOOL movingToParentViewController;
+@property (nonatomic, getter=isBeingPresented) BOOL beingPresented;
+@property (nonatomic, getter=isBeingDismissed) BOOL beingDismissed;
+
+#pragma mark -
+
 @property (nonatomic, readwrite) BOOL isViewLoaded;
-@property (nonatomic, readwrite, weak) UINavigationController *navigationController;
 @property (nonatomic, readwrite) UIViewController *parentViewController;
+@property (nonatomic, readwrite) UIViewController *presentingViewController;
+@property (nonatomic, readwrite) UIViewController *presentedViewController;
 
 @end

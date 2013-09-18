@@ -18,6 +18,11 @@
 {
     [super viewDidLoad];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Modal"
+                                                                              style:UIBarButtonItemStyleBordered
+                                                                             target:self
+                                                                             action:@selector(showModal:)];
+    
     UILabel *testLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 50.0, 100.0, 100.0)];
     testLabel.textAlignment = NSTextAlignmentCenter;
     testLabel.shadowOffset = CGSizeMake(0.0, 1.0);
@@ -51,6 +56,26 @@
     controller.navigationItem.title = @"Really long title is really long";
     
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (IBAction)showModal:(id)sender
+{
+    UIViewController *test = [UIViewController new];
+    test.view.backgroundColor = [UIColor whiteColor];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    button.frame = CGRectMake(50.0, 120.0, 100.0, 44.0);
+    [button setTitle:@"Close" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(closeModal:) forControlEvents:UIControlEventTouchUpInside];
+    [button sizeToFit];
+    [test.view addSubview:button];
+    
+    [self presentViewController:test animated:YES completion:nil];
+}
+
+- (IBAction)closeModal:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)alert:(id)sender

@@ -41,6 +41,8 @@ static CAMediaTimingFunction *CAMediaTimingFunctionFromUIViewAnimationCurve(UIVi
     if((self = [super init])) {
         self.name = name;
         self.context = context;
+        
+        self.curve = UIViewAnimationCurveEaseIn;
     }
     
     return self;
@@ -65,6 +67,8 @@ static CAMediaTimingFunction *CAMediaTimingFunctionFromUIViewAnimationCurve(UIVi
     animation.repeatCount = self.repeatCount;
     animation.autoreverses = self.repeatAutoreverses;
     animation.timingFunction = CAMediaTimingFunctionFromUIViewAnimationCurve(self.curve);
+    
+    animation.fromValue = _beginsFromCurrentState? [layer.presentationLayer valueForKeyPath:keyPath] : [layer valueForKeyPath:keyPath];
     
     return animation;
 }

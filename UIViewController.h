@@ -7,6 +7,7 @@
 //
 
 #import "UIResponder.h"
+#import "UIViewControllerTransitioning.h"
 
 @class UINavigationController, UINavigationItem, UIView;
 
@@ -39,7 +40,7 @@
 
 #pragma mark - Navigation Stack Support
 
-@property (nonatomic, readonly, weak) UINavigationController *navigationController;
+@property (nonatomic, readonly) UINavigationController *navigationController;
 @property (nonatomic, readonly) UINavigationItem *navigationItem;
 
 #pragma mark - Containing View Controllers
@@ -51,9 +52,31 @@
 #pragma mark -
 
 @property (nonatomic, readonly) NSArray *childViewControllers;
+@property (nonatomic, readonly) UIViewController *presentingViewController;
+@property (nonatomic, readonly) UIViewController *presentedViewController;
 
 - (void)addChildViewController:(UIViewController *)childController;
 - (void)removeFromParentViewController;
+
+#pragma mark - Testing for Specific Kinds of View Transitions
+
+- (BOOL)isMovingFromParentViewController;
+- (BOOL)isMovingToParentViewController;
+- (BOOL)isBeingPresented;
+- (BOOL)isBeingDismissed;
+
+#pragma mark - Presenting Another View Controller’s Content
+
+- (void)presentViewController:(UIViewController *)childController animated:(BOOL)animated completion:(dispatch_block_t)completionHandler;
+- (void)dismissViewControllerAnimated:(BOOL)aniamted completion:(dispatch_block_t)completionHandler;
+
+#pragma mark -
+
+@property (nonatomic) UIModalTransitionStyle modalTransitionStyle;
+@property (nonatomic) UIModalPresentationStyle modalPresentationStyle;
+@property (nonatomic) BOOL definesPresentationContext;
+@property (nonatomic, unsafe_unretained) id <UIViewControllerTransitioningDelegate> transitioningDelegate;
+@property (nonatomic) BOOL providesPresentationContextTransitionStyle;
 
 #pragma mark - Actions
 
