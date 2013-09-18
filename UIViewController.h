@@ -55,6 +55,8 @@
 @property (nonatomic, readonly) UIViewController *presentingViewController;
 @property (nonatomic, readonly) UIViewController *presentedViewController;
 
+#pragma mark -
+
 - (void)addChildViewController:(UIViewController *)childController;
 - (void)removeFromParentViewController;
 
@@ -72,11 +74,11 @@
 
 #pragma mark -
 
-@property (nonatomic) UIModalTransitionStyle modalTransitionStyle;
-@property (nonatomic) UIModalPresentationStyle modalPresentationStyle;
-@property (nonatomic) BOOL definesPresentationContext;
+@property (nonatomic) UIModalTransitionStyle modalTransitionStyle; //Ignored
+@property (nonatomic) UIModalPresentationStyle modalPresentationStyle; //Ignored
+@property (nonatomic) BOOL definesPresentationContext; //Ignored
 @property (nonatomic, unsafe_unretained) id <UIViewControllerTransitioningDelegate> transitioningDelegate;
-@property (nonatomic) BOOL providesPresentationContextTransitionStyle;
+@property (nonatomic) BOOL providesPresentationContextTransitionStyle; //Ignored
 
 #pragma mark - Actions
 
