@@ -202,28 +202,6 @@
     return _view;
 }
 
-#pragma mark - Testing for Specific Kinds of View Transitions
-
-- (BOOL)isMovingFromParentViewController
-{
-    return NO;
-}
-
-- (BOOL)isMovingToParentViewController
-{
-    return NO;
-}
-
-- (BOOL)isBeingPresented
-{
-    return (self.presentingViewController != nil);
-}
-
-- (BOOL)isBeingDismissed
-{
-    return NO;
-}
-
 #pragma mark - Presenting Another View Controller’s Content
 
 - (id <UIViewControllerAnimatedTransitioning>)_animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
