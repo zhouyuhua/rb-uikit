@@ -230,4 +230,21 @@ static BOOL AnimationsEnabled = YES;
     UIKitUnimplementedMethod();
 }
 
+#pragma mark -
+
++ (void)animateKeyframesWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion
+{
+    UIKitUnimplementedMethod();
+}
+
++ (void)addKeyframeWithRelativeStartTime:(NSTimeInterval)relativeStartTime relativeDuration:(NSTimeInterval)duration animations:(void (^)(void))animations
+{
+    UIKitUnimplementedMethod();
+}
+
++ (void)performSystemAnimation:(UISystemAnimation)animation onViews:(NSArray *)views options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion
+{
+    UIKitUnimplementedMethod();
+}
+
 @end

@@ -817,6 +817,39 @@ static void EnumerateSubviews(UIView *view, void(^block)(UIView *subview, NSUInt
         [subview _windowDidResignKey];
 }
 
+#pragma mark - Using Motion Effects
+
+- (void)addMotionEffect:(UIMotionEffect *)effect
+{
+    NSParameterAssert(effect);
+    
+    //Do nothing.
+}
+
+- (void)removeMotionEffect:(UIMotionEffect *)effect
+{
+    //Do nothing.
+}
+
+#pragma mark - Capturing a View Snapshot
+
+- (UIView *)snapshotViewAfterScreenUpdates:(BOOL)afterScreenUpdates
+{
+    UIKitUnimplementedMethod();
+    return nil;
+}
+
+- (UIView *)resizableSnapshotViewFromRect:(CGRect)rect afterScreenUpdates:(BOOL)afterScreenUpdates withCapInsets:(UIEdgeInsets)insets
+{
+    UIKitUnimplementedMethod();
+    return nil;
+}
+
+- (void)drawViewHierarchyInRect:(CGRect)rect afterScreenUpdates:(BOOL)afterScreenUpdates
+{
+    UIKitUnimplementedMethod();
+}
+
 #pragma mark - <CALayerDelegate>
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx

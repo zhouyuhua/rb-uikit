@@ -12,6 +12,9 @@
 #import "UIScreen.h"
 #import "UIDevice.h"
 
+#import "UINib.h"
+#import "UIMotionEffect.h"
+
 #import "UIResponder.h"
 #import "UIView.h"
 #import "UIWindow.h"

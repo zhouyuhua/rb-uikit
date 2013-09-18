@@ -34,7 +34,11 @@
 		8B1255BC17E56C3A0063454E /* UIActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1255BA17E56C3A0063454E /* UIActivityIndicatorView.m */; };
 		8B1255C017E95CD70063454E /* UIViewControllerTransitioning.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1255BF17E95CD70063454E /* UIViewControllerTransitioning.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1255C217E95EE60063454E /* UIViewTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1255C117E95EE60063454E /* UIViewTransitioning.m */; };
-		8B1255C417E95F0A0063454E /* UIViewControllerTransitioning_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1255C317E95F0A0063454E /* UIViewControllerTransitioning_Private.h */; };
+		8B1255C417E95F0A0063454E /* UIViewControllerTransitioning_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1255C317E95F0A0063454E /* UIViewControllerTransitioning_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B1255C817E978130063454E /* UINib.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1255C617E978130063454E /* UINib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B1255C917E978130063454E /* UINib.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1255C717E978130063454E /* UINib.m */; };
+		8B1255CC17E979070063454E /* UIMotionEffect.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1255CA17E979070063454E /* UIMotionEffect.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B1255CD17E979070063454E /* UIMotionEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1255CB17E979070063454E /* UIMotionEffect.m */; };
 		8B1EC8DA17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B1EC8DB17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */; };
 		8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -281,6 +285,10 @@
 		8B1255BF17E95CD70063454E /* UIViewControllerTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewControllerTransitioning.h; sourceTree = "<group>"; };
 		8B1255C117E95EE60063454E /* UIViewTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewTransitioning.m; sourceTree = "<group>"; };
 		8B1255C317E95F0A0063454E /* UIViewControllerTransitioning_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewControllerTransitioning_Private.h; sourceTree = "<group>"; };
+		8B1255C617E978130063454E /* UINib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINib.h; sourceTree = "<group>"; };
+		8B1255C717E978130063454E /* UINib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINib.m; sourceTree = "<group>"; };
+		8B1255CA17E979070063454E /* UIMotionEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMotionEffect.h; sourceTree = "<group>"; };
+		8B1255CB17E979070063454E /* UIMotionEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMotionEffect.m; sourceTree = "<group>"; };
 		8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitViewAdaptorNativeView.h; sourceTree = "<group>"; };
 		8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitViewAdaptorNativeView.m; sourceTree = "<group>"; };
 		8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINSTextFieldCell.h; sourceTree = "<group>"; };
@@ -555,6 +563,17 @@
 				8B1255BA17E56C3A0063454E /* UIActivityIndicatorView.m */,
 			);
 			name = "Progress Indicators";
+			sourceTree = "<group>";
+		};
+		8B1255C517E978080063454E /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				8B1255C617E978130063454E /* UINib.h */,
+				8B1255C717E978130063454E /* UINib.m */,
+				8B1255CA17E979070063454E /* UIMotionEffect.h */,
+				8B1255CB17E979070063454E /* UIMotionEffect.m */,
+			);
+			name = Stubs;
 			sourceTree = "<group>";
 		};
 		8B515C4317BB39D0003065D2 /* Table View */ = {
@@ -891,6 +910,7 @@
 				8B549FFB17B9C86C0068775C /* Collection View */,
 				8B5E725317B9EFC3006A16B9 /* Menus */,
 				8B54687F17D2C85200D7E338 /* Tab Bars */,
+				8B1255C517E978080063454E /* Stubs */,
 				8BE492C11798C44F002BEA5A /* Supporting Files */,
 			);
 			path = UIKit;
@@ -1088,7 +1108,6 @@
 				8B54A04017B9CD7B0068775C /* UICollectionViewController.h in Headers */,
 				8B54A03F17B9CD7B0068775C /* UICollectionViewDelegate.h in Headers */,
 				8B54A03D17B9CD7B0068775C /* UICollectionViewCell.h in Headers */,
-				8B1255C417E95F0A0063454E /* UIViewControllerTransitioning_Private.h in Headers */,
 				8B54A03B17B9CD7B0068775C /* UICollectionView.h in Headers */,
 				8B54A04417B9CD7B0068775C /* UICollectionViewFlowLayout.h in Headers */,
 				8B54A04817B9CD7B0068775C /* UICollectionViewLayout.h in Headers */,
@@ -1111,6 +1130,8 @@
 				8B515C4617BB39E5003065D2 /* UITableView.h in Headers */,
 				8B95506817C316D600B8E4F9 /* UIKeyEvent.h in Headers */,
 				8B755AF917E032FA006BBA4F /* UIPasteboard.h in Headers */,
+				8B1255C817E978130063454E /* UINib.h in Headers */,
+				8B1255CC17E979070063454E /* UIMotionEffect.h in Headers */,
 				8B515C4A17BB39ED003065D2 /* UITableViewCell.h in Headers */,
 				8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */,
 				8BF0F9F217CE636000DAFD92 /* UIStringDrawing.h in Headers */,
@@ -1159,6 +1180,7 @@
 				8B1255B617E567100063454E /* UIRefreshControl_Private.h in Headers */,
 				8B1255AF17E563270063454E /* UIButtonImageBackgroundView.h in Headers */,
 				8B5BD75E179B348700A53E4A /* UIGraphics.h in Headers */,
+				8B1255C417E95F0A0063454E /* UIViewControllerTransitioning_Private.h in Headers */,
 				8B515C5917BB3CEE003065D2 /* UITableView_Private.h in Headers */,
 				8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */,
 				8B515C4017BB1715003065D2 /* UICollectionViewUpdateItem_Private.h in Headers */,
@@ -1346,6 +1368,7 @@
 				8B5E725B17B9EFFB006A16B9 /* UIMenuItem.m in Sources */,
 				8B5E725717B9EFF5006A16B9 /* UIMenuController.m in Sources */,
 				8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */,
+				8B1255CD17E979070063454E /* UIMotionEffect.m in Sources */,
 				8BE493311798E39A002BEA5A /* UILabel.m in Sources */,
 				8B54A04C17B9CD7B0068775C /* UICollectionViewUpdateItem.m in Sources */,
 				8B91077417A8C62D008D9DF0 /* _UIAnimations.m in Sources */,
@@ -1361,6 +1384,7 @@
 				8B91077017A8C5C9008D9DF0 /* UIView_UIViewAnimation.m in Sources */,
 				8B1EC8E517A9F8280035369C /* UITextField.m in Sources */,
 				8BE493251798DA39002BEA5A /* UIScreen.m in Sources */,
+				8B1255C917E978130063454E /* UINib.m in Sources */,
 				8B5BD74F179908EC00A53E4A /* UIButtonBarBackgroundView.m in Sources */,
 				8B1255C217E95EE60063454E /* UIViewTransitioning.m in Sources */,
 				8BF0F9F317CE636000DAFD92 /* UIStringDrawing.m in Sources */,

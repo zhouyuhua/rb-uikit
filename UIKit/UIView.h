@@ -85,7 +85,11 @@ typedef NS_ENUM(NSInteger, UIViewTintAdjustmentMode) {
     UIViewTintAdjustmentModeDimmed,
 };
 
-@class UIWindow, UIGestureRecognizer;
+typedef NS_ENUM(NSUInteger, UISystemAnimation) {
+    UISystemAnimationDelete,
+};
+
+@class UIWindow, UIGestureRecognizer, UIMotionEffect;
 
 @interface UIView : UIResponder <UIAppearance, NSCoding>
 
@@ -196,6 +200,18 @@ typedef NS_ENUM(NSInteger, UIViewTintAdjustmentMode) {
 
 - (void)tintColorDidChange;
 
+#pragma mark - Using Motion Effects
+
+- (void)addMotionEffect:(UIMotionEffect *)effect;
+@property (nonatomic, copy) NSArray *motionEffects;
+- (void)removeMotionEffect:(UIMotionEffect *)effect;
+
+#pragma mark - Capturing a View Snapshot
+
+- (UIView *)snapshotViewAfterScreenUpdates:(BOOL)afterScreenUpdates;
+- (UIView *)resizableSnapshotViewFromRect:(CGRect)rect afterScreenUpdates:(BOOL)afterScreenUpdates withCapInsets:(UIEdgeInsets)insets;
+- (void)drawViewHierarchyInRect:(CGRect)rect afterScreenUpdates:(BOOL)afterScreenUpdates;
+
 @end
 
 @interface UIView (UIViewAnimation)
@@ -237,5 +253,11 @@ typedef NS_ENUM(NSInteger, UIViewTintAdjustmentMode) {
 + (void)transitionWithView:(UIView *)view duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion;
 
 + (void)transitionFromView:(UIView *)fromView toView:(UIView *)toView duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options completion:(void (^)(BOOL finished))completion; // toView added to fromView.superview, fromView removed from its superview
+
+#pragma mark -
+
++ (void)animateKeyframesWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion UIKIT_UNIMPLEMENTED;
++ (void)addKeyframeWithRelativeStartTime:(NSTimeInterval)relativeStartTime relativeDuration:(NSTimeInterval)duration animations:(void (^)(void))animations UIKIT_UNIMPLEMENTED;
++ (void)performSystemAnimation:(UISystemAnimation)animation onViews:(NSArray *)views options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion UIKIT_UNIMPLEMENTED;
 
 @end
