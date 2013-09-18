@@ -8,7 +8,7 @@
 
 #import "UIView.h"
 
-@interface UIAnimationCollection : NSObject
+@interface _UIAnimations : NSObject
 
 - (instancetype)initWithName:(NSString *)name context:(void *)context;
 

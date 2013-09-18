@@ -7,9 +7,11 @@
 //
 
 #import "UIView_Private.h"
-#import "UIAnimationCollection.h"
+#import "_UIAnimations.h"
 
-static NSMutableArray *AnimationStack()
+@implementation UIView (UIViewAnimation)
+
++ (NSMutableArray *)_sharedAnimationsStack
 {
     static NSMutableArray *animationStack = nil;
     static dispatch_once_t onceToken;
@@ -20,85 +22,94 @@ static NSMutableArray *AnimationStack()
     return animationStack;
 }
 
-static UIAnimationCollection *TopAnimation()
++ (void)_pushAnimations:(_UIAnimations *)animations
 {
-    return [AnimationStack() lastObject];
+    NSParameterAssert(animations);
+    
+    [self._sharedAnimationsStack addObject:animations];
+}
+
++ (_UIAnimations *)_popAnimations
+{
+    _UIAnimations *lastAnimations = [self._sharedAnimationsStack lastObject];
+    [self._sharedAnimationsStack removeLastObject];
+    
+    return lastAnimations;
+}
+
++ (_UIAnimations *)_currentAnimations
+{
+    return [self._sharedAnimationsStack lastObject];
 }
 
 #pragma mark -
 
-@implementation UIView (UIViewAnimation)
-
 + (void)beginAnimations:(NSString *)animationID context:(void *)context
 {
-    UIAnimationCollection *animation = [[UIAnimationCollection alloc] initWithName:animationID context:context];
-    [AnimationStack() addObject:animation];
+    [self _pushAnimations:[[_UIAnimations alloc] initWithName:animationID context:context]];
 }
 
 + (void)commitAnimations
 {
-    UIAnimationCollection *animation = [AnimationStack() lastObject];
-    [AnimationStack() removeLastObject];
-    
-    [animation commit];
+    [[self _popAnimations] commit];
 }
 
 #pragma mark -
 
 + (void)setAnimationDelegate:(id)delegate
 {
-    TopAnimation().delegate = delegate;
+    self._currentAnimations.delegate = delegate;
 }
 
 + (void)setAnimationWillStartSelector:(SEL)selector
 {
-    TopAnimation().willStartSelector = selector;
+    self._currentAnimations.willStartSelector = selector;
 }
 
 + (void)setAnimationDidStopSelector:(SEL)selector
 {
-    TopAnimation().didStopSelector = selector;
+    self._currentAnimations.didStopSelector = selector;
 }
 
 #pragma mark -
 
 + (void)setAnimationDuration:(NSTimeInterval)duration
 {
-    TopAnimation().duration = duration;
+    self._currentAnimations.duration = duration;
 }
 
 + (void)setAnimationDelay:(NSTimeInterval)delay
 {
-    TopAnimation().delay = delay;
+    self._currentAnimations.delay = delay;
 }
 
 + (void)setAnimationStartDate:(NSDate *)startDate
 {
-    TopAnimation().startDate = startDate;
+    self._currentAnimations.startDate = startDate;
 }
 
 #pragma mark -
 
 + (void)setAnimationCurve:(UIViewAnimationCurve)curve
 {
-    TopAnimation().curve = curve;
+    self._currentAnimations.curve = curve;
 }
 
 + (void)setAnimationRepeatCount:(float)repeatCount
 {
-    TopAnimation().repeatCount = repeatCount;
+    self._currentAnimations.repeatCount = repeatCount;
 }
 
 + (void)setAnimationRepeatAutoreverses:(BOOL)repeatAutoreverses
 {
-    TopAnimation().repeatAutoreverses = repeatAutoreverses;
+    self._currentAnimations.repeatAutoreverses = repeatAutoreverses;
 }
 
 #pragma mark -
 
 + (void)setAnimationBeginsFromCurrentState:(BOOL)fromCurrentState
 {
-    TopAnimation().beginsFromCurrentState = fromCurrentState;
+    self._currentAnimations.beginsFromCurrentState = fromCurrentState;
 }
 
 #pragma mark -
@@ -123,15 +134,26 @@ static BOOL AnimationsEnabled = YES;
 
 + (void)performWithoutAnimation:(void (^)(void))actionsWithoutAnimation
 {
-    UIKitUnimplementedMethod();
+    NSParameterAssert(actionsWithoutAnimation);
+    
+    static NSInteger NestCount = 0;
+    if(++NestCount == 1) {
+        [self setAnimationsEnabled:NO];
+    }
+    
+    actionsWithoutAnimation();
+    
+    if(--NestCount == 0) {
+        [self setAnimationsEnabled:YES];
+    }
 }
 
 #pragma mark - <CALayerDelegate> Continued
 
 - (id <CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event
 {
-    if([UIView areAnimationsEnabled] && TopAnimation() != nil && layer == self.layer) {
-        return [TopAnimation() actionForLayer:layer forKey:event] ?: (id <CAAction>)[NSNull null];
+    if([UIView areAnimationsEnabled] && self.class._currentAnimations != nil && layer == self.layer) {
+        return [self.class._currentAnimations actionForLayer:layer forKey:event] ?: (id <CAAction>)[NSNull null];
     } else {
         return (id <CAAction>)[NSNull null];
     }
@@ -164,9 +186,17 @@ static BOOL AnimationsEnabled = YES;
     if((options & UIViewAnimationOptionCurveEaseInOut) == UIViewAnimationOptionCurveLinear)
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
     
-    //TODO: Handle all options
+    if(UIKIT_FLAG_IS_SET(options, UIViewAnimationOptionTransitionFlipFromLeft) ||
+       UIKIT_FLAG_IS_SET(options, UIViewAnimationOptionTransitionFlipFromRight) ||
+       UIKIT_FLAG_IS_SET(options, UIViewAnimationOptionTransitionCurlUp) ||
+       UIKIT_FLAG_IS_SET(options, UIViewAnimationOptionTransitionCurlDown) ||
+       UIKIT_FLAG_IS_SET(options, UIViewAnimationOptionTransitionCrossDissolve) ||
+       UIKIT_FLAG_IS_SET(options, UIViewAnimationOptionTransitionFlipFromTop) ||
+       UIKIT_FLAG_IS_SET(options, UIViewAnimationOptionTransitionFlipFromBottom)) {
+        UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"Transitions not implemented");
+    }
     
-    TopAnimation().completionHandler = completion;
+    self._currentAnimations.completionHandler = completion;
     if(animations)
         animations();
     
@@ -183,9 +213,11 @@ static BOOL AnimationsEnabled = YES;
     [self animateWithDuration:duration delay:0.0 options:kNilOptions animations:animations completion:NULL];
 }
 
-+ (void)animateWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay usingSpringWithDamping:(CGFloat)dampingRatio initialSpringVelocity:(CGFloat)velocity options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion NS_AVAILABLE_IOS(7_0)
++ (void)animateWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay usingSpringWithDamping:(CGFloat)dampingRatio initialSpringVelocity:(CGFloat)velocity options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion
 {
-    UIKitUnimplementedMethod();
+    UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"Damping not unimplemented");
+    
+    [self animateWithDuration:duration delay:delay options:options animations:animations completion:completion];
 }
 
 + (void)transitionWithView:(UIView *)view duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion

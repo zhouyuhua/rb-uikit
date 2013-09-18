@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UIAnimationCollection.h"
+#import "_UIAnimations.h"
 #import <objc/message.h>
 
 static CAMediaTimingFunction *CAMediaTimingFunctionFromUIViewAnimationCurve(UIViewAnimationCurve curve)
@@ -26,7 +26,7 @@ static CAMediaTimingFunction *CAMediaTimingFunctionFromUIViewAnimationCurve(UIVi
     }
 }
 
-@implementation UIAnimationCollection {
+@implementation _UIAnimations {
     NSUInteger _animationCount;
 }
 

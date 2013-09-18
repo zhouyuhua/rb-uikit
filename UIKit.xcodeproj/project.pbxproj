@@ -165,8 +165,8 @@
 		8B91076B17A8B883008D9DF0 /* UITouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91076917A8B883008D9DF0 /* UITouch.m */; };
 		8B91076D17A8B8BC008D9DF0 /* UITouch_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91076C17A8B8BC008D9DF0 /* UITouch_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91077017A8C5C9008D9DF0 /* UIView_UIViewAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91076E17A8C5A7008D9DF0 /* UIView_UIViewAnimation.m */; };
-		8B91077317A8C62D008D9DF0 /* UIAnimationCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91077117A8C62D008D9DF0 /* UIAnimationCollection.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		8B91077417A8C62D008D9DF0 /* UIAnimationCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91077217A8C62D008D9DF0 /* UIAnimationCollection.m */; };
+		8B91077317A8C62D008D9DF0 /* _UIAnimations.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91077117A8C62D008D9DF0 /* _UIAnimations.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B91077417A8C62D008D9DF0 /* _UIAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91077217A8C62D008D9DF0 /* _UIAnimations.m */; };
 		8B91077817A979F9008D9DF0 /* UIWindow_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91077717A979F9008D9DF0 /* UIWindow_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91077D17A97EF7008D9DF0 /* UIAppKitView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91077E17A97EF7008D9DF0 /* UIAppKitView.m */; };
@@ -412,8 +412,8 @@
 		8B91076917A8B883008D9DF0 /* UITouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITouch.m; sourceTree = "<group>"; };
 		8B91076C17A8B8BC008D9DF0 /* UITouch_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouch_Private.h; sourceTree = "<group>"; };
 		8B91076E17A8C5A7008D9DF0 /* UIView_UIViewAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIView_UIViewAnimation.m; sourceTree = "<group>"; };
-		8B91077117A8C62D008D9DF0 /* UIAnimationCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAnimationCollection.h; sourceTree = "<group>"; };
-		8B91077217A8C62D008D9DF0 /* UIAnimationCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAnimationCollection.m; sourceTree = "<group>"; };
+		8B91077117A8C62D008D9DF0 /* _UIAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _UIAnimations.h; sourceTree = "<group>"; };
+		8B91077217A8C62D008D9DF0 /* _UIAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UIAnimations.m; sourceTree = "<group>"; };
 		8B91077717A979F9008D9DF0 /* UIWindow_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWindow_Private.h; sourceTree = "<group>"; };
 		8B91077D17A97EF7008D9DF0 /* UIAppKitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitView.h; sourceTree = "<group>"; };
 		8B91077E17A97EF7008D9DF0 /* UIAppKitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitView.m; sourceTree = "<group>"; };
@@ -736,8 +736,8 @@
 		8B91077517A8C6C4008D9DF0 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
-				8B91077117A8C62D008D9DF0 /* UIAnimationCollection.h */,
-				8B91077217A8C62D008D9DF0 /* UIAnimationCollection.m */,
+				8B91077117A8C62D008D9DF0 /* _UIAnimations.h */,
+				8B91077217A8C62D008D9DF0 /* _UIAnimations.m */,
 				8B91076E17A8C5A7008D9DF0 /* UIView_UIViewAnimation.m */,
 			);
 			name = Animation;
@@ -1134,7 +1134,7 @@
 				8B91076717A8B7B1008D9DF0 /* UIEvent_Private.h in Headers */,
 				8B5BD7381798FA9B00A53E4A /* UIButton.h in Headers */,
 				8BE493421798EAA0002BEA5A /* UIImage.h in Headers */,
-				8B91077317A8C62D008D9DF0 /* UIAnimationCollection.h in Headers */,
+				8B91077317A8C62D008D9DF0 /* _UIAnimations.h in Headers */,
 				8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */,
 				8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */,
 				8B1EC8DA17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h in Headers */,
@@ -1348,7 +1348,7 @@
 				8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */,
 				8BE493311798E39A002BEA5A /* UILabel.m in Sources */,
 				8B54A04C17B9CD7B0068775C /* UICollectionViewUpdateItem.m in Sources */,
-				8B91077417A8C62D008D9DF0 /* UIAnimationCollection.m in Sources */,
+				8B91077417A8C62D008D9DF0 /* _UIAnimations.m in Sources */,
 				8BF0F9EE17CD23AB00DAFD92 /* UIFont.m in Sources */,
 				8B54A05417B9CD7B0068775C /* UIGridLayoutSection.m in Sources */,
 				8B5BD762179B3A8500A53E4A /* UIThreePartImageProvider.m in Sources */,
