@@ -195,6 +195,8 @@
 		8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8A22C17B1E66A004FB0E8 /* UIAction.m */; };
 		8BC9D25217EF932600BF1E63 /* _UINavigationControllerTransitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC9D25017EF932600BF1E63 /* _UINavigationControllerTransitions.h */; };
 		8BC9D25317EF932600BF1E63 /* _UINavigationControllerTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D25117EF932600BF1E63 /* _UINavigationControllerTransitions.m */; };
+		8BC9D25617EFA80800BF1E63 /* UINavigationBarShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC9D25417EFA80800BF1E63 /* UINavigationBarShadow@2x.png */; };
+		8BC9D25717EFA80800BF1E63 /* UINavigationBarShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC9D25517EFA80800BF1E63 /* UINavigationBarShadow.png */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -448,6 +450,8 @@
 		8BB8A22C17B1E66A004FB0E8 /* UIAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAction.m; sourceTree = "<group>"; };
 		8BC9D25017EF932600BF1E63 /* _UINavigationControllerTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _UINavigationControllerTransitions.h; sourceTree = "<group>"; };
 		8BC9D25117EF932600BF1E63 /* _UINavigationControllerTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UINavigationControllerTransitions.m; sourceTree = "<group>"; };
+		8BC9D25417EFA80800BF1E63 /* UINavigationBarShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UINavigationBarShadow@2x.png"; sourceTree = "<group>"; };
+		8BC9D25517EFA80800BF1E63 /* UINavigationBarShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UINavigationBarShadow.png; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -945,6 +949,8 @@
 				8BAE958F179A1D3100562F35 /* UIBarButtonItemBackground.png */,
 				8B5BD7341798F3E100A53E4A /* UINavigationBarBackgroundImage@2x.png */,
 				8B5BD7311798F1A200A53E4A /* UINavigationBarBackgroundImage.png */,
+				8BC9D25417EFA80800BF1E63 /* UINavigationBarShadow@2x.png */,
+				8BC9D25517EFA80800BF1E63 /* UINavigationBarShadow.png */,
 				8BE492C21798C44F002BEA5A /* UIKit-Info.plist */,
 				8BE492C31798C44F002BEA5A /* InfoPlist.strings */,
 				8BE492C61798C44F002BEA5A /* UIKit-Prefix.pch */,
@@ -1280,6 +1286,7 @@
 				8B5BD7331798F1A200A53E4A /* UINavigationBarBackgroundImage.png in Resources */,
 				8B5AF850179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted.png in Resources */,
 				8B5AF84F179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png in Resources */,
+				8BC9D25717EFA80800BF1E63 /* UINavigationBarShadow.png in Resources */,
 				8B5AF863179B9B79008B3BF3 /* UITextFieldSquareBackground.png in Resources */,
 				8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */,
 				8B08256417AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png in Resources */,
@@ -1294,6 +1301,7 @@
 				8BAE9590179A1D3100562F35 /* UIBarButtonItemBackground@2x.png in Resources */,
 				8B08256317AA1F7300494FAA /* UISearchBarMagnifyingGlass.png in Resources */,
 				8B54687517D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png in Resources */,
+				8BC9D25617EFA80800BF1E63 /* UINavigationBarShadow@2x.png in Resources */,
 				8B1255A417E418C80063454E /* UISearchBarBackground.png in Resources */,
 				8B1255A717E41D580063454E /* UISearchBarClearButtonIcon@2x.png in Resources */,
 				8B5BD7351798F3E100A53E4A /* UINavigationBarBackgroundImage@2x.png in Resources */,

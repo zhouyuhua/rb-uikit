@@ -16,6 +16,8 @@
     
     UIImageView *_backgroundImageView;
     CGFloat _titleVerticalPositionAdjustment;
+    
+    UIImageView *_shadowImageView;
 }
 
 ///The navigation controller of the bar.

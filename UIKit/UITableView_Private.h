@@ -55,8 +55,8 @@
     NSMutableArray *_sections;
     NSMutableArray *_allCells;
     
-    NSMutableArray *_highlightedIndexPaths;
-    NSMutableArray *_selectedIndexPaths;
+    NSMutableOrderedSet *_highlightedIndexPaths;
+    NSMutableOrderedSet *_selectedIndexPaths;
     
     NSMutableArray *_updateStack;
     

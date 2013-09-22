@@ -29,6 +29,10 @@
         _backgroundImageView.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:_backgroundImageView];
         
+        _shadowImageView = [UIImageView new];
+        _shadowImageView.contentMode = UIViewContentModeScaleToFill;
+        [self addSubview:_shadowImageView];
+        
         UINavigationBar *appearance = self.class.appearance;
         [self setBackgroundImage:[appearance backgroundImageForBarMetrics:UIBarMetricsDefault] forBarMetrics:UIBarMetricsDefault];
         self.shadowImage = appearance.shadowImage;
@@ -48,7 +52,16 @@
 {
     [super layoutSubviews];
     
-    _backgroundImageView.frame = self.bounds;
+    CGRect bounds = self.bounds;
+    _backgroundImageView.frame = bounds;
+    
+    if(_shadowImageView.image) {
+        CGRect shadowImageViewFrame = _shadowImageView.frame;
+        shadowImageViewFrame.size.width = CGRectGetWidth(bounds);
+        shadowImageViewFrame.origin.x = CGRectGetMinX(bounds);
+        shadowImageViewFrame.origin.y = CGRectGetMaxY(bounds);
+        _shadowImageView.frame = shadowImageViewFrame;
+    }
 }
 
 #pragma mark - Properties
@@ -77,17 +90,29 @@
     return [_items copy];
 }
 
-- (_UINavigationItemView *)backItem
+- (UINavigationItem *)backItem
 {
     return _items[_items.count - 2];
 }
 
-- (_UINavigationItemView *)topItem
+- (UINavigationItem *)topItem
 {
     return [_items lastObject];
 }
 
 #pragma mark - Appearances
+
+- (void)setShadowImage:(UIImage *)shadowImage
+{
+    _shadowImageView.image = shadowImage;
+    [_shadowImageView sizeToFit];
+    [self setNeedsLayout];
+}
+
+- (UIImage *)shadowImage
+{
+    return _shadowImageView.image;
+}
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics
 {

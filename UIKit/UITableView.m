@@ -59,8 +59,8 @@
         _separatorColor = [UIColor lightGrayColor];
         _separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         
-        _highlightedIndexPaths = [NSMutableArray array];
-        _selectedIndexPaths = [NSMutableArray array];
+        _highlightedIndexPaths = [NSMutableOrderedSet orderedSet];
+        _selectedIndexPaths = [NSMutableOrderedSet orderedSet];
         
         _updateStack = [NSMutableArray array];
     }
@@ -859,7 +859,8 @@
         UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
         [cell setSelected:NO animated:animated];
     }
-    [_selectedIndexPaths setArray:indexPaths];
+    [_selectedIndexPaths removeAllObjects];
+    [_selectedIndexPaths addObjectsFromArray:indexPaths];
     
     CGRect totalCellFrame = CGRectZero;
     for (NSIndexPath *indexPath in indexPaths) {
@@ -992,13 +993,15 @@
     if(!self.allowsSelection)
         return;
     
+    NSLog(@"_highlightedIndexPaths: %@", _highlightedIndexPaths);
+    
     for (NSIndexPath *indexPath in _highlightedIndexPaths) {
         if(_delegateRespondsTo.tableViewWillSelectRowAtIndexPath) {
             [self.delegate tableView:self willSelectRowAtIndexPath:indexPath];
         }
     }
     
-    [self _selectRowsAtIndexPaths:_highlightedIndexPaths animated:YES scrollPosition:UITableViewScrollPositionNone];
+    [self _selectRowsAtIndexPaths:[_highlightedIndexPaths array] animated:YES scrollPosition:UITableViewScrollPositionNone];
     
     for (NSIndexPath *indexPath in _highlightedIndexPaths) {
         if(_delegateRespondsTo.tableViewDidSelectRowAtIndexPath) {
@@ -1026,6 +1029,8 @@
             UITableViewCell *oldCell = [self cellForRowAtIndexPath:indexPath];
             [oldCell setHighlighted:NO animated:NO];
         }
+        
+        [_highlightedIndexPaths removeAllObjects];
     }
     
     if(indexPath) {
@@ -1037,9 +1042,9 @@
         } else {
             [cell setHighlighted:YES animated:NO];
         }
+        
+        [_highlightedIndexPaths addObject:indexPath];
     }
-    
-    [_highlightedIndexPaths addObject:indexPath];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -1052,7 +1057,7 @@
     BOOL multipleSelectionMode = (([NSEvent modifierFlags] & NSShiftKeyMask) == NSShiftKeyMask && self.allowsMultipleSelection);
     
     if(multipleSelectionMode) {
-        [_highlightedIndexPaths addObjectsFromArray:_selectedIndexPaths];
+        [_highlightedIndexPaths addObjectsFromArray:[_selectedIndexPaths array]];
     } else {
         for (NSIndexPath *indexPath in _selectedIndexPaths.copy) {
             if(_delegateRespondsTo.tableViewWillDeselectRowAtIndexPath)
@@ -1075,9 +1080,9 @@
         } else {
             [cell setHighlighted:YES animated:NO];
         }
+        
+        [_highlightedIndexPaths addObject:indexPath];
     }
-    
-    [_highlightedIndexPaths addObject:indexPath];
     
     if(_delegateRespondsTo.tableViewDidDeselectRowAtIndexPath) {
         for (NSIndexPath *indexPath in _selectedIndexPaths) {
