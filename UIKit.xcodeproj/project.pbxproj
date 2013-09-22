@@ -193,6 +193,8 @@
 		8BB4BD7017B35AF7009B7708 /* UIScrollViewScrollAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4BD6E17B35AF7009B7708 /* UIScrollViewScrollAnimator.m */; };
 		8BB8A22D17B1E66A004FB0E8 /* UIAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BB8A22B17B1E66A004FB0E8 /* UIAction.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8A22C17B1E66A004FB0E8 /* UIAction.m */; };
+		8BC9D25217EF932600BF1E63 /* _UINavigationControllerTransitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC9D25017EF932600BF1E63 /* _UINavigationControllerTransitions.h */; };
+		8BC9D25317EF932600BF1E63 /* _UINavigationControllerTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D25117EF932600BF1E63 /* _UINavigationControllerTransitions.m */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -444,6 +446,8 @@
 		8BB4BD6E17B35AF7009B7708 /* UIScrollViewScrollAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScrollViewScrollAnimator.m; sourceTree = "<group>"; };
 		8BB8A22B17B1E66A004FB0E8 /* UIAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAction.h; sourceTree = "<group>"; };
 		8BB8A22C17B1E66A004FB0E8 /* UIAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAction.m; sourceTree = "<group>"; };
+		8BC9D25017EF932600BF1E63 /* _UINavigationControllerTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _UINavigationControllerTransitions.h; sourceTree = "<group>"; };
+		8BC9D25117EF932600BF1E63 /* _UINavigationControllerTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UINavigationControllerTransitions.m; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1011,6 +1015,8 @@
 				8B5468A017D41C5E00D7E338 /* UINavigationItem_Private.h */,
 				8BE4930D1798D65C002BEA5A /* _UINavigationItemView.h */,
 				8BE4930E1798D65C002BEA5A /* _UINavigationItemView.m */,
+				8BC9D25017EF932600BF1E63 /* _UINavigationControllerTransitions.h */,
+				8BC9D25117EF932600BF1E63 /* _UINavigationControllerTransitions.m */,
 				8B5AF849179B67F7008B3BF3 /* UINavigationBarAppearance.h */,
 				8B5AF84A179B67F7008B3BF3 /* UINavigationBarAppearance.m */,
 			);
@@ -1098,6 +1104,7 @@
 				8B1EC8E417A9F8280035369C /* UITextField.h in Headers */,
 				8B08255E17AA19EF00494FAA /* UIBarCommon.h in Headers */,
 				8BE493301798E39A002BEA5A /* UILabel.h in Headers */,
+				8BC9D25217EF932600BF1E63 /* _UINavigationControllerTransitions.h in Headers */,
 				8B6AEDE617AB638B00D6858A /* UIGestureRecognizer.h in Headers */,
 				8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */,
 				8BB4BD5517B1E860009B7708 /* UIScrollView.h in Headers */,
@@ -1352,6 +1359,7 @@
 				8B515C5717BB3AAA003065D2 /* NSIndexPath+UITableView.m in Sources */,
 				8BB4BD7017B35AF7009B7708 /* UIScrollViewScrollAnimator.m in Sources */,
 				8B91078017A97EF7008D9DF0 /* UIAppKitView.m in Sources */,
+				8BC9D25317EF932600BF1E63 /* _UINavigationControllerTransitions.m in Sources */,
 				8B54688317D2C86E00D7E338 /* UITabBar.m in Sources */,
 				8B54A03A17B9CD7B0068775C /* NSIndexPath+UICollectionViewAdditions.m in Sources */,
 				8B755AFA17E032FA006BBA4F /* UIPasteboard.m in Sources */,

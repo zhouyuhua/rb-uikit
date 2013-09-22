@@ -12,6 +12,16 @@
     NSMutableArray *_viewControllers;
     UIView *_visibleView;
     UINavigationBar *_navigationBar;
+    
+    id <UIViewControllerContextTransitioning> _currentAnimationContext;
+    
+    struct {
+        int navigationControllerWillShowViewControllerAnimated : 1;
+        int navigationControllerDidShowViewControllerAnimated : 1;
+        
+        int navigationControllerAnimationControllerForOperationFromViewControllerToViewController : 1;
+        int navigationControllerInteractionControllerForAnimationController : 1;
+    } _delegateRespondsTo;
 }
 
 ///The view that holds the contents of the controller's children.

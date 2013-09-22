@@ -7,9 +7,17 @@
 //
 
 #import "UIResponder.h"
+#import "UIDevice.h"
 #import "UIViewControllerTransitioning.h"
 
 @class UINavigationController, UINavigationItem, UIView;
+
+typedef NS_ENUM(NSInteger, UIInterfaceOrientation) {
+    UIInterfaceOrientationPortrait           = UIDeviceOrientationPortrait,
+    UIInterfaceOrientationPortraitUpsideDown = UIDeviceOrientationPortraitUpsideDown,
+    UIInterfaceOrientationLandscapeLeft      = UIDeviceOrientationLandscapeRight,
+    UIInterfaceOrientationLandscapeRight     = UIDeviceOrientationLandscapeLeft
+};
 
 @interface UIViewController : UIResponder <NSCoding>
 

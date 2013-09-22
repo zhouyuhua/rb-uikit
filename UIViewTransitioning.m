@@ -34,9 +34,6 @@ NSString *const UITransitionContextToViewControllerKey = @"UITransitionContextTo
     NSParameterAssert(transitioningObject);
     NSParameterAssert(completionHandler);
     
-    NSAssert(controllers[UITransitionContextFromViewControllerKey] != nil, @"UITransitionContextFromViewControllerKey missing");
-    NSAssert(controllers[UITransitionContextToViewControllerKey] != nil, @"UITransitionContextToViewControllerKey missing");
-    
     if((self = [super init])) {
         _containerView = containerView;
         _viewControllers = controllers;
@@ -205,7 +202,7 @@ NSString *const UITransitionContextToViewControllerKey = @"UITransitionContextTo
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    return [transitionContext isAnimated]? 0.25 : 0.0;
+    return [transitionContext isAnimated]? UIKitDefaultAnimationDuration : 0.0;
 }
 
 @end
@@ -253,7 +250,7 @@ NSString *const UITransitionContextToViewControllerKey = @"UITransitionContextTo
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    return [transitionContext isAnimated]? 0.35 : 0.0;
+    return [transitionContext isAnimated]? UIKitDefaultAnimationDuration : 0.0;
 }
 
 @end

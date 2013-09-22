@@ -560,14 +560,15 @@
 
 - (void)insertSubview:(UIView *)view atIndex:(NSInteger)index
 {
-    NSParameterAssert(view);
+    if(!view || [_subviews containsObject:view])
+        return;
+    
+    if(view.superview)
+        [view removeFromSuperview];
     
     if(_window)
         [view _viewWillMoveToWindow:_window];
     [view willMoveToSuperview:self];
-    
-    if([_subviews containsObject:view])
-        return; //This is allowed in real UIKit
     
     [_subviews insertObject:view atIndex:index];
     [self.layer insertSublayer:view.layer atIndex:(unsigned int)index];
@@ -601,35 +602,37 @@
 
 - (void)addSubview:(UIView *)view
 {
-    NSParameterAssert(view);
-    
     [self insertSubview:view atIndex:_subviews.count];
 }
 
 - (void)insertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview
 {
     NSParameterAssert(view);
-    NSParameterAssert(siblingSubview);
-    
-    NSUInteger indexOfSibling = [_subviews indexOfObject:siblingSubview];
-    if(indexOfSibling == NSNotFound) {
-        [NSException raise:NSInternalInconsistencyException format:@"Cannot insert below view %@ that is not a subview of %@", siblingSubview, self];
+    if(!siblingSubview) {
+        [self insertSubview:view atIndex:0];
+    } else {
+        NSUInteger indexOfSibling = [_subviews indexOfObject:siblingSubview];
+        if(indexOfSibling == NSNotFound) {
+            [NSException raise:NSInternalInconsistencyException format:@"Cannot insert below view %@ that is not a subview of %@", siblingSubview, self];
+        }
+        
+        [self insertSubview:view atIndex:indexOfSibling == 0? 0 : indexOfSibling - 1];
     }
-    
-    [self insertSubview:view atIndex:indexOfSibling - 1];
 }
 
 - (void)insertSubview:(UIView *)view aboveSubview:(UIView *)siblingSubview
 {
     NSParameterAssert(view);
-    NSParameterAssert(siblingSubview);
-    
-    NSUInteger indexOfSibling = [_subviews indexOfObject:siblingSubview];
-    if(indexOfSibling == NSNotFound) {
-        [NSException raise:NSInternalInconsistencyException format:@"Cannot insert above view %@ that is not a subview of %@", siblingSubview, self];
+    if(!siblingSubview) {
+        [self addSubview:view];
+    } else {
+        NSUInteger indexOfSibling = [_subviews indexOfObject:siblingSubview];
+        if(indexOfSibling == NSNotFound) {
+            [NSException raise:NSInternalInconsistencyException format:@"Cannot insert above view %@ that is not a subview of %@", siblingSubview, self];
+        }
+        
+        [self insertSubview:view atIndex:indexOfSibling + 1];
     }
-    
-    [self insertSubview:view atIndex:indexOfSibling + 1];
 }
 
 #pragma mark -

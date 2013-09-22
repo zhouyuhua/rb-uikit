@@ -55,7 +55,16 @@
 
 - (void)setItems:(NSArray *)items animated:(BOOL)animate
 {
-    UIKitUnimplementedMethod();
+    [self willChangeValueForKey:@"items"];
+    [_items setArray:items];
+    [self didChangeValueForKey:@"items"];
+    
+    if(items.count > 0) {
+        if(animate)
+            [self replaceVisibleNavigationItemPushingFromRight:items.lastObject];
+        else
+            [self replaceVisibleNavigationItemWith:items.lastObject];
+    }
 }
 
 - (void)setItems:(NSArray *)items
@@ -222,7 +231,7 @@
     newViewTargetFrame.origin.x = 0;
     
     _topItem = newItem;
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:UIKitDefaultAnimationDuration animations:^{
         [oldView setAlpha:0.0];
         [oldView setFrame:oldViewTargetFrame];
         [newView setFrame:newViewTargetFrame];
@@ -255,7 +264,7 @@
     newViewTargetFrame.origin.x = 0;
     
     _topItem = newItem;
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:UIKitDefaultAnimationDuration animations:^{
         [oldView setAlpha:0.0];
         [oldView setFrame:oldViewTargetFrame];
         [newView setFrame:newViewTargetFrame];

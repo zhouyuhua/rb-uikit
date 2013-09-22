@@ -43,6 +43,8 @@ UIKIT_INLINE void UIKitWarnUnimplementedMethod(const char *prettyFunction, NSStr
         NSLog(@"*** Warning, %s is unimplemented", prettyFunction);
 }
 
+#define UIKitDefaultAnimationDuration   0.25
+
 //For compatibility
 enum {
     NSTextAlignmentLeft = NSLeftTextAlignment,

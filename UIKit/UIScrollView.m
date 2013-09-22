@@ -210,7 +210,7 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.35;
 
 - (void)_hideScrollers
 {
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:UIKitDefaultAnimationDuration animations:^{
         _verticalScroller.alpha = 0.0;
         _horizontalScroller.alpha = 0.0;
     }];
