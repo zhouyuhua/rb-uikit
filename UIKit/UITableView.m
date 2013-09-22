@@ -299,7 +299,7 @@
     NSParameterAssert(identifier);
     
     NSMutableArray *cellsForIdentifier = _reusableCells[identifier];
-    UITableViewCell *cell = [cellsForIdentifier firstObject];
+    UITableViewCell *cell = cellsForIdentifier.count > 0? cellsForIdentifier[0] : nil;
     if(cell) {
         [cellsForIdentifier removeObject:cell];
     }
@@ -839,7 +839,7 @@
 
 - (NSIndexPath *)indexPathForSelectedRow
 {
-    return _selectedIndexPaths.firstObject;
+    return _selectedIndexPaths.count > 0? _selectedIndexPaths[0] : nil;
 }
 
 - (NSArray *)indexPathsForSelectedRows

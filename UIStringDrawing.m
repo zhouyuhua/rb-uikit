@@ -26,7 +26,7 @@ static CTLineRef GetSharedElipsisLine(void)
     static CTLineRef elipsis = NULL;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        elipsis = CTLineCreateWithAttributedString((CFAttributedStringRef)[[NSAttributedString alloc] initWithString:@"…"]);
+        elipsis = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)[[NSAttributedString alloc] initWithString:@"…"]);
     });
     
     return elipsis;
@@ -39,7 +39,7 @@ static NSArray *CreateLinesForString(NSString *string, UIFont *font, NSLineBreak
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:string attributes:attributes];
     
     NSMutableArray *lines = [NSMutableArray array];
-    CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((CFAttributedStringRef)attributedString);
+    CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attributedString);
     
     CGSize renderSize = CGSizeZero;
     CGFloat lineHeight = font.lineHeight;

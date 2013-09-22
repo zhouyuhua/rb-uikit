@@ -137,7 +137,10 @@
 
 - (UIBarButtonItem *)leftBarButtonItem
 {
-    return [self.leftBarButtonItems firstObject];
+    if(self.leftBarButtonItems.count > 0)
+        return self.leftBarButtonItems[0];
+    else
+        return nil;
 }
 
 #pragma mark -
@@ -157,7 +160,10 @@
 
 - (UIBarButtonItem *)rightBarButtonItem
 {
-    return [self.rightBarButtonItems firstObject];
+    if(self.rightBarButtonItems.count > 0)
+        return self.rightBarButtonItems[0];
+    else
+        return nil;
 }
 
 #pragma mark - Internal

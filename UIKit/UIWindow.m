@@ -200,7 +200,8 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 {
     NSUInteger indexOfKeyView = [self._possibleKeyViews indexOfObject:(UIView *)self._firstResponder];
     if(indexOfKeyView == NSNotFound) {
-        [self._possibleKeyViews.firstObject becomeFirstResponder];
+        if(self._possibleKeyViews.count > 0)
+            [self._possibleKeyViews[0] becomeFirstResponder];
     } else if(self._possibleKeyViews.count > 0) {
         NSUInteger newKeyViewIndex = indexOfKeyView + 1;
         if(newKeyViewIndex >= self._possibleKeyViews.count) {
