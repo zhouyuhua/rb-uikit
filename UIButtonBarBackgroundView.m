@@ -9,36 +9,71 @@
 #import "UIButtonBarBackgroundView.h"
 #import "UIImage_Private.h"
 
-@implementation UIButtonBarBackgroundView
+///The _UIButtonBarBackgroundPlaceholderView class is a small kludge that
+///enables us to draw NSButtonCell contents in the right orientation.
+@interface _UIButtonBarBackgroundPlaceholderView : NSView
+
+@end
+
+@implementation _UIButtonBarBackgroundPlaceholderView
+
+///All UIViews are flipped.
+- (BOOL)isFlipped
+{
+    return YES;
+}
+
+@end
+
+#pragma mark -
+
+@implementation UIButtonBarBackgroundView {
+    NSButtonCell *_backgroundCell;
+    _UIButtonBarBackgroundPlaceholderView *_placeholderView;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
     if((self = [super initWithFrame:frame])) {
         self.contentMode = UIViewContentModeRedraw;
+        
+        _backgroundCell = [[NSButtonCell alloc] initTextCell:@""];
+        [_backgroundCell setBezelStyle:NSTexturedRoundedBezelStyle];
+        [_backgroundCell setControlSize:NSRegularControlSize];
+        
+        _placeholderView = [_UIButtonBarBackgroundPlaceholderView new];
     }
     
     return self;
 }
 
+- (void)setHighlighted:(BOOL)highlighted
+{
+    [super setHighlighted:highlighted];
+    
+    [_backgroundCell setHighlighted:highlighted];
+}
+
 - (void)drawRect:(CGRect)rect
 {
-    UIImage *backgroundImage;
-    if(self.highlighted)
-        backgroundImage = UIKitImageNamed(@"UIBarButtonItemBackgroundHighlighted", UIImageResizingModeStretch);
-    else
-        backgroundImage = UIKitImageNamed(@"UIBarButtonItemBackground", UIImageResizingModeStretch);
-    
-    UIImage *stretchableBackgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)];
-    [stretchableBackgroundImage drawInRect:rect];
+    _placeholderView.frame = rect;
+    [_backgroundCell drawBezelWithFrame:rect inView:_placeholderView];
 }
 
 - (CGSize)constrainButtonSize:(CGSize)size withTitle:(NSString *)title image:(UIImage *)image
 {
-    size.height = 30.0;
+    size.height = 23.0;
     if(title || image)
         size.width += 20.0;
     
     return size;
+}
+
+- (void)tintColorDidChange
+{
+    [super tintColorDidChange];
+    
+    [_backgroundCell setEnabled:(self.tintAdjustmentMode == UIViewTintAdjustmentModeNormal)];
 }
 
 @end

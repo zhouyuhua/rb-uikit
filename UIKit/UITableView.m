@@ -436,10 +436,10 @@
                 [_allCells addObject:cell];
                 _cachedCells[indexPath] = cell;
             }
-            
-            [self bringSubviewToFront:sectionInfo.headerView];
-            [self bringSubviewToFront:sectionInfo.footerView];
         }
+        
+        [self bringSubviewToFront:sectionInfo.headerView];
+        [self bringSubviewToFront:sectionInfo.footerView];
     }];
     
     if(_tableFooterView) {
