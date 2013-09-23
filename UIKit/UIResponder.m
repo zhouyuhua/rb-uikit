@@ -25,7 +25,15 @@
 - (BOOL)becomeFirstResponder
 {
     if([self canBecomeFirstResponder]) {
+        UIResponder *currentResponder = self._firstResponderManager._firstResponder;
+        if(currentResponder == self)
+            return YES;
+        
+        if(currentResponder && [currentResponder canResignFirstResponder] && ![currentResponder resignFirstResponder])
+            return NO;
+        
         self._firstResponderManager._firstResponder = self;
+        
         return YES;
     }
     
@@ -40,7 +48,7 @@
 - (BOOL)resignFirstResponder
 {
     if([self canResignFirstResponder]) {
-        self._firstResponderManager._firstResponder = [self nextResponder];
+        self._firstResponderManager._firstResponder = nil;
         return YES;
     }
     

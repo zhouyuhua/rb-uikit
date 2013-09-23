@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+UIKIT_EXTERN NSString *const UINSTextFieldDidBecomeFirstResponder;
+
 @class UITextField;
 
 @interface UINSTextField : NSTextField

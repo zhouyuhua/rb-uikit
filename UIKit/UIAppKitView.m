@@ -119,6 +119,22 @@ UIView *NSViewToUIView(NSView *view)
     return NO;
 }
 
+#pragma mark - First Responder Status
+
+- (BOOL)makeNativeViewBecomeFirstResponder
+{
+    return [self.nativeView becomeFirstResponder];
+}
+
+- (BOOL)makeNativeViewResignFirstResponder
+{
+    if(self.nativeView.window != nil) {
+        return [self.nativeView.window makeFirstResponder:self.window._hostNativeView];
+    }
+    
+    return NO;
+}
+
 #pragma mark - Responding To Movements
 
 - (void)willMoveToWindow:(UIWindow *)newWindow

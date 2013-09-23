@@ -43,4 +43,10 @@ UIKIT_EXTERN UIView *NSViewToUIView(NSView *view);
 ///The native view being wrapped.
 @property (nonatomic, readonly) NSView *nativeView;
 
+#pragma mark - First Responder Status
+
+- (BOOL)makeNativeViewBecomeFirstResponder;
+
+- (BOOL)makeNativeViewResignFirstResponder;
+
 @end

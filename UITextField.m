@@ -51,7 +51,7 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(controlTextDidBeginEditing:)
-                                                 name:NSControlTextDidBeginEditingNotification
+                                                 name:UINSTextFieldDidBecomeFirstResponder
                                                object:self._nativeTextField];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(controlTextDidEndEditing:)
@@ -112,14 +112,32 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
     return YES;
 }
 
+- (BOOL)_becomeFirstResponderModifyingNativeViewStatus:(BOOL)modifyingNativeViewStatus
+{
+    BOOL success = [super becomeFirstResponder];
+    if(modifyingNativeViewStatus)
+        success = [__nativeTextFieldAdaptor makeNativeViewBecomeFirstResponder] && success;
+    
+    return success;
+}
+
+- (BOOL)_resignFirstResponderModifyingNativeViewStatus:(BOOL)modifyingNativeViewStatus
+{
+    BOOL success = [super resignFirstResponder];
+    if(modifyingNativeViewStatus)
+        success = [__nativeTextFieldAdaptor makeNativeViewResignFirstResponder] && success;
+    
+    return success;
+}
+
 - (BOOL)becomeFirstResponder
 {
-    return [__nativeTextFieldAdaptor.nativeView becomeFirstResponder] && [super becomeFirstResponder];
+    return [self _becomeFirstResponderModifyingNativeViewStatus:YES];
 }
 
 - (BOOL)resignFirstResponder
 {
-    return [__nativeTextFieldAdaptor.nativeView resignFirstResponder] && [super resignFirstResponder];
+    return [self _resignFirstResponderModifyingNativeViewStatus:YES];
 }
 
 #pragma mark - Properties
@@ -485,6 +503,8 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
         [_delegate textFieldDidBeginEditing:self];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidBeginEditingNotification object:self];
+    
+    [self _becomeFirstResponderModifyingNativeViewStatus:NO];
 }
 
 - (void)controlTextDidEndEditing:(NSNotification *)notification
@@ -496,7 +516,7 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidEndEditingNotification object:self];
     
-    [self resignFirstResponder];
+    [self _resignFirstResponderModifyingNativeViewStatus:NO];
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification

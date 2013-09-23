@@ -9,11 +9,27 @@
 #import "UINSTextFieldCell.h"
 #import "UITextField_Private.h"
 
+NSString *const UINSTextFieldDidBecomeFirstResponder = @"UINSTextFieldDidBecomeFirstResponder";
+
 @implementation UINSTextField
 
 + (Class)cellClass
 {
     return [UINSTextFieldCell class];
+}
+
+- (BOOL)becomeFirstResponder
+{
+    BOOL success = [super becomeFirstResponder];
+    if(success) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:UINSTextFieldDidBecomeFirstResponder object:self];
+    }
+    return success;
+}
+
+- (BOOL)resignFirstResponder
+{
+    return [super resignFirstResponder];
 }
 
 - (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString
