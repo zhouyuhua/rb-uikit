@@ -11,6 +11,7 @@
 #import "TestController.h"
 #import "TestCollectionViewController.h"
 #import "TestTableViewController.h"
+#import "TestWebViewController.h"
 
 @interface AppDelegate () <UIAlertViewDelegate>
 
@@ -25,7 +26,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:[TestTableViewController new]];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:[TestWebViewController new]];
     self.window.rootViewController = self.navigationController;
     
     [self.window makeKeyAndVisible];

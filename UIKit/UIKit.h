@@ -43,6 +43,7 @@
 #import "UIScrollView.h"
 
 #import "UIAppKitView.h"
+#import "UIWebView.h"
 
 #import "UIAlertView.h"
 #import "UIMenuController.h"
