@@ -7,6 +7,8 @@
 //
 
 #import "UIResponder_Private.h"
+#import "UIEvent_Private.h"
+#import "UIKeyEvent_Private.h"
 
 @implementation UIResponder
 
@@ -59,22 +61,34 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self.nextResponder touchesBegan:touches withEvent:event];
+    if(self.nextResponder == nil)
+        event._unhandled = YES;
+    else
+        [self.nextResponder touchesBegan:touches withEvent:event];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self.nextResponder touchesMoved:touches withEvent:event];
+    if(self.nextResponder == nil)
+        event._unhandled = YES;
+    else
+        [self.nextResponder touchesMoved:touches withEvent:event];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self.nextResponder touchesEnded:touches withEvent:event];
+    if(self.nextResponder == nil)
+        event._unhandled = YES;
+    else
+        [self.nextResponder touchesEnded:touches withEvent:event];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self.nextResponder touchesCancelled:touches withEvent:event];
+    if(self.nextResponder == nil)
+        event._unhandled = YES;
+    else
+        [self.nextResponder touchesCancelled:touches withEvent:event];
 }
 
 #pragma mark -
@@ -129,15 +143,20 @@
 
 - (void)keyDown:(UIKeyEvent *)event
 {
-    if(self.nextResponder)
+    if(self.nextResponder) {
         [self.nextResponder keyDown:event];
-    else
-        NSBeep();
+    } else {
+        event._unhandled = YES;
+    }
 }
 
 - (void)keyUp:(UIKeyEvent *)event
 {
-    [self.nextResponder keyUp:event];
+    if(self.nextResponder) {
+        [self.nextResponder keyUp:event];
+    } else {
+        event._unhandled = YES;
+    }
 }
 
 #pragma mark -

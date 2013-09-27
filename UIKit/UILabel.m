@@ -111,7 +111,7 @@
     [self setNeedsDisplay];
 }
 
-- (void)setHighlightedTextColor:(NSColor *)highlightedTextColor
+- (void)setHighlightedTextColor:(UIColor *)highlightedTextColor
 {
     _highlightedTextColor = highlightedTextColor;
     if(_highlighted)

@@ -43,8 +43,12 @@ extern UIApplication *UIApp;
 
 #pragma mark - Event Handling
 
-- (void)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView;
-- (void)_dispatchMouseEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView;
+- (BOOL)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView;
+- (BOOL)_dispatchMouseEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView;
 - (void)_dispatchIdleScrollEvent:(NSEvent *)event ofPhase:(NSEventPhase)phase fromHostView:(UIWindowHostNativeView *)hostView;
+
+#pragma mark -
+
+- (void)_cancelTouches:(NSSet *)touches event:(UIEvent *)event;
 
 @end

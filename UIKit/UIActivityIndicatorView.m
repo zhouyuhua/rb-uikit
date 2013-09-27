@@ -76,7 +76,7 @@ static NSTimeInterval const kAnimationFramesPerSecond = (5.0 / 60.0);
             CGFloat angle = (self.isAnimating)? (270 + (step * 30)) * DEG2RAD : 270 * DEG2RAD;
             
             for (NSUInteger i = 0; i < 12; i++) {
-                [[NSColor colorWithCalibratedRed:_colorRedComponent
+                [[UIColor colorWithCalibratedRed:_colorRedComponent
                                            green:_colorGreenComponent
                                             blue:_colorBlueComponent
                                            alpha:1.0 - sqrt(i) * 0.25] set];

@@ -1,0 +1,13 @@
+//
+//  UINSWindow.h
+//  UIKit
+//
+//  Created by Kevin MacWhinnie on 9/22/13.
+//  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
+//
+
+#import <Cocoa/Cocoa.h>
+
+@interface UINSWindow : NSWindow
+
+@end

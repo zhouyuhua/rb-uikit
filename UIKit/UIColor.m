@@ -8,6 +8,7 @@
 
 #import "UIColor.h"
 #import <objc/runtime.h>
+#import "UIImage_Private.h"
 
 ///A pair of selectors that describe UIColor methods
 ///that may be missing, and their NSColor equivalents.
@@ -45,12 +46,26 @@ typedef struct MethodPair {
         }
     }
     
+    method_exchangeImplementations(class_getClassMethod(self.class, @selector(colorWithPatternImage:)),
+                                   class_getClassMethod(self.class, @selector(UIKit_colorWithPatternImage:)));
+    
     /*
      It's possible someone has looked up UIColor using NSClassFromString
      so this just ensures they actually get back something.
      */
     Class runtimeUIColor = objc_allocateClassPair([NSColor class], "UIColor", 0);
     objc_registerClassPair(runtimeUIColor);
+}
+
+#pragma mark -
+
+- (UIColor *)UIKit_colorWithPatternImage:(id)image
+{
+    NSImage *pattern = image;
+    if([image isKindOfClass:[UIImage class]])
+        pattern = [image NSImage];
+    
+    return [self UIKit_colorWithPatternImage:pattern];
 }
 
 @end

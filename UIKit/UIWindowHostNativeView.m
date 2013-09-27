@@ -80,29 +80,34 @@
 
 - (void)keyUp:(NSEvent *)event
 {
-    [UIApp _dispatchKeyEvent:event fromHostView:self];
+    if(![UIApp _dispatchKeyEvent:event fromHostView:self])
+        [super keyUp:event];
 }
 
 - (void)keyDown:(NSEvent *)event
 {
-    [UIApp _dispatchKeyEvent:event fromHostView:self];
+    if(![UIApp _dispatchKeyEvent:event fromHostView:self])
+        [super keyDown:event];
 }
 
 #pragma mark -
 
 - (void)mouseUp:(NSEvent *)event
 {
-    [UIApp _dispatchMouseEvent:event fromHostView:self];
+    if(![UIApp _dispatchMouseEvent:event fromHostView:self])
+        [super mouseUp:event];
 }
 
 - (void)mouseDragged:(NSEvent *)event
 {
-    [UIApp _dispatchMouseEvent:event fromHostView:self];
+    if(![UIApp _dispatchMouseEvent:event fromHostView:self])
+        [super mouseDragged:event];
 }
 
 - (void)mouseDown:(NSEvent *)event
 {
-    [UIApp _dispatchMouseEvent:event fromHostView:self];
+    if(![UIApp _dispatchMouseEvent:event fromHostView:self])
+        [super mouseDown:event];
 }
 
 #pragma mark -

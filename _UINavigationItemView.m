@@ -20,7 +20,6 @@
 
 @interface _UINavigationItemView () {
     UILabel *_titleLabel;
-    UIImageView *_logoImageView;
 }
 
 @property (nonatomic) CGFloat titleVerticalPositionAdjustment;
@@ -114,19 +113,6 @@
         _navigationItem.titleView.frame = titleViewFrame;
         
         _titleLabel.frame = CGRectZero;
-        _logoImageView.frame = CGRectZero;
-    } else if(_logoImageView) {
-        CGRect logoImageViewFrame = _logoImageView.frame;
-        logoImageViewFrame.origin.y = round(CGRectGetMidY(self.bounds) - CGRectGetHeight(logoImageViewFrame) / 2.0) + _titleVerticalPositionAdjustment;
-        logoImageViewFrame.origin.x = round(CGRectGetMidX(self.bounds) - CGRectGetWidth(logoImageViewFrame) / 2.0);
-        
-        if(CGRectGetMinX(logoImageViewFrame) < CGRectGetMinX(contentFrame)) {
-            logoImageViewFrame.origin.x = CGRectGetMinX(contentFrame) + 5.0;
-        }
-        
-        _logoImageView.frame = logoImageViewFrame;
-        
-        _titleLabel.frame = CGRectZero;
     } else {
         CGRect titleLabelFrame;
         titleLabelFrame.size = [_titleLabel sizeThatFits:contentFrame.size];
@@ -142,8 +128,6 @@
         }
         
         _titleLabel.frame = titleLabelFrame;
-        
-        _logoImageView.frame = CGRectZero;
     }
 }
 
@@ -169,25 +153,6 @@
     }
     
     self.titleVerticalPositionAdjustment = [newNavigationBar titleVerticalPositionAdjustmentForBarMetrics:UIBarMetricsDefault];
-}
-
-- (void)willMoveToWindow:(UIWindow *)newWindow
-{
-    if(self.navigationBar._navigationController._rootViewController) {
-        NSString *navigationControllerBarLogoImageName = [UIKitConfigurationManager sharedConfigurationManager].navigationControllerBarLogoImageName;
-        if(navigationControllerBarLogoImageName) {
-            _titleLabel.hidden = YES;
-            
-            _logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:navigationControllerBarLogoImageName]];
-            [self addSubview:_logoImageView];
-        } else {
-            _titleLabel.hidden = NO;
-            [_logoImageView removeFromSuperview];
-        }
-    } else {
-        _titleLabel.hidden = NO;
-        [_logoImageView removeFromSuperview];
-    }
 }
 
 #pragma mark - Responding to Changes

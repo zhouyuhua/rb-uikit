@@ -14,6 +14,7 @@
 
 @property (nonatomic) NSMutableSet *touches;
 @property (nonatomic) BOOL _isPartOfBurst;
+@property (nonatomic, getter=_isUnhandled, setter=_setUnhandled:) BOOL _unhandled;
 
 #pragma mark - readwrite
 

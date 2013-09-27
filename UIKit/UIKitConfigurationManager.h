@@ -69,16 +69,4 @@ UIKIT_EXTERN NSString *const UIKitConfigurationResourceFileName;
 ///Corresponding key is `UIWantsBorderlessButtons`.
 @property BOOL wantsBorderlessButtons;
 
-#pragma mark - UINavigationController
-
-///Specifies a logo to use in place of navigation level titles
-///for instances of UINavigationController that are used as
-///`rootViewController`s in instances of `UIWindow`.
-///
-///This property does not apply to navigation controllers which
-///are not placed at the root of a window.
-///
-///Corresponding key is `UINavigationControllerBarLogoImageName`
-@property NSString *navigationControllerBarLogoImageName;
-
 @end

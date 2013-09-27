@@ -13,6 +13,7 @@
 - (instancetype)initWithNSEvent:(NSEvent *)event;
 
 @property (nonatomic, copy) NSEvent *_event;
+@property (nonatomic, getter=_isUnhandled, setter=_setUnhandled:) BOOL _unhandled;
 
 #pragma mark - readwrite
 

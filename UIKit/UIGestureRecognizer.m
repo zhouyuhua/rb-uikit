@@ -8,6 +8,7 @@
 
 #import "UIGestureRecognizer_Private.h"
 
+#import "UIApplication_Private.h"
 #import "UIEvent_Private.h"
 #import "UITouch_Private.h"
 #import "UIView_Private.h"
@@ -211,7 +212,7 @@
     NSSet *touches = [event touchesForGestureRecognizer:self];
     for (UITouch *touch in touches) {
         if(self.cancelsTouchesInView || (self._lastIgnoredEvent == event && self._lastIgnoredTouch == touch)) {
-            touch.view = nil;
+            [UIApp _cancelTouches:touches event:event];
             self._lastIgnoredTouch = nil;
             self._lastIgnoredEvent = nil;
         }

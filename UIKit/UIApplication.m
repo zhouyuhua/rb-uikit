@@ -190,6 +190,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 
 - (void)_updateTrackingPhase:(UITouchPhase)phase withNativeMouseEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
+    _currentEvent._unhandled = NO;
     _currentEvent.timestamp = event.timestamp;
     
     _currentTouch.timestamp = event.timestamp;
@@ -229,6 +230,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 - (void)_trackingUpdateForNativeGestureEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
     _currentEvent.timestamp = event.timestamp;
+    _currentEvent._unhandled = NO;
     
     _currentTouch.timestamp = event.timestamp;
     CGPoint locationInWindow = _currentTouch.locationInWindow;
@@ -246,6 +248,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 - (void)_endTrackingNativeGestureEvent:(NSEvent *)event fromHostview:(UIWindowHostNativeView *)hostView
 {
     _currentEvent.timestamp = event.timestamp;
+    _currentEvent._unhandled = NO;
     
     _currentTouch.timestamp = event.timestamp;
     CGPoint locationInWindow = _currentTouch.locationInWindow;
@@ -262,12 +265,14 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 
 #pragma mark -
 
-- (void)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
+- (BOOL)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
-    [hostView.kitWindow sendKeyEvent:[[UIKeyEvent alloc] initWithNSEvent:event]];
+    UIKeyEvent *keyEvent = [[UIKeyEvent alloc] initWithNSEvent:event];
+    [hostView.kitWindow sendKeyEvent:keyEvent];
+    return !keyEvent._unhandled;
 }
 
-- (void)_dispatchMouseEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
+- (BOOL)_dispatchMouseEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
     switch (event.type) {
         case NSLeftMouseDown: {
@@ -334,6 +339,8 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
             break;
         }
     }
+    
+    return !_currentEvent._unhandled;
 }
 
 - (void)_dispatchIdleScrollEvent:(NSEvent *)event ofPhase:(NSEventPhase)phase fromHostView:(UIWindowHostNativeView *)hostView
@@ -362,6 +369,16 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
             break;
         }
     }
+}
+
+#pragma mark -
+
+- (void)_cancelTouches:(NSSet *)touches event:(UIEvent *)event
+{
+    UITouch *touch = touches.anyObject;
+    [touch.view touchesCancelled:touches withEvent:event];
+    
+    touch.view = nil;
 }
 
 #pragma mark - Notifications

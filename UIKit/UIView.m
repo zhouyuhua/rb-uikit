@@ -87,7 +87,7 @@
         self.layer.layoutManager = [[UIViewLayoutManager alloc] initWithView:self];
         
         self.contentScaleFactor = 0.0;
-        self.backgroundColor = [self.class.appearance backgroundColor];
+        self.backgroundColor = ((UIConcreteAppearance *)self.class.appearance).backgroundColor;
         self.userInteractionEnabled = YES;
         self.autoresizesSubviews = YES;
         self.contentMode = UIViewContentModeScaleToFill;
@@ -511,7 +511,6 @@
     }
     
     if(self.tintAdjustmentMode == UIViewTintAdjustmentModeDimmed) {
-        //This is special cased to ensure system-matching
         if([tintColor isEqual:[UIColor alternateSelectedControlColor]]) {
             return [UIColor secondarySelectedControlColor];
         }

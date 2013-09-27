@@ -130,7 +130,7 @@
 
 #pragma mark -
 
-- (void)setBarTintColor:(NSColor *)barTintColor
+- (void)setBarTintColor:(UIColor *)barTintColor
 {
     _barTintColor = barTintColor;
     self.backgroundColor = barTintColor;

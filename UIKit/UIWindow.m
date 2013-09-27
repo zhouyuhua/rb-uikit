@@ -15,13 +15,21 @@
 #import "UIWindowHostNativeView.h"
 #import "UITouch.h"
 #import "UIGestureRecognizer_Private.h"
+#import "UIImage_Private.h"
+
+#import "UINSWindow.h"
 
 NSString *const UIWindowDidBecomeVisibleNotification = @"UIWindowDidBecomeVisibleNotification";
 NSString *const UIWindowDidBecomeHiddenNotification = @"UIWindowDidBecomeHiddenNotification";
 NSString *const UIWindowDidBecomeKeyNotification = @"UIWindowDidBecomeKeyNotification";
 NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotification";
 
-@implementation UIWindow
+@implementation UIWindow {
+    BOOL _shouldIgnoreMouseMovedEvents;
+    NSPoint _initialDragLocation;
+    NSPoint _initialDragLocationOnScreen;
+    NSRect _initialWindowFrameForDrag;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -41,7 +49,11 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
         self._nativeWindow.contentView = self._hostNativeView;
         
         [self._nativeWindow setAutorecalculatesContentBorderThickness:NO forEdge:NSMaxYEdge];
-        [self._nativeWindow setContentBorderThickness:50.0 forEdge:NSMaxYEdge];
+        [self._nativeWindow setContentBorderThickness:40.0 forEdge:NSMaxYEdge];
+        
+        self.backgroundColor = [UIColor colorWithPatternImage:UIKitImageNamed(@"UIWindowBackground", UIImageResizingModeStretch).NSImage];
+        
+        self.clipsToBounds = YES;
     }
     
     return self;
@@ -303,7 +315,7 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 
 @implementation UIWindow (Mac)
 
-static NSUInteger _NativeWindowStyleMask = (NSTitledWindowMask |
+static NSUInteger _NativeWindowStyleMask = (NSBorderlessWindowMask |
                                             NSTexturedBackgroundWindowMask |
                                             NSClosableWindowMask |
                                             NSMiniaturizableWindowMask |
@@ -332,7 +344,7 @@ static Class _NativeWindowClass = Nil;
 
 + (Class)nativeWindowClass
 {
-    return _NativeWindowClass ?: [NSWindow class];
+    return _NativeWindowClass ?: [UINSWindow class];
 }
 
 #pragma mark -

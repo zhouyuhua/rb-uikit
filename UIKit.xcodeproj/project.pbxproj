@@ -197,6 +197,12 @@
 		8BC9D25317EF932600BF1E63 /* _UINavigationControllerTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D25117EF932600BF1E63 /* _UINavigationControllerTransitions.m */; };
 		8BC9D25617EFA80800BF1E63 /* UINavigationBarShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC9D25417EFA80800BF1E63 /* UINavigationBarShadow@2x.png */; };
 		8BC9D25717EFA80800BF1E63 /* UINavigationBarShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC9D25517EFA80800BF1E63 /* UINavigationBarShadow.png */; };
+		8BC9D25C17EFFAEE00BF1E63 /* UINSWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC9D25A17EFFAEE00BF1E63 /* UINSWindow.h */; };
+		8BC9D25D17EFFAEE00BF1E63 /* UINSWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D25B17EFFAEE00BF1E63 /* UINSWindow.m */; };
+		8BC9D26317F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC9D26117F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive@2x.png */; };
+		8BC9D26417F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC9D26217F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive.png */; };
+		8BC9D26717F28F3D00BF1E63 /* UIWindowBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC9D26517F28F3D00BF1E63 /* UIWindowBackground.png */; };
+		8BC9D26817F28F3D00BF1E63 /* UIWindowBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC9D26617F28F3D00BF1E63 /* UIWindowBackground@2x.png */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -452,6 +458,12 @@
 		8BC9D25117EF932600BF1E63 /* _UINavigationControllerTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UINavigationControllerTransitions.m; sourceTree = "<group>"; };
 		8BC9D25417EFA80800BF1E63 /* UINavigationBarShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UINavigationBarShadow@2x.png"; sourceTree = "<group>"; };
 		8BC9D25517EFA80800BF1E63 /* UINavigationBarShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UINavigationBarShadow.png; sourceTree = "<group>"; };
+		8BC9D25A17EFFAEE00BF1E63 /* UINSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINSWindow.h; sourceTree = "<group>"; };
+		8BC9D25B17EFFAEE00BF1E63 /* UINSWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINSWindow.m; sourceTree = "<group>"; };
+		8BC9D26117F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UINavigationBarBackgroundImage_Inactive@2x.png"; sourceTree = "<group>"; };
+		8BC9D26217F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UINavigationBarBackgroundImage_Inactive.png; sourceTree = "<group>"; };
+		8BC9D26517F28F3D00BF1E63 /* UIWindowBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIWindowBackground.png; sourceTree = "<group>"; };
+		8BC9D26617F28F3D00BF1E63 /* UIWindowBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIWindowBackground@2x.png"; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -788,6 +800,8 @@
 				8BE492FC1798CFDD002BEA5A /* UIWindow.h */,
 				8BE492FD1798CFDD002BEA5A /* UIWindow.m */,
 				8B91077717A979F9008D9DF0 /* UIWindow_Private.h */,
+				8BC9D25A17EFFAEE00BF1E63 /* UINSWindow.h */,
+				8BC9D25B17EFFAEE00BF1E63 /* UINSWindow.m */,
 			);
 			name = UIWindow;
 			sourceTree = "<group>";
@@ -949,8 +963,12 @@
 				8BAE958F179A1D3100562F35 /* UIBarButtonItemBackground.png */,
 				8B5BD7341798F3E100A53E4A /* UINavigationBarBackgroundImage@2x.png */,
 				8B5BD7311798F1A200A53E4A /* UINavigationBarBackgroundImage.png */,
+				8BC9D26117F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive@2x.png */,
+				8BC9D26217F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive.png */,
 				8BC9D25417EFA80800BF1E63 /* UINavigationBarShadow@2x.png */,
 				8BC9D25517EFA80800BF1E63 /* UINavigationBarShadow.png */,
+				8BC9D26517F28F3D00BF1E63 /* UIWindowBackground.png */,
+				8BC9D26617F28F3D00BF1E63 /* UIWindowBackground@2x.png */,
 				8BE492C21798C44F002BEA5A /* UIKit-Info.plist */,
 				8BE492C31798C44F002BEA5A /* InfoPlist.strings */,
 				8BE492C61798C44F002BEA5A /* UIKit-Prefix.pch */,
@@ -1178,6 +1196,7 @@
 				8BB8A22D17B1E66A004FB0E8 /* UIAction.h in Headers */,
 				8B6AEDEF17AB6BF600D6858A /* UIApplication_Private.h in Headers */,
 				8BE492FB1798CFAB002BEA5A /* UIBezierPath.h in Headers */,
+				8BC9D25C17EFFAEE00BF1E63 /* UINSWindow.h in Headers */,
 				8BE493431798EAA0002BEA5A /* UIFont.h in Headers */,
 				8B95506B17C3189600B8E4F9 /* UIKeyEvent_Private.h in Headers */,
 				8BF623F217BDD2A70015ED5C /* UITableViewSectionInfo.h in Headers */,
@@ -1285,9 +1304,12 @@
 				8BF0F9E817BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png in Resources */,
 				8B5BD7331798F1A200A53E4A /* UINavigationBarBackgroundImage.png in Resources */,
 				8B5AF850179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted.png in Resources */,
+				8BC9D26317F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive@2x.png in Resources */,
 				8B5AF84F179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png in Resources */,
+				8BC9D26817F28F3D00BF1E63 /* UIWindowBackground@2x.png in Resources */,
 				8BC9D25717EFA80800BF1E63 /* UINavigationBarShadow.png in Resources */,
 				8B5AF863179B9B79008B3BF3 /* UITextFieldSquareBackground.png in Resources */,
+				8BC9D26417F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive.png in Resources */,
 				8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */,
 				8B08256417AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png in Resources */,
 				8BF0F9E917BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png in Resources */,
@@ -1299,6 +1321,7 @@
 				8B08256717AA264100494FAA /* UIBackButtonChevron@2x.png in Resources */,
 				8B1255A317E418C80063454E /* UISearchBarBackground@2x.png in Resources */,
 				8BAE9590179A1D3100562F35 /* UIBarButtonItemBackground@2x.png in Resources */,
+				8BC9D26717F28F3D00BF1E63 /* UIWindowBackground.png in Resources */,
 				8B08256317AA1F7300494FAA /* UISearchBarMagnifyingGlass.png in Resources */,
 				8B54687517D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png in Resources */,
 				8BC9D25617EFA80800BF1E63 /* UINavigationBarShadow@2x.png in Resources */,
@@ -1331,6 +1354,7 @@
 				8B5BD72F1798F05C00A53E4A /* UIImageView.m in Sources */,
 				8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */,
 				8B54688717D2C87700D7E338 /* UITabBarController.m in Sources */,
+				8BC9D25D17EFFAEE00BF1E63 /* UINSWindow.m in Sources */,
 				8B5BD73E1799037400A53E4A /* UIButtonBackgroundView.m in Sources */,
 				8BE4931B1798D65C002BEA5A /* _UINavigationItemView.m in Sources */,
 				8B5BD758179B24D400A53E4A /* UIImage.m in Sources */,

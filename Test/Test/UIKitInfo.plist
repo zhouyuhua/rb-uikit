@@ -6,7 +6,5 @@
 	<integer>320</integer>
 	<key>UIMainScreenHeight</key>
 	<integer>500</integer>
-	<key>UINavigationControllerBarLogoImageName</key>
-	<string>TestLogo</string>
 </dict>
 </plist>
