@@ -13,7 +13,7 @@
 #import "UIThreePartImageProvider.h"
 #import "UITemplateImageProvider.h"
 
-#import "UIGraphics.h"
+#import "UIGraphics_Private.h"
 
 @implementation UIImage
 
@@ -40,14 +40,28 @@
     
     UIImage *image = [namedImageCache objectForKey:[name stringByDeletingPathExtension]];
     if(!image) {
-        NSString *imagePath = nil;
-        if([UIScreen mainScreen].scale == 2.0)
-            imagePath = [bundle pathForImageResource:[name stringByAppendingString:@"@2x"]];
+        NSString *imagePath = [bundle pathForImageResource:name];
+        if([UIScreen mainScreen].scale == 2.0) {
+            NSString *imagePathFor2x = [bundle pathForImageResource:[name stringByAppendingString:@"@2x"]];
+            
+            NSMutableArray *providers = [NSMutableArray array];
+            UIImageProvider *providerFor1x = [[UIImageProvider alloc] initWithContentsOfFile:imagePath scale:1.0];
+            if(providerFor1x)
+                [providers addObject:providerFor1x];
+            
+            UIImageProvider *providerFor2x = [[UIImageProvider alloc] initWithContentsOfFile:imagePathFor2x scale:2.0];
+            if(providerFor2x)
+                [providers addObject:providerFor2x];
+            
+            if(providers.count == 0)
+                return nil;
+            
+            image = [[UIImage alloc] initWithProviders:providers];
+            
+        } else {
+            image = [UIImage imageWithContentsOfFile:imagePath];
+        }
         
-        if(!imagePath)
-            imagePath = [bundle pathForImageResource:name];
-        
-        image = [UIImage imageWithContentsOfFile:imagePath];
         [namedImageCache setObject:image forKey:[name stringByDeletingPathExtension]];
     }
     
@@ -97,7 +111,7 @@
 {
     NSParameterAssert(path);
     
-    return [self initWithProvider:[[UIImageProvider alloc] initWithContentsOfFile:path scale:[UIScreen mainScreen].scale]];
+    return [self initWithProviders:@[ [[UIImageProvider alloc] initWithContentsOfFile:path scale:[UIScreen mainScreen].scale] ]];
 }
 
 - (id)initWithData:(NSData *)data
@@ -109,7 +123,7 @@
 {
     NSParameterAssert(data);
     
-    return [self initWithProvider:[[UIImageProvider alloc] initWithData:data scale:[UIScreen mainScreen].scale]];
+    return [self initWithProviders:@[ [[UIImageProvider alloc] initWithData:data scale:[UIScreen mainScreen].scale] ]];
 }
 
 - (id)initWithCGImage:(CGImageRef)cgImage
@@ -121,7 +135,7 @@
 {
     NSParameterAssert(image);
     
-    return [self initWithProvider:[[UIImageProvider alloc] initWithCGImage:image scale:scale]];
+    return [self initWithProviders:@[ [[UIImageProvider alloc] initWithCGImage:image scale:scale] ]];
 }
 
 - (id)initWithCIImage:(CIImage *)ciImage
@@ -137,13 +151,13 @@
 
 #pragma mark -
 
-- (id)initWithProvider:(UIImageProvider *)provider
+- (id)initWithProviders:(NSArray *)providers
 {
-    if(!provider)
+    if(!providers)
         return nil;
     
     if((self = [super init])) {
-        self.provider = provider;
+        self._providers = providers;
     }
     
     return self;
@@ -151,7 +165,25 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    return [[UIImage alloc] initWithProvider:self.provider];
+    return [[UIImage alloc] initWithProviders:self._providers];
+}
+
+#pragma mark - Providers
+
+- (UIImageProvider *)_bestProviderForScale:(CGFloat)scale
+{
+    UIImageProvider *bestProvider;
+    
+    for (UIImageProvider *provider in self._providers) {
+        bestProvider = provider;
+        
+        CGFloat providerScale = provider.scale;
+        if(providerScale >= scale) {
+            break;
+        }
+    }
+    
+    return bestProvider;
 }
 
 #pragma mark - Properties
@@ -159,7 +191,7 @@
 - (CGSize)size
 {
     CGFloat scale = self.scale;
-    CGSize imageSize = [_provider imageSize];
+    CGSize imageSize = [[self _bestProviderForScale:2.0] imageSize];
     imageSize.width /= scale;
     imageSize.height /= scale;
     return imageSize;
@@ -167,12 +199,12 @@
 
 - (CGImageRef)CGImage
 {
-    return [_provider image];
+    return [[self _bestProviderForScale:2.0] image];
 }
 
 - (CGFloat)scale
 {
-    return [_provider scale];
+    return [[self _bestProviderForScale:2.0] scale];
 }
 
 - (CIImage *)CIImage
@@ -185,10 +217,10 @@
 
 - (NSImage *)NSImage
 {
-    return [[NSImage alloc] initWithCGImage:_provider.image size:_provider.imageSize];
+    return [[NSImage alloc] initWithCGImage:self.CGImage size:self.size];
 }
 
-#pragma mark -
+#pragma mark - Tinting
 
 - (UIImage *)_tintedImageWithColor:(UIColor *)color
 {
@@ -239,7 +271,7 @@
         CGContextSetBlendMode(context, blendMode);
         CGContextSetAlpha(context, alpha);
         
-        [_provider drawInRect:rect fromRect:CGRectZero tile:(_resizingMode == UIImageResizingModeTile)];
+        [[self _bestProviderForScale:_UIGraphicsGetCurrentScale()] drawInRect:rect fromRect:CGRectZero tile:(_resizingMode == UIImageResizingModeTile)];
     }
     CGContextRestoreGState(context);
 }
@@ -248,7 +280,7 @@
 
 - (void)drawAsPatternInRect:(CGRect)rect
 {
-    [_provider drawInRect:rect fromRect:CGRectZero tile:YES];
+    [[self _bestProviderForScale:_UIGraphicsGetCurrentScale()] drawInRect:rect fromRect:CGRectZero tile:YES];
 }
 
 #pragma mark - Resizable Images
@@ -263,11 +295,11 @@
     if(capInsets.top != 0.0 || capInsets.bottom != 0.0)
         UIKitUnimplementedMethod();
     
-    UIThreePartImageProvider *threePartProvider = [[UIThreePartImageProvider alloc] initWithProvider:self.provider
+    UIThreePartImageProvider *threePartProvider = [[UIThreePartImageProvider alloc] initWithProvider:[self _bestProviderForScale:2.0]
                                                                                              leftCap:capInsets.left
                                                                                             rightCap:capInsets.right
                                                                                         resizingMode:resizingMode];
-    UIImage *image = [[UIImage alloc] initWithProvider:threePartProvider];
+    UIImage *image = [[UIImage alloc] initWithProviders:@[ threePartProvider ]];
     image.capInsets = capInsets;
     image.resizingMode = resizingMode;
     return image;
@@ -277,7 +309,7 @@
 
 - (BOOL)_isResizable
 {
-    return [self.provider isKindOfClass:[UIThreePartImageProvider class]];
+    return [self._providers.lastObject isKindOfClass:[UIThreePartImageProvider class]];
 }
 
 #pragma mark - Rendering Modes
@@ -292,12 +324,12 @@
             newImage.renderingMode = renderingMode;
             return newImage;
         } else {
-            UITemplateImageProvider *templateProvider = (UITemplateImageProvider *)self.provider;
+            UITemplateImageProvider *templateProvider = (UITemplateImageProvider *)[self _bestProviderForScale:2.0];
             return templateProvider.originalImage;
         }
     } else {
         UITemplateImageProvider *imageProvider = [[UITemplateImageProvider alloc] initWithOriginalImage:self];
-        UIImage *newImage = [[UIImage alloc] initWithProvider:imageProvider];
+        UIImage *newImage = [[UIImage alloc] initWithProviders:@[ imageProvider ]];
         newImage.renderingMode = UIImageRenderingModeAlwaysTemplate;
         return newImage;
     }

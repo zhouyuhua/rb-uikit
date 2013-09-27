@@ -51,6 +51,8 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
         [self._nativeWindow setAutorecalculatesContentBorderThickness:NO forEdge:NSMaxYEdge];
         [self._nativeWindow setContentBorderThickness:40.0 forEdge:NSMaxYEdge];
         
+        self.contentScaleFactor = self._nativeWindow.backingScaleFactor;
+        
         self.backgroundColor = [UIColor colorWithPatternImage:UIKitImageNamed(@"UIWindowBackground", UIImageResizingModeStretch).NSImage];
         
         self.clipsToBounds = YES;
@@ -306,6 +308,16 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:UIWindowDidBecomeHiddenNotification object:self];
+    }];
+}
+
+- (void)windowDidChangeBackingProperties:(NSNotification *)notification
+{
+    CGFloat newScale = self._nativeWindow.backingScaleFactor;
+    self.contentScaleFactor = newScale;
+    
+    [self _enumerateSubviews:^(UIView *subview, NSUInteger depth, BOOL *stop) {
+        subview.contentScaleFactor = newScale;
     }];
 }
 

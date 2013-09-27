@@ -9,7 +9,7 @@
 #import "UIView_Private.h"
 #import "UIWindow.h"
 #import "UIConcreteAppearance.h"
-#import "UIGraphics.h"
+#import "UIGraphics_Private.h"
 #import "UIColor.h"
 #import "UIWindow_Private.h"
 #import "UIGestureRecognizer_Private.h"
@@ -783,6 +783,8 @@ static void EnumerateSubviews(UIView *view, void(^block)(UIView *subview, NSUInt
     if(currentFirstResponder && !newWindow._firstResponder)
         newWindow._firstResponder = self._firstResponder;
     
+    self.contentScaleFactor = newWindow.contentScaleFactor;
+    
     for (UIView *subview in _subviews)
         [subview _viewWillMoveToWindow:newWindow];
 }
@@ -857,6 +859,7 @@ static void EnumerateSubviews(UIView *view, void(^block)(UIView *subview, NSUInt
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
 {
     UIGraphicsPushContext(ctx);
+    _UIGraphicsPushScale(self.contentScaleFactor);
     
     CGRect drawingRect = CGContextGetClipBoundingBox(ctx);
     
@@ -872,6 +875,7 @@ static void EnumerateSubviews(UIView *view, void(^block)(UIView *subview, NSUInt
     [self drawRect:drawingRect];
     
     UIGraphicsPopContext();
+    _UIGraphicsPopScale();
 }
 
 //Continued in UIView_UIViewAnimation.m

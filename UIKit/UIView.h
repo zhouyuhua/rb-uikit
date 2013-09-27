@@ -108,6 +108,13 @@ typedef NS_ENUM(NSUInteger, UISystemAnimation) {
 @property (nonatomic) CGRect bounds;
 @property (nonatomic) CGPoint center;
 @property (nonatomic) CGAffineTransform transform;
+
+/*
+ This property is automatically updated by UIKit when depth changes occur.
+ Depth changes are common enough (retina MBP + cinema display) that this
+ property does not honor the native UIKit behavior. If this becomes an issue
+ in real world code, a UIKit configuration flag can be added.
+ */
 @property (nonatomic) CGFloat contentScaleFactor;
 
 @property (nonatomic,getter=isMultipleTouchEnabled) BOOL multipleTouchEnabled;

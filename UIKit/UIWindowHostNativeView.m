@@ -71,11 +71,6 @@
     return YES;
 }
 
-- (BOOL)mouseDownCanMoveWindow
-{
-    return NO;
-}
-
 #pragma mark -
 
 - (void)keyUp:(NSEvent *)event
@@ -114,17 +109,20 @@
 
 - (void)beginGestureWithEvent:(NSEvent *)event
 {
-    [UIApp _dispatchMouseEvent:event fromHostView:self];
+    if(![UIApp _dispatchMouseEvent:event fromHostView:self])
+        [super beginGestureWithEvent:event];
 }
 
 - (void)scrollWheel:(NSEvent *)event
 {
-    [UIApp _dispatchMouseEvent:event fromHostView:self];
+    if(![UIApp _dispatchMouseEvent:event fromHostView:self])
+        [super scrollWheel:event];
 }
 
 - (void)endGestureWithEvent:(NSEvent *)event
 {
-    [UIApp _dispatchMouseEvent:event fromHostView:self];
+    if(![UIApp _dispatchMouseEvent:event fromHostView:self])
+        [super endGestureWithEvent:event];
 }
 
 #pragma mark -

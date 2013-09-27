@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UIGraphics.h"
+#import "UIGraphics_Private.h"
 #import "UIScreen.h"
 
 #import "UIImage_Private.h"
@@ -14,10 +14,10 @@
 static NSMutableArray *GetContextStack()
 {
     NSMutableDictionary *threadStorage = [[NSThread currentThread] threadDictionary];
-    NSMutableArray *contextStack = threadStorage[@"contextStack"];
+    NSMutableArray *contextStack = threadStorage[@"UIKit/UIGraphics/contextStack"];
     if(!contextStack) {
         contextStack = [NSMutableArray array];
-        threadStorage[@"contextStack"] = contextStack;
+        threadStorage[@"UIKit/UIGraphics/contextStack"] = contextStack;
     }
     
     return contextStack;
@@ -117,6 +117,7 @@ void UIGraphicsBeginImageContextWithOptions(CGSize size, BOOL opaque, CGFloat sc
                                                       /* in bitmapInfo */ (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
     
     UIGraphicsPushContext(imageContext);
+    _UIGraphicsPushScale(scale);
     
     CGColorSpaceRelease(colorSpace);
     CGContextRelease(imageContext);
@@ -133,6 +134,7 @@ UIImage *UIGraphicsGetImageFromCurrentImageContext(void)
 void UIGraphicsEndImageContext(void)
 {
     UIGraphicsPopContext();
+    _UIGraphicsPopScale();
 }
 
 #pragma mark - PDF context
@@ -151,6 +153,7 @@ BOOL UIGraphicsBeginPDFContextToFile(NSString *path, CGRect bounds, NSDictionary
     CGContextRef context = CGPDFContextCreateWithURL((__bridge CFURLRef)[NSURL fileURLWithPath:path], &bounds, (__bridge CFDictionaryRef)documentInfo);
     if(context) {
         UIGraphicsPushContext(context);
+        _UIGraphicsPushScale(1.0);
         CGContextRelease(context);
         
         return YES;
@@ -174,6 +177,7 @@ void UIGraphicsBeginPDFContextToData(NSMutableData *data, CGRect bounds, NSDicti
     CGContextRef context = CGPDFContextCreate(dataConsumer, &bounds, (__bridge CFDictionaryRef)documentInfo);
     
     UIGraphicsPushContext(context);
+    _UIGraphicsPushScale(1.0);
     
     CGContextRelease(context);
     CGDataConsumerRelease(dataConsumer);
@@ -186,6 +190,7 @@ void UIGraphicsEndPDFContext(void)
     CGPDFContextClose(context);
     
     UIGraphicsPopContext();
+    _UIGraphicsPopScale();
 }
 
 #pragma mark -
@@ -239,4 +244,42 @@ void UIGraphicsSetPDFContextDestinationForRect(NSString *name, CGRect rect)
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGPDFContextSetDestinationForRect(context, (__bridge CFStringRef)name, rect);
+}
+
+#pragma mark - Private
+
+static NSMutableArray *GetScaleStack()
+{
+    NSMutableDictionary *threadStorage = [[NSThread currentThread] threadDictionary];
+    NSMutableArray *contextStack = threadStorage[@"UIKit/UIGraphics/scaleStack"];
+    if(!contextStack) {
+        contextStack = [NSMutableArray array];
+        threadStorage[@"UIKit/UIGraphics/scaleStack"] = contextStack;
+    }
+    
+    return contextStack;
+}
+
+void _UIGraphicsPushScale(CGFloat scale)
+{
+    NSMutableArray *scaleStack = GetScaleStack();
+    [scaleStack addObject:@(scale)];
+}
+
+void _UIGraphicsPopScale(void)
+{
+    NSMutableArray *scaleStack = GetScaleStack();
+    [scaleStack removeLastObject];
+}
+
+CGFloat _UIGraphicsGetCurrentScale(void)
+{
+    NSMutableArray *scaleStack = GetScaleStack();
+    if(scaleStack.count != 0) {
+        NSNumber *scale = [scaleStack lastObject];
+        [scaleStack removeLastObject];
+        return scale.floatValue;
+    } else {
+        return [UIScreen mainScreen].scale;
+    }
 }

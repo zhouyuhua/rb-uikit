@@ -17,11 +17,15 @@
 
 - (NSImage *)NSImage;
 
-#pragma mark - Properties
+#pragma mark - Providers
 
-@property (nonatomic) UIImageProvider *provider;
+@property (nonatomic, copy) NSArray *_providers;
+
+- (UIImageProvider *)_bestProviderForScale:(CGFloat)scale;
 
 - (BOOL)_isResizable;
+
+#pragma mark - Tinting
 
 - (UIImage *)_tintedImageWithColor:(UIColor *)color;
 

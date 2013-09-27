@@ -203,6 +203,7 @@
 		8BC9D26417F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC9D26217F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive.png */; };
 		8BC9D26717F28F3D00BF1E63 /* UIWindowBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC9D26517F28F3D00BF1E63 /* UIWindowBackground.png */; };
 		8BC9D26817F28F3D00BF1E63 /* UIWindowBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BC9D26617F28F3D00BF1E63 /* UIWindowBackground@2x.png */; };
+		8BC9D26E17F5455100BF1E63 /* UIGraphics_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC9D26D17F5455100BF1E63 /* UIGraphics_Private.h */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -464,6 +465,7 @@
 		8BC9D26217F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UINavigationBarBackgroundImage_Inactive.png; sourceTree = "<group>"; };
 		8BC9D26517F28F3D00BF1E63 /* UIWindowBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIWindowBackground.png; sourceTree = "<group>"; };
 		8BC9D26617F28F3D00BF1E63 /* UIWindowBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIWindowBackground@2x.png"; sourceTree = "<group>"; };
+		8BC9D26D17F5455100BF1E63 /* UIGraphics_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIGraphics_Private.h; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1007,6 +1009,7 @@
 				8BE4933B1798E481002BEA5A /* UIGeometry.h */,
 				8B5BD75D179B348700A53E4A /* UIGraphics.h */,
 				8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */,
+				8BC9D26D17F5455100BF1E63 /* UIGraphics_Private.h */,
 			);
 			name = "Graphic Types";
 			sourceTree = "<group>";
@@ -1194,6 +1197,7 @@
 				8B91077817A979F9008D9DF0 /* UIWindow_Private.h in Headers */,
 				8B6AEDE917AB639400D6858A /* UIGestureRecognizer_Private.h in Headers */,
 				8BB8A22D17B1E66A004FB0E8 /* UIAction.h in Headers */,
+				8BC9D26E17F5455100BF1E63 /* UIGraphics_Private.h in Headers */,
 				8B6AEDEF17AB6BF600D6858A /* UIApplication_Private.h in Headers */,
 				8BE492FB1798CFAB002BEA5A /* UIBezierPath.h in Headers */,
 				8BC9D25C17EFFAEE00BF1E63 /* UINSWindow.h in Headers */,
