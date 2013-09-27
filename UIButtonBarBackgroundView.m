@@ -74,6 +74,7 @@
     [super tintColorDidChange];
     
     [_backgroundCell setEnabled:(self.tintAdjustmentMode == UIViewTintAdjustmentModeNormal)];
+    [self setNeedsDisplay];
 }
 
 @end

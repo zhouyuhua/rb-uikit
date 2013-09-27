@@ -16,6 +16,7 @@
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics;
 - (UIImage *)backgroundImageForBarMetrics:(UIBarMetrics)barMetrics;
+- (BOOL)_hasCustomBackgroundImage;
 
 @property (nonatomic, retain) UIImage *shadowImage;
 

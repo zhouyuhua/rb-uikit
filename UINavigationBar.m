@@ -102,6 +102,23 @@
 
 #pragma mark - Appearances
 
+- (void)tintColorDidChange
+{
+    [super tintColorDidChange];
+    
+    if(![[UINavigationBarAppearance appearanceForClass:[self class]] _hasCustomBackgroundImage]) {
+        if(self.tintAdjustmentMode == UIViewTintAdjustmentModeNormal) {
+            [self setBackgroundImage:UIKitImageNamed(@"UINavigationBarBackgroundImage", UIImageResizingModeStretch)
+                       forBarMetrics:UIBarMetricsDefault];
+        } else {
+            [self setBackgroundImage:UIKitImageNamed(@"UINavigationBarBackgroundImage_Inactive", UIImageResizingModeStretch)
+                       forBarMetrics:UIBarMetricsDefault];
+        }
+    }
+}
+
+#pragma mark -
+
 - (void)setShadowImage:(UIImage *)shadowImage
 {
     _shadowImageView.image = shadowImage;

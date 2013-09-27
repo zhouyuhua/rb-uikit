@@ -49,6 +49,10 @@
 UIConcreteAppearanceGeneratePropertyGetter(NSDictionary *, titleTextAttributes, @{ NSForegroundColorAttributeName: [UIColor colorWithWhite:0.0 alpha:0.8],
                                                                                    NSFontAttributeName: [UIFont boldSystemFontOfSize:15.0] })
 UIConcreteAppearanceGeneratePropertyGetter(UIImage *, backgroundImage, UIKitImageNamed(@"UINavigationBarBackgroundImage", UIImageResizingModeStretch))
+- (BOOL)_hasCustomBackgroundImage;
+{
+    return (_backgroundImage != nil);
+}
 UIConcreteAppearanceGeneratePropertyGetter(UIImage *, shadowImage, UIKitImageNamed(@"UINavigationBarShadow", UIImageResizingModeStretch))
 
 @end
