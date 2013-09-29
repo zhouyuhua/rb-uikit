@@ -8,6 +8,7 @@
 
 #import "UITextView_Private.h"
 #import "UIAppKitView.h"
+#import "UIWindow.h"
 #import "UINSTextView.h"
 
 @implementation UITextView
@@ -30,6 +31,7 @@
         [_nativeTextView setAllowsUndo:YES];
         [_nativeTextView setInsertionPointColor:self.tintColor];
         [_nativeTextView setSelectedTextAttributes:@{NSBackgroundColorAttributeName: [self.tintColor colorWithAlphaComponent:0.5]}];
+        [_nativeTextView setAutomaticDataDetectionEnabled:YES];
         
         _adaptorView = [[UIAppKitView alloc] initWithNativeView:_nativeTextView];
         __weak __typeof(self) weakSelf = self;

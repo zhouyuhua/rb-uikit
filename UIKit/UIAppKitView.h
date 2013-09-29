@@ -6,10 +6,13 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <AppKit/AppKit.h>
+#ifndef UIAppKitView_h
+#define UIAppKitView_h 1
 
-@class UIAppKitViewGlueNSView;
+#import "UIView.h"
+#import <AppKit/NSView.h>
+
+@class UIAppKitViewGlueNSView, UIScrollView;
 
 ///Converts an NSView into an equivalent UIView.
 ///
@@ -74,3 +77,5 @@ UIKIT_EXTERN UIView *NSViewToUIView(NSView *view);
 @property (nonatomic, unsafe_unretained) UIScrollView *UIScrollView;
 
 @end
+
+#endif /* UIAppKitView_h */

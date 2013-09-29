@@ -20,6 +20,7 @@
 {
     [super viewDidLoad];
     
+    self.navigationItem.leftBarButtonItem = [UIMacWindowButtonsView windowButtonsBarItem];
     self.navigationItem.title = @"Text View Test";
     
     self.textView = [[UITextView alloc] initWithFrame:self.view.bounds];

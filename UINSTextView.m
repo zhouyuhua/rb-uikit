@@ -7,6 +7,7 @@
 //
 
 #import "UINSTextView.h"
+#import "UIScrollView.h"
 
 @implementation UINSTextView
 

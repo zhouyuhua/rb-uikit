@@ -9,8 +9,8 @@
 #import "UIAppKitView.h"
 
 @interface UIAppKitView () {
-    CGRect _lastKnownFrame;
     NSUInteger _suppressSizeChangeMessagesCount;
+    CGRect _lastKnownFrame;
 }
 
 @property (nonatomic, unsafe_unretained) UIScrollView *enclosingScrollView;

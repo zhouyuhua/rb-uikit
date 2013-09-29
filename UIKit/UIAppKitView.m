@@ -12,6 +12,7 @@
 #import "UIWindow_Private.h"
 #import "UIWindowHostNativeView.h"
 #import "UIAppKitViewGlueNSView.h"
+#import "UIScrollView.h"
 
 static const char *kAdaptorViewKey = "com.roundabout.uikit.UIAppKitView/adaptor";
 
@@ -85,6 +86,9 @@ UIView *NSViewToUIView(NSView *view)
 {
     [self beginSupressingSizeChanges];
     {
+        [self.adaptorView.layer removeFromSuperlayer];
+        [self.layer addSublayer:self.adaptorView.layer];
+        
         _lastKnownFrame = [self.window convertRect:self.frame fromView:self.superview];
         self.adaptorView.frame = _lastKnownFrame;
         self.adaptorView.layer.frame = self.bounds;

@@ -44,6 +44,8 @@
 #import "UIScrollView.h"
 
 #import "UIAppKitView.h"
+#import "UIMacWindowButtonsView.h"
+
 #import "UIWebView.h"
 
 #import "UIAlertView.h"

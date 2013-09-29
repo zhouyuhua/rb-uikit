@@ -213,6 +213,8 @@
 		8BC9D28817F7A52C00BF1E63 /* UIAppKitView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC9D28717F7A52C00BF1E63 /* UIAppKitView_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BC9D28B17F7A58900BF1E63 /* UINSTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC9D28917F7A58900BF1E63 /* UINSTextView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BC9D28C17F7A58900BF1E63 /* UINSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D28A17F7A58900BF1E63 /* UINSTextView.m */; };
+		8BC9D29317F7BBDF00BF1E63 /* UIMacWindowButtonsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC9D29117F7BBDF00BF1E63 /* UIMacWindowButtonsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BC9D29417F7BBDF00BF1E63 /* UIMacWindowButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D29217F7BBDF00BF1E63 /* UIMacWindowButtonsView.m */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -484,6 +486,8 @@
 		8BC9D28717F7A52C00BF1E63 /* UIAppKitView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitView_Private.h; sourceTree = "<group>"; };
 		8BC9D28917F7A58900BF1E63 /* UINSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINSTextView.h; sourceTree = "<group>"; };
 		8BC9D28A17F7A58900BF1E63 /* UINSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINSTextView.m; sourceTree = "<group>"; };
+		8BC9D29117F7BBDF00BF1E63 /* UIMacWindowButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMacWindowButtonsView.h; sourceTree = "<group>"; };
+		8BC9D29217F7BBDF00BF1E63 /* UIMacWindowButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMacWindowButtonsView.m; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -850,6 +854,8 @@
 				8BC9D28717F7A52C00BF1E63 /* UIAppKitView_Private.h */,
 				8B1EC8D817A9F2B10035369C /* UIAppKitViewGlueNSView.h */,
 				8B1EC8D917A9F2B10035369C /* UIAppKitViewGlueNSView.m */,
+				8BC9D29117F7BBDF00BF1E63 /* UIMacWindowButtonsView.h */,
+				8BC9D29217F7BBDF00BF1E63 /* UIMacWindowButtonsView.m */,
 			);
 			name = Adaptors;
 			sourceTree = "<group>";
@@ -1215,6 +1221,7 @@
 				8BC9D27E17F77DBE00BF1E63 /* UITextView.h in Headers */,
 				8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */,
 				8BF0F9F217CE636000DAFD92 /* UIStringDrawing.h in Headers */,
+				8BC9D29317F7BBDF00BF1E63 /* UIMacWindowButtonsView.h in Headers */,
 				8B515C5217BB3A25003065D2 /* UITableViewController.h in Headers */,
 				8BE492F21798CF0C002BEA5A /* UIColor.h in Headers */,
 				8B5E725A17B9EFFB006A16B9 /* UIMenuItem.h in Headers */,
@@ -1401,6 +1408,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BC9D29417F7BBDF00BF1E63 /* UIMacWindowButtonsView.m in Sources */,
 				8B54A05017B9CD7B0068775C /* UIGridLayoutItem.m in Sources */,
 				8B54687217D2B93F00D7E338 /* UIButtonBorderlessBackgroundView.m in Sources */,
 				8B91075F17A8B1EA008D9DF0 /* UIGraphics.m in Sources */,

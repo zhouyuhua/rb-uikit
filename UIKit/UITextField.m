@@ -12,6 +12,7 @@
 #import "UIImage_Private.h"
 #import "UIWindow_Private.h"
 #import "UIView_Private.h"
+#import "UIImageView.h"
 
 NSString *const UITextFieldTextDidBeginEditingNotification = @"UITextFieldTextDidBeginEditingNotification";
 NSString *const UITextFieldTextDidEndEditingNotification = @"UITextFieldTextDidEndEditingNotification";
