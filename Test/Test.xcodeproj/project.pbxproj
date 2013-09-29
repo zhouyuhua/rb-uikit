@@ -11,6 +11,7 @@
 		8B54A05917B9E1240068775C /* TestCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A05817B9E1240068775C /* TestCollectionViewController.m */; };
 		8B54A05D17B9E1FD0068775C /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54A05C17B9E1FD0068775C /* TestController.m */; };
 		8BC9D27817F54FBD00BF1E63 /* TestWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D27717F54FBD00BF1E63 /* TestWebViewController.m */; };
+		8BC9D28417F7827300BF1E63 /* TestTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D28317F7827300BF1E63 /* TestTextViewController.m */; };
 		8BE493521798EAE9002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE493511798EAE9002BEA5A /* Cocoa.framework */; };
 		8BE4935C1798EAE9002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE4935A1798EAE9002BEA5A /* InfoPlist.strings */; };
 		8BE4935E1798EAE9002BEA5A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE4935D1798EAE9002BEA5A /* main.m */; };
@@ -60,6 +61,8 @@
 		8B789D0817D6EBFC00E7CE4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		8BC9D27617F54FBD00BF1E63 /* TestWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestWebViewController.h; sourceTree = "<group>"; };
 		8BC9D27717F54FBD00BF1E63 /* TestWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestWebViewController.m; sourceTree = "<group>"; };
+		8BC9D28217F7827300BF1E63 /* TestTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTextViewController.h; sourceTree = "<group>"; };
+		8BC9D28317F7827300BF1E63 /* TestTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTextViewController.m; sourceTree = "<group>"; };
 		8BE4934E1798EAE9002BEA5A /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE493511798EAE9002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE493541798EAE9002BEA5A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -169,6 +172,8 @@
 				8BF623F517BDDD5E0015ED5C /* TestTableViewController.m */,
 				8BC9D27617F54FBD00BF1E63 /* TestWebViewController.h */,
 				8BC9D27717F54FBD00BF1E63 /* TestWebViewController.m */,
+				8BC9D28217F7827300BF1E63 /* TestTextViewController.h */,
+				8BC9D28317F7827300BF1E63 /* TestTextViewController.m */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 				8BE4935E1798EAE9002BEA5A /* main.m in Sources */,
 				8B54A05D17B9E1FD0068775C /* TestController.m in Sources */,
 				8BC9D27817F54FBD00BF1E63 /* TestWebViewController.m in Sources */,
+				8BC9D28417F7827300BF1E63 /* TestTextViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

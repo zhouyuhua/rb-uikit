@@ -31,6 +31,7 @@
 #import "UILabel.h"
 #import "UITextField.h"
 #import "UISearchBar.h"
+#import "UITextView.h"
 
 #import "UIColor.h"
 #import "UIImage.h"

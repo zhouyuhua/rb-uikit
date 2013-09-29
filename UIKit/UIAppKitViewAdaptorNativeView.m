@@ -33,6 +33,8 @@
     NSParameterAssert(appKitView);
     
     if((self = [super initWithFrame:view.frame])) {
+        self.wantsLayer = YES;
+        
         self.view = view;
         self.view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
         self.view.frame = self.bounds;
@@ -72,7 +74,7 @@
 
 - (void)viewFrameDidChange:(NSNotification *)notification
 {
-    
+    [self.appKitView reflectNativeViewSizeChange];
 }
 
 #pragma mark - Event Handling

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UIAppKitView.h"
+#import "UIAppKitView_Private.h"
 #import <objc/runtime.h>
 
 #import "UIWindow_Private.h"
@@ -29,12 +29,6 @@ UIView *NSViewToUIView(NSView *view)
     return adaptor;
 }
 
-@interface UIAppKitView ()
-
-@property (nonatomic, readwrite) UIAppKitViewAdaptorNativeView *adaptorView;
-
-@end
-
 #pragma mark -
 
 @implementation UIAppKitView
@@ -52,7 +46,6 @@ UIView *NSViewToUIView(NSView *view)
     NSParameterAssert(view);
     
     if((self = [super initWithFrame:view.frame])) {
-        view.wantsLayer = YES;
         self.adaptorView = [[UIAppKitViewAdaptorNativeView alloc] initWithView:view appKitView:self];
         
         [self.layer addObserver:self forKeyPath:@"position" options:0 context:NULL];
@@ -74,8 +67,8 @@ UIView *NSViewToUIView(NSView *view)
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if(object == self.layer && [keyPath isEqualToString:@"position"]) {
-        [self updateView];
+    if([keyPath isEqualToString:@"position"] || [keyPath isEqualToString:@"bounds"]) {
+        [self performSelector:@selector(updateView) withObject:nil afterDelay:0.0];
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
@@ -90,9 +83,48 @@ UIView *NSViewToUIView(NSView *view)
 
 - (void)updateView
 {
-    self.adaptorView.frame = [self.window convertRect:self.frame fromView:self.superview];
-    self.adaptorView.layer.frame = self.bounds;
-    [self.adaptorView resetCursorRects];
+    [self beginSupressingSizeChanges];
+    {
+        _lastKnownFrame = [self.window convertRect:self.frame fromView:self.superview];
+        self.adaptorView.frame = _lastKnownFrame;
+        self.adaptorView.layer.frame = self.bounds;
+        [self.adaptorView resetCursorRects];
+    }
+    [self endSuppressingSizeChanges];
+}
+
+#pragma mark -
+
+- (void)beginSupressingSizeChanges
+{
+    _suppressSizeChangeMessagesCount++;
+}
+
+- (void)endSuppressingSizeChanges
+{
+    if(_suppressSizeChangeMessagesCount > 0)
+        _suppressSizeChangeMessagesCount--;
+}
+
+- (BOOL)isSuppressingSizeChanges
+{
+    return (_suppressSizeChangeMessagesCount > 0);
+}
+
+- (void)reflectNativeViewSizeChange
+{
+    if([self isSuppressingSizeChanges])
+        return;
+    
+    CGRect currentFrame = self.nativeView.frame;
+    if(!CGSizeEqualToSize(_lastKnownFrame.size, currentFrame.size)) {
+        CGRect frame = self.frame;
+        frame.size = currentFrame.size;
+        self.frame = frame;
+        
+        if(_metricChangeObserver)
+            _metricChangeObserver(currentFrame);
+    }
 }
 
 #pragma mark - Responder Business
@@ -123,7 +155,7 @@ UIView *NSViewToUIView(NSView *view)
 
 - (BOOL)makeNativeViewBecomeFirstResponder
 {
-    return [self.nativeView becomeFirstResponder];
+    return [self.nativeView.window makeFirstResponder:self.nativeView];
 }
 
 - (BOOL)makeNativeViewResignFirstResponder
@@ -164,9 +196,24 @@ UIView *NSViewToUIView(NSView *view)
     }
 }
 
+#pragma mark -
+
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
+    if(self.enclosingScrollView) {
+        [self.enclosingScrollView removeObserver:self forKeyPath:@"bounds"];
+        self.enclosingScrollView = nil;
+    }
+}
+
 - (void)didMoveToSuperview
 {
     [self updateView];
+    
+    if([self.superview isKindOfClass:[UIScrollView class]]) {
+        self.enclosingScrollView = (UIScrollView *)self.superview;
+        [self.enclosingScrollView addObserver:self forKeyPath:@"bounds" options:kNilOptions context:NULL];
+    }
 }
 
 #pragma mark - Unsupported Things
@@ -177,6 +224,15 @@ UIView *NSViewToUIView(NSView *view)
 }
 
 #pragma mark - Properties
+
+- (void)setEnclosingScrollView:(UIScrollView *)enclosingScrollView
+{
+    _enclosingScrollView = enclosingScrollView;
+    
+    if([self.nativeView conformsToProtocol:@protocol(UIAppKitScrollViewAdaptor)]) {
+        ((id <UIAppKitScrollViewAdaptor>)self.nativeView).UIScrollView = enclosingScrollView;
+    }
+}
 
 - (NSView *)nativeView
 {

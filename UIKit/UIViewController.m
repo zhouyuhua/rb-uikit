@@ -108,7 +108,7 @@
     if(!self.isViewLoaded) {
         [self viewWillLoad];
         
-        self.view = [UIView new];
+        self.view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 320.0)];
         
         [self viewDidLoad];
     }

@@ -35,6 +35,14 @@ UIKIT_EXTERN UIView *NSViewToUIView(NSView *view);
 ///This is the designated initializer.
 - (instancetype)initWithNativeView:(NSView *)view;
 
+#pragma mark - Layout
+
+///Updates the app kit view's frame to reflect the current geometry of its native view.
+- (void)reflectNativeViewSizeChange;
+
+///A block that is invoked whenever the native view changes its sizing.
+@property (nonatomic, copy) void(^metricChangeObserver)(CGRect newFrame);
+
 #pragma mark - Properties
 
 ///The adaptor view that sits between the UIAppKitView and the NSView.
@@ -45,8 +53,18 @@ UIKIT_EXTERN UIView *NSViewToUIView(NSView *view);
 
 #pragma mark - First Responder Status
 
+///Makes the native view the first responder in AppKit land.
 - (BOOL)makeNativeViewBecomeFirstResponder;
 
+///Makes the native view resign first responder status in AppKit land.
 - (BOOL)makeNativeViewResignFirstResponder;
+
+@end
+
+#pragma mark -
+
+@protocol UIAppKitScrollViewAdaptor <NSObject>
+
+@property (nonatomic, unsafe_unretained) UIScrollView *UIScrollView;
 
 @end

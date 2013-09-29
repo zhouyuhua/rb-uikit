@@ -867,7 +867,11 @@
         UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
         [cell setSelected:YES animated:animated];
         
-        totalCellFrame = CGRectUnion(totalCellFrame, [self rectForRowAtIndexPath:indexPath]);
+        CGRect cellFrame = [self rectForRowAtIndexPath:indexPath];
+        if(CGRectGetMinY(cellFrame) > CGRectGetMinY(totalCellFrame))
+            totalCellFrame.origin.y = CGRectGetMinY(cellFrame);
+        
+        totalCellFrame.size.height += CGRectGetHeight(cellFrame);
     }
     
     if(scrollPosition == UITableViewScrollPositionNone) {

@@ -67,19 +67,16 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.35;
 
 - (void)setContentSize:(CGSize)contentSize
 {
-    CGRect bounds = self.bounds;
-    if(contentSize.width < CGRectGetWidth(bounds))
-        contentSize.width = CGRectGetWidth(bounds);
-    
-    if(contentSize.height < CGRectGetHeight(bounds))
-        contentSize.height = CGRectGetHeight(bounds);
-    
     _contentSize = contentSize;
     
-    _verticalScroller.contentSize = contentSize;
-    _horizontalScroller.contentSize = contentSize;
-//
-//    [self _constrainContent];
+    [self _constrainContent];
+}
+
+- (void)didMoveToSuperview
+{
+    [super didMoveToSuperview];
+    
+    [self _constrainContent];
 }
 
 #pragma mark -
@@ -136,8 +133,25 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.35;
     return contentOffset;
 }
 
+- (CGSize)_constrainContentSize:(CGSize)contentSize
+{
+    CGRect bounds = self.bounds;
+    if(contentSize.width < CGRectGetWidth(bounds))
+        contentSize.width = CGRectGetWidth(bounds);
+    
+    if(contentSize.height < CGRectGetHeight(bounds))
+        contentSize.height = CGRectGetHeight(bounds);
+    
+    return contentSize;
+}
+
 - (void)_constrainContent
 {
+    _contentSize = [self _constrainContentSize:_contentSize];
+    
+    _verticalScroller.contentSize = _contentSize;
+    _horizontalScroller.contentSize = _contentSize;
+    
     self.contentOffset = [self _constrainContentOffset:_contentOffset forBounceBack:NO];
 }
 
@@ -181,7 +195,10 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.35;
     CGRect visibleRect = self.bounds;
     CGRect intersection = CGRectIntersection(rect, contentRect);
     if(!CGRectIsNull(intersection) && !CGRectContainsRect(visibleRect, intersection)) {
-        [self setContentOffset:intersection.origin animated:animated];
+        CGPoint scrollPoint = CGPointMake(MAX(0.0, CGRectGetMaxX(rect) - CGRectGetWidth(visibleRect)),
+                                          MAX(0.0, CGRectGetMaxY(rect) - CGRectGetHeight(visibleRect)));
+        [self setContentOffset:scrollPoint animated:animated];
+        [self flashScrollIndicators];
     }
 }
 
