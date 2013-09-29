@@ -17,6 +17,6 @@
 
 #pragma mark -
 
-@property (nonatomic, readwrite) UIAppKitViewAdaptorNativeView *adaptorView;
+@property (nonatomic, readwrite) UIAppKitViewGlueNSView *adaptorView;
 
 @end

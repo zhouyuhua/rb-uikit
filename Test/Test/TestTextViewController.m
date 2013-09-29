@@ -8,6 +8,12 @@
 
 #import "TestTextViewController.h"
 
+@interface TestTextViewController ()
+
+@property (nonatomic) UITextView *textView;
+
+@end
+
 @implementation TestTextViewController
 
 - (void)viewDidLoad
@@ -16,9 +22,16 @@
     
     self.navigationItem.title = @"Text View Test";
     
-    UITextView *textView = [[UITextView alloc] initWithFrame:self.view.bounds];
-    textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:textView];
+    self.textView = [[UITextView alloc] initWithFrame:self.view.bounds];
+    self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:self.textView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.textView becomeFirstResponder];
 }
 
 @end

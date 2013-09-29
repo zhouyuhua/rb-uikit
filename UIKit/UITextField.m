@@ -104,7 +104,7 @@ NSString *const UITextFieldTextDidChangeNotification = @"UITextFieldTextDidChang
 
 - (BOOL)canBecomeFirstResponder
 {
-    return __nativeTextFieldAdaptor.nativeView.canBecomeKeyView;
+    return [__nativeTextFieldAdaptor canNativeViewBecomeFirstResponder];
 }
 
 - (BOOL)canResignFirstResponder

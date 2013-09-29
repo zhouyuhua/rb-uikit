@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AppKit/AppKit.h>
 
-@class UIAppKitViewAdaptorNativeView;
+@class UIAppKitViewGlueNSView;
 
 ///Converts an NSView into an equivalent UIView.
 ///
@@ -41,17 +41,20 @@ UIKIT_EXTERN UIView *NSViewToUIView(NSView *view);
 - (void)reflectNativeViewSizeChange;
 
 ///A block that is invoked whenever the native view changes its sizing.
-@property (nonatomic, copy) void(^metricChangeObserver)(CGRect newFrame);
+@property (nonatomic, copy) void(^nativeViewSizeChangeObserver)(CGRect newFrame);
 
 #pragma mark - Properties
 
 ///The adaptor view that sits between the UIAppKitView and the NSView.
-@property (nonatomic, readonly) UIAppKitViewAdaptorNativeView *adaptorView;
+@property (nonatomic, readonly) UIAppKitViewGlueNSView *adaptorView;
 
 ///The native view being wrapped.
 @property (nonatomic, readonly) NSView *nativeView;
 
 #pragma mark - First Responder Status
+
+///Returns a BOOL indicating whether or not the native view can be made first responder.
+- (BOOL)canNativeViewBecomeFirstResponder;
 
 ///Makes the native view the first responder in AppKit land.
 - (BOOL)makeNativeViewBecomeFirstResponder;
@@ -63,8 +66,11 @@ UIKIT_EXTERN UIView *NSViewToUIView(NSView *view);
 
 #pragma mark -
 
+///The UIAppKitScrollViewAdaptor protocol marks an NSView subclass
+///as being able to embed itself within a UIScrollView.
 @protocol UIAppKitScrollViewAdaptor <NSObject>
 
+///The scroll view that visually contains the implementor of the protocol.
 @property (nonatomic, unsafe_unretained) UIScrollView *UIScrollView;
 
 @end

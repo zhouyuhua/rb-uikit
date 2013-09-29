@@ -11,7 +11,7 @@
 
 #import "UIWindow_Private.h"
 #import "UIWindowHostNativeView.h"
-#import "UIAppKitViewAdaptorNativeView.h"
+#import "UIAppKitViewGlueNSView.h"
 
 static const char *kAdaptorViewKey = "com.roundabout.uikit.UIAppKitView/adaptor";
 
@@ -46,7 +46,7 @@ UIView *NSViewToUIView(NSView *view)
     NSParameterAssert(view);
     
     if((self = [super initWithFrame:view.frame])) {
-        self.adaptorView = [[UIAppKitViewAdaptorNativeView alloc] initWithView:view appKitView:self];
+        self.adaptorView = [[UIAppKitViewGlueNSView alloc] initWithView:view appKitView:self];
         
         [self.layer addObserver:self forKeyPath:@"position" options:0 context:NULL];
     }
@@ -122,8 +122,8 @@ UIView *NSViewToUIView(NSView *view)
         frame.size = currentFrame.size;
         self.frame = frame;
         
-        if(_metricChangeObserver)
-            _metricChangeObserver(currentFrame);
+        if(_nativeViewSizeChangeObserver)
+            _nativeViewSizeChangeObserver(currentFrame);
     }
 }
 
@@ -153,18 +153,29 @@ UIView *NSViewToUIView(NSView *view)
 
 #pragma mark - First Responder Status
 
+- (BOOL)canNativeViewBecomeFirstResponder
+{
+    return self.nativeView.canBecomeKeyView;
+}
+
 - (BOOL)makeNativeViewBecomeFirstResponder
 {
-    return [self.nativeView.window makeFirstResponder:self.nativeView];
+    if(self.nativeView.window != nil) {
+        return [self.nativeView.window makeFirstResponder:self.nativeView];
+    } else {
+        self.adaptorView.makeViewFirstResponderUponAdditionToWindow = YES;
+        
+        return YES;
+    }
 }
 
 - (BOOL)makeNativeViewResignFirstResponder
 {
     if(self.nativeView.window != nil) {
         return [self.nativeView.window makeFirstResponder:self.window._hostNativeView];
+    } else {
+        return YES;
     }
-    
-    return NO;
 }
 
 #pragma mark - Responding To Movements

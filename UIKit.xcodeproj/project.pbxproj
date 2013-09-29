@@ -39,8 +39,8 @@
 		8B1255C917E978130063454E /* UINib.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1255C717E978130063454E /* UINib.m */; };
 		8B1255CC17E979070063454E /* UIMotionEffect.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1255CA17E979070063454E /* UIMotionEffect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1255CD17E979070063454E /* UIMotionEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1255CB17E979070063454E /* UIMotionEffect.m */; };
-		8B1EC8DA17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		8B1EC8DB17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */; };
+		8B1EC8DA17A9F2B10035369C /* UIAppKitViewGlueNSView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8D817A9F2B10035369C /* UIAppKitViewGlueNSView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B1EC8DB17A9F2B10035369C /* UIAppKitViewGlueNSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8D917A9F2B10035369C /* UIAppKitViewGlueNSView.m */; };
 		8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B1EC8E217A9F8280035369C /* UINSTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8DD17A9F8280035369C /* UINSTextFieldCell.m */; };
 		8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DE17A9F8280035369C /* UITextField_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -309,8 +309,8 @@
 		8B1255C717E978130063454E /* UINib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINib.m; sourceTree = "<group>"; };
 		8B1255CA17E979070063454E /* UIMotionEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMotionEffect.h; sourceTree = "<group>"; };
 		8B1255CB17E979070063454E /* UIMotionEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMotionEffect.m; sourceTree = "<group>"; };
-		8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitViewAdaptorNativeView.h; sourceTree = "<group>"; };
-		8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitViewAdaptorNativeView.m; sourceTree = "<group>"; };
+		8B1EC8D817A9F2B10035369C /* UIAppKitViewGlueNSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitViewGlueNSView.h; sourceTree = "<group>"; };
+		8B1EC8D917A9F2B10035369C /* UIAppKitViewGlueNSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitViewGlueNSView.m; sourceTree = "<group>"; };
 		8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINSTextFieldCell.h; path = UIKit/UINSTextFieldCell.h; sourceTree = "<group>"; };
 		8B1EC8DD17A9F8280035369C /* UINSTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UINSTextFieldCell.m; path = UIKit/UINSTextFieldCell.m; sourceTree = "<group>"; };
 		8B1EC8DE17A9F8280035369C /* UITextField_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITextField_Private.h; path = UIKit/UITextField_Private.h; sourceTree = "<group>"; };
@@ -848,8 +848,8 @@
 				8B91077D17A97EF7008D9DF0 /* UIAppKitView.h */,
 				8B91077E17A97EF7008D9DF0 /* UIAppKitView.m */,
 				8BC9D28717F7A52C00BF1E63 /* UIAppKitView_Private.h */,
-				8B1EC8D817A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h */,
-				8B1EC8D917A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m */,
+				8B1EC8D817A9F2B10035369C /* UIAppKitViewGlueNSView.h */,
+				8B1EC8D917A9F2B10035369C /* UIAppKitViewGlueNSView.m */,
 			);
 			name = Adaptors;
 			sourceTree = "<group>";
@@ -1238,7 +1238,7 @@
 				8B91077317A8C62D008D9DF0 /* _UIAnimations.h in Headers */,
 				8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */,
 				8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */,
-				8B1EC8DA17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.h in Headers */,
+				8B1EC8DA17A9F2B10035369C /* UIAppKitViewGlueNSView.h in Headers */,
 				8B54A05617B9D6CC0068775C /* UIScrollView_Private.h in Headers */,
 				8B91077817A979F9008D9DF0 /* UIWindow_Private.h in Headers */,
 				8B6AEDE917AB639400D6858A /* UIGestureRecognizer_Private.h in Headers */,
@@ -1485,7 +1485,7 @@
 				8BF0F9F317CE636000DAFD92 /* UIStringDrawing.m in Sources */,
 				8B5BD7391798FA9B00A53E4A /* UIButton.m in Sources */,
 				8B54686B17D2B33E00D7E338 /* UIKitConfigurationManager.m in Sources */,
-				8B1EC8DB17A9F2B10035369C /* UIAppKitViewAdaptorNativeView.m in Sources */,
+				8B1EC8DB17A9F2B10035369C /* UIAppKitViewGlueNSView.m in Sources */,
 				8B1255BC17E56C3A0063454E /* UIActivityIndicatorView.m in Sources */,
 				8BC9D27F17F77DBE00BF1E63 /* UITextView.m in Sources */,
 				8B95506917C316D600B8E4F9 /* UIKeyEvent.m in Sources */,

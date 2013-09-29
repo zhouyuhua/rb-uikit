@@ -27,11 +27,13 @@
         [_nativeTextView setHorizontallyResizable:NO];
         [_nativeTextView setVerticallyResizable:YES];
         [_nativeTextView setMaxSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX)];
+        [_nativeTextView setAllowsUndo:YES];
+        [_nativeTextView setInsertionPointColor:self.tintColor];
+        [_nativeTextView setSelectedTextAttributes:@{NSBackgroundColorAttributeName: [self.tintColor colorWithAlphaComponent:0.5]}];
         
         _adaptorView = [[UIAppKitView alloc] initWithNativeView:_nativeTextView];
         __weak __typeof(self) weakSelf = self;
-        _adaptorView.metricChangeObserver = ^(CGRect newFrame) {
-            NSLog(@"newFrame: %@", NSStringFromCGRect(newFrame));
+        _adaptorView.nativeViewSizeChangeObserver = ^(CGRect newFrame) {
             weakSelf.contentSize = newFrame.size;
         };
         [self addSubview:_adaptorView];
@@ -42,7 +44,7 @@
         self.selectable = YES;
         self.allowsEditingTextAttributes = YES;
         
-        self.font = [UIFont systemFontOfSize:13.0];
+        self.font = [UIFont userFontOfSize:13.0];
         self.textColor = [UIColor blackColor];
         self.backgroundColor = [UIColor whiteColor];
         
@@ -62,7 +64,7 @@
 
 - (BOOL)canBecomeFirstResponder
 {
-    return _nativeTextView.canBecomeKeyView;
+    return [_adaptorView canNativeViewBecomeFirstResponder];
 }
 
 - (BOOL)canResignFirstResponder
@@ -102,7 +104,12 @@
 
 - (CGSize)sizeThatFits:(CGSize)size
 {
-    return CGSizeZero;
+    (void)[self.layoutManager glyphRangeForTextContainer:self.textContainer]; //Force layout
+    
+    NSRect usedRect = [self.layoutManager usedRectForTextContainer:self.textContainer];
+    
+    return CGSizeMake(MIN(size.width, NSWidth(usedRect)),
+                      MIN(size.height, NSHeight(usedRect)));
 }
 
 - (void)layoutSubviews
@@ -225,14 +232,22 @@
 
 - (void)setTextContainerInset:(UIEdgeInsets)textContainerInset
 {
-    UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"Separate top-bottom, left-right insets not support");
-    [_nativeTextView setTextContainerInset:NSMakeSize(textContainerInset.left, textContainerInset.top)];
+    if(textContainerInset.left != textContainerInset.right ||
+       textContainerInset.top != textContainerInset.bottom) {
+        UIKitWarnUnimplementedMethod(__PRETTY_FUNCTION__, @"Assymetrical text container insets");
+    }
+    
+    [_nativeTextView setTextContainerInset:NSMakeSize(textContainerInset.left + textContainerInset.right,
+                                                      textContainerInset.top + textContainerInset.bottom)];
 }
 
 - (UIEdgeInsets)textContainerInset
 {
     NSSize inset = [_nativeTextView textContainerInset];
-    return UIEdgeInsetsMake(inset.height, inset.width, 0.0, 0.0);
+    return UIEdgeInsetsMake(inset.height / 2.0,
+                            inset.width / 2.0,
+                            inset.height / 2.0,
+                            inset.width / 2.0);
 }
 
 #pragma mark - Working with the Selection
@@ -262,6 +277,26 @@
     return [_nativeTextView isSelectable];
 }
 
+#pragma mark - Delegate
+
+- (void)setDelegate:(id <UITextViewDelegate>)delegate
+{
+    [super setDelegate:delegate];
+    
+    _delegateRespondsTo.textViewShouldBeginEditing = [delegate respondsToSelector:@selector(textViewShouldBeginEditing:)];
+    _delegateRespondsTo.textViewDidBeginEditing = [delegate respondsToSelector:@selector(textViewDidBeginEditing:)];
+    _delegateRespondsTo.textViewShouldEndEditing = [delegate respondsToSelector:@selector(textViewShouldEndEditing:)];
+    _delegateRespondsTo.textViewDidEndEditing = [delegate respondsToSelector:@selector(textViewDidEndEditing:)];
+    
+    _delegateRespondsTo.textViewShouldChangeTextInRangeReplacementText = [delegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)];
+    _delegateRespondsTo.textViewDidChange = [delegate respondsToSelector:@selector(textViewDidChange:)];
+    
+    _delegateRespondsTo.textViewDidChangeSelection = [delegate respondsToSelector:@selector(textViewDidChangeSelection:)];
+    
+    _delegateRespondsTo.textViewShouldInteractWithTextAttachmentInRange = [delegate respondsToSelector:@selector(textView:shouldInteractWithTextAttachment:inRange:)];
+    _delegateRespondsTo.textViewShouldInteractWithURLInRange = [delegate respondsToSelector:@selector(textView:shouldInteractWithURL:inRange:)];
+}
+
 #pragma mark - Accessing Text Kit Objects
 
 - (NSLayoutManager *)layoutManager
@@ -283,27 +318,100 @@
 
 - (BOOL)textShouldBeginEditing:(NSText *)textObject
 {
-    return YES;
+    if(_delegateRespondsTo.textViewShouldBeginEditing)
+        return [self.delegate textViewShouldBeginEditing:self];
+    else
+        return YES;
 }
 
 - (BOOL)textShouldEndEditing:(NSText *)textObject
 {
-    return YES;
+    if(_delegateRespondsTo.textViewShouldEndEditing)
+        return [self.delegate textViewShouldEndEditing:self];
+    else
+        return YES;
 }
 
 - (void)textDidBeginEditing:(NSNotification *)notification
 {
     [self _becomeFirstResponderModifyingNativeViewStatus:NO];
+    
+    if(_delegateRespondsTo.textViewDidBeginEditing)
+        [self.delegate textViewDidBeginEditing:self];
 }
 
 - (void)textDidEndEditing:(NSNotification *)notification
 {
     [self _resignFirstResponderModifyingNativeViewStatus:NO];
+    
+    if(_delegateRespondsTo.textViewDidEndEditing)
+        [self.delegate textViewDidEndEditing:self];
 }
 
 - (void)textDidChange:(NSNotification *)notification
 {
+    if(_delegateRespondsTo.textViewDidChange)
+        [self.delegate textViewDidChange:self];
+}
+
+#pragma mark -
+
+- (BOOL)textView:(NSTextView *)textView clickedOnLink:(id)link atIndex:(NSUInteger)charIndex
+{
+    if(_delegateRespondsTo.textViewShouldInteractWithURLInRange) {
+        NSRange range;
+        [self.textStorage URLAtIndex:charIndex effectiveRange:&range];
+        
+        if([self.delegate textView:self shouldInteractWithURL:link inRange:range]) {
+            return NO;
+        } else {
+            //Do nothing.
+            return YES;
+        }
+    }
     
+    return NO;
+}
+
+- (void)textViewDidChangeSelection:(NSNotification *)notification
+{
+    if(_delegateRespondsTo.textViewDidChangeSelection)
+        [self.delegate textViewDidChangeSelection:self];
+}
+
+- (BOOL)textView:(NSTextView *)textView shouldChangeTextInRange:(NSRange)affectedCharRange replacementString:(NSString *)replacementString
+{
+    if(_delegateRespondsTo.textViewShouldChangeTextInRangeReplacementText)
+        return [self.delegate textView:self shouldChangeTextInRange:affectedCharRange replacementText:replacementString];
+    else
+        return YES;
+}
+
+#pragma mark -
+
+- (NSUndoManager *)undoManagerForTextView:(NSTextView *)view
+{
+    return self.window.undoManager;
+}
+
+#pragma mark - Tint Colors
+
+- (void)tintColorDidChange
+{
+    [super tintColorDidChange];
+    
+    [_nativeTextView setInsertionPointColor:self.tintColor];
+    [_nativeTextView setSelectedTextAttributes:@{NSBackgroundColorAttributeName: [self.tintColor colorWithAlphaComponent:0.5]}];
+}
+
+#pragma mark - Event Handling
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self _becomeFirstResponderModifyingNativeViewStatus:YES];
+    [_nativeTextView moveToEndOfDocument:nil];
+    
+    [super touchesBegan:touches withEvent:event];
 }
 
 @end

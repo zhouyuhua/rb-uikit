@@ -6,21 +6,23 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UIAppKitViewAdaptorNativeView.h"
+#import "UIAppKitViewGlueNSView.h"
 #import "UIAppKitView.h"
 #import "UIWindow_Private.h"
 #import "UIWindowHostNativeView.h"
 
-@interface UIAppKitViewAdaptorNativeView ()
+@interface UIAppKitViewGlueNSView ()
 
-@property (nonatomic, weak, readwrite) UIAppKitView *appKitView;
+@property (nonatomic, unsafe_unretained, readwrite) UIAppKitView *appKitView;
 @property (nonatomic, readwrite, assign) NSView *view;
 
 @end
 
 #pragma mark -
 
-@implementation UIAppKitViewAdaptorNativeView
+@implementation UIAppKitViewGlueNSView
+
+#pragma mark - Lifecycle
 
 - (void)dealloc
 {
@@ -59,25 +61,14 @@
     return nil;
 }
 
-- (id)init
-{
-    [self doesNotRecognizeSelector:_cmd];
-    return nil;
-}
+#pragma mark - Overrides
 
 - (BOOL)isFlipped
 {
     return YES;
 }
 
-#pragma mark - Notifications
-
-- (void)viewFrameDidChange:(NSNotification *)notification
-{
-    [self.appKitView reflectNativeViewSizeChange];
-}
-
-#pragma mark - Event Handling
+#pragma mark -
 
 - (NSView *)hitTest:(NSPoint)point
 {
@@ -87,6 +78,24 @@
     }
     
     return [super hitTest:point];
+}
+
+#pragma mark - Notifications
+
+- (void)viewFrameDidChange:(NSNotification *)notification
+{
+    [self.appKitView reflectNativeViewSizeChange];
+}
+
+- (void)viewDidMoveToWindow
+{
+    [super viewDidMoveToWindow];
+    
+    if(self.makeViewFirstResponderUponAdditionToWindow) {
+        [self.window makeFirstResponder:self.view];
+        
+        self.makeViewFirstResponderUponAdditionToWindow = NO;
+    }
 }
 
 @end
