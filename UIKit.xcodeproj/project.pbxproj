@@ -211,9 +211,9 @@
 		8BC9D28C17F7A58900BF1E63 /* UINSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D28A17F7A58900BF1E63 /* UINSTextView.m */; };
 		8BC9D29317F7BBDF00BF1E63 /* UIMacWindowButtonsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC9D29117F7BBDF00BF1E63 /* UIMacWindowButtonsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BC9D29417F7BBDF00BF1E63 /* UIMacWindowButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D29217F7BBDF00BF1E63 /* UIMacWindowButtonsView.m */; };
-		8BD5304A17F9259500F81175 /* UIToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5304817F9259500F81175 /* UIToolbar.h */; };
+		8BD5304A17F9259500F81175 /* UIToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5304817F9259500F81175 /* UIToolbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BD5304B17F9259500F81175 /* UIToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5304917F9259500F81175 /* UIToolbar.m */; };
-		8BD5304F17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5304D17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h */; };
+		8BD5304F17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5304D17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BD5305017F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5304E17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.m */; };
 		8BD5305517F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5305117F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive@2x.png */; };
 		8BD5305617F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5305217F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive.png */; };
@@ -482,18 +482,18 @@
 		8BC9D27017F54AA500BF1E63 /* UIWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIWebView.h; sourceTree = "<group>"; };
 		8BC9D27117F54AA500BF1E63 /* UIWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWebView.m; sourceTree = "<group>"; };
 		8BC9D27417F54B7E00BF1E63 /* UIDataDetectorTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIDataDetectorTypes.h; path = UIKit/UIDataDetectorTypes.h; sourceTree = "<group>"; };
-		8BC9D27C17F77DBE00BF1E63 /* UITextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextView.h; sourceTree = "<group>"; };
-		8BC9D27D17F77DBE00BF1E63 /* UITextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextView.m; sourceTree = "<group>"; };
-		8BC9D28017F77F5500BF1E63 /* UITextView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextView_Private.h; sourceTree = "<group>"; };
+		8BC9D27C17F77DBE00BF1E63 /* UITextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITextView.h; path = UIKit/UITextView.h; sourceTree = "<group>"; };
+		8BC9D27D17F77DBE00BF1E63 /* UITextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UITextView.m; path = UIKit/UITextView.m; sourceTree = "<group>"; };
+		8BC9D28017F77F5500BF1E63 /* UITextView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITextView_Private.h; path = UIKit/UITextView_Private.h; sourceTree = "<group>"; };
 		8BC9D28717F7A52C00BF1E63 /* UIAppKitView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitView_Private.h; sourceTree = "<group>"; };
-		8BC9D28917F7A58900BF1E63 /* UINSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINSTextView.h; sourceTree = "<group>"; };
-		8BC9D28A17F7A58900BF1E63 /* UINSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINSTextView.m; sourceTree = "<group>"; };
+		8BC9D28917F7A58900BF1E63 /* UINSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINSTextView.h; path = UIKit/UINSTextView.h; sourceTree = "<group>"; };
+		8BC9D28A17F7A58900BF1E63 /* UINSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UINSTextView.m; path = UIKit/UINSTextView.m; sourceTree = "<group>"; };
 		8BC9D29117F7BBDF00BF1E63 /* UIMacWindowButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIMacWindowButtonsView.h; sourceTree = "<group>"; };
 		8BC9D29217F7BBDF00BF1E63 /* UIMacWindowButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMacWindowButtonsView.m; sourceTree = "<group>"; };
-		8BD5304817F9259500F81175 /* UIToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIToolbar.h; sourceTree = "<group>"; };
-		8BD5304917F9259500F81175 /* UIToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIToolbar.m; sourceTree = "<group>"; };
-		8BD5304D17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _UIBarButtonFlexibleSpaceItem.h; sourceTree = "<group>"; };
-		8BD5304E17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UIBarButtonFlexibleSpaceItem.m; sourceTree = "<group>"; };
+		8BD5304817F9259500F81175 /* UIToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIToolbar.h; path = UIKit/UIToolbar.h; sourceTree = "<group>"; };
+		8BD5304917F9259500F81175 /* UIToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIToolbar.m; path = UIKit/UIToolbar.m; sourceTree = "<group>"; };
+		8BD5304D17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _UIBarButtonFlexibleSpaceItem.h; path = UIKit/_UIBarButtonFlexibleSpaceItem.h; sourceTree = "<group>"; };
+		8BD5304E17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _UIBarButtonFlexibleSpaceItem.m; path = UIKit/_UIBarButtonFlexibleSpaceItem.m; sourceTree = "<group>"; };
 		8BD5305117F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIToolBarBackgroundImage_Inactive@2x.png"; sourceTree = "<group>"; };
 		8BD5305217F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIToolBarBackgroundImage_Inactive.png; sourceTree = "<group>"; };
 		8BD5305317F92DCF00F81175 /* UIToolBarBackgroundImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIToolBarBackgroundImage@2x.png"; sourceTree = "<group>"; };
@@ -1186,7 +1186,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BE493401798EAA0002BEA5A /* UIKit.h in Headers */,
-				8BD5304F17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h in Headers */,
 				8BE493411798EAA0002BEA5A /* UIKitDefines.h in Headers */,
 				8BE493241798DA39002BEA5A /* UIScreen.h in Headers */,
 				8BE4932A1798DBD5002BEA5A /* UIDevice.h in Headers */,
@@ -1212,10 +1211,10 @@
 				8B91076217A8B6B7008D9DF0 /* UIWindowHostNativeView.h in Headers */,
 				8B91076A17A8B883008D9DF0 /* UITouch.h in Headers */,
 				8B08255B17AA18B100494FAA /* UISearchBar.h in Headers */,
+				8BD5304A17F9259500F81175 /* UIToolbar.h in Headers */,
 				8B08256017AA1A3500494FAA /* UITextInputTraits.h in Headers */,
 				8B1EC8E417A9F8280035369C /* UITextField.h in Headers */,
 				8B08255E17AA19EF00494FAA /* UIBarCommon.h in Headers */,
-				8BD5304A17F9259500F81175 /* UIToolbar.h in Headers */,
 				8BE493301798E39A002BEA5A /* UILabel.h in Headers */,
 				8B6AEDE617AB638B00D6858A /* UIGestureRecognizer.h in Headers */,
 				8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */,
@@ -1308,6 +1307,7 @@
 				8B1255C417E95F0A0063454E /* UIViewControllerTransitioning_Private.h in Headers */,
 				8BC9D28117F77F5500BF1E63 /* UITextView_Private.h in Headers */,
 				8B515C5917BB3CEE003065D2 /* UITableView_Private.h in Headers */,
+				8BD5304F17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h in Headers */,
 				8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */,
 				8B515C4017BB1715003065D2 /* UICollectionViewUpdateItem_Private.h in Headers */,
 				8B5468A117D41C5E00D7E338 /* UINavigationItem_Private.h in Headers */,

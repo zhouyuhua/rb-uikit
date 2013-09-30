@@ -21,6 +21,7 @@
 
 #import "UIViewController.h"
 #import "UINavigationController.h"
+#import "UIToolbar.h"
 
 #import "UIControl.h"
 #import "UIButton.h"
