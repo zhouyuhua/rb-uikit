@@ -19,7 +19,7 @@
 #import "UINavigationItem_Private.h"
 
 #define OUTER_EDGE_PADDING  8.0
-#define INTER_ITEM_PADDING  5.0
+#define INTER_ITEM_PADDING  8.0
 
 @interface _UINavigationItemView () {
     UILabel *_titleLabel;
@@ -77,7 +77,7 @@
     
     CGRect leftButtonFrame = CGRectMake(OUTER_EDGE_PADDING, 0.0, 0.0, 0.0);
     for (UIBarButtonItem *item in _navigationItem._allLeftItems) {
-        UIView *buttonView = item.view;
+        UIView *buttonView = item._itemView;
         
         leftButtonFrame.size = [buttonView sizeThatFits:contentFrame.size];
         leftButtonFrame.origin.y = round(CGRectGetMidY(contentFrame) - CGRectGetHeight(leftButtonFrame) / 2.0);
@@ -92,7 +92,7 @@
     
     CGRect rightButtonFrame = CGRectMake(CGRectGetMaxX(contentFrame) - OUTER_EDGE_PADDING, 0.0, 0.0, 0.0);
     for (UIBarButtonItem *item in _navigationItem._allRightItems) {
-        UIView *buttonView = item.view;
+        UIView *buttonView = item._itemView;
         
         rightButtonFrame.size = [buttonView sizeThatFits:contentFrame.size];
         rightButtonFrame.origin.y = round(CGRectGetMidY(contentFrame) - CGRectGetHeight(rightButtonFrame) / 2.0);
@@ -194,22 +194,22 @@
 - (void)barButtonItemsWillChange
 {
     for (UIBarButtonItem *leftItem in _navigationItem._allLeftItems) {
-        [leftItem.view removeFromSuperview];
+        [leftItem._itemView removeFromSuperview];
     }
     
     for (UIBarButtonItem *rightItem in _navigationItem._allRightItems) {
-        [rightItem.view removeFromSuperview];
+        [rightItem._itemView removeFromSuperview];
     }
 }
 
 - (void)barButtonItemsDidChange
 {
     for (UIBarButtonItem *leftItem in _navigationItem._allLeftItems) {
-        [self addSubview:leftItem.view];
+        [self addSubview:leftItem._itemView];
     }
     
     for (UIBarButtonItem *rightItem in _navigationItem._allRightItems) {
-        [self addSubview:rightItem.view];
+        [self addSubview:rightItem._itemView];
     }
     
     [self setNeedsLayout];

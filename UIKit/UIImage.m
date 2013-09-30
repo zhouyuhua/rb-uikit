@@ -215,6 +215,11 @@
 
 #pragma mark -
 
+- (instancetype)initWithNSImage:(NSImage *)image
+{
+    return [self initWithCGImage:[image CGImageForProposedRect:NULL context:NULL hints:NULL]];
+}
+
 - (NSImage *)NSImage
 {
     return [[NSImage alloc] initWithCGImage:self.CGImage size:self.size];

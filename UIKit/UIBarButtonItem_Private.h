@@ -16,11 +16,14 @@ enum : NSInteger {
 
 @interface UIBarButtonItem ()
 
+@property (nonatomic) UIBarButtonSystemItem _systemItem;
+
+#pragma mark -
+
 ///The UIButton that supplies the content of this bar button item. Lazily initialized.
 @property (nonatomic, readonly) UIButton *underlyingButton;
 
-///Returns either the custom view of the bar button
-/// item, or the underlying button property.
-- (UIView *)view;
+///Either the custom view of the bar button item, or the underlying button property.
+@property (nonatomic, readonly) UIView *_itemView;
 
 @end

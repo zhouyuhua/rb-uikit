@@ -18,6 +18,8 @@
 #import "UIBarButtonItem_Private.h"
 #import "UINavigationItem_Private.h"
 
+#import "UIToolbar.h"
+
 @implementation UINavigationController
 
 - (id)init
@@ -54,6 +56,9 @@
         _navigationBar._navigationController = self;
         [self.view addSubview:_navigationBar];
         
+        _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 40.0)];
+        [self.view addSubview:_toolbar];
+        
         [self layoutViews];
     }
     
@@ -69,14 +74,25 @@
     navigationBarFrame.size.width = CGRectGetWidth(contentArea);
     self.navigationBar.frame = navigationBarFrame;
     
-    CGRect contentViewFrame = self.contentView.frame;
-    if(self.navigationBarHidden) {
-        contentViewFrame.origin = CGPointZero;
-        contentViewFrame.size = contentArea.size;
+    CGRect toolbarFrame = _toolbar.frame;
+    toolbarFrame.size.width = CGRectGetWidth(contentArea);
+    if(_toolbarHidden) {
+        toolbarFrame.origin.y = CGRectGetMaxY(contentArea);
     } else {
-        contentViewFrame.origin.y = CGRectGetHeight(self.navigationBar.bounds);
-        contentViewFrame.size.width = CGRectGetWidth(contentArea);
-        contentViewFrame.size.height = CGRectGetHeight(contentArea) - CGRectGetHeight(self.navigationBar.frame);
+        toolbarFrame.origin.y = CGRectGetMaxY(contentArea) - CGRectGetHeight(toolbarFrame);
+    }
+    _toolbar.frame = toolbarFrame;
+    
+    CGRect contentViewFrame = self.contentView.frame;
+    contentViewFrame.origin = CGPointZero;
+    contentViewFrame.size = contentArea.size;
+    if(!self.navigationBarHidden) {
+        contentViewFrame.origin.y += CGRectGetHeight(self.navigationBar.bounds);
+        contentViewFrame.size.height -= CGRectGetHeight(self.navigationBar.frame);
+    }
+    
+    if(!self.toolbarHidden) {
+        contentViewFrame.size.height -= CGRectGetHeight(toolbarFrame);
     }
     
     self.contentView.frame = contentViewFrame;
@@ -134,6 +150,7 @@
                         completionHandler:nil];
     
     self.navigationBar.items = [self.viewControllers valueForKey:@"navigationItem"];
+    self.toolbar.items = self.visibleViewController.toolbarItems;
 }
 
 - (NSArray *)viewControllers
@@ -194,6 +211,7 @@
     }
     
     [_navigationBar pushNavigationItem:viewController.navigationItem animated:animated];
+    self.toolbar.items = self.visibleViewController.toolbarItems;
 }
 
 - (void)popViewControllerAnimated:(BOOL)animated
@@ -213,6 +231,7 @@
                         completionHandler:nil];
     
     [_navigationBar popNavigationItemAnimated:animated];
+    self.toolbar.items = self.visibleViewController.toolbarItems;
 }
 
 - (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated
@@ -234,6 +253,7 @@
                         completionHandler:nil];
     
     [_navigationBar popToNavigationItem:viewController.navigationItem animated:animated];
+    self.toolbar.items = self.visibleViewController.toolbarItems;
 }
 
 - (void)popToRootViewControllerAnimated:(BOOL)animated
@@ -257,6 +277,7 @@
                         completionHandler:nil];
     
     [_navigationBar popToRootNavigationItemAnimated:animated];
+    self.toolbar.items = self.visibleViewController.toolbarItems;
 }
 
 #pragma mark - Delegate
@@ -274,9 +295,17 @@
 
 #pragma mark - Configuring Custom Toolbars
 
+@synthesize toolbar = _toolbar;
+
 - (void)setToolbarHidden:(BOOL)hidden animated:(BOOL)animated
 {
     _toolbarHidden = hidden;
+    
+    [UIView animateWithDuration:(animated? UIKitDefaultAnimationDuration : 0.0) animations:^{
+        [self layoutViews];
+    } completion:^(BOOL finished) {
+        _toolbar.hidden = hidden;
+    }];
 }
 
 - (void)setToolbarHidden:(BOOL)toolbarHidden

@@ -23,6 +23,8 @@
 #define UIKIT_UNIMPLEMENTED
 #define UIKIT_FLAG_IS_SET(mask, flag) ((mask & flag) == flag)
 
+#define UILocalizedString(key, comment) key
+
 UIKIT_INLINE void UIKitInvalidParameter(NSString *parameterName, NSString *message)
 {
     [NSException raise:NSInvalidArgumentException format:@"Parameter %@ unsatisfied: %@", parameterName, message];

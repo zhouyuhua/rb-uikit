@@ -51,6 +51,11 @@ typedef NS_ENUM(NSInteger, UIInterfaceOrientation) {
 @property (nonatomic, readonly) UINavigationController *navigationController;
 @property (nonatomic, readonly) UINavigationItem *navigationItem;
 
+@property (nonatomic, readonly) BOOL hidesBottomBarWhenPushed;
+
+- (void)setToolbarItems:(NSArray *)items animated:(BOOL)animated;
+@property (nonatomic, copy) NSArray *toolbarItems;
+
 #pragma mark - Containing View Controllers
 
 @property (nonatomic, readonly) UIViewController *parentViewController;

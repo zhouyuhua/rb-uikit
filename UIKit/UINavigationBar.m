@@ -147,6 +147,16 @@
 
 #pragma mark -
 
+- (void)setBarStyle:(UIBarStyle)barStyle
+{
+    //Do nothing.
+}
+
+- (UIBarStyle)barStyle
+{
+    return UIBarStyleDefault;
+}
+
 - (void)setBarTintColor:(UIColor *)barTintColor
 {
     _barTintColor = barTintColor;

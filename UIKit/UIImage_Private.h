@@ -15,6 +15,7 @@
 
 + (UIImage *)imageNamed:(NSString *)name inBundle:(NSBundle *)bundle;
 
+- (instancetype)initWithNSImage:(NSImage *)image;
 - (NSImage *)NSImage;
 
 #pragma mark - Providers

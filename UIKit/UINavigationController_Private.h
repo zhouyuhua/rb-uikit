@@ -12,6 +12,7 @@
     NSMutableArray *_viewControllers;
     UIView *_visibleView;
     UINavigationBar *_navigationBar;
+    UIToolbar *_toolbar;
     
     id <UIViewControllerContextTransitioning> _currentAnimationContext;
     

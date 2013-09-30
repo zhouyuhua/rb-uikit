@@ -9,13 +9,13 @@
 #ifndef UIKit_UIBarCommon_h
 #define UIKit_UIBarCommon_h
 
-typedef enum {
+typedef NS_ENUM(NSInteger, UIBarStyle) {
     UIBarStyleDefault = 0,
     UIBarStyleBlack = 1,
     
     UIBarStyleBlackOpaque = 1,
     UIBarStyleBlackTranslucent = 2,
-} UIBarStyle;
+};
 
 typedef NS_ENUM(NSInteger, UIBarMetrics) {
     UIBarMetricsDefault,
@@ -23,5 +23,25 @@ typedef NS_ENUM(NSInteger, UIBarMetrics) {
     UIBarMetricsDefaultPrompt = 101,
     UIBarMetricsLandscapePhonePrompt,
 };
+
+typedef NS_ENUM(NSInteger, UIBarPosition) {
+    UIBarPositionAny = 0,
+    UIBarPositionBottom = 1,
+    UIBarPositionTop = 2,
+    UIBarPositionTopAttached = 3,
+};
+
+
+@protocol UIBarPositioning <NSObject>
+
+@property (nonatomic, readonly) UIBarPosition barPosition;
+
+@end
+
+@protocol UIBarPositioningDelegate <NSObject>
+
+- (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar;
+
+@end
 
 #endif

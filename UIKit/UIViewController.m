@@ -13,6 +13,7 @@
 #import "UIResponder_Private.h"
 #import "UINavigationController.h"
 #import "UINavigationItem.h"
+#import "UIToolbar.h"
 
 #import "UIWindow.h"
 
@@ -131,6 +132,19 @@
     }
     
     return _navigationItem;
+}
+
+#pragma mark -
+
+- (void)setToolbarItems:(NSArray *)toolbarItems
+{
+    [self setToolbarItems:toolbarItems animated:NO];
+}
+
+- (void)setToolbarItems:(NSArray *)items animated:(BOOL)animated
+{
+    _toolbarItems = [items copy];
+    [self.navigationController.toolbar setItems:items animated:animated];
 }
 
 #pragma mark - Containing View Controllers

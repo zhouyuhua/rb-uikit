@@ -29,6 +29,7 @@
 
 #pragma mark - Appearances
 
+@property (nonatomic) UIBarStyle barStyle UI_APPEARANCE_SELECTOR;
 @property (nonatomic, assign, getter=isTranslucent) BOOL translucent;
 @property (nonatomic) UIColor *barTintColor UI_APPEARANCE_SELECTOR;
 
