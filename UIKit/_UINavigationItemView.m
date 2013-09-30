@@ -18,6 +18,9 @@
 #import "UINavigationBar_Private.h"
 #import "UINavigationItem_Private.h"
 
+#define OUTER_EDGE_PADDING  8.0
+#define INTER_ITEM_PADDING  5.0
+
 @interface _UINavigationItemView () {
     UILabel *_titleLabel;
 }
@@ -34,7 +37,7 @@
 
 - (void)dealloc
 {
-    [_titleLabel unbind:@"text"];
+    [_navigationItem removeObserver:self forKeyPath:@"title"];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -52,7 +55,8 @@
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         
-        [_titleLabel bind:@"text" toObject:_navigationItem withKeyPath:@"title" options:nil];
+        _titleLabel.text = _navigationItem.title;
+        [_navigationItem addObserver:self forKeyPath:@"title" options:kNilOptions context:NULL];
         
         [self addSubview:_titleLabel];
         
@@ -71,7 +75,7 @@
     
     CGRect contentFrame = self.bounds;
     
-    CGRect leftButtonFrame = CGRectMake(5.0, 0.0, 0.0, 0.0);
+    CGRect leftButtonFrame = CGRectMake(OUTER_EDGE_PADDING, 0.0, 0.0, 0.0);
     for (UIBarButtonItem *item in _navigationItem._allLeftItems) {
         UIView *buttonView = item.view;
         
@@ -80,13 +84,13 @@
         
         buttonView.frame = leftButtonFrame;
         
-        leftButtonFrame.origin.x += CGRectGetWidth(leftButtonFrame) + 5.0;
+        leftButtonFrame.origin.x += CGRectGetWidth(leftButtonFrame) + INTER_ITEM_PADDING;
         
-        contentFrame.origin.x += CGRectGetWidth(leftButtonFrame) + 10.0;
-        contentFrame.size.width -= CGRectGetWidth(leftButtonFrame) + 10.0;
+        contentFrame.origin.x += CGRectGetWidth(leftButtonFrame) + INTER_ITEM_PADDING;
+        contentFrame.size.width -= CGRectGetWidth(leftButtonFrame) + INTER_ITEM_PADDING;
     }
     
-    CGRect rightButtonFrame = CGRectMake(CGRectGetMaxX(contentFrame) - 5.0, 0.0, 0.0, 0.0);
+    CGRect rightButtonFrame = CGRectMake(CGRectGetMaxX(contentFrame) - OUTER_EDGE_PADDING, 0.0, 0.0, 0.0);
     for (UIBarButtonItem *item in _navigationItem._allRightItems) {
         UIView *buttonView = item.view;
         
@@ -96,9 +100,9 @@
         
         buttonView.frame = rightButtonFrame;
         
-        rightButtonFrame.origin.x -= 5.0;
+        rightButtonFrame.origin.x -= INTER_ITEM_PADDING;
         
-        contentFrame.size.width -= CGRectGetWidth(rightButtonFrame) + 10.0;
+        contentFrame.size.width -= CGRectGetWidth(rightButtonFrame) + INTER_ITEM_PADDING;
     }
     
     if(_navigationItem.titleView) {
@@ -107,7 +111,7 @@
         titleViewFrame.origin.x = round(CGRectGetMidX(self.bounds) - CGRectGetWidth(titleViewFrame) / 2.0);
         
         if(CGRectGetMinX(titleViewFrame) < CGRectGetMinX(contentFrame)) {
-            titleViewFrame.origin.x = CGRectGetMinX(contentFrame) + 5.0;
+            titleViewFrame.origin.x = CGRectGetMinX(contentFrame) + INTER_ITEM_PADDING;
         }
         
         _navigationItem.titleView.frame = titleViewFrame;
@@ -120,11 +124,11 @@
         titleLabelFrame.origin.x = round(CGRectGetMidX(self.bounds) - CGRectGetWidth(titleLabelFrame) / 2.0);
         
         if(CGRectGetMinX(titleLabelFrame) < CGRectGetMinX(contentFrame)) {
-            titleLabelFrame.origin.x = CGRectGetMinX(contentFrame) + 5.0;
+            titleLabelFrame.origin.x = CGRectGetMinX(contentFrame) + OUTER_EDGE_PADDING;
         }
         
-        if(CGRectGetMaxX(titleLabelFrame) >= (CGRectGetMaxX(contentFrame) - 5.0)) {
-            titleLabelFrame.size.width = CGRectGetWidth(contentFrame) - 15.0;
+        if(CGRectGetMaxX(titleLabelFrame) >= (CGRectGetMaxX(contentFrame) - OUTER_EDGE_PADDING)) {
+            titleLabelFrame.size.width = CGRectGetWidth(contentFrame) - (INTER_ITEM_PADDING * 2 + OUTER_EDGE_PADDING);
         }
         
         _titleLabel.frame = titleLabelFrame;
@@ -156,6 +160,18 @@
 }
 
 #pragma mark - Responding to Changes
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if(object == _navigationItem && [keyPath isEqualToString:@"title"]) {
+        _titleLabel.text = _navigationItem.title;
+        [self setNeedsLayout];
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+#pragma mark -
 
 - (void)titleViewWillChange
 {
