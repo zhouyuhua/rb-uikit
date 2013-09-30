@@ -12,13 +12,17 @@
 #import "UINavigationItem_Private.h"
 #import "UIImageView.h"
 #import "UIImage_Private.h"
-#import "UINavigationBarAppearance.h"
 
 @implementation UINavigationBar
 
 + (instancetype)appearance
 {
-    return (UINavigationBar *)[UINavigationBarAppearance appearanceForClass:[self class]];
+    return nil;
+}
+
++ (instancetype)appearanceWhenContainedIn:(Class<UIAppearanceContainer>)ContainerClass, ...
+{
+    return nil;
 }
 
 - (id)initWithFrame:(NSRect)frameRect
@@ -33,14 +37,11 @@
         _shadowImageView.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:_shadowImageView];
         
-        UINavigationBar *appearance = self.class.appearance;
-        [self setBackgroundImage:[appearance backgroundImageForBarMetrics:UIBarMetricsDefault] forBarMetrics:UIBarMetricsDefault];
-        self.shadowImage = appearance.shadowImage;
+        [self setBackgroundImage:UIKitImageNamed(@"UINavigationBarBackgroundImage", UIImageResizingModeStretch) forBarMetrics:UIBarMetricsDefault];
+        self.shadowImage = UIKitImageNamed(@"UINavigationBarShadow", UIImageResizingModeStretch);
         
-        self.titleTextAttributes = appearance.titleTextAttributes;
-        [self setTitleVerticalPositionAdjustment:[appearance titleVerticalPositionAdjustmentForBarMetrics:UIBarMetricsDefault] forBarMetrics:UIBarMetricsDefault];
-        
-        self.tintColor = appearance.backgroundColor;
+        self.titleTextAttributes = @{ NSForegroundColorAttributeName: [UIColor colorWithWhite:0.0 alpha:0.8],
+                                      NSFontAttributeName: [UIFont boldSystemFontOfSize:15.0] };
     }
     
     return self;
@@ -106,14 +107,12 @@
 {
     [super tintColorDidChange];
     
-    if(![[UINavigationBarAppearance appearanceForClass:[self class]] _hasCustomBackgroundImage]) {
-        if(self.tintAdjustmentMode == UIViewTintAdjustmentModeNormal) {
-            [self setBackgroundImage:UIKitImageNamed(@"UINavigationBarBackgroundImage", UIImageResizingModeStretch)
-                       forBarMetrics:UIBarMetricsDefault];
-        } else {
-            [self setBackgroundImage:UIKitImageNamed(@"UINavigationBarBackgroundImage_Inactive", UIImageResizingModeStretch)
-                       forBarMetrics:UIBarMetricsDefault];
-        }
+    if(self.tintAdjustmentMode == UIViewTintAdjustmentModeNormal) {
+        [self setBackgroundImage:UIKitImageNamed(@"UINavigationBarBackgroundImage", UIImageResizingModeStretch)
+                   forBarMetrics:UIBarMetricsDefault];
+    } else {
+        [self setBackgroundImage:UIKitImageNamed(@"UINavigationBarBackgroundImage_Inactive", UIImageResizingModeStretch)
+                   forBarMetrics:UIBarMetricsDefault];
     }
 }
 

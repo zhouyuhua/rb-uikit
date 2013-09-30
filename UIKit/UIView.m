@@ -8,7 +8,6 @@
 
 #import "UIView_Private.h"
 #import "UIWindow.h"
-#import "UIConcreteAppearance.h"
 #import "UIGraphics_Private.h"
 #import "UIColor.h"
 #import "UIWindow_Private.h"
@@ -55,17 +54,6 @@
     NSMutableArray *_gestureRecognizers;
 }
 
-+ (instancetype)appearance
-{
-    return (UIView *)[UIConcreteAppearance appearanceForClass:[self class]];
-}
-
-+ (instancetype)appearanceWhenContainedIn:(Class <UIAppearanceContainer>)ContainerClass, ...
-{
-    UIKitUnimplementedMethod();
-    return nil;
-}
-
 #pragma mark - Lifecycle
 
 + (Class)layerClass
@@ -87,7 +75,6 @@
         self.layer.layoutManager = [[UIViewLayoutManager alloc] initWithView:self];
         
         self.contentScaleFactor = 0.0;
-        self.backgroundColor = ((UIConcreteAppearance *)self.class.appearance).backgroundColor;
         self.userInteractionEnabled = YES;
         self.autoresizesSubviews = YES;
         self.contentMode = UIViewContentModeScaleToFill;

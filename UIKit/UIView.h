@@ -8,7 +8,6 @@
 
 #import "UIResponder.h"
 #import "UIColor.h"
-#import "UIAppearance.h"
 
 typedef NS_ENUM(NSInteger, UIViewContentMode) {
     UIViewContentModeScaleToFill,
@@ -91,7 +90,7 @@ typedef NS_ENUM(NSUInteger, UISystemAnimation) {
 
 @class UIWindow, UIGestureRecognizer, UIMotionEffect;
 
-@interface UIView : UIResponder <UIAppearance, NSCoding>
+@interface UIView : UIResponder <NSCoding>
 
 + (Class)layerClass;
 
@@ -172,7 +171,7 @@ typedef NS_ENUM(NSUInteger, UISystemAnimation) {
 - (void)setNeedsDisplayInRect:(CGRect)rect;
 
 @property (nonatomic) BOOL clipsToBounds;
-@property (nonatomic, copy) UIColor *backgroundColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, copy) UIColor *backgroundColor;
 @property (nonatomic) CGFloat alpha;
 @property (nonatomic, getter=isOpaque) BOOL opaque;
 @property (nonatomic) BOOL clearsContextBeforeDrawing;
