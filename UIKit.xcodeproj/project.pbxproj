@@ -232,6 +232,8 @@
 		8BD5307117FBA37800F81175 /* UITabBarItemPlaceholderImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5306F17FBA37800F81175 /* UITabBarItemPlaceholderImage@2x.png */; };
 		8BD5307417FBA4C100F81175 /* UITabBarShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5307217FBA4C100F81175 /* UITabBarShadow.png */; };
 		8BD5307517FBA4C100F81175 /* UITabBarShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5307317FBA4C100F81175 /* UITabBarShadow@2x.png */; };
+		8BD5307817FBAF7300F81175 /* UITabBarOverflowIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5307617FBAF7300F81175 /* UITabBarOverflowIcon.png */; };
+		8BD5307917FBAF7300F81175 /* UITabBarOverflowIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5307717FBAF7300F81175 /* UITabBarOverflowIcon@2x.png */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -522,6 +524,8 @@
 		8BD5306F17FBA37800F81175 /* UITabBarItemPlaceholderImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITabBarItemPlaceholderImage@2x.png"; sourceTree = "<group>"; };
 		8BD5307217FBA4C100F81175 /* UITabBarShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBarShadow.png; sourceTree = "<group>"; };
 		8BD5307317FBA4C100F81175 /* UITabBarShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITabBarShadow@2x.png"; sourceTree = "<group>"; };
+		8BD5307617FBAF7300F81175 /* UITabBarOverflowIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBarOverflowIcon.png; sourceTree = "<group>"; };
+		8BD5307717FBAF7300F81175 /* UITabBarOverflowIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITabBarOverflowIcon@2x.png"; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1055,6 +1059,8 @@
 		8BE492C11798C44F002BEA5A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8BD5307617FBAF7300F81175 /* UITabBarOverflowIcon.png */,
+				8BD5307717FBAF7300F81175 /* UITabBarOverflowIcon@2x.png */,
 				8BD5307217FBA4C100F81175 /* UITabBarShadow.png */,
 				8BD5307317FBA4C100F81175 /* UITabBarShadow@2x.png */,
 				8BD5306E17FBA37800F81175 /* UITabBarItemPlaceholderImage.png */,
@@ -1448,6 +1454,7 @@
 				8B5AF863179B9B79008B3BF3 /* UITextFieldSquareBackground.png in Resources */,
 				8BC9D26417F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive.png in Resources */,
 				8BD5307517FBA4C100F81175 /* UITabBarShadow@2x.png in Resources */,
+				8BD5307817FBAF7300F81175 /* UITabBarOverflowIcon.png in Resources */,
 				8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */,
 				8B08256417AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png in Resources */,
 				8BF0F9E917BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png in Resources */,
@@ -1464,6 +1471,7 @@
 				8B08256717AA264100494FAA /* UIBackButtonChevron@2x.png in Resources */,
 				8B1255A317E418C80063454E /* UISearchBarBackground@2x.png in Resources */,
 				8BAE9590179A1D3100562F35 /* UIBarButtonItemBackground@2x.png in Resources */,
+				8BD5307917FBAF7300F81175 /* UITabBarOverflowIcon@2x.png in Resources */,
 				8BC9D26717F28F3D00BF1E63 /* UIWindowBackground.png in Resources */,
 				8B08256317AA1F7300494FAA /* UISearchBarMagnifyingGlass.png in Resources */,
 				8BD5305C17F9337600F81175 /* UIBarButtonSystemItemAdd@2x.png in Resources */,

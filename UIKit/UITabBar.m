@@ -14,6 +14,9 @@
 #import "UIImage_Private.h"
 #import "UIImageView.h"
 
+#import "UIMenuController_Private.h"
+
+static CGFloat const kOuterPadding = 20.0;
 static CGFloat const kPreferredHeight = 50.0;
 
 @interface UITabBar () {
@@ -21,6 +24,7 @@ static CGFloat const kPreferredHeight = 50.0;
     UIImageView *_shadowImageView;
     
     UIImageView *_selectionImageView;
+    UIButton *_overflowButton;
 }
 
 @end
@@ -63,6 +67,11 @@ static CGFloat const kPreferredHeight = 50.0;
         
         _selectionImageView = [[UIImageView alloc] initWithImage:self.selectionIndicatorImage];
         [self addSubview:_selectionImageView];
+        
+        _overflowButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_overflowButton setImage:UIKitImageNamed(@"UITabBarOverflowIcon", UIImageResizingModeStretch) forState:UIControlStateNormal];
+        [_overflowButton addTarget:self action:@selector(_showOverflowMenu:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_overflowButton];
     }
     
     return self;
@@ -87,11 +96,10 @@ static CGFloat const kPreferredHeight = 50.0;
     _shadowImageView.frame = shadowFrame;
     
     
-    CGRect contentBounds = CGRectInset(bounds, _itemSpacing, 0.0);
+    CGRect contentBounds = CGRectInset(bounds, kOuterPadding, 0.0);
     
-    CGFloat totalAreaOfItems = (_itemWidth + _itemSpacing) * _items.count;
+    CGFloat totalAreaOfItems = (_itemWidth + _itemSpacing) * _items.count - _itemSpacing;
     CGFloat initialXPosition = (totalAreaOfItems >= CGRectGetWidth(contentBounds))? CGRectGetMinX(contentBounds) : round(CGRectGetMidX(contentBounds) - totalAreaOfItems / 2.0);
-    NSUInteger numberOfVisibleItems = CGRectGetWidth(contentBounds) / (_itemWidth + _itemSpacing);
     
     __block CGRect itemFrame = CGRectMake(initialXPosition,
                                           CGRectGetMinY(contentBounds),
@@ -101,7 +109,7 @@ static CGFloat const kPreferredHeight = 50.0;
     
     [_items enumerateObjectsUsingBlock:^(UITabBarItem *item, NSUInteger index, BOOL *stop) {
         _UITabBarItemView *itemView = item._itemView;
-        if(index >= numberOfVisibleItems) {
+        if(CGRectGetMaxX(itemFrame) > CGRectGetMaxX(contentBounds)) {
             itemView.hidden = YES;
         } else {
             if(item == _selectedItem)
@@ -115,6 +123,14 @@ static CGFloat const kPreferredHeight = 50.0;
     }];
     
     _selectionImageView.frame = selectionFrame;
+    
+    CGRect overflowButtonFrame = CGRectZero;
+    if(totalAreaOfItems > CGRectGetWidth(contentBounds)) {
+        overflowButtonFrame.size.width = kOuterPadding;
+        overflowButtonFrame.size.height = CGRectGetHeight(bounds);
+        overflowButtonFrame.origin.x = CGRectGetMaxX(bounds) - CGRectGetWidth(overflowButtonFrame);
+    }
+    _overflowButton.frame = overflowButtonFrame;
 }
 
 #pragma mark - Configuring Tab Bar Items
@@ -210,6 +226,13 @@ static CGFloat const kPreferredHeight = 50.0;
 
 #pragma mark -
 
+- (UIColor *)selectedImageTintColor
+{
+    return _selectedImageTintColor ?: self.tintColor;
+}
+
+#pragma mark -
+
 - (void)setItemPositioning:(UITabBarItemPositioning)itemPositioning
 {
     //Do nothing.
@@ -218,6 +241,40 @@ static CGFloat const kPreferredHeight = 50.0;
 - (UITabBarItemPositioning)itemPositioning
 {
     return UITabBarItemPositioningCentered;
+}
+
+#pragma mark - Overflow Menu
+
+- (void)_showOverflowMenu:(UIButton *)sender
+{
+    NSMenu *menu = [[NSMenu alloc] initWithTitle:@"Overflow"];
+    for (UITabBarItem *tabBarItem in self.items) {
+        if(!tabBarItem._itemView.hidden)
+            continue;
+        
+        NSMenuItem *menuItem = [menu addItemWithTitle:tabBarItem.title action:@selector(_takeSelectionFromMenuItem:) keyEquivalent:@""];
+        [menuItem setTarget:self];
+        [menuItem setRepresentedObject:tabBarItem];
+        [menuItem setAttributedTitle:[[NSAttributedString alloc] initWithString:tabBarItem.title
+                                                                     attributes:@{NSFontAttributeName: tabBarItem._itemView.titleLabel.font}]];
+        
+        if(tabBarItem._highlighted) {
+            [menuItem setImage:tabBarItem.selectedImage.NSImage ?: tabBarItem.image.NSImage];
+            [menuItem setState:NSOnState];
+        } else {
+            [menuItem setImage:tabBarItem.image.NSImage];
+            [menuItem setState:NSOffState];
+        }
+    }
+    [menu popUpMenuPositioningItem:nil
+                        atLocation:CGPointMake(CGRectGetMaxX(sender.bounds), round(CGRectGetMidY(sender.bounds) - menu.size.height / 2.0))
+                          inUIView:sender];
+}
+
+- (void)_takeSelectionFromMenuItem:(NSMenuItem *)item
+{
+    self.selectedItem = item.representedObject;
+    [self.delegate tabBar:self didSelectItem:_selectedItem];
 }
 
 #pragma mark - Event Handling

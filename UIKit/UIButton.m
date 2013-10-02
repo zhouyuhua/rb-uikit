@@ -54,6 +54,8 @@
         _backgroundImages = [NSMutableDictionary dictionary];
         _attributedTitles = [NSMutableDictionary dictionary];
         
+        self.clipsToBounds = YES;
+        
         [self setTitleColor:self.tintColor forState:UIControlStateNormal];
         [self setTitleColor:[UIColor alternateSelectedControlTextColor] forState:UIControlStateHighlighted];
         [self setTitleColor:[UIColor disabledControlTextColor] forState:UIControlStateDisabled];
@@ -316,8 +318,8 @@
     CGSize preferredSize = [self.titleLabel sizeThatFits:contentRect.size];
     return CGRectMake(round(CGRectGetMidX(contentRect) - preferredSize.width / 2.0) + self.currentImage.size.width,
                       round(CGRectGetMidY(contentRect) - preferredSize.height / 2.0) - 1.0,
-                      preferredSize.width,
-                      preferredSize.height);
+                      round(preferredSize.width),
+                      round(preferredSize.height));
 }
 
 - (CGRect)imageRectForContentRect:(CGRect)contentRect

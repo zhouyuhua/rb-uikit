@@ -161,8 +161,6 @@
 			children = (
 				8BE493631798EAE9002BEA5A /* AppDelegate.h */,
 				8BE493641798EAE9002BEA5A /* AppDelegate.m */,
-				8B54A05717B9E1240068775C /* TestCollectionViewController.h */,
-				8B54A05817B9E1240068775C /* TestCollectionViewController.m */,
 				8BE493661798EAE9002BEA5A /* MainMenu.xib */,
 				8BE493691798EAE9002BEA5A /* Images.xcassets */,
 				8BE493581798EAE9002BEA5A /* Supporting Files */,
@@ -174,6 +172,8 @@
 				8BC9D27717F54FBD00BF1E63 /* TestWebViewController.m */,
 				8BC9D28217F7827300BF1E63 /* TestTextViewController.h */,
 				8BC9D28317F7827300BF1E63 /* TestTextViewController.m */,
+				8B54A05717B9E1240068775C /* TestCollectionViewController.h */,
+				8B54A05817B9E1240068775C /* TestCollectionViewController.m */,
 			);
 			path = Test;
 			sourceTree = "<group>";

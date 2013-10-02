@@ -32,7 +32,7 @@
         
         [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
         
-        self.title = @"Collection View Test";
+        self.title = @"Collection";
     }
     
     return self;

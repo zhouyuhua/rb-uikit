@@ -34,3 +34,15 @@ typedef NS_ENUM(NSUInteger, UIMenuControllerArrowDirection) {
 @property (copy) NSArray *menuItems;
 
 @end
+
+#pragma mark -
+
+///The NSMenu+UIKit category adds methods to allow NSMenu to inter-operate with UIKit.
+@interface NSMenu (UIKit)
+
+///Pops up the menu at the specified location in a given UIView.
+- (BOOL)popUpMenuPositioningItem:(NSMenuItem *)item
+                      atLocation:(CGPoint)location
+                        inUIView:(UIView *)view;
+
+@end

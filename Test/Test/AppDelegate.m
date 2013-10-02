@@ -30,7 +30,10 @@
     self.tabBarController = [UITabBarController new];
     self.tabBarController.viewControllers = @[ [[UINavigationController alloc] initWithRootViewController:[TestTextViewController new]],
                                                [[UINavigationController alloc] initWithRootViewController:[TestWebViewController new]],
-                                               [[UINavigationController alloc] initWithRootViewController:[TestTableViewController new]] ];
+                                               [[UINavigationController alloc] initWithRootViewController:[TestTableViewController new]],
+                                               [[UINavigationController alloc] initWithRootViewController:[TestCollectionViewController new]],
+                                               [[UINavigationController alloc] initWithRootViewController:[TestController new]] ];
+    self.tabBarController.selectedIndex = 0;
     self.window.rootViewController = self.tabBarController;
     
     [self.window makeKeyAndVisible];

@@ -166,3 +166,21 @@
 }
 
 @end
+
+#pragma mark -
+
+@implementation NSMenu (UIKit)
+
+- (BOOL)popUpMenuPositioningItem:(NSMenuItem *)item
+                      atLocation:(CGPoint)location
+                        inUIView:(UIView *)view
+{
+    UIWindowHostNativeView *hostNativeView = view.window._hostNativeView;
+    
+    CGPoint popUpPoint = [view.window convertPoint:location fromView:view];
+    return [self popUpMenuPositioningItem:item
+                               atLocation:popUpPoint
+                                   inView:hostNativeView];
+}
+
+@end
