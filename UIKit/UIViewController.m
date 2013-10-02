@@ -306,7 +306,7 @@
 
 - (UIViewController *)_presentationController
 {
-    return self.parentViewController ?: self;
+    return self.parentViewController._presentationController ?: self;
 }
 
 #pragma mark -
