@@ -45,19 +45,51 @@ typedef NS_ENUM(NSUInteger, UIWindowLevel) {
 
 @end
 
+#pragma mark -
+
+///This enum is provided so that a no-op kludge can be created for the real UIKit so that
+///native window modification code can live in a normal project without #ifdefs.
+typedef NS_OPTIONS(NSUInteger, UIWindowNativeStyleMask) {
+    UIWindowNativeStyleMaskBorderless = NSBorderlessWindowMask,
+    UIWindowNativeStyleMaskTitled = NSTitledWindowMask,
+    UIWindowNativeStyleMaskClosable = NSClosableWindowMask,
+    UIWindowNativeStyleMaskMiniaturizable = NSMiniaturizableWindowMask,
+    UIWindowNativeStyleMaskResizable = NSResizableWindowMask,
+    UIWindowNativeStyleMaskTextured = NSTexturedBackgroundWindowMask,
+    UIWindowNativeStyleMaskFullScreen = NSFullScreenWindowMask,
+    
+    UIWindowNativeStyleMaskDefault = (UIWindowNativeStyleMaskBorderless |
+                                      UIWindowNativeStyleMaskClosable |
+                                      UIWindowNativeStyleMaskMiniaturizable |
+                                      UIWindowNativeStyleMaskResizable)
+};
+
+///The UIWindow+Mac category describes the methods available in UIWindow on the Mac.
 @interface UIWindow (Mac)
 
-/*
- Changing these properties does not affect
- UIWindows that have already been created.
- */
+///Sets the style mask used for the native windows backing UIWindows.
+///
+/// \param  styleMask   The style mask to use. Must be borderless.
+///
+///Setting the style mask does not affect any instances of UIWindow already created.
++ (void)setNativeWindowStyleMask:(UIWindowNativeStyleMask)styleMask;
 
-+ (void)setNativeWindowStyleMask:(NSUInteger)styleMask;
-+ (NSUInteger)nativeWindowStyleMask;
+///Returns the native window style mask used by UIWindows upon creation.
++ (UIWindowNativeStyleMask)nativeWindowStyleMask;
 
+///Sets the native window class used by UIWindow upon creation.
+///
+/// \param  nativeWindowClass   The class to use. Must be a subclass of UINSWindow. May not be nil.
+///
+///Setting the window class does not affect any instances of UIWindow already created.
 + (void)setNativeWindowClass:(Class)nativeWindowClass;
+
+///Returns the current native window class used by UIWindows upon creation.
 + (Class)nativeWindowClass;
 
+#pragma mark -
+
+///Dispatches key events sent to the receiver by the UIApplication object to its views.
 - (void)sendKeyEvent:(UIKeyEvent *)keyEvent;
 
 @end

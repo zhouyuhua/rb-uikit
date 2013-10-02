@@ -12,12 +12,13 @@
 #import "UITabBar.h"
 
 #import "UIImageView.h"
+#import "UIImage_Private.h"
 #import "UILabel.h"
 
 #import "UIFont.h"
 
 static CGSize const kImageViewSize = {30.0, 30.0};
-static CGFloat const kInsetX = 5.0, kInsetY = 5.0;
+static CGFloat const kInsetX = 5.0, kInsetY = 3.0;
 
 @implementation _UITabBarItemView
 
@@ -96,7 +97,7 @@ static CGFloat const kInsetX = 5.0, kInsetY = 5.0;
     if(image.renderingMode != UIImageRenderingModeAlwaysOriginal)
         image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
-    _imageView.image = image;
+    _imageView.image = image ?: [UIKitImageNamed(@"UITabBarItemPlaceholderImage", UIImageResizingModeStretch) imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _titleLabel.text = _item.title;
     _badgeLabel.text = _item.badgeValue;
     

@@ -69,7 +69,7 @@
     self._contentView = [[UIView alloc] initWithFrame:contentViewFrame];
     self._contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self._contentView.backgroundColor = [UIColor windowBackgroundColor];
-    [self.view addSubview:self._contentView];
+    [self.view insertSubview:self._contentView belowSubview:self.tabBar];
 }
 
 #pragma mark - Accessing the Tab Bar Controller Properties

@@ -49,7 +49,7 @@ CGFloat const UINSWindowContentCornerRadius = 5.0;
 @implementation UINSWindow {
     NSRect _prezoomRect;
     
-    BOOL _shouldIgnoreMouseMovedEvents;
+    BOOL _acceptingMouseMovedEvents;
     NSPoint _initialDragLocation;
     NSPoint _initialDragLocationOnScreen;
     NSRect _initialWindowFrameForDrag;
@@ -64,7 +64,7 @@ CGFloat const UINSWindowContentCornerRadius = 5.0;
         aStyle ^= NSBorderlessWindowMask;
     
     if((self = [super initWithContentRect:contentRect styleMask:aStyle backing:bufferingType defer:flag])) {
-        [self setMovableByWindowBackground:YES];
+        [self setMovableByWindowBackground:NO];
         [self setOpaque:NO];
         [self setBackgroundColor:[NSColor clearColor]];
         [super setContentView:[_UINSWindowContentView new]];
@@ -226,12 +226,12 @@ CGFloat const UINSWindowContentCornerRadius = 5.0;
 	if([self frameAutosaveName])
 		[self saveFrameUsingName:[self frameAutosaveName]];
 	
-	_shouldIgnoreMouseMovedEvents = NO;
+	_acceptingMouseMovedEvents = NO;
 }
 
 - (void)mouseDragged:(NSEvent *)event
 {
-	if(![NSApp isActive] || _shouldIgnoreMouseMovedEvents)
+	if(![NSApp isActive] || !_acceptingMouseMovedEvents)
 		return;
 	
 	NSRect windowFrame = [self frame];
@@ -249,7 +249,7 @@ CGFloat const UINSWindowContentCornerRadius = 5.0;
 
 - (void)mouseDown:(NSEvent *)event
 {
-    _shouldIgnoreMouseMovedEvents = ![self isMovableByWindowBackground];
+    _acceptingMouseMovedEvents = YES;
 	
 	_initialDragLocation = [event locationInWindow];
 	_initialDragLocationOnScreen = [self convertRectToScreen:(NSRect){[event locationInWindow], [self frame].size}].origin;

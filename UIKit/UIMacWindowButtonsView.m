@@ -1,9 +1,5 @@
 //
-//  BKWindowTitleBarButtonsView.m
-//  Pinna
-//
-//  Created by Peter MacWhinnie on 1/23/11.
-//  Copyright 2011 Roundabout Software, LLC. All rights reserved.
+//  UIMacWindowButtonsView.m
 //
 
 #import "UIMacWindowButtonsView.h"

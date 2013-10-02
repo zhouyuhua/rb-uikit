@@ -48,9 +48,6 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
         self._hostNativeView.kitWindow = self;
         self._nativeWindow.contentView = self._hostNativeView;
         
-        [self._nativeWindow setAutorecalculatesContentBorderThickness:NO forEdge:NSMaxYEdge];
-        [self._nativeWindow setContentBorderThickness:40.0 forEdge:NSMaxYEdge];
-        
         self.contentScaleFactor = self._nativeWindow.backingScaleFactor;
         
         self.backgroundColor = [UIColor colorWithPatternImage:UIKitImageNamed(@"UIWindowBackground", UIImageResizingModeStretch).NSImage];
@@ -327,18 +324,19 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 
 @implementation UIWindow (Mac)
 
-static NSUInteger _NativeWindowStyleMask = (NSBorderlessWindowMask |
-                                            NSTexturedBackgroundWindowMask |
-                                            NSClosableWindowMask |
-                                            NSMiniaturizableWindowMask |
-                                            NSResizableWindowMask);
+static UIWindowNativeStyleMask _NativeWindowStyleMask = UIWindowNativeStyleMaskDefault;
 
-+ (void)setNativeWindowStyleMask:(NSUInteger)styleMask
++ (void)setNativeWindowStyleMask:(UIWindowNativeStyleMask)styleMask
 {
+    if(!UIKIT_FLAG_IS_SET(styleMask, NSBorderlessWindowMask) || UIKIT_FLAG_IS_SET(styleMask, NSTitledWindowMask)) {
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"Native window style mask must be borderless"];
+    }
+    
     _NativeWindowStyleMask = styleMask;
 }
 
-+ (NSUInteger)nativeWindowStyleMask
++ (UIWindowNativeStyleMask)nativeWindowStyleMask
 {
     return _NativeWindowStyleMask;
 }
@@ -348,7 +346,7 @@ static NSUInteger _NativeWindowStyleMask = (NSBorderlessWindowMask |
 static Class _NativeWindowClass = Nil;
 + (void)setNativeWindowClass:(Class)nativeWindowClass
 {
-    NSAssert([nativeWindowClass isKindOfClass:[NSWindow class]],
+    NSAssert([nativeWindowClass isKindOfClass:[UINSWindow class]],
              @"Cannot change native window class to non-NSWindow subclass", NSStringFromClass(nativeWindowClass));
     
     _NativeWindowClass = nativeWindowClass;

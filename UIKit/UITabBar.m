@@ -25,6 +25,8 @@ static CGFloat const kPreferredHeight = 50.0;
 
 @end
 
+#pragma mark -
+
 @implementation UITabBar
 
 + (instancetype)appearance
@@ -47,6 +49,7 @@ static CGFloat const kPreferredHeight = 50.0;
         
         self.barTintColor = [UIColor whiteColor];
         self.backgroundImage = UIKitImageNamed(@"UITabBarBackground", UIImageResizingModeStretch);
+        self.shadowImage = UIKitImageNamed(@"UITabBarShadow", UIImageResizingModeStretch);
         
         self.clipsToBounds = NO;
         
@@ -80,7 +83,7 @@ static CGFloat const kPreferredHeight = 50.0;
     
     CGRect shadowFrame = _shadowImageView.frame;
     shadowFrame.size.width = CGRectGetWidth(bounds);
-    shadowFrame.origin.y = CGRectGetMinX(bounds) - CGRectGetHeight(shadowFrame);
+    shadowFrame.origin.y = -CGRectGetHeight(shadowFrame);
     _shadowImageView.frame = shadowFrame;
     
     
