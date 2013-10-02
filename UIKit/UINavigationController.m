@@ -57,6 +57,7 @@
         [self.view addSubview:_navigationBar];
         
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 40.0)];
+        _toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
         [self.view addSubview:_toolbar];
         self.toolbarHidden = YES;
         
@@ -313,10 +314,14 @@
 {
     _toolbarHidden = hidden;
     
+    if(!hidden)
+        _toolbar.hidden = NO;
+    
     [UIView animateWithDuration:(animated? UIKitDefaultAnimationDuration : 0.0) animations:^{
         [self layoutViews];
     } completion:^(BOOL finished) {
-        _toolbar.hidden = hidden;
+        if(hidden)
+            _toolbar.hidden = YES;
     }];
 }
 
@@ -386,7 +391,6 @@
         [destination viewDidAppear:animated];
         
         [source removeFromParentViewController];
-        [self addChildViewController:destination];
         
         destination.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
@@ -411,6 +415,8 @@
     
     if(_delegateRespondsTo.navigationControllerWillShowViewControllerAnimated)
         [self.delegate navigationController:self willShowViewController:destination animated:animated];
+    
+    [self addChildViewController:destination];
     
     [source viewWillDisappear:animated];
     [destination viewWillAppear:animated];

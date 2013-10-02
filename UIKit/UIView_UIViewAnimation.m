@@ -167,6 +167,16 @@ static BOOL AnimationsEnabled = YES;
 
 + (void)animateWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion
 {
+    if(duration == 0.0) {
+        if(animations)
+            animations();
+        
+        if(completion)
+            completion(YES);
+        
+        return;
+    }
+    
     [UIView beginAnimations:NULL context:NULL];
     [UIView setAnimationDuration:duration];
     [UIView setAnimationDelay:delay];
