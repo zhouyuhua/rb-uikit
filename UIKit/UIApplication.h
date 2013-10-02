@@ -10,6 +10,7 @@
 #define UIKit_UIApplication_h 1
 
 #import "UIResponder.h"
+#import "UIStatusBar.h"
 
 typedef NS_OPTIONS(NSUInteger, UIRemoteNotificationType) {
     UIRemoteNotificationTypeNone    = NSRemoteNotificationTypeNone,

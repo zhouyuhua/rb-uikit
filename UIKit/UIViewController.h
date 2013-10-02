@@ -9,6 +9,7 @@
 #import "UIResponder.h"
 #import "UIDevice.h"
 #import "UIViewControllerTransitioning.h"
+#import "UIStatusBar.h"
 
 @class UINavigationController, UITabBarController, UISplitViewController;
 @class UINavigationItem, UIBarButtonItem, UITabBarItem, UIView;
@@ -117,6 +118,27 @@ typedef NS_ENUM(NSInteger, UIInterfaceOrientation) {
 @property (nonatomic) BOOL definesPresentationContext; //Ignored
 @property (nonatomic, unsafe_unretained) id <UIViewControllerTransitioningDelegate> transitioningDelegate;
 @property (nonatomic) BOOL providesPresentationContextTransitionStyle; //Ignored
+
+#pragma mark - Configuring the View’s Layout Behavior
+
+@property (nonatomic) BOOL automaticallyAdjustsScrollViewInsets UIKIT_UNIMPLEMENTED;
+@property (nonatomic) UIRectEdge edgesForExtendedLayout UIKIT_UNIMPLEMENTED;
+@property (nonatomic) CGSize preferredContentSize;
+
+#pragma mark -
+
+@property (nonatomic) BOOL extendedLayoutIncludesOpaqueBars UIKIT_STUB;
+
+- (UIViewController *)childViewControllerForStatusBarHidden UIKIT_STUB;
+- (UIViewController *)childViewControllerForStatusBarStyle UIKIT_STUB;
+
+- (UIStatusBarStyle)preferredStatusBarStyle UIKIT_STUB;
+- (BOOL)prefersStatusBarHidden UIKIT_STUB;
+
+@property (nonatomic) BOOL modalPresentationCapturesStatusBarAppearance UIKIT_STUB;
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation UIKIT_STUB;
+- (void)setNeedsStatusBarAppearanceUpdate UIKIT_STUB;
 
 #pragma mark - Actions
 

@@ -238,6 +238,21 @@
 		8BD5307F17FBBC0800F81175 /* UISplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5307D17FBBC0800F81175 /* UISplitViewController.m */; };
 		8BD5308217FBBDEE00F81175 /* _UISplitViewControllerDividerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5308017FBBDEE00F81175 /* _UISplitViewControllerDividerView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BD5308317FBBDEE00F81175 /* _UISplitViewControllerDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5308117FBBDEE00F81175 /* _UISplitViewControllerDividerView.m */; };
+		8BD5308717FBC07F00F81175 /* UIPopoverController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5308517FBC07F00F81175 /* UIPopoverController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BD5308817FBC07F00F81175 /* UIPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5308617FBC07F00F81175 /* UIPopoverController.m */; };
+		8BD5308B17FBC17800F81175 /* UIPopoverBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5308917FBC17800F81175 /* UIPopoverBackgroundView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BD5308C17FBC17800F81175 /* UIPopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5308A17FBC17800F81175 /* UIPopoverBackgroundView.m */; };
+		8BD5308E17FBC45100F81175 /* UIStatusBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5308D17FBC45100F81175 /* UIStatusBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BD5309117FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5308F17FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h */; };
+		8BD5309217FBCFED00F81175 /* _UIConcretePopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5309017FBCFED00F81175 /* _UIConcretePopoverBackgroundView.m */; };
+		8BD5309517FBD2CA00F81175 /* UIPopoverArrowUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5309317FBD2CA00F81175 /* UIPopoverArrowUp.png */; };
+		8BD5309617FBD2CA00F81175 /* UIPopoverArrowUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5309417FBD2CA00F81175 /* UIPopoverArrowUp@2x.png */; };
+		8BD5309917FBD44300F81175 /* UIPopoverArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5309717FBD44300F81175 /* UIPopoverArrowRight.png */; };
+		8BD5309A17FBD44300F81175 /* UIPopoverArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5309817FBD44300F81175 /* UIPopoverArrowRight@2x.png */; };
+		8BD5309D17FBD46100F81175 /* UIPopoverArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5309B17FBD46100F81175 /* UIPopoverArrowLeft.png */; };
+		8BD5309E17FBD46100F81175 /* UIPopoverArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5309C17FBD46100F81175 /* UIPopoverArrowLeft@2x.png */; };
+		8BD530A117FBD47700F81175 /* UIPopoverArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5309F17FBD47700F81175 /* UIPopoverArrowDown.png */; };
+		8BD530A217FBD47700F81175 /* UIPopoverArrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD530A017FBD47700F81175 /* UIPopoverArrowDown@2x.png */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -534,6 +549,21 @@
 		8BD5307D17FBBC0800F81175 /* UISplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISplitViewController.m; sourceTree = "<group>"; };
 		8BD5308017FBBDEE00F81175 /* _UISplitViewControllerDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _UISplitViewControllerDividerView.h; sourceTree = "<group>"; };
 		8BD5308117FBBDEE00F81175 /* _UISplitViewControllerDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UISplitViewControllerDividerView.m; sourceTree = "<group>"; };
+		8BD5308517FBC07F00F81175 /* UIPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPopoverController.h; sourceTree = "<group>"; };
+		8BD5308617FBC07F00F81175 /* UIPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPopoverController.m; sourceTree = "<group>"; };
+		8BD5308917FBC17800F81175 /* UIPopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPopoverBackgroundView.h; sourceTree = "<group>"; };
+		8BD5308A17FBC17800F81175 /* UIPopoverBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPopoverBackgroundView.m; sourceTree = "<group>"; };
+		8BD5308D17FBC45100F81175 /* UIStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIStatusBar.h; sourceTree = "<group>"; };
+		8BD5308F17FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _UIConcretePopoverBackgroundView.h; sourceTree = "<group>"; };
+		8BD5309017FBCFED00F81175 /* _UIConcretePopoverBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UIConcretePopoverBackgroundView.m; sourceTree = "<group>"; };
+		8BD5309317FBD2CA00F81175 /* UIPopoverArrowUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIPopoverArrowUp.png; sourceTree = "<group>"; };
+		8BD5309417FBD2CA00F81175 /* UIPopoverArrowUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIPopoverArrowUp@2x.png"; sourceTree = "<group>"; };
+		8BD5309717FBD44300F81175 /* UIPopoverArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIPopoverArrowRight.png; sourceTree = "<group>"; };
+		8BD5309817FBD44300F81175 /* UIPopoverArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIPopoverArrowRight@2x.png"; sourceTree = "<group>"; };
+		8BD5309B17FBD46100F81175 /* UIPopoverArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIPopoverArrowLeft.png; sourceTree = "<group>"; };
+		8BD5309C17FBD46100F81175 /* UIPopoverArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIPopoverArrowLeft@2x.png"; sourceTree = "<group>"; };
+		8BD5309F17FBD47700F81175 /* UIPopoverArrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIPopoverArrowDown.png; sourceTree = "<group>"; };
+		8BD530A017FBD47700F81175 /* UIPopoverArrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIPopoverArrowDown@2x.png"; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -989,15 +1019,21 @@
 			name = "Bar Button Item";
 			sourceTree = "<group>";
 		};
-		8BD5307B17FBB8A400F81175 /* Split View Controller */ = {
+		8BD5307B17FBB8A400F81175 /* Content Controller */ = {
 			isa = PBXGroup;
 			children = (
 				8BD5307C17FBBC0800F81175 /* UISplitViewController.h */,
 				8BD5307D17FBBC0800F81175 /* UISplitViewController.m */,
 				8BD5308017FBBDEE00F81175 /* _UISplitViewControllerDividerView.h */,
 				8BD5308117FBBDEE00F81175 /* _UISplitViewControllerDividerView.m */,
+				8BD5308517FBC07F00F81175 /* UIPopoverController.h */,
+				8BD5308617FBC07F00F81175 /* UIPopoverController.m */,
+				8BD5308917FBC17800F81175 /* UIPopoverBackgroundView.h */,
+				8BD5308A17FBC17800F81175 /* UIPopoverBackgroundView.m */,
+				8BD5308F17FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h */,
+				8BD5309017FBCFED00F81175 /* _UIConcretePopoverBackgroundView.m */,
 			);
-			name = "Split View Controller";
+			name = "Content Controller";
 			sourceTree = "<group>";
 		};
 		8BE492AD1798C44F002BEA5A = {
@@ -1069,7 +1105,7 @@
 				8B5E725317B9EFC3006A16B9 /* Menus */,
 				8B54687F17D2C85200D7E338 /* Tab Bars */,
 				8BC9D26F17F54A9500BF1E63 /* Web View */,
-				8BD5307B17FBB8A400F81175 /* Split View Controller */,
+				8BD5307B17FBB8A400F81175 /* Content Controller */,
 				8B1255C517E978080063454E /* Stubs */,
 				8BE492C11798C44F002BEA5A /* Supporting Files */,
 			);
@@ -1079,6 +1115,14 @@
 		8BE492C11798C44F002BEA5A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8BD5309F17FBD47700F81175 /* UIPopoverArrowDown.png */,
+				8BD530A017FBD47700F81175 /* UIPopoverArrowDown@2x.png */,
+				8BD5309B17FBD46100F81175 /* UIPopoverArrowLeft.png */,
+				8BD5309C17FBD46100F81175 /* UIPopoverArrowLeft@2x.png */,
+				8BD5309717FBD44300F81175 /* UIPopoverArrowRight.png */,
+				8BD5309817FBD44300F81175 /* UIPopoverArrowRight@2x.png */,
+				8BD5309317FBD2CA00F81175 /* UIPopoverArrowUp.png */,
+				8BD5309417FBD2CA00F81175 /* UIPopoverArrowUp@2x.png */,
 				8BD5307617FBAF7300F81175 /* UITabBarOverflowIcon.png */,
 				8BD5307717FBAF7300F81175 /* UITabBarOverflowIcon@2x.png */,
 				8BD5307217FBA4C100F81175 /* UITabBarShadow.png */,
@@ -1223,6 +1267,7 @@
 				8B6AEDEA17AB642A00D6858A /* UIApplication.h */,
 				8B6AEDEB17AB642A00D6858A /* UIApplication.m */,
 				8B6AEDEE17AB6BF600D6858A /* UIApplication_Private.h */,
+				8BD5308D17FBC45100F81175 /* UIStatusBar.h */,
 			);
 			name = Device;
 			sourceTree = "<group>";
@@ -1305,6 +1350,7 @@
 				8B515C5617BB3AAA003065D2 /* NSIndexPath+UITableView.h in Headers */,
 				8B54A04B17B9CD7B0068775C /* UICollectionViewUpdateItem.h in Headers */,
 				8B54689E17D41B7B00D7E338 /* UINavigationItem.h in Headers */,
+				8BD5309117FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h in Headers */,
 				8B515C4E17BB3A04003065D2 /* UITableViewHeaderFooterView.h in Headers */,
 				8B54688617D2C87700D7E338 /* UITabBarController.h in Headers */,
 				8B1255BB17E56C3A0063454E /* UIActivityIndicatorView.h in Headers */,
@@ -1314,6 +1360,7 @@
 				8B755AF917E032FA006BBA4F /* UIPasteboard.h in Headers */,
 				8B1255C817E978130063454E /* UINib.h in Headers */,
 				8B1255CC17E979070063454E /* UIMotionEffect.h in Headers */,
+				8BD5308B17FBC17800F81175 /* UIPopoverBackgroundView.h in Headers */,
 				8B515C4A17BB39ED003065D2 /* UITableViewCell.h in Headers */,
 				8BC9D27E17F77DBE00BF1E63 /* UITextView.h in Headers */,
 				8BC9D25C17EFFAEE00BF1E63 /* UINSWindow.h in Headers */,
@@ -1324,6 +1371,8 @@
 				8B515C5217BB3A25003065D2 /* UITableViewController.h in Headers */,
 				8BE492F21798CF0C002BEA5A /* UIColor.h in Headers */,
 				8B5E725A17B9EFFB006A16B9 /* UIMenuItem.h in Headers */,
+				8BD5308717FBC07F00F81175 /* UIPopoverController.h in Headers */,
+				8BD5308E17FBC45100F81175 /* UIStatusBar.h in Headers */,
 				8B5E725617B9EFF5006A16B9 /* UIMenuController.h in Headers */,
 				8B54686A17D2B33E00D7E338 /* UIKitConfigurationManager.h in Headers */,
 				8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */,
@@ -1465,6 +1514,7 @@
 				8BF0F9E817BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png in Resources */,
 				8B5BD7331798F1A200A53E4A /* UINavigationBarBackgroundImage.png in Resources */,
 				8B5AF850179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted.png in Resources */,
+				8BD5309E17FBD46100F81175 /* UIPopoverArrowLeft@2x.png in Resources */,
 				8BD5306D17FB9CDD00F81175 /* UITabBarBackground@2x.png in Resources */,
 				8BD5305517F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive@2x.png in Resources */,
 				8BC9D26317F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive@2x.png in Resources */,
@@ -1478,6 +1528,7 @@
 				8BD5307517FBA4C100F81175 /* UITabBarShadow@2x.png in Resources */,
 				8BD5307817FBAF7300F81175 /* UITabBarOverflowIcon.png in Resources */,
 				8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */,
+				8BD530A117FBD47700F81175 /* UIPopoverArrowDown.png in Resources */,
 				8B08256417AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png in Resources */,
 				8BF0F9E917BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png in Resources */,
 				8BD5307117FBA37800F81175 /* UITabBarItemPlaceholderImage@2x.png in Resources */,
@@ -1485,8 +1536,12 @@
 				8BD5305617F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive.png in Resources */,
 				8BAE9591179A1D3100562F35 /* UIBarButtonItemBackground.png in Resources */,
 				8B54687617D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png in Resources */,
+				8BD530A217FBD47700F81175 /* UIPopoverArrowDown@2x.png in Resources */,
+				8BD5309617FBD2CA00F81175 /* UIPopoverArrowUp@2x.png in Resources */,
+				8BD5309D17FBD46100F81175 /* UIPopoverArrowLeft.png in Resources */,
 				8BD5307417FBA4C100F81175 /* UITabBarShadow.png in Resources */,
 				8BD5305717F92DCF00F81175 /* UIToolBarBackgroundImage@2x.png in Resources */,
+				8BD5309917FBD44300F81175 /* UIPopoverArrowRight.png in Resources */,
 				8B5AF867179B9D15008B3BF3 /* UITextFieldRoundBackground.png in Resources */,
 				8B08256817AA264100494FAA /* UIBackButtonChevron.png in Resources */,
 				8B5AF864179B9B79008B3BF3 /* UITextFieldSquareBackground@2x.png in Resources */,
@@ -1498,7 +1553,9 @@
 				8B08256317AA1F7300494FAA /* UISearchBarMagnifyingGlass.png in Resources */,
 				8BD5305C17F9337600F81175 /* UIBarButtonSystemItemAdd@2x.png in Resources */,
 				8BD5307017FBA37800F81175 /* UITabBarItemPlaceholderImage.png in Resources */,
+				8BD5309517FBD2CA00F81175 /* UIPopoverArrowUp.png in Resources */,
 				8B54687517D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png in Resources */,
+				8BD5309A17FBD44300F81175 /* UIPopoverArrowRight@2x.png in Resources */,
 				8BC9D25617EFA80800BF1E63 /* UINavigationBarShadow@2x.png in Resources */,
 				8B1255A417E418C80063454E /* UISearchBarBackground.png in Resources */,
 				8B1255A717E41D580063454E /* UISearchBarClearButtonIcon@2x.png in Resources */,
@@ -1542,6 +1599,7 @@
 				8BE493351798E3F3002BEA5A /* UIBarItem.m in Sources */,
 				8BE492ED1798C888002BEA5A /* UIView.m in Sources */,
 				8B5BD75C179B2CA700A53E4A /* UIImageProvider.m in Sources */,
+				8BD5309217FBCFED00F81175 /* _UIConcretePopoverBackgroundView.m in Sources */,
 				8BE493171798D65C002BEA5A /* UINavigationBar.m in Sources */,
 				8B54689F17D41B7B00D7E338 /* UINavigationItem.m in Sources */,
 				8B515C4B17BB39ED003065D2 /* UITableViewCell.m in Sources */,
@@ -1561,6 +1619,7 @@
 				8B39CBFB17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.m in Sources */,
 				8B755AF517E02FC3006BBA4F /* UIView+UIDraggingDestination.m in Sources */,
 				8BB4BD5617B1E860009B7708 /* UIScrollView.m in Sources */,
+				8BD5308C17FBC17800F81175 /* UIPopoverBackgroundView.m in Sources */,
 				8BE493191798D65C002BEA5A /* UINavigationController.m in Sources */,
 				8B54A04E17B9CD7B0068775C /* UIGridLayoutInfo.m in Sources */,
 				8BD5308317FBBDEE00F81175 /* _UISplitViewControllerDividerView.m in Sources */,
@@ -1601,6 +1660,7 @@
 				8B1EC8E217A9F8280035369C /* UINSTextFieldCell.m in Sources */,
 				8BE492FF1798CFDD002BEA5A /* UIWindow.m in Sources */,
 				8BC9D28C17F7A58900BF1E63 /* UINSTextView.m in Sources */,
+				8BD5308817FBC07F00F81175 /* UIPopoverController.m in Sources */,
 				8BB4BD6117B1ED5E009B7708 /* UIPanGestureRecognizer.m in Sources */,
 				8B6AEDED17AB642A00D6858A /* UIApplication.m in Sources */,
 				8BD5307F17FBBC0800F81175 /* UISplitViewController.m in Sources */,

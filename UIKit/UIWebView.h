@@ -62,10 +62,10 @@ typedef NS_ENUM(NSUInteger, UIWebViewNavigationType) {
 
 #pragma mark - Setting Web Content Properties
 
-@property (nonatomic) BOOL scalesPageToFit;
-@property (nonatomic, readonly) UIScrollView *scrollView;
-@property (nonatomic) BOOL suppressesIncrementalRendering;
-@property (nonatomic) BOOL keyboardDisplayRequiresUserAction;
+@property (nonatomic) BOOL scalesPageToFit UIKIT_STUB;
+@property (nonatomic, readonly) UIScrollView *scrollView UIKIT_UNIMPLEMENTED;
+@property (nonatomic) BOOL suppressesIncrementalRendering UIKIT_STUB;
+@property (nonatomic) BOOL keyboardDisplayRequiresUserAction UIKIT_STUB;
 
 #pragma mark - Running JavaScript
 
@@ -73,21 +73,21 @@ typedef NS_ENUM(NSUInteger, UIWebViewNavigationType) {
 
 #pragma mark - Detecting Types of Data
 
-@property (nonatomic) UIDataDetectorTypes dataDetectorTypes;
+@property (nonatomic) UIDataDetectorTypes dataDetectorTypes UIKIT_UNIMPLEMENTED;
 
 #pragma mark - Managing Media Playback
 
-@property (nonatomic) BOOL allowsInlineMediaPlayback;
-@property (nonatomic) BOOL mediaPlaybackRequiresUserAction;
-@property (nonatomic) BOOL mediaPlaybackAllowsAirPlay;
+@property (nonatomic) BOOL allowsInlineMediaPlayback UIKIT_STUB;
+@property (nonatomic) BOOL mediaPlaybackRequiresUserAction UIKIT_STUB;
+@property (nonatomic) BOOL mediaPlaybackAllowsAirPlay UIKIT_STUB;
 
 #pragma mark - Managing Pages
 
-@property (nonatomic) CGFloat gapBetweenPages;
-@property (nonatomic, readonly) NSUInteger pageCount;
-@property (nonatomic, readonly) CGFloat pageLength;
-@property (nonatomic) UIWebPaginationBreakingMode paginationBreakingMode;
-@property (nonatomic) UIWebPaginationMode paginationMode;
+@property (nonatomic) CGFloat gapBetweenPages UIKIT_UNIMPLEMENTED;
+@property (nonatomic, readonly) NSUInteger pageCount UIKIT_UNIMPLEMENTED;
+@property (nonatomic, readonly) CGFloat pageLength UIKIT_UNIMPLEMENTED;
+@property (nonatomic) UIWebPaginationBreakingMode paginationBreakingMode UIKIT_UNIMPLEMENTED;
+@property (nonatomic) UIWebPaginationMode paginationMode UIKIT_UNIMPLEMENTED;
 
 @end
 

@@ -71,3 +71,4 @@
 #import "UITabBarController.h"
 
 #import "UISplitViewController.h"
+#import "UIPopoverController.h"

@@ -27,6 +27,10 @@
 {
     [super viewDidLoad];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Popover"
+                                                                             style:UIBarButtonItemStyleBordered
+                                                                            target:self
+                                                                            action:@selector(showPopover:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Modal"
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
@@ -65,6 +69,14 @@
     controller.navigationItem.title = @"Really long title is really long";
     
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (IBAction)showPopover:(id)sender
+{
+    UIViewController *testController = [UIViewController new];
+    testController.view.backgroundColor = [UIColor yellowColor];
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:testController];
+    [popover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }
 
 - (IBAction)showModal:(id)sender

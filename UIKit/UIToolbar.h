@@ -23,7 +23,7 @@
 
 #pragma mark - Customizing Appearance
 
-@property (nonatomic) UIBarStyle barStyle UI_APPEARANCE_SELECTOR;
+@property (nonatomic) UIBarStyle barStyle UI_APPEARANCE_SELECTOR UIKIT_STUB;
 @property (nonatomic) UIColor *barTintColor UI_APPEARANCE_SELECTOR;
 @property (nonatomic, getter=isTranslucent) BOOL translucent;
 - (UIImage *)backgroundImageForToolbarPosition:(UIBarPosition)position barMetrics:(UIBarMetrics)metrics UI_APPEARANCE_SELECTOR;

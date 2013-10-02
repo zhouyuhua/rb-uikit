@@ -116,6 +116,9 @@ void UIGraphicsBeginImageContextWithOptions(CGSize size, BOOL opaque, CGFloat sc
                                                       /* in colorSpace */ colorSpace,
                                                       /* in bitmapInfo */ (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
     
+    CGContextTranslateCTM(imageContext, 0.0, size.height);
+    CGContextScaleCTM(imageContext, 1.0, -1.0);
+    
     UIGraphicsPushContext(imageContext);
     _UIGraphicsPushScale(scale);
     

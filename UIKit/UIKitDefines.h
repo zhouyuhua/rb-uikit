@@ -21,6 +21,7 @@
 #define UIKIT_INLINE        static inline
 
 #define UIKIT_UNIMPLEMENTED
+#define UIKIT_STUB
 #define UIKIT_FLAG_IS_SET(mask, flag) ((mask & flag) == flag)
 
 #define UILocalizedString(key, comment) key

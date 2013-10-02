@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger, UITabBarItemPositioning) {
 @property (nonatomic) UIColor *barTintColor UI_APPEARANCE_SELECTOR;
 
 /* Only UITabBarItemPositioningCentered is supported. Changing this property has no effect. */
-@property (nonatomic) UITabBarItemPositioning itemPositioning UI_APPEARANCE_SELECTOR;
+@property (nonatomic) UITabBarItemPositioning itemPositioning UI_APPEARANCE_SELECTOR UIKIT_STUB;
 
 @property (nonatomic) CGFloat itemSpacing UI_APPEARANCE_SELECTOR;
 @property (nonatomic) CGFloat itemWidth UI_APPEARANCE_SELECTOR;

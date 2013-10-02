@@ -33,6 +33,7 @@ UIKIT_EXTERN NSString *const UIViewDidChangeSuperviewNotification;
 
 #pragma mark -
 
+@property (nonatomic, readonly) UIView *_topSuperview;
 - (void)_enumerateSubviews:(void(^)(UIView *subview, NSUInteger depth, BOOL *stop))block;
 - (void)_printSubviews;
 

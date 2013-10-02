@@ -751,6 +751,11 @@ NSString *const UIViewDidChangeSuperviewNotification = @"UIViewDidChangeSupervie
 
 #pragma mark -
 
+- (UIView *)_topSuperview
+{
+    return self.superview._topSuperview ?: self;
+}
+
 static void EnumerateSubviews(UIView *view, void(^block)(UIView *subview, NSUInteger depth, BOOL *stop), NSUInteger depth, BOOL *stop)
 {
     for (UIView *subview in view.subviews) {

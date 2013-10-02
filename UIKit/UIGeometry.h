@@ -9,6 +9,15 @@
 #ifndef UIKit_UIGeometry_h
 #define UIKit_UIGeometry_h
 
+typedef NS_OPTIONS(NSUInteger, UIRectEdge) {
+    UIRectEdgeNone = 0,
+    UIRectEdgeTop = 1 << 0,
+    UIRectEdgeLeft = 1 << 1,
+    UIRectEdgeBottom = 1 << 2,
+    UIRectEdgeRight = 1 << 3,
+    UIRectEdgeAll = UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight
+};
+
 typedef struct UIEdgeInsets {
     CGFloat top, left, bottom, right;
 } UIEdgeInsets;

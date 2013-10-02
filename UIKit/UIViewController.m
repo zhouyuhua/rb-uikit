@@ -27,7 +27,11 @@
         UIKitUnimplementedMethod();
         return nil;
     } else {
-        return [super init];
+        if((self = [super init])) {
+            self.preferredContentSize = CGSizeMake(200.0, 200.0);
+        }
+        
+        return self;
     }
 }
 
@@ -400,6 +404,38 @@
     self.presentedViewController.movingFromParentViewController = YES;
     [self.presentedViewController viewWillDisappear:animated];
     [transitioningObject animateTransition:_currentAnimationContext];
+}
+
+#pragma mark - Configuring the View’s Layout Behavior
+
+- (UIViewController *)childViewControllerForStatusBarHidden
+{
+    return nil;
+}
+
+- (UIViewController *)childViewControllerForStatusBarStyle
+{
+    return nil;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return UIStatusBarAnimationNone;
+}
+
+- (void)setNeedsStatusBarAppearanceUpdate
+{
+    //Do nothing.
 }
 
 #pragma mark - Actions
