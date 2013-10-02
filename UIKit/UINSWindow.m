@@ -39,7 +39,10 @@ CGFloat const UINSWindowContentCornerRadius = 5.0;
 
 - (NSView *)view
 {
-    return self.subviews.firstObject;
+    if(self.subviews.count > 0)
+        return self.subviews[0];
+    else
+        return nil;
 }
 
 @end

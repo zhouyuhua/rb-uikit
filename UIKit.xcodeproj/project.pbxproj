@@ -154,6 +154,7 @@
 		8B755AF917E032FA006BBA4F /* UIPasteboard.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B755AF717E032FA006BBA4F /* UIPasteboard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B755AFA17E032FA006BBA4F /* UIPasteboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B755AF817E032FA006BBA4F /* UIPasteboard.m */; };
 		8B755AFC17E03648006BBA4F /* UIPasteboard_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B755AFB17E03648006BBA4F /* UIPasteboard_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B79B16E17FC8FA5001604E4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B79B16D17FC8FA5001604E4 /* WebKit.framework */; };
 		8B91075B17A8A8A8008D9DF0 /* UIResponder_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075C17A8A971008D9DF0 /* UIView_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91075F17A8B1EA008D9DF0 /* UIGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */; };
@@ -465,6 +466,7 @@
 		8B755AF717E032FA006BBA4F /* UIPasteboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPasteboard.h; path = UIKit/UIPasteboard.h; sourceTree = "<group>"; };
 		8B755AF817E032FA006BBA4F /* UIPasteboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIPasteboard.m; path = UIKit/UIPasteboard.m; sourceTree = "<group>"; };
 		8B755AFB17E03648006BBA4F /* UIPasteboard_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPasteboard_Private.h; path = UIKit/UIPasteboard_Private.h; sourceTree = "<group>"; };
+		8B79B16D17FC8FA5001604E4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIResponder_Private.h; path = UIKit/UIResponder_Private.h; sourceTree = "<group>"; };
 		8B91075C17A8A971008D9DF0 /* UIView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIView_Private.h; path = UIKit/UIView_Private.h; sourceTree = "<group>"; };
 		8B91075E17A8B1EA008D9DF0 /* UIGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIGraphics.m; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B79B16E17FC8FA5001604E4 /* WebKit.framework in Frameworks */,
 				8BE492EF1798C986002BEA5A /* QuartzCore.framework in Frameworks */,
 				8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */,
 			);
@@ -1058,6 +1061,7 @@
 		8BE492B91798C44F002BEA5A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8B79B16D17FC8FA5001604E4 /* WebKit.framework */,
 				8BE492EE1798C986002BEA5A /* QuartzCore.framework */,
 				8BE492BA1798C44F002BEA5A /* Cocoa.framework */,
 				8BE492CF1798C44F002BEA5A /* XCTest.framework */,
