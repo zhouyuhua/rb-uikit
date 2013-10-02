@@ -178,12 +178,12 @@ static CGFloat const kPreferredHeight = 50.0;
 
 - (void)beginCustomizingItems:(NSArray *)items
 {
-    
+    UIKitUnimplementedMethod();
 }
 
 - (void)endCustomizingAnimated:(BOOL)animate
 {
-    
+    UIKitUnimplementedMethod();
 }
 
 - (BOOL)isCustomizing
@@ -232,6 +232,18 @@ static CGFloat const kPreferredHeight = 50.0;
 }
 
 #pragma mark -
+
+- (void)setItemSpacing:(CGFloat)itemSpacing
+{
+    _itemSpacing = itemSpacing;
+    [self setNeedsLayout];
+}
+
+- (void)setItemWidth:(CGFloat)itemWidth
+{
+    _itemWidth = itemWidth;
+    [self setNeedsLayout];
+}
 
 - (void)setItemPositioning:(UITabBarItemPositioning)itemPositioning
 {

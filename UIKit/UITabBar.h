@@ -35,15 +35,18 @@ typedef NS_ENUM(NSInteger, UITabBarItemPositioning) {
 
 #pragma mark - Supporting User Customization of Tab Bars
 
-- (void)beginCustomizingItems:(NSArray *)items;
-- (void)endCustomizingAnimated:(BOOL)animate;
+- (void)beginCustomizingItems:(NSArray *)items UIKIT_UNIMPLEMENTED;
+- (void)endCustomizingAnimated:(BOOL)animate UIKIT_UNIMPLEMENTED;
 - (BOOL)isCustomizing;
 
 #pragma mark - Customizing Tab Bar Appearance
 
 @property (nonatomic) UIBarStyle barStyle UI_APPEARANCE_SELECTOR;
 @property (nonatomic) UIColor *barTintColor UI_APPEARANCE_SELECTOR;
+
+/* Only UITabBarItemPositioningCentered is supported. Changing this property has no effect. */
 @property (nonatomic) UITabBarItemPositioning itemPositioning UI_APPEARANCE_SELECTOR;
+
 @property (nonatomic) CGFloat itemSpacing UI_APPEARANCE_SELECTOR;
 @property (nonatomic) CGFloat itemWidth UI_APPEARANCE_SELECTOR;
 @property (nonatomic) UIColor *selectedImageTintColor UI_APPEARANCE_SELECTOR;
@@ -59,10 +62,10 @@ typedef NS_ENUM(NSInteger, UITabBarItemPositioning) {
 #pragma mark - Customizing Tab Bars
 
 @optional
-- (void)tabBar:(UITabBar *)tabBar willBeginCustomizingItems:(NSArray *)items;
-- (void)tabBar:(UITabBar *)tabBar didBeginCustomizingItems:(NSArray *)items;
-- (void)tabBar:(UITabBar *)tabBar willEndCustomizingItems:(NSArray *)items changed:(BOOL)changed;
-- (void)tabBar:(UITabBar *)tabBar didEndCustomizingItems:(NSArray *)items changed:(BOOL)changed;
+- (void)tabBar:(UITabBar *)tabBar willBeginCustomizingItems:(NSArray *)items UIKIT_UNIMPLEMENTED;
+- (void)tabBar:(UITabBar *)tabBar didBeginCustomizingItems:(NSArray *)items UIKIT_UNIMPLEMENTED;
+- (void)tabBar:(UITabBar *)tabBar willEndCustomizingItems:(NSArray *)items changed:(BOOL)changed UIKIT_UNIMPLEMENTED;
+- (void)tabBar:(UITabBar *)tabBar didEndCustomizingItems:(NSArray *)items changed:(BOOL)changed UIKIT_UNIMPLEMENTED;
 
 @required
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item;

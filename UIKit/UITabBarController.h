@@ -45,14 +45,14 @@
 
 #pragma mark - Managing Tab Bar Customizations
 
-- (void)tabBarController:(UITabBarController *)tabBarController willBeginCustomizingViewControllers:(NSArray *)controllers;
-- (void)tabBarController:(UITabBarController *)tabBarController willEndCustomizingViewControllers:(NSArray *)controllers changed:(BOOL)changed;
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)controllers changed:(BOOL)changed;
+- (void)tabBarController:(UITabBarController *)tabBarController willBeginCustomizingViewControllers:(NSArray *)controllers UIKIT_UNIMPLEMENTED;
+- (void)tabBarController:(UITabBarController *)tabBarController willEndCustomizingViewControllers:(NSArray *)controllers changed:(BOOL)changed UIKIT_UNIMPLEMENTED;
+- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)controllers changed:(BOOL)changed UIKIT_UNIMPLEMENTED;
 
 #pragma mark - Overriding View Rotation Settings
 
-- (NSUInteger)tabBarControllerSupportedInterfaceOrientations:(UITabBarController *)tabBarController;
-- (NSUInteger)tabBarControllerPreferredInterfaceOrientationForPresentation:(UITabBarController *)tabBarController;
+- (NSUInteger)tabBarControllerSupportedInterfaceOrientations:(UITabBarController *)tabBarController UIKIT_UNIMPLEMENTED;
+- (NSUInteger)tabBarControllerPreferredInterfaceOrientationForPresentation:(UITabBarController *)tabBarController UIKIT_UNIMPLEMENTED;
 
 #pragma mark - Supporting Custom Tab Bar Transition Animations
 

@@ -157,7 +157,17 @@
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    self.selectedIndex = [tabBar.items indexOfObject:item];
+    NSUInteger index = [tabBar.items indexOfObject:item];
+    if(_delegateRespondsTo.tabBarControllerShouldSelectViewController) {
+        if(![self.delegate tabBarController:self shouldSelectViewController:self.viewControllers[index]]) {
+            self.tabBar.selectedItem = self.selectedViewController.tabBarItem;
+            return;
+        }
+    }
+    
+    self.selectedIndex = index;
+    if(_delegateRespondsTo.tabBarControllerDidSelectViewController)
+        [self.delegate tabBarController:self didSelectViewController:self.viewControllers[index]];
 }
 
 @end
