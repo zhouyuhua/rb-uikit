@@ -35,12 +35,17 @@ typedef NS_ENUM(NSInteger, UIInterfaceOrientation) {
 - (void)viewDidLoad;
 - (void)loadView;
 
-#pragma mark - Appearance
+#pragma mark - Responding to View Events
 
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidAppear:(BOOL)animated;
 - (void)viewWillDisappear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
+
+#pragma mark -
+
+- (void)viewWillLayoutSubviews;
+- (void)viewDidLayoutSubviews;
 
 #pragma mark - Managing the View
 

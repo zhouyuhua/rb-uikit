@@ -234,6 +234,10 @@
 		8BD5307517FBA4C100F81175 /* UITabBarShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5307317FBA4C100F81175 /* UITabBarShadow@2x.png */; };
 		8BD5307817FBAF7300F81175 /* UITabBarOverflowIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5307617FBAF7300F81175 /* UITabBarOverflowIcon.png */; };
 		8BD5307917FBAF7300F81175 /* UITabBarOverflowIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5307717FBAF7300F81175 /* UITabBarOverflowIcon@2x.png */; };
+		8BD5307E17FBBC0800F81175 /* UISplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5307C17FBBC0800F81175 /* UISplitViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BD5307F17FBBC0800F81175 /* UISplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5307D17FBBC0800F81175 /* UISplitViewController.m */; };
+		8BD5308217FBBDEE00F81175 /* _UISplitViewControllerDividerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5308017FBBDEE00F81175 /* _UISplitViewControllerDividerView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8BD5308317FBBDEE00F81175 /* _UISplitViewControllerDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5308117FBBDEE00F81175 /* _UISplitViewControllerDividerView.m */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -526,6 +530,10 @@
 		8BD5307317FBA4C100F81175 /* UITabBarShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITabBarShadow@2x.png"; sourceTree = "<group>"; };
 		8BD5307617FBAF7300F81175 /* UITabBarOverflowIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBarOverflowIcon.png; sourceTree = "<group>"; };
 		8BD5307717FBAF7300F81175 /* UITabBarOverflowIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITabBarOverflowIcon@2x.png"; sourceTree = "<group>"; };
+		8BD5307C17FBBC0800F81175 /* UISplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISplitViewController.h; sourceTree = "<group>"; };
+		8BD5307D17FBBC0800F81175 /* UISplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISplitViewController.m; sourceTree = "<group>"; };
+		8BD5308017FBBDEE00F81175 /* _UISplitViewControllerDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _UISplitViewControllerDividerView.h; sourceTree = "<group>"; };
+		8BD5308117FBBDEE00F81175 /* _UISplitViewControllerDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UISplitViewControllerDividerView.m; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -981,6 +989,17 @@
 			name = "Bar Button Item";
 			sourceTree = "<group>";
 		};
+		8BD5307B17FBB8A400F81175 /* Split View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8BD5307C17FBBC0800F81175 /* UISplitViewController.h */,
+				8BD5307D17FBBC0800F81175 /* UISplitViewController.m */,
+				8BD5308017FBBDEE00F81175 /* _UISplitViewControllerDividerView.h */,
+				8BD5308117FBBDEE00F81175 /* _UISplitViewControllerDividerView.m */,
+			);
+			name = "Split View Controller";
+			sourceTree = "<group>";
+		};
 		8BE492AD1798C44F002BEA5A = {
 			isa = PBXGroup;
 			children = (
@@ -1050,6 +1069,7 @@
 				8B5E725317B9EFC3006A16B9 /* Menus */,
 				8B54687F17D2C85200D7E338 /* Tab Bars */,
 				8BC9D26F17F54A9500BF1E63 /* Web View */,
+				8BD5307B17FBB8A400F81175 /* Split View Controller */,
 				8B1255C517E978080063454E /* Stubs */,
 				8BE492C11798C44F002BEA5A /* Supporting Files */,
 			);
@@ -1297,6 +1317,7 @@
 				8B515C4A17BB39ED003065D2 /* UITableViewCell.h in Headers */,
 				8BC9D27E17F77DBE00BF1E63 /* UITextView.h in Headers */,
 				8BC9D25C17EFFAEE00BF1E63 /* UINSWindow.h in Headers */,
+				8BD5307E17FBBC0800F81175 /* UISplitViewController.h in Headers */,
 				8B91077F17A97EF7008D9DF0 /* UIAppKitView.h in Headers */,
 				8BF0F9F217CE636000DAFD92 /* UIStringDrawing.h in Headers */,
 				8BC9D29317F7BBDF00BF1E63 /* UIMacWindowButtonsView.h in Headers */,
@@ -1355,6 +1376,7 @@
 				8BD5304F17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h in Headers */,
 				8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */,
 				8B515C4017BB1715003065D2 /* UICollectionViewUpdateItem_Private.h in Headers */,
+				8BD5308217FBBDEE00F81175 /* _UISplitViewControllerDividerView.h in Headers */,
 				8B5468A117D41C5E00D7E338 /* UINavigationItem_Private.h in Headers */,
 				8B5E725F17B9F83B006A16B9 /* UIMenuController_Private.h in Headers */,
 				8B5E726117B9F9C1006A16B9 /* UICollectionView_Internal.h in Headers */,
@@ -1541,6 +1563,7 @@
 				8BB4BD5617B1E860009B7708 /* UIScrollView.m in Sources */,
 				8BE493191798D65C002BEA5A /* UINavigationController.m in Sources */,
 				8B54A04E17B9CD7B0068775C /* UIGridLayoutInfo.m in Sources */,
+				8BD5308317FBBDEE00F81175 /* _UISplitViewControllerDividerView.m in Sources */,
 				8B54A03C17B9CD7B0068775C /* UICollectionView.m in Sources */,
 				8B515C4F17BB3A04003065D2 /* UITableViewHeaderFooterView.m in Sources */,
 				8B515C5717BB3AAA003065D2 /* NSIndexPath+UITableView.m in Sources */,
@@ -1580,6 +1603,7 @@
 				8BC9D28C17F7A58900BF1E63 /* UINSTextView.m in Sources */,
 				8BB4BD6117B1ED5E009B7708 /* UIPanGestureRecognizer.m in Sources */,
 				8B6AEDED17AB642A00D6858A /* UIApplication.m in Sources */,
+				8BD5307F17FBBC0800F81175 /* UISplitViewController.m in Sources */,
 				8B91077017A8C5C9008D9DF0 /* UIView_UIViewAnimation.m in Sources */,
 				8B1EC8E517A9F8280035369C /* UITextField.m in Sources */,
 				8BE493251798DA39002BEA5A /* UIScreen.m in Sources */,

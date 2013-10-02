@@ -161,9 +161,6 @@
 			children = (
 				8BE493631798EAE9002BEA5A /* AppDelegate.h */,
 				8BE493641798EAE9002BEA5A /* AppDelegate.m */,
-				8BE493661798EAE9002BEA5A /* MainMenu.xib */,
-				8BE493691798EAE9002BEA5A /* Images.xcassets */,
-				8BE493581798EAE9002BEA5A /* Supporting Files */,
 				8B54A05B17B9E1FD0068775C /* TestController.h */,
 				8B54A05C17B9E1FD0068775C /* TestController.m */,
 				8BF623F417BDDD5E0015ED5C /* TestTableViewController.h */,
@@ -174,6 +171,8 @@
 				8BC9D28317F7827300BF1E63 /* TestTextViewController.m */,
 				8B54A05717B9E1240068775C /* TestCollectionViewController.h */,
 				8B54A05817B9E1240068775C /* TestCollectionViewController.m */,
+				8BE493691798EAE9002BEA5A /* Images.xcassets */,
+				8BE493581798EAE9002BEA5A /* Supporting Files */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -181,12 +180,13 @@
 		8BE493581798EAE9002BEA5A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8BE493661798EAE9002BEA5A /* MainMenu.xib */,
 				8BE493591798EAE9002BEA5A /* Test-Info.plist */,
+				8B54686C17D2B7E000D7E338 /* UIKitInfo.plist */,
 				8BE4935A1798EAE9002BEA5A /* InfoPlist.strings */,
 				8BE4935D1798EAE9002BEA5A /* main.m */,
 				8BE4935F1798EAE9002BEA5A /* Test-Prefix.pch */,
 				8BE493601798EAE9002BEA5A /* Credits.rtf */,
-				8B54686C17D2B7E000D7E338 /* UIKitInfo.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

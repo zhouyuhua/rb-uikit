@@ -12,6 +12,7 @@
 #import "UIColor.h"
 #import "UIWindow_Private.h"
 #import "UIGestureRecognizer_Private.h"
+#import "UIViewController.h"
 
 #import "UIAppKitView.h"
 
@@ -40,7 +41,9 @@ NSString *const UIViewDidChangeSuperviewNotification = @"UIViewDidChangeSupervie
 
 - (void)layoutSublayersOfLayer:(CALayer *)layer
 {
-    [self.view layoutSubviews];
+    [_view._viewController viewWillLayoutSubviews];
+    [_view layoutSubviews];
+    [_view._viewController viewDidLayoutSubviews];
 }
 
 @end

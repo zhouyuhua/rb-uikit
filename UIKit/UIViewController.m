@@ -72,7 +72,7 @@
     UIKitUnimplementedMethod();
 }
 
-#pragma mark - Appearance
+#pragma mark - Responding to View Events
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -88,6 +88,18 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+}
+
+#pragma mark -
+
+- (void)viewWillLayoutSubviews
+{
+    
+}
+
+- (void)viewDidLayoutSubviews
+{
+    
 }
 
 #pragma mark - Managing the View

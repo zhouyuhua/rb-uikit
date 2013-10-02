@@ -69,3 +69,5 @@
 
 #import "UITabBar.h"
 #import "UITabBarController.h"
+
+#import "UISplitViewController.h"
