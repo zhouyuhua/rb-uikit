@@ -15,6 +15,8 @@
 
 #import "UIAppKitView.h"
 
+NSString *const UIViewDidChangeSuperviewNotification = @"UIViewDidChangeSuperviewNotification";
+
 @interface UIViewLayoutManager : NSObject
 
 - (id)initWithView:(UIView *)view;
@@ -576,8 +578,9 @@
     }
     
     [view didMoveToSuperview];
-    
     [self didAddSubview:view];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIViewDidChangeSuperviewNotification object:self];
     
     if(tintColorIsChanging)
         [view tintColorDidChange];
@@ -680,6 +683,7 @@
     
     [self didMoveToWindow];
     [self didMoveToSuperview];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIViewDidChangeSuperviewNotification object:self];
     
     if(tintColorIsChanging)
         [self tintColorDidChange];
@@ -715,12 +719,15 @@
 
 - (BOOL)isDescendantOfView:(UIView *)view
 {
-    for (UIView *subview in view.subviews) {
-        if(subview == self)
-            return YES;
-    }
+    __block BOOL isDescendent = NO;
+    [view _enumerateSubviews:^(UIView *subview, NSUInteger depth, BOOL *stop) {
+        if(subview == self) {
+            isDescendent = YES;
+            *stop = YES;
+        }
+    }];
     
-    return [self isDescendantOfView:view.superview];
+    return isDescendent;
 }
 
 - (UIView *)viewWithTag:(NSInteger)tag

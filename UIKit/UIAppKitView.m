@@ -9,6 +9,7 @@
 #import "UIAppKitView_Private.h"
 #import <objc/runtime.h>
 
+#import "UIView_Private.h"
 #import "UIWindow_Private.h"
 #import "UIWindowHostNativeView.h"
 #import "UIAppKitViewGlueNSView.h"
@@ -50,6 +51,11 @@ UIView *NSViewToUIView(NSView *view)
         self.adaptorView = [[UIAppKitViewGlueNSView alloc] initWithView:view appKitView:self];
         
         [self.layer addObserver:self forKeyPath:@"position" options:0 context:NULL];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(viewDidChangeSuperview:)
+                                                     name:UIViewDidChangeSuperviewNotification
+                                                   object:nil];
     }
     
     return self;
@@ -80,6 +86,17 @@ UIView *NSViewToUIView(NSView *view)
 - (void)layoutSubviews
 {
     [self updateView];
+}
+
+- (void)viewDidChangeSuperview:(NSNotification *)notification
+{
+    if([self isDescendantOfView:notification.object]) {
+        if(((UIView *)notification.object).superview) {
+            [self addToHierarchy];
+        } else {
+            [self removeFromHierarchy];
+        }
+    }
 }
 
 #pragma mark -

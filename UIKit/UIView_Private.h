@@ -11,6 +11,8 @@
 
 @class UIViewController;
 
+UIKIT_EXTERN NSString *const UIViewDidChangeSuperviewNotification;
+
 @interface UIView () <_UIFirstResponderManager> {
     __unsafe_unretained UIResponder *__firstResponder;
     NSMutableArray *_registeredDraggingTypes;
