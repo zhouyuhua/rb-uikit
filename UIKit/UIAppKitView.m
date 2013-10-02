@@ -82,6 +82,36 @@ UIView *NSViewToUIView(NSView *view)
     [self updateView];
 }
 
+#pragma mark -
+
+- (void)addToHierarchy
+{
+    if(self.adaptorView.superview != nil)
+        return;
+    
+    self.window._hostNativeView.postsFrameChangedNotifications = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateView)
+                                                 name:NSViewFrameDidChangeNotification
+                                               object:self.window._hostNativeView];
+    
+    [self.window._hostNativeView addSubview:self.adaptorView];
+    
+    [self updateView];
+}
+
+- (void)removeFromHierarchy
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NSViewFrameDidChangeNotification
+                                                  object:self.window._hostNativeView];
+    
+    [self.adaptorView removeFromSuperviewWithoutNeedingDisplay];
+    [self.adaptorView.layer removeFromSuperlayer];
+}
+
+#pragma mark -
+
 - (void)updateView
 {
     [self beginSupressingSizeChanges];
@@ -186,29 +216,12 @@ UIView *NSViewToUIView(NSView *view)
 
 - (void)willMoveToWindow:(UIWindow *)newWindow
 {
-    if(self.window) {
-        [self.adaptorView removeFromSuperviewWithoutNeedingDisplay];
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:NSViewFrameDidChangeNotification
-                                                      object:newWindow._hostNativeView];
-    }
+    [self removeFromHierarchy];
 }
 
 - (void)didMoveToWindow
 {
-    if(self.window) {
-        self.window._hostNativeView.postsFrameChangedNotifications = YES;
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(layoutSubviews)
-                                                     name:NSViewFrameDidChangeNotification
-                                                   object:self.window._hostNativeView];
-        
-        [self.window._hostNativeView addSubview:self.adaptorView];
-        [self.adaptorView.layer removeFromSuperlayer];
-        [self.layer addSublayer:self.adaptorView.layer];
-        
-        [self updateView];
-    }
+    [self addToHierarchy];
 }
 
 #pragma mark -
@@ -223,11 +236,18 @@ UIView *NSViewToUIView(NSView *view)
 
 - (void)didMoveToSuperview
 {
-    [self updateView];
-    
-    if([self.superview isKindOfClass:[UIScrollView class]]) {
-        self.enclosingScrollView = (UIScrollView *)self.superview;
-        [self.enclosingScrollView addObserver:self forKeyPath:@"bounds" options:kNilOptions context:NULL];
+    if(self.superview) {
+        if(self.window != nil)
+            [self addToHierarchy];
+        
+        [self updateView];
+        
+        if([self.superview isKindOfClass:[UIScrollView class]]) {
+            self.enclosingScrollView = (UIScrollView *)self.superview;
+            [self.enclosingScrollView addObserver:self forKeyPath:@"bounds" options:kNilOptions context:NULL];
+        }
+    } else {
+        [self removeFromHierarchy];
     }
 }
 

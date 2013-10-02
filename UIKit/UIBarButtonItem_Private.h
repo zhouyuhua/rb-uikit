@@ -21,7 +21,7 @@ enum : NSInteger {
 #pragma mark -
 
 ///The UIButton that supplies the content of this bar button item. Lazily initialized.
-@property (nonatomic, readonly) UIButton *underlyingButton;
+@property (nonatomic, readonly) UIButton *_underlyingButton;
 
 ///Either the custom view of the bar button item, or the underlying button property.
 @property (nonatomic, readonly) UIView *_itemView;

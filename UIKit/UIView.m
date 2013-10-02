@@ -552,6 +552,8 @@
     if(view.superview)
         [view removeFromSuperview];
     
+    BOOL tintColorIsChanging = (view->_tintColor == nil && _tintColor != nil);
+    
     if(_window)
         [view _viewWillMoveToWindow:_window];
     [view willMoveToSuperview:self];
@@ -576,6 +578,9 @@
     [view didMoveToSuperview];
     
     [self didAddSubview:view];
+    
+    if(tintColorIsChanging)
+        [view tintColorDidChange];
 }
 
 - (void)exchangeSubviewAtIndex:(NSInteger)index1 withSubviewAtIndex:(NSInteger)index2
@@ -658,6 +663,8 @@
     if(!_superview)
         return;
     
+    BOOL tintColorIsChanging = (_tintColor == nil);
+    
     [self willMoveToWindow:nil];
     [self willMoveToSuperview:nil];
     [self.superview willRemoveSubview:self];
@@ -673,6 +680,9 @@
     
     [self didMoveToWindow];
     [self didMoveToSuperview];
+    
+    if(tintColorIsChanging)
+        [self tintColorDidChange];
 }
 
 #pragma mark -

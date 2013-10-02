@@ -58,6 +58,7 @@
         
         _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 40.0)];
         [self.view addSubview:_toolbar];
+        self.toolbarHidden = YES;
         
         [self layoutViews];
     }
@@ -98,6 +99,13 @@
     self.contentView.frame = contentViewFrame;
 }
 
+#pragma mark - Overrides
+
+- (NSString *)title
+{
+    return super.title ?: self.visibleViewController.title;
+}
+
 #pragma mark - Stack
 
 - (UIViewController *)topViewController
@@ -134,7 +142,7 @@
             UIViewController *previousController = self.viewControllers[index - 1];
             UIBarButtonItem *backItem = previousController.navigationItem.backBarButtonItem;
             backItem.target = self;
-            backItem.action = @selector(popFromNavigationController:);
+            backItem.action = @selector(_popVisibleController:);
             if(backItem.title == nil) {
                 backItem.title = previousController.navigationItem.title;
             }
@@ -151,6 +159,8 @@
     
     self.navigationBar.items = [self.viewControllers valueForKey:@"navigationItem"];
     self.toolbar.items = self.visibleViewController.toolbarItems;
+    if(self.visibleViewController.hidesBottomBarWhenPushed)
+        self.toolbarHidden = YES;
 }
 
 - (NSArray *)viewControllers
@@ -203,7 +213,7 @@
         UIViewController *previousController = self.viewControllers[self.viewControllers.count - 2];
         UIBarButtonItem *backItem = previousController.navigationItem.backBarButtonItem;
         backItem.target = self;
-        backItem.action = @selector(popFromNavigationController:);
+        backItem.action = @selector(_popVisibleController:);
         if(backItem.title == nil) {
             backItem.title = previousController.navigationItem.title;
         }
@@ -212,6 +222,8 @@
     
     [_navigationBar pushNavigationItem:viewController.navigationItem animated:animated];
     self.toolbar.items = self.visibleViewController.toolbarItems;
+    if(viewController.hidesBottomBarWhenPushed)
+        self.toolbarHidden = YES;
 }
 
 - (void)popViewControllerAnimated:(BOOL)animated
@@ -408,7 +420,7 @@
 
 #pragma mark - Actions
 
-- (IBAction)popFromNavigationController:(id)sender
+- (IBAction)_popVisibleController:(id)sender
 {
     [self popViewControllerAnimated:YES];
 }

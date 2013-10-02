@@ -221,6 +221,13 @@
 		8BD5305817F92DCF00F81175 /* UIToolBarBackgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5305417F92DCF00F81175 /* UIToolBarBackgroundImage.png */; };
 		8BD5305B17F9337600F81175 /* UIBarButtonSystemItemAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5305917F9337600F81175 /* UIBarButtonSystemItemAdd.png */; };
 		8BD5305C17F9337600F81175 /* UIBarButtonSystemItemAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5305A17F9337600F81175 /* UIBarButtonSystemItemAdd@2x.png */; };
+		8BD5306117FA87B600F81175 /* UITabBarItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5305F17FA87B600F81175 /* UITabBarItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BD5306217FA87B600F81175 /* UITabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5306017FA87B600F81175 /* UITabBarItem.m */; };
+		8BD5306617FB82C100F81175 /* _UITabBarItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5306417FB82C100F81175 /* _UITabBarItemView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8BD5306717FB82C100F81175 /* _UITabBarItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5306517FB82C100F81175 /* _UITabBarItemView.m */; };
+		8BD5306917FB86C300F81175 /* UITabBarItem_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5306817FB86C300F81175 /* UITabBarItem_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8BD5306C17FB9CDD00F81175 /* UITabBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5306A17FB9CDD00F81175 /* UITabBarBackground.png */; };
+		8BD5306D17FB9CDD00F81175 /* UITabBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5306B17FB9CDD00F81175 /* UITabBarBackground@2x.png */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -500,6 +507,13 @@
 		8BD5305417F92DCF00F81175 /* UIToolBarBackgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIToolBarBackgroundImage.png; sourceTree = "<group>"; };
 		8BD5305917F9337600F81175 /* UIBarButtonSystemItemAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonSystemItemAdd.png; sourceTree = "<group>"; };
 		8BD5305A17F9337600F81175 /* UIBarButtonSystemItemAdd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonSystemItemAdd@2x.png"; sourceTree = "<group>"; };
+		8BD5305F17FA87B600F81175 /* UITabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITabBarItem.h; sourceTree = "<group>"; };
+		8BD5306017FA87B600F81175 /* UITabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITabBarItem.m; sourceTree = "<group>"; };
+		8BD5306417FB82C100F81175 /* _UITabBarItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _UITabBarItemView.h; sourceTree = "<group>"; };
+		8BD5306517FB82C100F81175 /* _UITabBarItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UITabBarItemView.m; sourceTree = "<group>"; };
+		8BD5306817FB86C300F81175 /* UITabBarItem_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITabBarItem_Private.h; sourceTree = "<group>"; };
+		8BD5306A17FB9CDD00F81175 /* UITabBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBarBackground.png; sourceTree = "<group>"; };
+		8BD5306B17FB9CDD00F81175 /* UITabBarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITabBarBackground@2x.png"; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -661,8 +675,13 @@
 			children = (
 				8B54688017D2C86E00D7E338 /* UITabBar.h */,
 				8B54688117D2C86E00D7E338 /* UITabBar.m */,
+				8BD5305F17FA87B600F81175 /* UITabBarItem.h */,
+				8BD5306017FA87B600F81175 /* UITabBarItem.m */,
+				8BD5306817FB86C300F81175 /* UITabBarItem_Private.h */,
 				8B54688417D2C87700D7E338 /* UITabBarController.h */,
 				8B54688517D2C87700D7E338 /* UITabBarController.m */,
+				8BD5306417FB82C100F81175 /* _UITabBarItemView.h */,
+				8BD5306517FB82C100F81175 /* _UITabBarItemView.m */,
 			);
 			name = "Tab Bars";
 			sourceTree = "<group>";
@@ -1022,6 +1041,8 @@
 		8BE492C11798C44F002BEA5A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8BD5306A17FB9CDD00F81175 /* UITabBarBackground.png */,
+				8BD5306B17FB9CDD00F81175 /* UITabBarBackground@2x.png */,
 				8BD5305917F9337600F81175 /* UIBarButtonSystemItemAdd.png */,
 				8BD5305A17F9337600F81175 /* UIBarButtonSystemItemAdd@2x.png */,
 				8BD5305117F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive@2x.png */,
@@ -1218,6 +1239,7 @@
 				8BE493301798E39A002BEA5A /* UILabel.h in Headers */,
 				8B6AEDE617AB638B00D6858A /* UIGestureRecognizer.h in Headers */,
 				8B6AEDFF17AC614100D6858A /* UIGestureRecognizerSubclass.h in Headers */,
+				8BD5306117FA87B600F81175 /* UITabBarItem.h in Headers */,
 				8BB4BD5517B1E860009B7708 /* UIScrollView.h in Headers */,
 				8BB4BD6F17B35AF7009B7708 /* UIScrollViewScrollAnimator.h in Headers */,
 				8BB4BD6017B1ED5E009B7708 /* UIPanGestureRecognizer.h in Headers */,
@@ -1305,6 +1327,8 @@
 				8B1255AF17E563270063454E /* UIButtonImageBackgroundView.h in Headers */,
 				8B5BD75E179B348700A53E4A /* UIGraphics.h in Headers */,
 				8B1255C417E95F0A0063454E /* UIViewControllerTransitioning_Private.h in Headers */,
+				8BD5306917FB86C300F81175 /* UITabBarItem_Private.h in Headers */,
+				8BD5306617FB82C100F81175 /* _UITabBarItemView.h in Headers */,
 				8BC9D28117F77F5500BF1E63 /* UITextView_Private.h in Headers */,
 				8B515C5917BB3CEE003065D2 /* UITableView_Private.h in Headers */,
 				8BD5304F17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h in Headers */,
@@ -1398,6 +1422,7 @@
 				8BF0F9E817BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground.png in Resources */,
 				8B5BD7331798F1A200A53E4A /* UINavigationBarBackgroundImage.png in Resources */,
 				8B5AF850179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted.png in Resources */,
+				8BD5306D17FB9CDD00F81175 /* UITabBarBackground@2x.png in Resources */,
 				8BD5305517F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive@2x.png in Resources */,
 				8BC9D26317F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive@2x.png in Resources */,
 				8B5AF84F179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png in Resources */,
@@ -1410,6 +1435,7 @@
 				8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */,
 				8B08256417AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png in Resources */,
 				8BF0F9E917BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png in Resources */,
+				8BD5306C17FB9CDD00F81175 /* UITabBarBackground.png in Resources */,
 				8BD5305617F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive.png in Resources */,
 				8BAE9591179A1D3100562F35 /* UIBarButtonItemBackground.png in Resources */,
 				8B54687617D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png in Resources */,
@@ -1456,6 +1482,7 @@
 				8B5BD72F1798F05C00A53E4A /* UIImageView.m in Sources */,
 				8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */,
 				8B54688717D2C87700D7E338 /* UITabBarController.m in Sources */,
+				8BD5306217FA87B600F81175 /* UITabBarItem.m in Sources */,
 				8BC9D25D17EFFAEE00BF1E63 /* UINSWindow.m in Sources */,
 				8B5BD73E1799037400A53E4A /* UIButtonBackgroundView.m in Sources */,
 				8BE4931B1798D65C002BEA5A /* _UINavigationItemView.m in Sources */,
@@ -1512,6 +1539,7 @@
 				8B5E725717B9EFF5006A16B9 /* UIMenuController.m in Sources */,
 				8B54A03817B9CB2C0068775C /* UILongPressGestureRecognizer.m in Sources */,
 				8B1255CD17E979070063454E /* UIMotionEffect.m in Sources */,
+				8BD5306717FB82C100F81175 /* _UITabBarItemView.m in Sources */,
 				8BE493311798E39A002BEA5A /* UILabel.m in Sources */,
 				8B54A04C17B9CD7B0068775C /* UICollectionViewUpdateItem.m in Sources */,
 				8B91077417A8C62D008D9DF0 /* _UIAnimations.m in Sources */,

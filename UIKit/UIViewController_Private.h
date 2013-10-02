@@ -8,7 +8,16 @@
 
 #import "UIViewController.h"
 
-@interface UIViewController ()
+@class _UIViewControllerContextConcreteTransitioning;
+
+@interface UIViewController () {
+    UINavigationItem *_navigationItem;
+    UIBarButtonItem *_editButtonItem;
+    NSMutableArray *_childViewControllers;
+    UIView *_view;
+    
+    _UIViewControllerContextConcreteTransitioning *_currentAnimationContext;
+}
 
 ///Whether or not the controller is a root view controller in a window.
 @property (nonatomic, getter=_isRootViewController) BOOL _rootViewController;

@@ -12,18 +12,14 @@
 #import "UIView_Private.h"
 #import "UIResponder_Private.h"
 #import "UINavigationController.h"
+#import "UITabBarController.h"
 #import "UINavigationItem.h"
+#import "UITabBar.h"
 #import "UIToolbar.h"
 
 #import "UIWindow.h"
 
-@implementation UIViewController {
-    UINavigationItem *_navigationItem;
-    NSMutableArray *_childViewControllers;
-    UIView *_view;
-    
-    _UIViewControllerContextConcreteTransitioning *_currentAnimationContext;
-}
+@implementation UIViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -94,7 +90,7 @@
 {
 }
 
-#pragma mark - Loading
+#pragma mark - Managing the View
 
 - (void)viewWillLoad
 {
@@ -115,23 +111,55 @@
     }
 }
 
-#pragma mark - Navigation Stack Support
+#pragma mark -
 
-- (UINavigationController *)navigationController
+- (void)setTitle:(NSString *)title
 {
-    if([self.parentViewController isKindOfClass:[UINavigationController class]])
-        return (UINavigationController *)self.parentViewController;
-    else
-        return [self.parentViewController navigationController];
+    _title = [title copy];
+    
+    _tabBarItem.title = title;
+    _navigationItem.title = title;
 }
+
+#pragma mark - Adding Editing Behaviors to Your View Controller
+
+- (void)setEditing:(BOOL)editing
+{
+    [self setEditing:editing animated:NO];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    _editing = editing;
+}
+
+#pragma mark -
+
+- (void)_toggleEditingStatus:(UIBarButtonItem *)item
+{
+    [self setEditing:!self.editing animated:YES];
+}
+
+#pragma mark - Configuring a Navigation Interface
 
 - (UINavigationItem *)navigationItem
 {
     if(!_navigationItem) {
-        _navigationItem = [[UINavigationItem alloc] initWithTitle:NSStringFromClass([self class])];
+        _navigationItem = [[UINavigationItem alloc] initWithTitle:self.title];
     }
     
     return _navigationItem;
+}
+
+- (UIBarButtonItem *)editButtonItem
+{
+    if(!_editButtonItem) {
+        _editButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                        target:self
+                                                                        action:@selector(_toggleEditingStatus:)];
+    }
+    
+    return _editButtonItem;
 }
 
 #pragma mark -
@@ -145,6 +173,19 @@
 {
     _toolbarItems = [items copy];
     [self.navigationController.toolbar setItems:items animated:animated];
+}
+
+#pragma mark - Configuring Tab Bar Items
+
+- (UITabBarItem *)tabBarItem
+{
+    if(!_tabBarItem) {
+        _tabBarItem = [[UITabBarItem alloc] initWithTitle:self.title
+                                                    image:nil 
+                                                      tag:(NSInteger)self.class];
+    }
+    
+    return _tabBarItem;
 }
 
 #pragma mark - Containing View Controllers
@@ -188,6 +229,29 @@
     [[self.parentViewController mutableChildViewControllers] removeObject:self];
     self.parentViewController = nil;
     [self didMoveToParentViewController:nil];
+}
+
+#pragma mark - Getting Other Related View Controllers
+
+- (UINavigationController *)navigationController
+{
+    if([self.parentViewController isKindOfClass:[UINavigationController class]])
+        return (UINavigationController *)self.parentViewController;
+    else
+        return [self.parentViewController navigationController];
+}
+
+- (UISplitViewController *)splitViewController
+{
+    return nil;
+}
+
+- (UITabBarController *)tabBarController
+{
+    if([self.parentViewController isKindOfClass:[UITabBarController class]])
+        return (UITabBarController *)self.parentViewController;
+    else
+        return [self.parentViewController tabBarController];
 }
 
 #pragma mark - Responder
@@ -242,7 +306,7 @@
 
 - (UIViewController *)_presentationController
 {
-    return self.navigationController ?: self;
+    return self.parentViewController ?: self;
 }
 
 #pragma mark -

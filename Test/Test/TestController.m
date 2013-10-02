@@ -14,6 +14,15 @@
 
 @implementation TestController
 
+- (id)init
+{
+    if((self = [super init])) {
+        self.title = @"Other";
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

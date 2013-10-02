@@ -15,9 +15,9 @@
 #import "UIImage_Private.h"
 #import "_UIBarButtonFlexibleSpaceItem.h"
 
-static NSString *TitleForSystemItemStyle(UIBarButtonSystemItem style)
+static NSString *TitleForSystemItem(UIBarButtonSystemItem item)
 {
-    switch (style) {
+    switch (item) {
         case UIBarButtonSystemItemDone: {
             return UILocalizedString(@"Done", @"");
         }
@@ -91,9 +91,9 @@ static NSString *TitleForSystemItemStyle(UIBarButtonSystemItem style)
     }
 }
 
-static UIImage *ImageForSystemItemStyle(UIBarButtonSystemItem style)
+static UIImage *ImageForSystemItem(UIBarButtonSystemItem item)
 {
-    switch (style) {
+    switch (item) {
         case UIBarButtonSystemItemDone: {
             return nil; //Has Text
         }
@@ -239,8 +239,8 @@ static UIImage *ImageForSystemItemStyle(UIBarButtonSystemItem style)
     
     if((self = [super init])) {
         self.style = UIBarButtonItemStyleBordered;
-        self.title = TitleForSystemItemStyle(systemItem);
-        self.image = ImageForSystemItemStyle(systemItem);
+        self.title = TitleForSystemItem(systemItem);
+        self.image = ImageForSystemItem(systemItem);
         self.target = target;
         self.action = action;
         
@@ -287,7 +287,7 @@ static UIImage *ImageForSystemItemStyle(UIBarButtonSystemItem style)
 
 #pragma mark - Buttons
 
-- (UIButton *)underlyingButton
+- (UIButton *)_underlyingButton
 {
     if(!_underlyingButton) {
         UIButtonType buttonType;
@@ -318,7 +318,7 @@ static UIImage *ImageForSystemItemStyle(UIBarButtonSystemItem style)
 
 - (UIView *)_itemView
 {
-    return self.customView ?: self.underlyingButton;
+    return self.customView ?: self._underlyingButton;
 }
 
 #pragma mark - Properties
@@ -326,13 +326,15 @@ static UIImage *ImageForSystemItemStyle(UIBarButtonSystemItem style)
 - (void)setTitle:(NSString *)title
 {
     [super setTitle:title];
-    [self.underlyingButton setTitle:title forState:UIControlStateNormal];
+    [_underlyingButton setTitle:title forState:UIControlStateNormal];
+    [_underlyingButton.superview setNeedsLayout];
 }
 
 - (void)setImage:(UIImage *)image
 {
     [super setImage:image];
-    [self.underlyingButton setImage:image forState:UIControlStateNormal];
+    [_underlyingButton setImage:image forState:UIControlStateNormal];
+    [_underlyingButton.superview setNeedsLayout];
 }
 
 @end

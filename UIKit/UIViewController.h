@@ -10,7 +10,8 @@
 #import "UIDevice.h"
 #import "UIViewControllerTransitioning.h"
 
-@class UINavigationController, UINavigationItem, UIView;
+@class UINavigationController, UITabBarController, UISplitViewController;
+@class UINavigationItem, UIBarButtonItem, UITabBarItem, UIView;
 
 typedef NS_ENUM(NSInteger, UIInterfaceOrientation) {
     UIInterfaceOrientationPortrait           = UIDeviceOrientationPortrait,
@@ -41,30 +42,49 @@ typedef NS_ENUM(NSInteger, UIInterfaceOrientation) {
 - (void)viewWillDisappear:(BOOL)animated;
 - (void)viewDidDisappear:(BOOL)animated;
 
-#pragma mark - Properties
+#pragma mark - Managing the View
 
 @property (nonatomic, readonly) BOOL isViewLoaded;
 @property (nonatomic) UIView *view;
+@property (nonatomic, copy) NSString *title;
 
-#pragma mark - Navigation Stack Support
+#pragma mark - Adding Editing Behaviors to Your View Controller
 
-@property (nonatomic, readonly) UINavigationController *navigationController;
+@property (nonatomic, getter=isEditing) BOOL editing;
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated;
+
+#pragma mark - Configuring a Navigation Interface
+
 @property (nonatomic, readonly) UINavigationItem *navigationItem;
+- (UIBarButtonItem *)editButtonItem;
 
 @property (nonatomic, readonly) BOOL hidesBottomBarWhenPushed;
 
 - (void)setToolbarItems:(NSArray *)items animated:(BOOL)animated;
 @property (nonatomic, copy) NSArray *toolbarItems;
 
+#pragma mark - Configuring Tab Bar Items
+
+@property (nonatomic) UITabBarItem *tabBarItem;
+
 #pragma mark - Containing View Controllers
 
-@property (nonatomic, readonly) UIViewController *parentViewController;
 - (void)willMoveToParentViewController:(UIViewController *)parent;
 - (void)didMoveToParentViewController:(UIViewController *)parent;
 
 #pragma mark -
 
 @property (nonatomic, readonly) NSArray *childViewControllers;
+
+#pragma mark - Getting Other Related View Controllers
+
+@property (nonatomic, readonly) UINavigationController *navigationController;
+@property (nonatomic, readonly) UISplitViewController *splitViewController;
+@property (nonatomic, readonly) UITabBarController *tabBarController;
+
+#pragma mark -
+
+@property (nonatomic, readonly) UIViewController *parentViewController;
 @property (nonatomic, readonly) UIViewController *presentingViewController;
 @property (nonatomic, readonly) UIViewController *presentedViewController;
 

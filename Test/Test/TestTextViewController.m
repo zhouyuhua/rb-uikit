@@ -16,12 +16,20 @@
 
 @implementation TestTextViewController
 
+- (id)init
+{
+    if((self = [super init])) {
+        self.title = @"Text";
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.navigationItem.leftBarButtonItem = [UIMacWindowButtonsView windowButtonsBarItem];
-    self.navigationItem.title = @"Text View Test";
     
     self.textView = [[UITextView alloc] initWithFrame:self.view.bounds];
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

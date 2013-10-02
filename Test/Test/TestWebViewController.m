@@ -16,6 +16,15 @@
 
 @implementation TestWebViewController
 
+- (id)init
+{
+    if((self = [super init])) {
+        self.title = @"Web";
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
