@@ -151,6 +151,13 @@
     }
 }
 
+#pragma mark -
+
+- (NSMenu *)menuForEvent:(NSEvent *)event
+{
+    return [UIApp _dispatchForMenuForEvent:event fromHostView:self];
+}
+
 #pragma mark - Drag and Drop
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender

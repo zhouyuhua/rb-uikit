@@ -61,6 +61,7 @@
     NSMutableArray *_updateStack;
     
     BOOL _needsReload;
+    BOOL _editing;
     
     UIRefreshControl *_refreshControl;
 }

@@ -69,7 +69,7 @@ typedef NS_ENUM(NSUInteger, UITableViewRowAnimation) {
 
 #pragma mark - Inserting or Deleting Table Rows
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath UIKIT_UNIMPLEMENTED;
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath;
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath UIKIT_UNIMPLEMENTED;
 
 #pragma mark - Reordering Table Rows

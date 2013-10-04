@@ -12,6 +12,8 @@
 #import "UIBarButtonItem_Private.h"
 #import "UIView_Private.h"
 
+#import "UIButton.h"
+
 @interface UIPopoverController ()
 
 @property (nonatomic) UIButton *shieldView;
@@ -35,6 +37,7 @@
     if((self = [super initWithNibName:nil bundle:nil])) {
         self.popoverBackgroundViewClass = [_UIConcretePopoverBackgroundView class];
         self.contentViewController = controller;
+        self.contentViewController.view.layer.cornerRadius = _UIPopoverCornerRadius;
         
         self.shieldView = [UIButton buttonWithType:UIButtonTypeCustom];
         self.shieldView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

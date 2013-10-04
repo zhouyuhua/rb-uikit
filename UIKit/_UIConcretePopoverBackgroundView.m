@@ -8,6 +8,9 @@
 
 #import "_UIConcretePopoverBackgroundView.h"
 #import "UIImage_Private.h"
+#import "UIImageView.h"
+
+CGFloat const _UIPopoverCornerRadius = 3.0;
 
 @implementation _UIConcretePopoverBackgroundView {
     UIView *_backgroundView;
@@ -19,7 +22,11 @@
     if((self = [super initWithFrame:frame])) {
         _backgroundView = [UIView new];
         _backgroundView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.95];
-        _backgroundView.layer.cornerRadius = 3.0;
+        _backgroundView.layer.cornerRadius = _UIPopoverCornerRadius;
+        _backgroundView.layer.shadowColor = [UIColor blackColor].CGColor;
+        _backgroundView.layer.shadowOpacity = 0.25;
+        _backgroundView.layer.shadowOffset = CGSizeZero;
+        _backgroundView.layer.shadowRadius = 3.0;
         [self addSubview:_backgroundView];
         
         _arrowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, [self.class arrowBase], [self.class arrowHeight])];

@@ -919,7 +919,7 @@
 
 - (BOOL)isEditing
 {
-    return NO;
+    return _editing;
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate
@@ -1133,6 +1133,58 @@
             break;
         }
     }
+}
+
+#pragma mark - Contextual Menus
+
+- (BOOL)_isIndexPathDeletable:(NSIndexPath *)indexPath
+{
+    if(!indexPath)
+        return NO;
+    
+    if(_dataSourceRespondsTo.tableViewCanEditRowAtIndexPath &&
+       _delegateRespondsTo.tableViewEditingStyleForRowAtIndexPath) {
+        return ([self.dataSource tableView:self canEditRowAtIndexPath:indexPath] &&
+                ([self.delegate tableView:self editingStyleForRowAtIndexPath:indexPath] == UITableViewCellEditingStyleDelete));
+    } else if(_dataSourceRespondsTo.tableViewCanEditRowAtIndexPath) {
+        return [self.dataSource tableView:self canEditRowAtIndexPath:indexPath];
+    } else if(_delegateRespondsTo.tableViewEditingStyleForRowAtIndexPath) {
+        return ([self.delegate tableView:self editingStyleForRowAtIndexPath:indexPath] == UITableViewCellEditingStyleDelete);
+    } else {
+        return NO;
+    }
+}
+
+- (NSMenu *)_menuForEvent:(NSEvent *)event atPointInView:(CGPoint)point
+{
+    NSIndexPath *indexPath = [self indexPathForRowAtPoint:point];
+    if([self _isIndexPathDeletable:indexPath]) {
+        [self selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        
+        NSMenu *deleteMenu = [[NSMenu alloc] initWithTitle:@"Table View Edit Menu"];
+        
+        NSMenuItem *deleteItem = [deleteMenu addItemWithTitle:UILocalizedString(@"Delete", @"") action:@selector(_deleteRowFromMenuItem:) keyEquivalent:@""];
+        [deleteItem setTarget:self];
+        [deleteItem setRepresentedObject:indexPath];
+        
+        _editing = YES;
+        
+        return deleteMenu;
+    }
+    
+    return nil;
+}
+
+- (void)_deleteRowFromMenuItem:(NSMenuItem *)item
+{
+    NSIndexPath *indexPathToDelete = [item representedObject];
+    [self deselectRowAtIndexPath:indexPathToDelete animated:YES];
+    
+    if(_dataSourceRespondsTo.tableViewCommitEditingStyleForRowAtIndexPath) {
+        [self.dataSource tableView:self commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPathToDelete];
+    }
+    
+    _editing = NO;
 }
 
 @end

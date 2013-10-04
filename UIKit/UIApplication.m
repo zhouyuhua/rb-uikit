@@ -343,6 +343,17 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     return !_currentEvent._unhandled;
 }
 
+- (NSMenu *)_dispatchForMenuForEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
+{
+    CGPoint mouseLocation = [[hostView window] convertScreenToBase:[NSEvent mouseLocation]];
+    CGPoint locationInWindow = [hostView convertPoint:mouseLocation fromView:nil];
+    UIView *targetView = [hostView.kitWindow hitTest:locationInWindow withEvent:nil];
+    if(targetView)
+        return [targetView _menuForEvent:event atPointInView:[hostView.kitWindow convertPoint:locationInWindow toView:targetView]];
+    else
+        return nil;
+}
+
 - (void)_dispatchIdleScrollEvent:(NSEvent *)event ofPhase:(NSEventPhase)phase fromHostView:(UIWindowHostNativeView *)hostView
 {
     CGPoint mouseLocation = [[hostView window] convertScreenToBase:[NSEvent mouseLocation]];

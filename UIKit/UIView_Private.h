@@ -37,6 +37,13 @@ UIKIT_EXTERN NSString *const UIViewDidChangeSuperviewNotification;
 - (void)_enumerateSubviews:(void(^)(UIView *subview, NSUInteger depth, BOOL *stop))block;
 - (void)_printSubviews;
 
+#pragma mark - UIView Specific Internal Events
+
+///Overridden by subclasses to return a context-sensitive pop-up menu for a given mouse-down event.
+///
+///The default implementation of this method forwards to its super view.
+- (NSMenu *)_menuForEvent:(NSEvent *)event atPointInView:(CGPoint)point;
+
 #pragma mark - readwrite
 
 @property (nonatomic, readwrite, unsafe_unretained) UIView *superview;

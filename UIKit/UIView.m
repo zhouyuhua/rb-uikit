@@ -866,6 +866,13 @@ static void EnumerateSubviews(UIView *view, void(^block)(UIView *subview, NSUInt
     UIKitUnimplementedMethod();
 }
 
+#pragma mark - UIView Specific Internal Events
+
+- (NSMenu *)_menuForEvent:(NSEvent *)event atPointInView:(CGPoint)point
+{
+    return [self.superview _menuForEvent:event atPointInView:point];
+}
+
 #pragma mark - <CALayerDelegate>
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx

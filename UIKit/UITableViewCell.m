@@ -179,7 +179,7 @@ static CGFloat const kSubtitleStyleInterLabelPadding = 2.0;
     _highlighted = highlighted;
     
     if(animate) {
-        [UIView animateWithDuration:UIKitAnimationDuration animations:^{
+        [UIView animateWithDuration:UIKitAnimationDurationFast animations:^{
             self.backgroundView.alpha = highlighted? 1.0 : 0.0;
             self.selectedBackgroundView.alpha = !highlighted? 0.0 : 1.0;
         } completion:^(BOOL finished) {
