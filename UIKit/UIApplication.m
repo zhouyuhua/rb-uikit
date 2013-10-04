@@ -232,6 +232,20 @@ static Class _SharedApplicationClass = Nil;
     return [[NSApplication sharedApplication] userInterfaceLayoutDirection];
 }
 
+#pragma mark - Setting the Icon of a Newsstand App
+
+- (void)setNewsstandIconImage:(UIImage *)image
+{
+    //Do nothing.
+}
+
+#pragma mark - Getting the Font Sizing Preference
+
+- (NSString *)preferredContentSizeCategory
+{
+    return UIContentSizeCategoryMedium;
+}
+
 #pragma mark - Registering for Remote Control Events
 
 - (void)beginReceivingRemoteControlEvents
@@ -702,3 +716,14 @@ NSTimeInterval const UIApplicationBackgroundFetchIntervalMinimum = 0.0;
 NSTimeInterval const UIApplicationBackgroundFetchIntervalNever = INFINITY;
 UIBackgroundTaskIdentifier const UIBackgroundTaskInvalid = NSUIntegerMax;
 NSTimeInterval const UIMinimumKeepAliveTimeout = 0.0;
+
+NSString *const UIContentSizeCategoryDidChangeNotification = @"UIContentSizeCategoryDidChangeNotification";
+NSString *const UIContentSizeCategoryNewValueKey = @"UIContentSizeCategoryNewValueKey";
+
+NSString *const UIContentSizeCategoryExtraSmall = @"UIContentSizeCategoryExtraSmall";
+NSString *const UIContentSizeCategorySmall = @"UIContentSizeCategorySmall";
+NSString *const UIContentSizeCategoryMedium = @"UIContentSizeCategoryMedium";
+NSString *const UIContentSizeCategoryLarge = @"UIContentSizeCategoryLarge";
+NSString *const UIContentSizeCategoryExtraLarge = @"UIContentSizeCategoryExtraLarge";
+NSString *const UIContentSizeCategoryExtraExtraLarge = @"UIContentSizeCategoryExtraExtraLarge";
+NSString *const UIContentSizeCategoryExtraExtraExtraLarge = @"UIContentSizeCategoryExtraExtraExtraLarge";

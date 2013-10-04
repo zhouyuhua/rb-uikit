@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceLayoutDirection) {
 };
 
 @protocol UIApplicationDelegate;
-@class UILocalNotification;
+@class UILocalNotification, UIImage;
 
 @interface UIApplication : UIResponder
 
@@ -133,6 +133,14 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceLayoutDirection) {
 - (void)unregisterForRemoteNotifications;
 - (UIRemoteNotificationType)enabledRemoteNotificationTypes;
 
+#pragma mark - Setting the Icon of a Newsstand App
+
+- (void)setNewsstandIconImage:(UIImage *)image;
+
+#pragma mark - Getting the Font Sizing Preference
+
+@property (nonatomic, readonly, copy) NSString *preferredContentSizeCategory;
+
 @end
 
 #pragma mark -
@@ -178,5 +186,16 @@ UIKIT_EXTERN NSTimeInterval const UIApplicationBackgroundFetchIntervalNever;
 
 UIKIT_EXTERN UIBackgroundTaskIdentifier const UIBackgroundTaskInvalid;
 UIKIT_EXTERN NSTimeInterval const UIMinimumKeepAliveTimeout;
+
+UIKIT_EXTERN NSString *const UIContentSizeCategoryDidChangeNotification;
+UIKIT_EXTERN NSString *const UIContentSizeCategoryNewValueKey;
+
+UIKIT_EXTERN NSString *const UIContentSizeCategoryExtraSmall;
+UIKIT_EXTERN NSString *const UIContentSizeCategorySmall;
+UIKIT_EXTERN NSString *const UIContentSizeCategoryMedium;
+UIKIT_EXTERN NSString *const UIContentSizeCategoryLarge;
+UIKIT_EXTERN NSString *const UIContentSizeCategoryExtraLarge;
+UIKIT_EXTERN NSString *const UIContentSizeCategoryExtraExtraLarge;
+UIKIT_EXTERN NSString *const UIContentSizeCategoryExtraExtraExtraLarge;
 
 #endif /* UIKit_UIApplication_h */
