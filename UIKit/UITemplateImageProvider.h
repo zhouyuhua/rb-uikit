@@ -14,8 +14,8 @@
 
 @interface UITemplateImageProvider : UIImageProvider
 
-- (instancetype)initWithOriginalImage:(UIImage *)originalImage;
+- (instancetype)initWithSourceProvider:(UIImageProvider *)provider;
 
-@property (nonatomic, copy) UIImage *originalImage;
+@property (nonatomic, copy) UIImageProvider *sourceProvider;
 
 @end

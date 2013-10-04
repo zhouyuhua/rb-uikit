@@ -168,30 +168,12 @@
     return [[UIImage alloc] initWithProviders:self._providers];
 }
 
-#pragma mark - Providers
-
-- (UIImageProvider *)_bestProviderForScale:(CGFloat)scale
-{
-    UIImageProvider *bestProvider;
-    
-    for (UIImageProvider *provider in self._providers) {
-        bestProvider = provider;
-        
-        CGFloat providerScale = provider.scale;
-        if(providerScale >= scale) {
-            break;
-        }
-    }
-    
-    return bestProvider;
-}
-
 #pragma mark - Properties
 
 - (CGSize)size
 {
     CGFloat scale = self.scale;
-    CGSize imageSize = [[self _bestProviderForScale:2.0] imageSize];
+    CGSize imageSize = [[self _bestProviderForScale:_UIGraphicsGetCurrentScale()] imageSize];
     imageSize.width /= scale;
     imageSize.height /= scale;
     return imageSize;
@@ -199,12 +181,12 @@
 
 - (CGImageRef)CGImage
 {
-    return [[self _bestProviderForScale:2.0] image];
+    return [[self _bestProviderForScale:_UIGraphicsGetCurrentScale()] image];
 }
 
 - (CGFloat)scale
 {
-    return [[self _bestProviderForScale:2.0] scale];
+    return [[self _bestProviderForScale:_UIGraphicsGetCurrentScale()] scale];
 }
 
 - (CIImage *)CIImage
@@ -223,6 +205,42 @@
 - (NSImage *)NSImage
 {
     return [[NSImage alloc] initWithCGImage:self.CGImage size:self.size];
+}
+
+#pragma mark - Providers
+
+- (UIImageProvider *)_bestProviderForScale:(CGFloat)scale
+{
+    UIImageProvider *bestProvider;
+    
+    for (UIImageProvider *provider in self._providers) {
+        bestProvider = provider;
+        
+        CGFloat providerScale = provider.scale;
+        if(providerScale >= scale) {
+            break;
+        }
+    }
+    
+    return bestProvider;
+}
+
+- (NSArray *)_mapProvidersWithBlock:(UIImageProvider *(^)(UIImageProvider *sourceProvider, BOOL *stop))mapper;
+{
+    NSParameterAssert(mapper);
+    
+    NSMutableArray *result = [NSMutableArray array];
+    BOOL stop = NO;
+    for (UIImageProvider *provider in self._providers) {
+        UIImageProvider *newProvider = mapper(provider, &stop);
+        if(newProvider)
+            [result addObject:newProvider];
+        
+        if(stop)
+            break;
+    }
+    
+    return result;
 }
 
 #pragma mark - Tinting
@@ -297,14 +315,32 @@
 
 - (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode
 {
-    if(capInsets.top != 0.0 || capInsets.bottom != 0.0)
+    NSArray *newProviders;
+    if(capInsets.left != 0.0 && capInsets.right != 0.0 && capInsets.top != 0.0 && capInsets.bottom != 0.0) {
         UIKitUnimplementedMethod();
+    } else if(capInsets.left != 0.0 && capInsets.right != 0.0) {
+        newProviders = [self _mapProvidersWithBlock:^(UIImageProvider *sourceProvider, BOOL *stop) {
+            return [[UIThreePartImageProvider alloc] initWithProvider:sourceProvider
+                                                              leftCap:capInsets.left
+                                                             rightCap:capInsets.right
+                                                           isVertical:NO
+                                                         resizingMode:resizingMode];
+        }];
+    } else if(capInsets.top != 0.0 && capInsets.bottom != 0.0) {
+        newProviders = [self _mapProvidersWithBlock:^(UIImageProvider *sourceProvider, BOOL *stop) {
+            return [[UIThreePartImageProvider alloc] initWithProvider:sourceProvider
+                                                              leftCap:capInsets.top
+                                                             rightCap:capInsets.bottom
+                                                           isVertical:YES
+                                                         resizingMode:resizingMode];
+        }];
+    } else {
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"Unsupported cap insets {%f, %f, %f, %f}", capInsets.left, capInsets.right, capInsets.top, capInsets.bottom];
+    }
     
-    UIThreePartImageProvider *threePartProvider = [[UIThreePartImageProvider alloc] initWithProvider:[self _bestProviderForScale:2.0]
-                                                                                             leftCap:capInsets.left
-                                                                                            rightCap:capInsets.right
-                                                                                        resizingMode:resizingMode];
-    UIImage *image = [[UIImage alloc] initWithProviders:@[ threePartProvider ]];
+    
+    UIImage *image = [[UIImage alloc] initWithProviders:newProviders];
     image.capInsets = capInsets;
     image.resizingMode = resizingMode;
     return image;
@@ -329,12 +365,20 @@
             newImage.renderingMode = renderingMode;
             return newImage;
         } else {
-            UITemplateImageProvider *templateProvider = (UITemplateImageProvider *)[self _bestProviderForScale:2.0];
-            return templateProvider.originalImage;
+            NSMutableArray *templateProviders = [NSMutableArray array];
+            for (UITemplateImageProvider *provider in self._providers) {
+                [templateProviders addObject:provider.sourceProvider];
+            }
+            
+            UIImage *newImage = [[UIImage alloc] initWithProviders:templateProviders];
+            newImage.renderingMode = renderingMode;
+            return newImage;
         }
     } else {
-        UITemplateImageProvider *imageProvider = [[UITemplateImageProvider alloc] initWithOriginalImage:self];
-        UIImage *newImage = [[UIImage alloc] initWithProviders:@[ imageProvider ]];
+        NSArray *templateProviders = [self _mapProvidersWithBlock:^(UIImageProvider *sourceProvider, BOOL *stop) {
+            return [[UITemplateImageProvider alloc] initWithSourceProvider:sourceProvider];
+        }];
+        UIImage *newImage = [[UIImage alloc] initWithProviders:templateProviders];
         newImage.renderingMode = UIImageRenderingModeAlwaysTemplate;
         return newImage;
     }

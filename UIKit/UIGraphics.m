@@ -105,19 +105,19 @@ void UIGraphicsBeginImageContext(CGSize size)
 void UIGraphicsBeginImageContextWithOptions(CGSize size, BOOL opaque, CGFloat scale)
 {
     if(scale == 0.0)
-        scale = [UIScreen mainScreen].scale;
+        scale = _UIGraphicsGetCurrentScale();
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef imageContext = CGBitmapContextCreate(/* in data */ NULL,
-                                                      /* in width */ size.width,
-                                                      /* in height */ size.height,
+                                                      /* in width */ size.width * scale,
+                                                      /* in height */ size.height * scale,
                                                       /* in bitsPerComponent */ 8,
                                                       /* in bytesPerRow */ 0,
                                                       /* in colorSpace */ colorSpace,
                                                       /* in bitmapInfo */ (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
     
-    CGContextTranslateCTM(imageContext, 0.0, size.height);
-    CGContextScaleCTM(imageContext, 1.0, -1.0);
+    CGContextTranslateCTM(imageContext, 0.0, size.height * scale);
+    CGContextScaleCTM(imageContext, scale, -scale);
     
     UIGraphicsPushContext(imageContext);
     _UIGraphicsPushScale(scale);

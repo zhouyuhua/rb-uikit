@@ -11,6 +11,10 @@
 
 @interface UIThreePartImageProvider : UIImageProvider
 
-- (instancetype)initWithProvider:(UIImageProvider *)provider leftCap:(CGFloat)leftCap rightCap:(CGFloat)rightCap resizingMode:(UIImageResizingMode)resizingMode;
+- (instancetype)initWithProvider:(UIImageProvider *)provider
+                         leftCap:(CGFloat)leftCap
+                        rightCap:(CGFloat)rightCap
+                      isVertical:(BOOL)isVertical
+                    resizingMode:(UIImageResizingMode)resizingMode;
 
 @end

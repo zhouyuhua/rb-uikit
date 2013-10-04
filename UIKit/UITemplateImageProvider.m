@@ -54,14 +54,14 @@ static CGImageRef CreateMaskWithImage(CGImageRef originalMaskImage)
 
 @implementation UITemplateImageProvider
 
-- (instancetype)initWithOriginalImage:(UIImage *)originalImage
+- (instancetype)initWithSourceProvider:(UIImageProvider *)provider
 {
-    NSParameterAssert(originalImage);
+    NSParameterAssert(provider);
     
-    CGImageRef maskImage = CreateMaskWithImage(originalImage.CGImage);
+    CGImageRef maskImage = CreateMaskWithImage(provider.image);
     
-    if((self = [super initWithCGImage:maskImage scale:originalImage.scale])) {
-        self.originalImage = originalImage;
+    if((self = [super initWithCGImage:maskImage scale:provider.scale])) {
+        self.sourceProvider = provider;
     }
     
     CGImageRelease(maskImage);
@@ -72,7 +72,7 @@ static CGImageRef CreateMaskWithImage(CGImageRef originalMaskImage)
 - (id)copyWithZone:(NSZone *)zone
 {
     UITemplateImageProvider *providerCopy = [super copyWithZone:zone];
-    providerCopy->_originalImage = _originalImage;
+    providerCopy->_sourceProvider = _sourceProvider;
     return providerCopy;
 }
 
