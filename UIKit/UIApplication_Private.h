@@ -37,6 +37,8 @@ extern UIApplication *UIApp;
     
     UIEvent *_currentEvent;
     UITouch *_currentTouch;
+    
+    NSInteger _eventIgnoreCount;
 }
 
 @property (nonatomic, readwrite) UIWindow *keyWindow;

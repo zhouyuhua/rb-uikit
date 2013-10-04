@@ -32,7 +32,7 @@
 #pragma mark -
 
 @property (nonatomic, readwrite) BOOL isViewLoaded;
-@property (nonatomic, readwrite) UIViewController *parentViewController;
+@property (nonatomic, readwrite, unsafe_unretained) UIViewController *parentViewController;
 @property (nonatomic, readwrite) UIViewController *presentingViewController;
 @property (nonatomic, readwrite) UIViewController *presentedViewController;
 

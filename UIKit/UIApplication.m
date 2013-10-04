@@ -79,14 +79,6 @@ static Class _SharedApplicationClass = Nil;
     _delegateRespondsTo.applicationWillEnterForeground = [delegate respondsToSelector:@selector(applicationWillEnterForeground:)];
 }
 
-- (UIApplicationState)applicationState
-{
-    if([NSApp isActive])
-        return UIApplicationStateActive;
-    else
-        return UIApplicationStateInactive;
-}
-
 #pragma mark - Opening URLs
 
 - (BOOL)openURL:(NSURL *)url
@@ -97,6 +89,161 @@ static Class _SharedApplicationClass = Nil;
 - (BOOL)canOpenURL:(NSURL *)url
 {
     return (LSGetApplicationForURL((__bridge CFURLRef)url, kLSRolesAll, NULL, NULL) != kLSApplicationNotFoundErr);
+}
+
+#pragma mark - Managing the Default Interface Orientations
+
+- (UIDeviceOrientation)supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    return UIDeviceOrientationFaceUp;
+}
+
+#pragma mark - Managing App Activity
+
+- (void)setIdleTimerDisabled:(BOOL)idleTimerDisabled
+{
+    UIKitUnimplementedMethod();
+}
+
+- (BOOL)isIdleTimerDisabled
+{
+    return NO;
+}
+
+#pragma mark - Multitasking
+
+- (UIApplicationState)applicationState
+{
+    if([NSApp isActive])
+        return UIApplicationStateActive;
+    else
+        return UIApplicationStateInactive;
+}
+
+#pragma mark -
+
+- (NSTimeInterval)backgroundTimeRemaining
+{
+    return DBL_MAX;
+}
+
+- (UIBackgroundRefreshStatus)backgroundRefreshStatus
+{
+    return UIBackgroundRefreshStatusDenied;
+}
+
+#pragma mark -
+
+- (void)setMinimumBackgroundFetchInterval:(NSTimeInterval)timeInterval
+{
+    
+}
+
+- (UIBackgroundTaskIdentifier)beginBackgroundTaskWithName:(NSString *)name expirationHandler:(void(^)(void))handler
+{
+    return UIBackgroundTaskInvalid;
+}
+
+- (UIBackgroundTaskIdentifier)beginBackgroundTaskWithExpirationHandler:(void(^)(void))handler
+{
+    return [self beginBackgroundTaskWithName:nil expirationHandler:handler];
+}
+
+- (void)endBackgroundTask:(UIBackgroundTaskIdentifier)identifier
+{
+    
+}
+
+- (void)setKeepAliveTimeout:(NSTimeInterval)timeInterval handler:(void(^)(void))handler
+{
+    
+}
+
+- (void)clearKeepAliveTimeout
+{
+    
+}
+
+#pragma mark - Managing Status Bar Orientation
+
+- (void)setStatusBarOrientation:(UIDeviceOrientation)statusBarOrientation
+{
+    [self setStatusBarOrientation:statusBarOrientation animated:NO];
+}
+
+- (void)setStatusBarOrientation:(UIDeviceOrientation)orientation animated:(BOOL)animate
+{
+    //Do nothing.
+}
+
+- (UIDeviceOrientation)statusBarOrientation
+{
+    return UIDeviceOrientationFaceUp;
+}
+
+#pragma mark - Controlling App Appearance
+
+- (void)setStatusBarHidden:(BOOL)statusBarHidden
+{
+    [self setStatusBarHidden:statusBarHidden withAnimation:NO];
+}
+
+- (void)setStatusBarHidden:(BOOL)hidden withAnimation:(BOOL)animate
+{
+    //Do nothing.
+}
+
+- (BOOL)isStatusBarHidden
+{
+    return YES;
+}
+
+#pragma mark -
+
+- (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle
+{
+    [self setStatusBarStyle:statusBarStyle animated:NO];
+}
+
+- (void)setStatusBarStyle:(UIStatusBarStyle)style animated:(BOOL)animate
+{
+    _statusBarStyle = style;
+}
+
+#pragma mark -
+
+- (CGRect)statusBarFrame
+{
+    return CGRectZero;
+}
+
+- (void)setApplicationIconBadgeNumber:(NSInteger)applicationIconBadgeNumber
+{
+    [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"%ld", applicationIconBadgeNumber]];
+}
+
+- (NSInteger)applicationIconBadgeNumber
+{
+    return [[[[NSApplication sharedApplication] dockTile] badgeLabel] integerValue];
+}
+
+- (UIUserInterfaceLayoutDirection)userInterfaceLayoutDirection
+{
+    return [[NSApplication sharedApplication] userInterfaceLayoutDirection];
+}
+
+#pragma mark - Registering for Remote Control Events
+
+- (void)beginReceivingRemoteControlEvents
+{
+    //Do nothing.
+    
+    /* In the future, this may integrate with PlayKeys. -km */
+}
+
+- (void)endReceivingRemoteControlEvents
+{
+    //Do nothing.
 }
 
 #pragma mark - Event Handling
@@ -122,9 +269,27 @@ static Class _SharedApplicationClass = Nil;
     return NO;
 }
 
-//@property (nonatomic, readonly) NSArray *windows;
+#pragma mark -
 
-#pragma mark - Event Handling
+- (void)beginIgnoringInteractionEvents
+{
+    _eventIgnoreCount++;
+}
+
+- (void)endIgnoringInteractionEvents
+{
+    if(_eventIgnoreCount == 0)
+        return;
+    
+    _eventIgnoreCount--;
+}
+
+- (BOOL)isIgnoringInteractionEvents
+{
+    return (_eventIgnoreCount > 0);
+}
+
+#pragma mark - Internal Event Handling
 
 static NSArray *UIGestureRecognizersForView(UIView *view)
 {
@@ -267,6 +432,9 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 
 - (BOOL)_dispatchKeyEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
+    if([self isIgnoringInteractionEvents])
+        return NO;
+    
     UIKeyEvent *keyEvent = [[UIKeyEvent alloc] initWithNSEvent:event];
     [hostView.kitWindow sendKeyEvent:keyEvent];
     return !keyEvent._unhandled;
@@ -274,6 +442,9 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 
 - (BOOL)_dispatchMouseEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
+    if([self isIgnoringInteractionEvents])
+        return NO;
+    
     switch (event.type) {
         case NSLeftMouseDown: {
             [self _beginTrackingNativeMouseEvent:event fromHostView:hostView];
@@ -345,6 +516,9 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 
 - (NSMenu *)_dispatchForMenuForEvent:(NSEvent *)event fromHostView:(UIWindowHostNativeView *)hostView
 {
+    if([self isIgnoringInteractionEvents])
+        return NO;
+    
     CGPoint mouseLocation = [[hostView window] convertScreenToBase:[NSEvent mouseLocation]];
     CGPoint locationInWindow = [hostView convertPoint:mouseLocation fromView:nil];
     UIView *targetView = [hostView.kitWindow hitTest:locationInWindow withEvent:nil];
@@ -523,3 +697,8 @@ NSString *const UIApplicationDidBecomeActiveNotification = @"UIApplicationDidBec
 NSString *const UIApplicationWillResignActiveNotification = @"UIApplicationWillResignActiveNotification";
 NSString *const UIApplicationDidReceiveMemoryWarningNotification = @"UIApplicationDidReceiveMemoryWarningNotification";
 NSString *const UIApplicationWillTerminateNotification = @"UIApplicationWillTerminateNotification";
+
+NSTimeInterval const UIApplicationBackgroundFetchIntervalMinimum = 0.0;
+NSTimeInterval const UIApplicationBackgroundFetchIntervalNever = INFINITY;
+UIBackgroundTaskIdentifier const UIBackgroundTaskInvalid = NSUIntegerMax;
+NSTimeInterval const UIMinimumKeepAliveTimeout = 0.0;

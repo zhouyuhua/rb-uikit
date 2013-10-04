@@ -303,6 +303,8 @@
     [UIView animateWithDuration:(animate? UIKitAnimationDurationFast : 0.0) animations:^{
         self.view.alpha = 1.0;
     }];
+    
+    (void)(__bridge_retained CFTypeRef)(self); // [self retain];
 }
 
 - (void)presentPopoverFromBarButtonItem:(UIBarButtonItem *)item permittedArrowDirections:(UIPopoverArrowDirection)arrowDirections animated:(BOOL)animate
@@ -326,6 +328,8 @@
         [self.shieldView removeFromSuperview];
         [self.view removeFromSuperview];
     }];
+    
+    (void)(__bridge_transfer id)((__bridge_retained CFTypeRef)(self)); // [self autorelease];
 }
 
 #pragma mark -

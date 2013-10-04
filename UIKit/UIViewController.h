@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger, UIInterfaceOrientation) {
 
 #pragma mark -
 
-@property (nonatomic, readonly) UIViewController *parentViewController;
+@property (nonatomic, readonly, unsafe_unretained) UIViewController *parentViewController;
 @property (nonatomic, readonly) UIViewController *presentingViewController;
 @property (nonatomic, readonly) UIViewController *presentedViewController;
 
