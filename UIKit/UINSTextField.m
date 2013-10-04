@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Roundabout Software, LLC. All rights reserved.
 //
 
-#import "UINSTextFieldCell.h"
+#import "UINSTextField.h"
 #import "UITextField_Private.h"
 
 NSString *const UINSTextFieldDidBecomeFirstResponder = @"UINSTextFieldDidBecomeFirstResponder";

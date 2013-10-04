@@ -39,8 +39,8 @@
 		8B1255CD17E979070063454E /* UIMotionEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1255CB17E979070063454E /* UIMotionEffect.m */; };
 		8B1EC8DA17A9F2B10035369C /* UIAppKitViewGlueNSView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8D817A9F2B10035369C /* UIAppKitViewGlueNSView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B1EC8DB17A9F2B10035369C /* UIAppKitViewGlueNSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8D917A9F2B10035369C /* UIAppKitViewGlueNSView.m */; };
-		8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		8B1EC8E217A9F8280035369C /* UINSTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8DD17A9F8280035369C /* UINSTextFieldCell.m */; };
+		8B1EC8E117A9F8280035369C /* UINSTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DC17A9F8280035369C /* UINSTextField.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B1EC8E217A9F8280035369C /* UINSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8DD17A9F8280035369C /* UINSTextField.m */; };
 		8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DE17A9F8280035369C /* UITextField_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B1EC8E417A9F8280035369C /* UITextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1EC8DF17A9F8280035369C /* UITextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B1EC8E517A9F8280035369C /* UITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1EC8E017A9F8280035369C /* UITextField.m */; };
@@ -350,8 +350,8 @@
 		8B1255CB17E979070063454E /* UIMotionEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMotionEffect.m; sourceTree = "<group>"; };
 		8B1EC8D817A9F2B10035369C /* UIAppKitViewGlueNSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppKitViewGlueNSView.h; sourceTree = "<group>"; };
 		8B1EC8D917A9F2B10035369C /* UIAppKitViewGlueNSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppKitViewGlueNSView.m; sourceTree = "<group>"; };
-		8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINSTextFieldCell.h; path = UIKit/UINSTextFieldCell.h; sourceTree = "<group>"; };
-		8B1EC8DD17A9F8280035369C /* UINSTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UINSTextFieldCell.m; path = UIKit/UINSTextFieldCell.m; sourceTree = "<group>"; };
+		8B1EC8DC17A9F8280035369C /* UINSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UINSTextField.h; path = UIKit/UINSTextField.h; sourceTree = "<group>"; };
+		8B1EC8DD17A9F8280035369C /* UINSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UINSTextField.m; path = UIKit/UINSTextField.m; sourceTree = "<group>"; };
 		8B1EC8DE17A9F8280035369C /* UITextField_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITextField_Private.h; path = UIKit/UITextField_Private.h; sourceTree = "<group>"; };
 		8B1EC8DF17A9F8280035369C /* UITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITextField.h; path = UIKit/UITextField.h; sourceTree = "<group>"; };
 		8B1EC8E017A9F8280035369C /* UITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UITextField.m; path = UIKit/UITextField.m; sourceTree = "<group>"; };
@@ -655,8 +655,8 @@
 				8B1EC8DF17A9F8280035369C /* UITextField.h */,
 				8B1EC8E017A9F8280035369C /* UITextField.m */,
 				8B1EC8DE17A9F8280035369C /* UITextField_Private.h */,
-				8B1EC8DC17A9F8280035369C /* UINSTextFieldCell.h */,
-				8B1EC8DD17A9F8280035369C /* UINSTextFieldCell.m */,
+				8B1EC8DC17A9F8280035369C /* UINSTextField.h */,
+				8B1EC8DD17A9F8280035369C /* UINSTextField.m */,
 			);
 			name = UITextField;
 			sourceTree = "<group>";
@@ -1395,7 +1395,7 @@
 				8BE493421798EAA0002BEA5A /* UIImage.h in Headers */,
 				8B91077317A8C62D008D9DF0 /* _UIAnimations.h in Headers */,
 				8B1EC8E317A9F8280035369C /* UITextField_Private.h in Headers */,
-				8B1EC8E117A9F8280035369C /* UINSTextFieldCell.h in Headers */,
+				8B1EC8E117A9F8280035369C /* UINSTextField.h in Headers */,
 				8B1EC8DA17A9F2B10035369C /* UIAppKitViewGlueNSView.h in Headers */,
 				8B54A05617B9D6CC0068775C /* UIScrollView_Private.h in Headers */,
 				8B91077817A979F9008D9DF0 /* UIWindow_Private.h in Headers */,
@@ -1661,7 +1661,7 @@
 				8B5BD762179B3A8500A53E4A /* UIThreePartImageProvider.m in Sources */,
 				8B91076B17A8B883008D9DF0 /* UITouch.m in Sources */,
 				8B54A04117B9CD7B0068775C /* UICollectionViewController.m in Sources */,
-				8B1EC8E217A9F8280035369C /* UINSTextFieldCell.m in Sources */,
+				8B1EC8E217A9F8280035369C /* UINSTextField.m in Sources */,
 				8BE492FF1798CFDD002BEA5A /* UIWindow.m in Sources */,
 				8BC9D28C17F7A58900BF1E63 /* UINSTextView.m in Sources */,
 				8BD5308817FBC07F00F81175 /* UIPopoverController.m in Sources */,

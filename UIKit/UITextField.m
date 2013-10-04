@@ -8,7 +8,7 @@
 
 #import "UITextField_Private.h"
 #import "UIAppKitView.h"
-#import "UINSTextFieldCell.h"
+#import "UINSTextField.h"
 #import "UIImage_Private.h"
 #import "UIWindow_Private.h"
 #import "UIView_Private.h"
