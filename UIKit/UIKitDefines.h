@@ -46,7 +46,8 @@ UIKIT_INLINE void UIKitWarnUnimplementedMethod(const char *prettyFunction, NSStr
         NSLog(@"*** Warning, %s is unimplemented", prettyFunction);
 }
 
-#define UIKitDefaultAnimationDuration   0.25
+#define UIKitAnimationDuration      0.25
+#define UIKitAnimationDurationFast  0.15
 
 //For compatibility
 enum {

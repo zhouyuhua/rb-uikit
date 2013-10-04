@@ -202,7 +202,7 @@ NSString *const UITransitionContextToViewControllerKey = @"UITransitionContextTo
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    return [transitionContext isAnimated]? UIKitDefaultAnimationDuration : 0.0;
+    return [transitionContext isAnimated]? UIKitAnimationDuration : 0.0;
 }
 
 @end
@@ -250,7 +250,7 @@ NSString *const UITransitionContextToViewControllerKey = @"UITransitionContextTo
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    return [transitionContext isAnimated]? UIKitDefaultAnimationDuration : 0.0;
+    return [transitionContext isAnimated]? UIKitAnimationDuration : 0.0;
 }
 
 @end

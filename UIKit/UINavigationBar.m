@@ -282,7 +282,7 @@
     newViewTargetFrame.origin.x = 0;
     
     _topItem = newItem;
-    [UIView animateWithDuration:UIKitDefaultAnimationDuration animations:^{
+    [UIView animateWithDuration:UIKitAnimationDuration animations:^{
         [oldView setAlpha:0.0];
         [oldView setFrame:oldViewTargetFrame];
         [newView setFrame:newViewTargetFrame];
@@ -315,7 +315,7 @@
     newViewTargetFrame.origin.x = 0;
     
     _topItem = newItem;
-    [UIView animateWithDuration:UIKitDefaultAnimationDuration animations:^{
+    [UIView animateWithDuration:UIKitAnimationDuration animations:^{
         [oldView setAlpha:0.0];
         [oldView setFrame:oldViewTargetFrame];
         [newView setFrame:newViewTargetFrame];

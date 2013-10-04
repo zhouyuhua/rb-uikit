@@ -297,7 +297,7 @@
     
     self.popoverVisible = YES;
     
-    [UIView animateWithDuration:(animate? UIKitDefaultAnimationDuration : 0.0) animations:^{
+    [UIView animateWithDuration:(animate? UIKitAnimationDurationFast : 0.0) animations:^{
         self.view.alpha = 1.0;
     }];
 }
@@ -315,7 +315,7 @@
     if(!self.popoverVisible)
         return;
     
-    [UIView animateWithDuration:(animate? UIKitDefaultAnimationDuration : 0.0) animations:^{
+    [UIView animateWithDuration:(animate? UIKitAnimationDuration : 0.0) animations:^{
         self.view.alpha = 0.0;
     } completion:^(BOOL finished) {
         self.popoverVisible = NO;

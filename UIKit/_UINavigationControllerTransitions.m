@@ -74,7 +74,7 @@ static CGFloat const kMaxShieldAlpha = 0.2;
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
     if([transitionContext isAnimated])
-        return UIKitDefaultAnimationDuration;
+        return UIKitAnimationDuration;
     else
         return 0.0;
 }
@@ -145,7 +145,7 @@ static CGFloat const kMaxShieldAlpha = 0.2;
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
     if([transitionContext isAnimated])
-        return UIKitDefaultAnimationDuration;
+        return UIKitAnimationDuration;
     else
         return 0.0;
 }

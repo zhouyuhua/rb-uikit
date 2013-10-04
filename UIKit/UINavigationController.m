@@ -317,7 +317,7 @@
     if(!hidden)
         _toolbar.hidden = NO;
     
-    [UIView animateWithDuration:(animated? UIKitDefaultAnimationDuration : 0.0) animations:^{
+    [UIView animateWithDuration:(animated? UIKitAnimationDuration : 0.0) animations:^{
         [self layoutViews];
     } completion:^(BOOL finished) {
         if(hidden)

@@ -867,6 +867,30 @@
 			name = "Event Handling";
 			sourceTree = "<group>";
 		};
+		8B72E83417FE81C700E5800F /* Popover */ = {
+			isa = PBXGroup;
+			children = (
+				8BD5308517FBC07F00F81175 /* UIPopoverController.h */,
+				8BD5308617FBC07F00F81175 /* UIPopoverController.m */,
+				8BD5308917FBC17800F81175 /* UIPopoverBackgroundView.h */,
+				8BD5308A17FBC17800F81175 /* UIPopoverBackgroundView.m */,
+				8BD5308F17FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h */,
+				8BD5309017FBCFED00F81175 /* _UIConcretePopoverBackgroundView.m */,
+			);
+			name = Popover;
+			sourceTree = "<group>";
+		};
+		8B72E83517FE81CB00E5800F /* Split View */ = {
+			isa = PBXGroup;
+			children = (
+				8BD5307C17FBBC0800F81175 /* UISplitViewController.h */,
+				8BD5307D17FBBC0800F81175 /* UISplitViewController.m */,
+				8BD5308017FBBDEE00F81175 /* _UISplitViewControllerDividerView.h */,
+				8BD5308117FBBDEE00F81175 /* _UISplitViewControllerDividerView.m */,
+			);
+			name = "Split View";
+			sourceTree = "<group>";
+		};
 		8B755AF617E032EC006BBA4F /* Drag & Drop */ = {
 			isa = PBXGroup;
 			children = (
@@ -1025,16 +1049,8 @@
 		8BD5307B17FBB8A400F81175 /* Content Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8BD5307C17FBBC0800F81175 /* UISplitViewController.h */,
-				8BD5307D17FBBC0800F81175 /* UISplitViewController.m */,
-				8BD5308017FBBDEE00F81175 /* _UISplitViewControllerDividerView.h */,
-				8BD5308117FBBDEE00F81175 /* _UISplitViewControllerDividerView.m */,
-				8BD5308517FBC07F00F81175 /* UIPopoverController.h */,
-				8BD5308617FBC07F00F81175 /* UIPopoverController.m */,
-				8BD5308917FBC17800F81175 /* UIPopoverBackgroundView.h */,
-				8BD5308A17FBC17800F81175 /* UIPopoverBackgroundView.m */,
-				8BD5308F17FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h */,
-				8BD5309017FBCFED00F81175 /* _UIConcretePopoverBackgroundView.m */,
+				8B72E83517FE81CB00E5800F /* Split View */,
+				8B72E83417FE81C700E5800F /* Popover */,
 			);
 			name = "Content Controller";
 			sourceTree = "<group>";
