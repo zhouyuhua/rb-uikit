@@ -315,6 +315,9 @@
 
 - (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets resizingMode:(UIImageResizingMode)resizingMode
 {
+    if(UIEdgeInsetsEqualToEdgeInsets(capInsets, UIEdgeInsetsZero))
+        return self;
+    
     NSArray *newProviders;
     if(capInsets.left != 0.0 && capInsets.right != 0.0 && capInsets.top != 0.0 && capInsets.bottom != 0.0) {
         UIKitUnimplementedMethod();

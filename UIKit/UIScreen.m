@@ -7,6 +7,21 @@
 //
 
 #import "UIScreen.h"
+#import "UIImage.h"
+#import "UIImageView.h"
+
+@interface UIScreenMode ()
+
+@property (nonatomic, readwrite) CGSize size;
+@property (nonatomic, readwrite) CGFloat pixelAspectRatio;
+
+@end
+
+@implementation UIScreenMode
+
+@end
+
+#pragma mark -
 
 @interface UIScreen ()
 
@@ -14,6 +29,8 @@
 @property (nonatomic) BOOL _isMainScreen;
 
 @end
+
+#pragma mark -
 
 @implementation UIScreen
 
@@ -56,7 +73,7 @@
     return self;
 }
 
-#pragma mark - Properties
+#pragma mark - Getting the Bounds Information
 
 - (BOOL)_useHardwareSizing
 {
@@ -94,4 +111,90 @@
     return self.underlyingScreen.backingScaleFactor;
 }
 
+#pragma mark - Accessing the Screen Modes
+
+- (UIScreenMode *)preferredMode
+{
+    UIScreenMode *screenMode = [UIScreenMode new];
+    screenMode.pixelAspectRatio = 1.0;
+    screenMode.size = self.underlyingScreen.frame.size;
+    return screenMode;
+}
+
+- (NSArray *)availableModes
+{
+    return @[ self.preferredMode ];
+}
+
+- (void)setCurrentMode:(UIScreenMode *)currentMode
+{
+    //Do nothing.
+}
+
+- (UIScreenMode *)currentMode
+{
+    return nil;
+}
+
+#pragma mark - Setting a Display’s Brightness
+
+- (void)setBrightness:(CGFloat)brightness
+{
+    //Do nothing.
+}
+
+- (CGFloat)brightness
+{
+    return 1.0;
+}
+
+- (void)setWantsSoftwareDimming:(BOOL)wantsSoftwareDimming
+{
+    //Do nothing.
+}
+
+- (BOOL)wantsSoftwareDimming
+{
+    return NO;
+}
+
+#pragma mark - Setting a Display’s Overscan Compensation
+
+- (void)setOverscanCompensation:(UIScreenOverscanCompensation)overscanCompensation
+{
+    //Do nothing.
+}
+
+- (UIScreenOverscanCompensation)overscanCompensation
+{
+    return UIScreenOverscanCompensationScale;
+}
+
+#pragma mark - Capturing a Screen Snapshot
+
+- (UIView *)snapshotViewAfterScreenUpdates:(BOOL)afterScreenUpdates
+{
+    if(![self _useHardwareSizing]) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            NSLog(@"*** Warning, results of %s will be nonsensical when using an emulated screen size", __PRETTY_FUNCTION__);
+        });
+    }
+    
+    CFArrayRef windowList = CGWindowListCreate(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
+    CGImageRef underlyingImage = CGWindowListCreateImageFromArray(CGRectInfinite, windowList, kCGWindowImageDefault);
+    UIImage *image = [[UIImage alloc] initWithCGImage:underlyingImage
+                                                scale:self.scale
+                                          orientation:UIImageOrientationUp];
+    CFRelease(windowList);
+    CFRelease(underlyingImage);
+    
+    return [[UIImageView alloc] initWithImage:image];
+}
+
 @end
+
+NSString *const UIScreenDidConnectNotification = @"UIScreenDidConnectNotification";
+NSString *const UIScreenDidDisconnectNotification = @"UIScreenDidDisconnectNotification";
+NSString *const UIScreenModeDidChangeNotification = @"UIScreenModeDidChangeNotification";
+NSString *const UIScreenBrightnessDidChangeNotification = @"UIScreenBrightnessDidChangeNotification";

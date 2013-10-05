@@ -16,6 +16,8 @@
 
 #import "UIAppKitView.h"
 
+#import "UIImageView.h"
+
 NSString *const UIViewDidChangeSuperviewNotification = @"UIViewDidChangeSuperviewNotification";
 
 @interface UIViewLayoutManager : NSObject
@@ -851,19 +853,43 @@ static void EnumerateSubviews(UIView *view, void(^block)(UIView *subview, NSUInt
 
 - (UIView *)snapshotViewAfterScreenUpdates:(BOOL)afterScreenUpdates
 {
-    UIKitUnimplementedMethod();
-    return nil;
+    return [self resizableSnapshotViewFromRect:self.bounds afterScreenUpdates:afterScreenUpdates withCapInsets:UIEdgeInsetsZero];
 }
 
 - (UIView *)resizableSnapshotViewFromRect:(CGRect)rect afterScreenUpdates:(BOOL)afterScreenUpdates withCapInsets:(UIEdgeInsets)insets
 {
-    UIKitUnimplementedMethod();
-    return nil;
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
+    {
+        [self drawViewHierarchyInRect:rect afterScreenUpdates:afterScreenUpdates];
+    }
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    UIImage *finalImage = [image resizableImageWithCapInsets:insets];
+    return [[UIImageView alloc] initWithImage:finalImage];
 }
 
 - (void)drawViewHierarchyInRect:(CGRect)rect afterScreenUpdates:(BOOL)afterScreenUpdates
 {
-    UIKitUnimplementedMethod();
+    if(CGRectEqualToRect(rect, CGRectZero))
+        return;
+    
+    if(afterScreenUpdates) {
+        [self.layer display];
+        
+        [self _enumerateSubviews:^(UIView *subview, NSUInteger depth, BOOL *stop) {
+            [subview.layer display];
+        }];
+    }
+    
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(currentContext);
+    {
+        CGContextClipToRect(currentContext, rect);
+        
+        [self.layer renderInContext:currentContext];
+    }
+    CGContextRestoreGState(currentContext);
 }
 
 #pragma mark - UIView Specific Internal Events
