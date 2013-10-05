@@ -329,7 +329,7 @@
         [self.view removeFromSuperview];
     }];
     
-    (void)(__bridge_transfer id)((__bridge_retained CFTypeRef)(self)); // [self autorelease];
+    (void)(__bridge_transfer id)((__bridge CFTypeRef)(self)); // [self autorelease];
 }
 
 #pragma mark -
