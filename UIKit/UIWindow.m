@@ -31,18 +31,11 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     NSRect _initialWindowFrameForDrag;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame nativeWindow:(NSWindow *)nativeWindow
 {
     if((self = [super initWithFrame:frame])) {
-        self._nativeWindow = [[self.class.nativeWindowClass alloc] initWithContentRect:frame
-                                                                             styleMask:self.class.nativeWindowStyleMask
-                                                                               backing:NSBackingStoreBuffered
-                                                                                 defer:NO];
-        
-        [self._nativeWindow center];
-        self._nativeWindow.delegate = self;
-        self._nativeWindow.level = NSNormalWindowLevel;
-        self._nativeWindow.animationBehavior = NSWindowAnimationBehaviorDocumentWindow;
+        nativeWindow.delegate = self;
+        self._nativeWindow = nativeWindow;
         
         self._hostNativeView = [[UIWindowHostNativeView alloc] initWithFrame:frame];
         self._hostNativeView.kitWindow = self;
@@ -56,6 +49,20 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     }
     
     return self;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    NSWindow *nativeWindow = [[self.class.nativeWindowClass alloc] initWithContentRect:frame
+                                                                         styleMask:self.class.nativeWindowStyleMask
+                                                                           backing:NSBackingStoreBuffered
+                                                                             defer:NO];
+    
+    [nativeWindow center];
+    nativeWindow.level = NSNormalWindowLevel;
+    nativeWindow.animationBehavior = NSWindowAnimationBehaviorDocumentWindow;
+    
+    return [self initWithFrame:frame nativeWindow:nativeWindow];
 }
 
 #pragma mark -

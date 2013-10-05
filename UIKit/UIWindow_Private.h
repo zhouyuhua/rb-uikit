@@ -13,6 +13,10 @@
 
 @interface UIWindow () <NSWindowDelegate>
 
+- (id)initWithFrame:(CGRect)frame nativeWindow:(NSWindow *)nativeWindow;
+
+#pragma mark - Underlying Adaptors
+
 @property (nonatomic) NSWindow *_nativeWindow;
 @property (nonatomic) UIWindowHostNativeView *_hostNativeView;
 
