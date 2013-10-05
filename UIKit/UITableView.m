@@ -981,6 +981,23 @@
     [self selectRowAtIndexPath:[self indexPathPrecedingIndexPath:self.indexPathForSelectedRow] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
+- (IBAction)deleteSelectedRow:(id)sender
+{
+    NSArray *indexPathsToDelete = self.indexPathsForSelectedRows;
+    if(indexPathsToDelete.count == 0) {
+        NSBeep();
+        return;
+    }
+    
+    for (NSIndexPath *indexPath in indexPathsToDelete) {
+        if([self _isIndexPathDeletable:indexPath]) {
+            if(_dataSourceRespondsTo.tableViewCommitEditingStyleForRowAtIndexPath) {
+                [self.dataSource tableView:self commitEditingStyle:UITableViewCellEditingStyleDelete forRowAtIndexPath:indexPath];
+            }
+        }
+    }
+}
+
 - (IBAction)deselectAll:(id)sender
 {
     if(self.indexPathForSelectedRow != nil) {
@@ -1100,6 +1117,12 @@
 - (void)keyDown:(UIKeyEvent *)event
 {
     switch (event.keyCode) {
+        case UIKeyDelete: {
+            [self deleteSelectedRow:nil];
+            
+            break;
+        }
+            
         case UIKeyUpArrow: {
             [self selectPreviousRow:nil];
             

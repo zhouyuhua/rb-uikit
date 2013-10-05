@@ -33,6 +33,7 @@ enum UIKeys : short {
     UIKeyEnter = 36,
     UIKeyEscape = 53,
     UIKeyTab = 48,
+    UIKeyDelete = 51,
 };
 
 @interface UIKeyEvent : NSObject
