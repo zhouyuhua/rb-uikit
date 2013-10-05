@@ -1070,6 +1070,18 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    UITouch *touch = [touches anyObject];
+    CGPoint locationOfTouch = [touch locationInView:self];
+    
+    NSIndexPath *indexPath = [self indexPathForRowAtPoint:locationOfTouch];
+    if(indexPath && _dataSourceRespondsTo.tableViewCanMoveRowAtIndexPath) {
+        if([self.dataSource tableView:self canMoveRowAtIndexPath:indexPath]) {
+            /* TODO: Begin dragging session */
+            
+            return;
+        }
+    }
+    
     if(!self.allowsSelection)
         return;
     
@@ -1080,18 +1092,14 @@
     if(multipleSelectionMode) {
         [_highlightedIndexPaths addObjectsFromArray:[_selectedIndexPaths array]];
     } else {
-        for (NSIndexPath *indexPath in _selectedIndexPaths.copy) {
+        for (NSIndexPath *selectedIndexPath in _selectedIndexPaths.copy) {
             if(_delegateRespondsTo.tableViewWillDeselectRowAtIndexPath)
-                [self.delegate tableView:self willDeselectRowAtIndexPath:indexPath];
+                [self.delegate tableView:self willDeselectRowAtIndexPath:selectedIndexPath];
             
-            [self deselectRowAtIndexPath:indexPath animated:NO];
+            [self deselectRowAtIndexPath:selectedIndexPath animated:NO];
         }
     }
     
-    UITouch *touch = [touches anyObject];
-    CGPoint locationOfTouch = [touch locationInView:self];
-    
-    NSIndexPath *indexPath = [self indexPathForRowAtPoint:locationOfTouch];
     if(indexPath) {
         UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
         if(multipleSelectionMode && [_highlightedIndexPaths containsObject:indexPath]) {
