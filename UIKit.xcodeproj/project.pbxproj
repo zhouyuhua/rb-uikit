@@ -244,7 +244,7 @@
 		8BD5308B17FBC17800F81175 /* UIPopoverBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5308917FBC17800F81175 /* UIPopoverBackgroundView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BD5308C17FBC17800F81175 /* UIPopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5308A17FBC17800F81175 /* UIPopoverBackgroundView.m */; };
 		8BD5308E17FBC45100F81175 /* UIStatusBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5308D17FBC45100F81175 /* UIStatusBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8BD5309117FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5308F17FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h */; };
+		8BD5309117FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5308F17FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BD5309217FBCFED00F81175 /* _UIConcretePopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5309017FBCFED00F81175 /* _UIConcretePopoverBackgroundView.m */; };
 		8BD5309517FBD2CA00F81175 /* UIPopoverArrowUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5309317FBD2CA00F81175 /* UIPopoverArrowUp.png */; };
 		8BD5309617FBD2CA00F81175 /* UIPopoverArrowUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5309417FBD2CA00F81175 /* UIPopoverArrowUp@2x.png */; };
@@ -254,8 +254,14 @@
 		8BD5309E17FBD46100F81175 /* UIPopoverArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5309C17FBD46100F81175 /* UIPopoverArrowLeft@2x.png */; };
 		8BD530A117FBD47700F81175 /* UIPopoverArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD5309F17FBD47700F81175 /* UIPopoverArrowDown.png */; };
 		8BD530A217FBD47700F81175 /* UIPopoverArrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD530A017FBD47700F81175 /* UIPopoverArrowDown@2x.png */; };
-		8BD530A617FFB37700F81175 /* _UIApplicationBackgroundTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD530A417FFB37700F81175 /* _UIApplicationBackgroundTask.h */; };
+		8BD530A617FFB37700F81175 /* _UIApplicationBackgroundTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD530A417FFB37700F81175 /* _UIApplicationBackgroundTask.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BD530A717FFB37700F81175 /* _UIApplicationBackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD530A517FFB37700F81175 /* _UIApplicationBackgroundTask.m */; };
+		8BD530AD1800ACD800F81175 /* UIConcreteAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD530AB1800ACD800F81175 /* UIConcreteAppearance.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8BD530AE1800ACD800F81175 /* UIConcreteAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD530AC1800ACD800F81175 /* UIConcreteAppearance.m */; };
+		8BD530B11800ACE500F81175 /* UIAppearanceProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD530AF1800ACE500F81175 /* UIAppearanceProperty.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8BD530B21800ACE500F81175 /* UIAppearanceProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD530B01800ACE500F81175 /* UIAppearanceProperty.m */; };
+		8BD530B51800C47D00F81175 /* UIRetainingNSValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD530B31800C47D00F81175 /* UIRetainingNSValue.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8BD530B61800C47D00F81175 /* UIRetainingNSValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD530B41800C47D00F81175 /* UIRetainingNSValue.m */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -570,6 +576,12 @@
 		8BD530A017FBD47700F81175 /* UIPopoverArrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIPopoverArrowDown@2x.png"; sourceTree = "<group>"; };
 		8BD530A417FFB37700F81175 /* _UIApplicationBackgroundTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _UIApplicationBackgroundTask.h; sourceTree = "<group>"; };
 		8BD530A517FFB37700F81175 /* _UIApplicationBackgroundTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UIApplicationBackgroundTask.m; sourceTree = "<group>"; };
+		8BD530AB1800ACD800F81175 /* UIConcreteAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIConcreteAppearance.h; sourceTree = "<group>"; };
+		8BD530AC1800ACD800F81175 /* UIConcreteAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIConcreteAppearance.m; sourceTree = "<group>"; };
+		8BD530AF1800ACE500F81175 /* UIAppearanceProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAppearanceProperty.h; sourceTree = "<group>"; };
+		8BD530B01800ACE500F81175 /* UIAppearanceProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppearanceProperty.m; sourceTree = "<group>"; };
+		8BD530B31800C47D00F81175 /* UIRetainingNSValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIRetainingNSValue.h; sourceTree = "<group>"; };
+		8BD530B41800C47D00F81175 /* UIRetainingNSValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIRetainingNSValue.m; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -785,6 +797,12 @@
 			isa = PBXGroup;
 			children = (
 				8B01140A179A193D00C8594C /* UIAppearance.h */,
+				8BD530AB1800ACD800F81175 /* UIConcreteAppearance.h */,
+				8BD530AC1800ACD800F81175 /* UIConcreteAppearance.m */,
+				8BD530AF1800ACE500F81175 /* UIAppearanceProperty.h */,
+				8BD530B01800ACE500F81175 /* UIAppearanceProperty.m */,
+				8BD530B31800C47D00F81175 /* UIRetainingNSValue.h */,
+				8BD530B41800C47D00F81175 /* UIRetainingNSValue.m */,
 			);
 			name = Appearances;
 			sourceTree = "<group>";
@@ -1363,7 +1381,6 @@
 				8B54A03B17B9CD7B0068775C /* UICollectionView.h in Headers */,
 				8B54A04417B9CD7B0068775C /* UICollectionViewFlowLayout.h in Headers */,
 				8B54A04817B9CD7B0068775C /* UICollectionViewLayout.h in Headers */,
-				8BD530A617FFB37700F81175 /* _UIApplicationBackgroundTask.h in Headers */,
 				8BB4BD6B17B35AEF009B7708 /* UIScrollViewDecelerationAnimator.h in Headers */,
 				8B1255B317E565840063454E /* UIRefreshControl.h in Headers */,
 				8B54A03717B9CB2C0068775C /* UILongPressGestureRecognizer.h in Headers */,
@@ -1377,7 +1394,6 @@
 				8B515C5617BB3AAA003065D2 /* NSIndexPath+UITableView.h in Headers */,
 				8B54A04B17B9CD7B0068775C /* UICollectionViewUpdateItem.h in Headers */,
 				8B54689E17D41B7B00D7E338 /* UINavigationItem.h in Headers */,
-				8BD5309117FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h in Headers */,
 				8B515C4E17BB3A04003065D2 /* UITableViewHeaderFooterView.h in Headers */,
 				8B54688617D2C87700D7E338 /* UITabBarController.h in Headers */,
 				8B1255BB17E56C3A0063454E /* UIActivityIndicatorView.h in Headers */,
@@ -1446,6 +1462,11 @@
 				8B5BD75E179B348700A53E4A /* UIGraphics.h in Headers */,
 				8B1255C417E95F0A0063454E /* UIViewControllerTransitioning_Private.h in Headers */,
 				8BD5306917FB86C300F81175 /* UITabBarItem_Private.h in Headers */,
+				8BD530AD1800ACD800F81175 /* UIConcreteAppearance.h in Headers */,
+				8BD530A617FFB37700F81175 /* _UIApplicationBackgroundTask.h in Headers */,
+				8BD530B11800ACE500F81175 /* UIAppearanceProperty.h in Headers */,
+				8BD5309117FBCFED00F81175 /* _UIConcretePopoverBackgroundView.h in Headers */,
+				8BD530B51800C47D00F81175 /* UIRetainingNSValue.h in Headers */,
 				8BD5306617FB82C100F81175 /* _UITabBarItemView.h in Headers */,
 				8BC9D28117F77F5500BF1E63 /* UITextView_Private.h in Headers */,
 				8B515C5917BB3CEE003065D2 /* UITableView_Private.h in Headers */,
@@ -1615,6 +1636,7 @@
 				8B5BD72F1798F05C00A53E4A /* UIImageView.m in Sources */,
 				8BB8A22E17B1E66A004FB0E8 /* UIAction.m in Sources */,
 				8B54688717D2C87700D7E338 /* UITabBarController.m in Sources */,
+				8BD530B61800C47D00F81175 /* UIRetainingNSValue.m in Sources */,
 				8BD5306217FA87B600F81175 /* UITabBarItem.m in Sources */,
 				8BD530A717FFB37700F81175 /* _UIApplicationBackgroundTask.m in Sources */,
 				8BC9D25D17EFFAEE00BF1E63 /* UINSWindow.m in Sources */,
@@ -1645,6 +1667,7 @@
 				8BE4931E1798D65C002BEA5A /* UIViewController.m in Sources */,
 				8BE4933A1798E44D002BEA5A /* UIControl.m in Sources */,
 				8B39CBFB17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.m in Sources */,
+				8BD530AE1800ACD800F81175 /* UIConcreteAppearance.m in Sources */,
 				8B755AF517E02FC3006BBA4F /* UIView+UIDraggingDestination.m in Sources */,
 				8BB4BD5617B1E860009B7708 /* UIScrollView.m in Sources */,
 				8BD5308C17FBC17800F81175 /* UIPopoverBackgroundView.m in Sources */,
@@ -1692,6 +1715,7 @@
 				8BB4BD6117B1ED5E009B7708 /* UIPanGestureRecognizer.m in Sources */,
 				8B6AEDED17AB642A00D6858A /* UIApplication.m in Sources */,
 				8BD5307F17FBBC0800F81175 /* UISplitViewController.m in Sources */,
+				8BD530B21800ACE500F81175 /* UIAppearanceProperty.m in Sources */,
 				8B91077017A8C5C9008D9DF0 /* UIView_UIViewAnimation.m in Sources */,
 				8B1EC8E517A9F8280035369C /* UITextField.m in Sources */,
 				8BE493251798DA39002BEA5A /* UIScreen.m in Sources */,

@@ -11,6 +11,8 @@
 #import "UIImage_Private.h"
 #import "UIImageView.h"
 
+#import "UIConcreteAppearance.h"
+
 #define OUTER_EDGE_PADDING  8.0
 #define INTER_ITEM_PADDING  8.0
 
@@ -23,16 +25,7 @@
 
 @implementation UIToolbar
 
-+ (instancetype)appearance
-{
-    return nil;
-}
-
-+ (instancetype)appearanceWhenContainedIn:(Class <UIAppearanceContainer>)ContainerClass, ...
-{
-    UIKitUnimplementedMethod();
-    return nil;
-}
+UI_CONCRETE_APPEARANCE_GENERATE(UIToolbar);
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -119,14 +112,16 @@
 {
     [super tintColorDidChange];
     
-    if(self.tintAdjustmentMode == UIViewTintAdjustmentModeNormal) {
-        [self setBackgroundImage:UIKitImageNamed(@"UIToolBarBackgroundImage", UIImageResizingModeStretch)
-              forToolbarPosition:UIBarPositionAny
-                      barMetrics:UIBarMetricsDefault];
-    } else {
-        [self setBackgroundImage:UIKitImageNamed(@"UIToolBarBackgroundImage_Inactive", UIImageResizingModeStretch)
-              forToolbarPosition:UIBarPositionAny
-                      barMetrics:UIBarMetricsDefault];
+    if(!UIConcreteAppearanceHasValueFor(UIConcreteAppearanceForInstance(self), @selector(backgroundImageForBarMetrics:))) {
+        if(self.tintAdjustmentMode == UIViewTintAdjustmentModeNormal) {
+            [self setBackgroundImage:UIKitImageNamed(@"UIToolBarBackgroundImage", UIImageResizingModeStretch)
+                  forToolbarPosition:UIBarPositionAny
+                          barMetrics:UIBarMetricsDefault];
+        } else {
+            [self setBackgroundImage:UIKitImageNamed(@"UIToolBarBackgroundImage_Inactive", UIImageResizingModeStretch)
+                  forToolbarPosition:UIBarPositionAny
+                          barMetrics:UIBarMetricsDefault];
+        }
     }
 }
 

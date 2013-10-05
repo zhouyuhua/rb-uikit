@@ -18,6 +18,8 @@
 
 #import "UIImageView.h"
 
+#import "UIConcreteAppearance.h"
+
 NSString *const UIViewDidChangeSuperviewNotification = @"UIViewDidChangeSuperviewNotification";
 
 @interface UIViewLayoutManager : NSObject
@@ -798,6 +800,8 @@ static void EnumerateSubviews(UIView *view, void(^block)(UIView *subview, NSUInt
         newWindow._firstResponder = self._firstResponder;
     
     self.contentScaleFactor = newWindow.contentScaleFactor;
+    
+    UIConcreteAppearanceApply(UIConcreteAppearanceForInstance(self), self);
     
     for (UIView *subview in _subviews)
         [subview _viewWillMoveToWindow:newWindow];

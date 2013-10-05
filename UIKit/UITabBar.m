@@ -16,6 +16,8 @@
 
 #import "UIMenuController_Private.h"
 
+#import "UIConcreteAppearance.h"
+
 static CGFloat const kOuterPadding = 20.0;
 static CGFloat const kPreferredHeight = 50.0;
 
@@ -33,15 +35,7 @@ static CGFloat const kPreferredHeight = 50.0;
 
 @implementation UITabBar
 
-+ (instancetype)appearance
-{
-    return nil;
-}
-
-+ (instancetype)appearanceWhenContainedIn:(Class<UIAppearanceContainer>)ContainerClass, ...
-{
-    return nil;
-}
+UI_CONCRETE_APPEARANCE_GENERATE(UITabBar);
 
 #pragma mark - Lifecycle
 
@@ -51,7 +45,6 @@ static CGFloat const kPreferredHeight = 50.0;
         self.itemSpacing = 5.0;
         self.itemWidth = 52.0;
         
-        self.barTintColor = [UIColor whiteColor];
         self.backgroundImage = UIKitImageNamed(@"UITabBarBackground", UIImageResizingModeStretch);
         self.shadowImage = UIKitImageNamed(@"UITabBarShadow", UIImageResizingModeStretch);
         

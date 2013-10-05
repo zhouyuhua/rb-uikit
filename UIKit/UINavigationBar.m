@@ -13,17 +13,11 @@
 #import "UIImageView.h"
 #import "UIImage_Private.h"
 
+#import "UIConcreteAppearance.h"
+
 @implementation UINavigationBar
 
-+ (instancetype)appearance
-{
-    return nil;
-}
-
-+ (instancetype)appearanceWhenContainedIn:(Class<UIAppearanceContainer>)ContainerClass, ...
-{
-    return nil;
-}
+UI_CONCRETE_APPEARANCE_GENERATE(UINavigationBar);
 
 - (id)initWithFrame:(NSRect)frameRect
 {
@@ -107,12 +101,14 @@
 {
     [super tintColorDidChange];
     
-    if(self.tintAdjustmentMode == UIViewTintAdjustmentModeNormal) {
-        [self setBackgroundImage:UIKitImageNamed(@"UINavigationBarBackgroundImage", UIImageResizingModeStretch)
-                   forBarMetrics:UIBarMetricsDefault];
-    } else {
-        [self setBackgroundImage:UIKitImageNamed(@"UINavigationBarBackgroundImage_Inactive", UIImageResizingModeStretch)
-                   forBarMetrics:UIBarMetricsDefault];
+    if(!UIConcreteAppearanceHasValueFor(UIConcreteAppearanceForInstance(self), @selector(backgroundImageForBarMetrics:))) {
+        if(self.tintAdjustmentMode == UIViewTintAdjustmentModeNormal) {
+            [self setBackgroundImage:UIKitImageNamed(@"UINavigationBarBackgroundImage", UIImageResizingModeStretch)
+                       forBarMetrics:UIBarMetricsDefault];
+        } else {
+            [self setBackgroundImage:UIKitImageNamed(@"UINavigationBarBackgroundImage_Inactive", UIImageResizingModeStretch)
+                       forBarMetrics:UIBarMetricsDefault];
+        }
     }
 }
 
