@@ -19,6 +19,8 @@
 #import "UITouch_Private.h"
 #import "UIGestureRecognizer_Private.h"
 
+#import "_UIApplicationBackgroundTask.h"
+
 UIApplication *UIApp = nil;
 
 @implementation UIApplication
@@ -141,7 +143,14 @@ static Class _SharedApplicationClass = Nil;
 
 - (UIBackgroundTaskIdentifier)beginBackgroundTaskWithName:(NSString *)name expirationHandler:(void(^)(void))handler
 {
-    return UIBackgroundTaskInvalid;
+    /* The background task will retain itself if the client app has set a background task duration */
+    _UIApplicationBackgroundTask *backgroundTask = [[_UIApplicationBackgroundTask alloc] initWithExpirationHandler:handler];
+    (void)backgroundTask;
+    
+    static volatile int32_t identifier = 0;
+    OSAtomicIncrement32(&identifier);
+    
+    return identifier;
 }
 
 - (UIBackgroundTaskIdentifier)beginBackgroundTaskWithExpirationHandler:(void(^)(void))handler
@@ -151,7 +160,7 @@ static Class _SharedApplicationClass = Nil;
 
 - (void)endBackgroundTask:(UIBackgroundTaskIdentifier)identifier
 {
-    
+    //Do nothing.
 }
 
 - (void)setKeepAliveTimeout:(NSTimeInterval)timeInterval handler:(void(^)(void))handler

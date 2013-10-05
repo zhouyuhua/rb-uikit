@@ -32,6 +32,13 @@ UIKIT_EXTERN NSString *const UIKitConfigurationResourceFileName;
 ///Corresponding key is `UIPrincipleClassName`.
 @property NSString *principleClassName;
 
+///The amount of time a background task may be allowed to execute
+///by `UIApplication` before the expiration handler should be fired.
+///A value of 0.0 indicates no expiration date. Default value is 0.0.
+///
+///Corresponding key is `UIBackgroundTaskAllowedDuration`
+@property NSTimeInterval backgroundTaskAllowedDuration;
+
 #pragma mark - UIScreen
 
 ///The width value that `+[UIScreen mainScreen]` should return.
