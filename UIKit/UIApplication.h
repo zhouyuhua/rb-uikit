@@ -133,6 +133,14 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceLayoutDirection) {
 - (void)unregisterForRemoteNotifications;
 - (UIRemoteNotificationType)enabledRemoteNotificationTypes;
 
+#pragma mark - Registering for Local Notifications
+
+- (void)scheduleLocalNotification:(UILocalNotification *)notification;
+- (void)presentLocalNotificationNow:(UILocalNotification *)notification;
+- (void)cancelLocalNotification:(UILocalNotification *)notification;
+- (void)cancelAllLocalNotifications;
+@property (nonatomic, copy) NSArray *scheduledLocalNotifications;
+
 #pragma mark - Setting the Icon of a Newsstand App
 
 - (void)setNewsstandIconImage:(UIImage *)image;

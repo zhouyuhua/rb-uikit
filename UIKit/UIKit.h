@@ -9,6 +9,8 @@
 #import "UIKitDefines.h"
 
 #import "UIApplication.h"
+#import "UILocalNotification.h"
+
 #import "UIScreen.h"
 #import "UIDevice.h"
 

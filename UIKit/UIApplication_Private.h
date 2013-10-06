@@ -12,7 +12,7 @@
 
 extern UIApplication *UIApp;
 
-@interface UIApplication () <NSApplicationDelegate> {
+@interface UIApplication () <NSApplicationDelegate, NSUserNotificationCenterDelegate> {
     struct {
         int applicationDidFinishLaunching : 1;
         

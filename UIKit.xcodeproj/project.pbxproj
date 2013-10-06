@@ -262,8 +262,10 @@
 		8BD530B21800ACE500F81175 /* UIAppearanceProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD530B01800ACE500F81175 /* UIAppearanceProperty.m */; };
 		8BD530B51800C47D00F81175 /* UIRetainingNSValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD530B31800C47D00F81175 /* UIRetainingNSValue.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BD530B61800C47D00F81175 /* UIRetainingNSValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD530B41800C47D00F81175 /* UIRetainingNSValue.m */; };
-		8BD530BA1800EDFD00F81175 /* NSObject+UIAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD530B81800EDFD00F81175 /* NSObject+UIAppearance.h */; };
+		8BD530BA1800EDFD00F81175 /* NSObject+UIAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD530B81800EDFD00F81175 /* NSObject+UIAppearance.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BD530BB1800EDFD00F81175 /* NSObject+UIAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD530B91800EDFD00F81175 /* NSObject+UIAppearance.m */; };
+		8BD530C01800F4C900F81175 /* UILocalNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD530BE1800F4C900F81175 /* UILocalNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BD530C11800F4C900F81175 /* UILocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD530BF1800F4C900F81175 /* UILocalNotification.m */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -586,6 +588,9 @@
 		8BD530B41800C47D00F81175 /* UIRetainingNSValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIRetainingNSValue.m; sourceTree = "<group>"; };
 		8BD530B81800EDFD00F81175 /* NSObject+UIAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+UIAppearance.h"; sourceTree = "<group>"; };
 		8BD530B91800EDFD00F81175 /* NSObject+UIAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+UIAppearance.m"; sourceTree = "<group>"; };
+		8BD530BE1800F4C900F81175 /* UILocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILocalNotification.h; sourceTree = "<group>"; };
+		8BD530BF1800F4C900F81175 /* UILocalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILocalNotification.m; sourceTree = "<group>"; };
+		8BD530C21800F8F000F81175 /* UILocalNotification_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILocalNotification_Private.h; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1083,6 +1088,21 @@
 			name = "Content Controller";
 			sourceTree = "<group>";
 		};
+		8BD530BD1800F4B700F81175 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8B6AEDEA17AB642A00D6858A /* UIApplication.h */,
+				8B6AEDEB17AB642A00D6858A /* UIApplication.m */,
+				8B6AEDEE17AB6BF600D6858A /* UIApplication_Private.h */,
+				8BD530A417FFB37700F81175 /* _UIApplicationBackgroundTask.h */,
+				8BD530A517FFB37700F81175 /* _UIApplicationBackgroundTask.m */,
+				8BD530BE1800F4C900F81175 /* UILocalNotification.h */,
+				8BD530BF1800F4C900F81175 /* UILocalNotification.m */,
+				8BD530C21800F8F000F81175 /* UILocalNotification_Private.h */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
 		8BE492AD1798C44F002BEA5A = {
 			isa = PBXGroup;
 			children = (
@@ -1133,6 +1153,7 @@
 				8B54686817D2B33E00D7E338 /* UIKitConfigurationManager.h */,
 				8B54686917D2B33E00D7E338 /* UIKitConfigurationManager.m */,
 				8BE493211798DA2C002BEA5A /* Device */,
+				8BD530BD1800F4B700F81175 /* Application */,
 				8BE493001798D620002BEA5A /* UIResponder */,
 				8B91077917A97E9E008D9DF0 /* UIView */,
 				8B91077A17A97EA6008D9DF0 /* UIWindow */,
@@ -1312,12 +1333,7 @@
 				8BE493231798DA39002BEA5A /* UIScreen.m */,
 				8BE493281798DBD5002BEA5A /* UIDevice.h */,
 				8BE493291798DBD5002BEA5A /* UIDevice.m */,
-				8B6AEDEA17AB642A00D6858A /* UIApplication.h */,
-				8B6AEDEB17AB642A00D6858A /* UIApplication.m */,
-				8B6AEDEE17AB6BF600D6858A /* UIApplication_Private.h */,
 				8BD5308D17FBC45100F81175 /* UIStatusBar.h */,
-				8BD530A417FFB37700F81175 /* _UIApplicationBackgroundTask.h */,
-				8BD530A517FFB37700F81175 /* _UIApplicationBackgroundTask.m */,
 			);
 			name = Device;
 			sourceTree = "<group>";
@@ -1346,7 +1362,6 @@
 				8BE493411798EAA0002BEA5A /* UIKitDefines.h in Headers */,
 				8BE493241798DA39002BEA5A /* UIScreen.h in Headers */,
 				8BE4932A1798DBD5002BEA5A /* UIDevice.h in Headers */,
-				8BD530BA1800EDFD00F81175 /* NSObject+UIAppearance.h in Headers */,
 				8B755AF417E02FC3006BBA4F /* UIView+UIDraggingDestination.h in Headers */,
 				8BE492E81798C52F002BEA5A /* UIResponder.h in Headers */,
 				8BE492EC1798C888002BEA5A /* UIView.h in Headers */,
@@ -1394,6 +1409,7 @@
 				8BB4BD5B17B1EC51009B7708 /* UIScroller.h in Headers */,
 				8B39CBFA17B2B9CA00435CEC /* UIScrollWheelGestureRecognizer.h in Headers */,
 				8BB4BD6717B359BC009B7708 /* UIAnimator.h in Headers */,
+				8BD530C01800F4C900F81175 /* UILocalNotification.h in Headers */,
 				8B6AEDEC17AB642A00D6858A /* UIApplication.h in Headers */,
 				8B08256D17AA2ACF00494FAA /* UIAlertView.h in Headers */,
 				8B54688A17D40F3F00D7E338 /* UIAvailability.h in Headers */,
@@ -1479,6 +1495,7 @@
 				8B515C5917BB3CEE003065D2 /* UITableView_Private.h in Headers */,
 				8BD5304F17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h in Headers */,
 				8BE493441798EAA0002BEA5A /* UIGeometry.h in Headers */,
+				8BD530BA1800EDFD00F81175 /* NSObject+UIAppearance.h in Headers */,
 				8B515C4017BB1715003065D2 /* UICollectionViewUpdateItem_Private.h in Headers */,
 				8BD5308217FBBDEE00F81175 /* _UISplitViewControllerDividerView.h in Headers */,
 				8B5468A117D41C5E00D7E338 /* UINavigationItem_Private.h in Headers */,
@@ -1665,6 +1682,7 @@
 				8B54A04317B9CD7B0068775C /* UICollectionViewData.m in Sources */,
 				8BF623F317BDD2A70015ED5C /* UITableViewSectionInfo.m in Sources */,
 				8BE492E91798C52F002BEA5A /* UIResponder.m in Sources */,
+				8BD530C11800F4C900F81175 /* UILocalNotification.m in Sources */,
 				8B91076317A8B6B7008D9DF0 /* UIWindowHostNativeView.m in Sources */,
 				8B515C5317BB3A25003065D2 /* UITableViewController.m in Sources */,
 				8BB4BD5C17B1EC51009B7708 /* UIScroller.m in Sources */,

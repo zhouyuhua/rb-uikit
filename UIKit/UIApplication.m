@@ -19,6 +19,8 @@
 #import "UITouch_Private.h"
 #import "UIGestureRecognizer_Private.h"
 
+#import "UILocalNotification_Private.h"
+
 #import "_UIApplicationBackgroundTask.h"
 
 UIApplication *UIApp = nil;
@@ -53,6 +55,15 @@ static Class _SharedApplicationClass = Nil;
     });
     
     return UIApp;
+}
+
+- (id)init
+{
+    if((self = [super init])) {
+        [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
+    }
+    
+    return self;
 }
 
 #pragma mark - Properties
@@ -604,6 +615,53 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
 - (UIRemoteNotificationType)enabledRemoteNotificationTypes
 {
     return [NSApp enabledRemoteNotificationTypes];
+}
+
+#pragma mark - Registering for Local Notifications
+
+- (void)scheduleLocalNotification:(UILocalNotification *)notification
+{
+    [[NSUserNotificationCenter defaultUserNotificationCenter] scheduleNotification:notification._nativeNotification];
+}
+
+- (void)presentLocalNotificationNow:(UILocalNotification *)notification
+{
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification._nativeNotification];
+}
+
+- (void)cancelLocalNotification:(UILocalNotification *)notification
+{
+    [[NSUserNotificationCenter defaultUserNotificationCenter] removeScheduledNotification:notification._nativeNotification];
+}
+
+- (void)cancelAllLocalNotifications
+{
+    self.scheduledLocalNotifications = nil;
+}
+
+- (void)setScheduledLocalNotifications:(NSArray *)scheduledLocalNotifications
+{
+    [[NSUserNotificationCenter defaultUserNotificationCenter] setScheduledNotifications:[scheduledLocalNotifications valueForKey:@"_nativeNotification"]];
+}
+
+- (NSArray *)scheduledLocalNotifications
+{
+    NSMutableArray *scheduledLocalNotifications = [NSMutableArray array];
+    for (NSUserNotification *notification in [[NSUserNotificationCenter defaultUserNotificationCenter] scheduledNotifications]) {
+        [scheduledLocalNotifications addObject:[[UILocalNotification alloc] _initWithNativeNotification:notification]];
+    }
+    
+    return scheduledLocalNotifications;
+}
+
+#pragma mark -
+
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification
+{
+    if(_delegateRespondsTo.applicationDidReceiveLocalNotification) {
+        UILocalNotification *localNotification = [[UILocalNotification alloc] _initWithNativeNotification:notification];
+        [_delegate application:self didReceiveLocalNotification:localNotification];
+    }
 }
 
 #pragma mark - <NSApplicationDelegate>
