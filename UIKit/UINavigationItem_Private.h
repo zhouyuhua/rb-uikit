@@ -23,6 +23,6 @@
 @property (nonatomic, readonly) NSArray *_allLeftItems;
 @property (nonatomic, readonly) NSArray *_allRightItems;
 
-@property (nonatomic) UIBarButtonItem *_backItem;
+@property (nonatomic, setter=_setBackItem:) UIBarButtonItem *_backItem;
 
 @end

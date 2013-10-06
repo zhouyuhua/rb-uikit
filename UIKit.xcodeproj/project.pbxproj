@@ -262,6 +262,8 @@
 		8BD530B21800ACE500F81175 /* UIAppearanceProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD530B01800ACE500F81175 /* UIAppearanceProperty.m */; };
 		8BD530B51800C47D00F81175 /* UIRetainingNSValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD530B31800C47D00F81175 /* UIRetainingNSValue.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8BD530B61800C47D00F81175 /* UIRetainingNSValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD530B41800C47D00F81175 /* UIRetainingNSValue.m */; };
+		8BD530BA1800EDFD00F81175 /* NSObject+UIAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD530B81800EDFD00F81175 /* NSObject+UIAppearance.h */; };
+		8BD530BB1800EDFD00F81175 /* NSObject+UIAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD530B91800EDFD00F81175 /* NSObject+UIAppearance.m */; };
 		8BE492BB1798C44F002BEA5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492BA1798C44F002BEA5A /* Cocoa.framework */; };
 		8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8BE492C31798C44F002BEA5A /* InfoPlist.strings */; };
 		8BE492D01798C44F002BEA5A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE492CF1798C44F002BEA5A /* XCTest.framework */; };
@@ -582,6 +584,8 @@
 		8BD530B01800ACE500F81175 /* UIAppearanceProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAppearanceProperty.m; sourceTree = "<group>"; };
 		8BD530B31800C47D00F81175 /* UIRetainingNSValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIRetainingNSValue.h; sourceTree = "<group>"; };
 		8BD530B41800C47D00F81175 /* UIRetainingNSValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIRetainingNSValue.m; sourceTree = "<group>"; };
+		8BD530B81800EDFD00F81175 /* NSObject+UIAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+UIAppearance.h"; sourceTree = "<group>"; };
+		8BD530B91800EDFD00F81175 /* NSObject+UIAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+UIAppearance.m"; sourceTree = "<group>"; };
 		8BE492B71798C44F002BEA5A /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE492BA1798C44F002BEA5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8BE492BD1798C44F002BEA5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -803,6 +807,8 @@
 				8BD530B01800ACE500F81175 /* UIAppearanceProperty.m */,
 				8BD530B31800C47D00F81175 /* UIRetainingNSValue.h */,
 				8BD530B41800C47D00F81175 /* UIRetainingNSValue.m */,
+				8BD530B81800EDFD00F81175 /* NSObject+UIAppearance.h */,
+				8BD530B91800EDFD00F81175 /* NSObject+UIAppearance.m */,
 			);
 			name = Appearances;
 			sourceTree = "<group>";
@@ -1340,6 +1346,7 @@
 				8BE493411798EAA0002BEA5A /* UIKitDefines.h in Headers */,
 				8BE493241798DA39002BEA5A /* UIScreen.h in Headers */,
 				8BE4932A1798DBD5002BEA5A /* UIDevice.h in Headers */,
+				8BD530BA1800EDFD00F81175 /* NSObject+UIAppearance.h in Headers */,
 				8B755AF417E02FC3006BBA4F /* UIView+UIDraggingDestination.h in Headers */,
 				8BE492E81798C52F002BEA5A /* UIResponder.h in Headers */,
 				8BE492EC1798C888002BEA5A /* UIView.h in Headers */,
@@ -1727,6 +1734,7 @@
 				8B54686B17D2B33E00D7E338 /* UIKitConfigurationManager.m in Sources */,
 				8B1EC8DB17A9F2B10035369C /* UIAppKitViewGlueNSView.m in Sources */,
 				8B1255BC17E56C3A0063454E /* UIActivityIndicatorView.m in Sources */,
+				8BD530BB1800EDFD00F81175 /* NSObject+UIAppearance.m in Sources */,
 				8BC9D27F17F77DBE00BF1E63 /* UITextView.m in Sources */,
 				8B95506917C316D600B8E4F9 /* UIKeyEvent.m in Sources */,
 				8B08255C17AA18B100494FAA /* UISearchBar.m in Sources */,

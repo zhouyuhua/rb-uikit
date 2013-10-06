@@ -13,7 +13,7 @@
 
 @protocol UINavigationBarDelegate;
 
-@interface UINavigationBar : UIView <UIAppearance>
+@interface UINavigationBar : UIView <UIAppearance, UIAppearanceContainer>
 
 #pragma mark - Properties
 

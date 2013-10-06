@@ -47,6 +47,9 @@ UIKIT_EXTERN void UIConcreteAppearanceApply(UIConcreteAppearance *appearance, id
 ///do nothing if the appearance is a custom user-provided class.
 UIKIT_EXTERN BOOL UIConcreteAppearanceHasValueFor(UIConcreteAppearance *appearance, SEL getterSelector);
 
+///Returns the container path for a given instance.
+UIKIT_EXTERN NSArray *UIConcreteAppearanceGetContainerPathForInstance(id instance);
+
 ///Returns the concrete appearance for a given instance,
 ///taking into account the container path of the instance.
 ///

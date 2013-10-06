@@ -15,6 +15,8 @@
 #import "UIImage_Private.h"
 #import "_UIBarButtonFlexibleSpaceItem.h"
 
+#import "UIConcreteAppearance.h"
+
 static NSString *TitleForSystemItem(UIBarButtonSystemItem item)
 {
     switch (item) {
@@ -181,6 +183,8 @@ static UIImage *ImageForSystemItem(UIBarButtonSystemItem item)
     UIButton *_underlyingButton;
 }
 
+UI_CONCRETE_APPEARANCE_GENERATE(UIBarButtonItem);
+
 /* !Important! Always set the `style` before anything else */
 
 - (id)initWithImage:(UIImage *)image style:(UIBarButtonItemStyle)style target:(id)target action:(SEL)action
@@ -289,7 +293,7 @@ static UIImage *ImageForSystemItem(UIBarButtonSystemItem item)
 
 - (UIButton *)_underlyingButton
 {
-    if(!_underlyingButton) {
+    if(!_underlyingButton && !_customView) {
         UIButtonType buttonType;
         if((NSInteger)self.style == UIBarButtonItemStyle_Private_Back)
             buttonType = UIButtonType_Private_BackBarButton;
@@ -303,6 +307,8 @@ static UIImage *ImageForSystemItem(UIBarButtonSystemItem item)
             [_underlyingButton setImage:self.image forState:UIControlStateNormal];
         
         [_underlyingButton addTarget:self action:@selector(sendAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIConcreteAppearanceApply(UIConcreteAppearanceForInstance(self), self);
     }
     
     return _underlyingButton;
@@ -321,6 +327,13 @@ static UIImage *ImageForSystemItem(UIBarButtonSystemItem item)
     return self.customView ?: self._underlyingButton;
 }
 
+- (void)set_appearanceContainer:(Class)_appearanceContainer
+{
+    __appearanceContainer = _appearanceContainer;
+    
+    UIConcreteAppearanceApply(UIConcreteAppearanceForInstance(self), self);
+}
+
 #pragma mark - Properties
 
 - (void)setTitle:(NSString *)title
@@ -335,6 +348,27 @@ static UIImage *ImageForSystemItem(UIBarButtonSystemItem item)
     [super setImage:image];
     [_underlyingButton setImage:image forState:UIControlStateNormal];
     [_underlyingButton.superview setNeedsLayout];
+}
+
+#pragma mark - Appearance
+
+- (void)setTitleTextAttributes:(NSDictionary *)attributes forState:(UIControlState)state
+{
+    [super setTitleTextAttributes:attributes forState:state];
+    
+    UIColor *titleColor = attributes[NSForegroundColorAttributeName];
+    if(titleColor)
+        [self._underlyingButton setTitleColor:titleColor forState:state];
+    
+    UIFont *font = attributes[NSFontAttributeName];
+    if(font)
+        self._underlyingButton.titleLabel.font = font;
+    
+    NSShadow *shadow = attributes[NSShadowAttributeName];
+    if(shadow) {
+        [self._underlyingButton setTitleShadowColor:[shadow shadowColor] forState:state];
+        self._underlyingButton.titleLabel.shadowOffset = [shadow shadowOffset];
+    }
 }
 
 @end

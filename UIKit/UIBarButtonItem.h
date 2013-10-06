@@ -7,6 +7,7 @@
 //
 
 #import "UIBarItem.h"
+#import "UIAppearance.h"
 
 typedef NS_ENUM(NSInteger, UIBarButtonItemStyle) {
     UIBarButtonItemStylePlain,
@@ -41,7 +42,7 @@ typedef NS_ENUM(NSInteger, UIBarButtonSystemItem) {
     UIBarButtonSystemItemPageCurl,
 };
 
-@interface UIBarButtonItem : UIBarItem
+@interface UIBarButtonItem : UIBarItem <UIAppearance>
 
 - (id)initWithImage:(UIImage *)image style:(UIBarButtonItemStyle)style target:(id)target action:(SEL)action;
 - (id)initWithImage:(UIImage *)image landscapeImagePhone:(UIImage *)landscapeImagePhone style:(UIBarButtonItemStyle)style target:(id)target action:(SEL)action;

@@ -20,6 +20,9 @@ enum : NSInteger {
 
 #pragma mark -
 
+///The container of the bar button item.
+@property (nonatomic, unsafe_unretained) Class _appearanceContainer;
+
 ///The UIButton that supplies the content of this bar button item. Lazily initialized.
 @property (nonatomic, readonly) UIButton *_underlyingButton;
 

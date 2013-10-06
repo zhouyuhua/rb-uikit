@@ -91,16 +91,19 @@ UI_CONCRETE_APPEARANCE_GENERATE(UIToolbar);
 {
     for (UIBarButtonItem *item in _items) {
         [item._itemView removeFromSuperview];
+        item._appearanceContainer = Nil;
     }
     
     _items = [items copy];
     _numberOfFlexibleSpaces = 0;
     
     for (UIBarButtonItem *item in _items) {
-        if(item._systemItem == UIBarButtonSystemItemFlexibleSpace)
+        if(item._systemItem == UIBarButtonSystemItemFlexibleSpace) {
             _numberOfFlexibleSpaces++;
-        else
+        } else {
             [self addSubview:item._itemView];
+            item._appearanceContainer = [UIToolbar class];
+        }
     }
     
     [self setNeedsLayout];

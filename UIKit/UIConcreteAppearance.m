@@ -11,6 +11,7 @@
 #import <objc/runtime.h>
 #import "UIAppearanceProperty.h"
 
+#import "NSObject+UIAppearance.h"
 #import "UIRetainingNSValue.h"
 
 static BOOL IsAppearanceSetterSelector(SEL selector)
@@ -113,18 +114,23 @@ static BOOL IsSelectorBlackListed(SEL selector)
         
         NSMutableArray *properties = [NSMutableArray array];
         
-        unsigned int methodCount;
-        Method *methods = class_copyMethodList(class, &methodCount);
-        for (unsigned int index = 0; index < methodCount; index++) {
-            Method method = methods[index];
-            SEL methodSelector = method_getName(method);
-            
-            if(IsSelectorBlackListed(methodSelector))
-                continue;
-            
-            if(IsAppearanceSetterSelector(methodSelector)) {
-                [properties addObject:[[UIAppearanceProperty alloc] initWithSetterMethod:method]];
+        Class currentClass = class;
+        while (currentClass != nil) {
+            unsigned int methodCount;
+            Method *methods = class_copyMethodList(currentClass, &methodCount);
+            for (unsigned int index = 0; index < methodCount; index++) {
+                Method method = methods[index];
+                SEL methodSelector = method_getName(method);
+                
+                if(IsSelectorBlackListed(methodSelector))
+                    continue;
+                
+                if(IsAppearanceSetterSelector(methodSelector)) {
+                    [properties addObject:[[UIAppearanceProperty alloc] initWithSetterMethod:method]];
+                }
             }
+            
+            currentClass = class_getSuperclass(currentClass);
         }
         
         self._properties = properties;
@@ -303,10 +309,24 @@ BOOL UIConcreteAppearanceHasValueFor(UIConcreteAppearance *appearance, SEL gette
     return ([appearance _propertyForSelector:getterSelector] != nil);
 }
 
+NSArray *UIConcreteAppearanceGetContainerPathForInstance(id containee)
+{
+    NSMutableArray *containerPath = [NSMutableArray array];
+    Class container;
+    while ((container = [containee _appearanceContainer]) != nil) {
+        [containerPath addObject:container];
+        
+        containee = [container _appearanceContainer];
+    }
+    
+    return containerPath;
+}
+
 UIConcreteAppearance *UIConcreteAppearanceForInstance(id instance)
 {
     if(!instance || ![instance conformsToProtocol:@protocol(UIAppearance)])
         return nil;
     
-    return [[instance class] appearance];
+    return [UIConcreteAppearance sharedInstanceForClass:[instance class]
+                                            containedIn:UIConcreteAppearanceGetContainerPathForInstance(instance)];
 }
