@@ -31,6 +31,13 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
     NSRect _initialWindowFrameForDrag;
 }
 
+- (void)dealloc
+{
+    [self _enumerateSubviews:^(UIView *subview, NSUInteger depth, BOOL *stop) {
+        subview.window = nil;
+    }];
+}
+
 - (id)initWithFrame:(CGRect)frame nativeWindow:(NSWindow *)nativeWindow
 {
     if((self = [super initWithFrame:frame])) {
@@ -119,16 +126,20 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 
 - (void)setHidden:(BOOL)hidden
 {
-    if(hidden) {
-        [self._nativeWindow close];
+    if(self._nativeWindow) {
+        if(hidden) {
+            [self._nativeWindow close];
+        } else {
+            [self makeKeyAndVisible];
+        }
     } else {
-        [self makeKeyAndVisible];
+        [super setHidden:hidden];
     }
 }
 
 - (BOOL)isHidden
 {
-    return !self._nativeWindow.isVisible;
+    return self._nativeWindow? !self._nativeWindow.isVisible : [super isHidden];
 }
 
 #pragma mark -
@@ -184,6 +195,13 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 - (UIResponder *)nextResponder
 {
     return UIApp;
+}
+
+#pragma mark - Overrides
+
+- (UIWindow *)window
+{
+    return self;
 }
 
 #pragma mark - Key View Loop
@@ -293,7 +311,7 @@ NSString *const UIWindowDidResignKeyNotification = @"UIWindowDidResignKeyNotific
 
 - (NSUndoManager *)undoManager
 {
-    return self._nativeWindow.undoManager;
+    return self._nativeWindow.undoManager ?: self._superwindow.undoManager;
 }
 
 #pragma mark - <NSWindowDelegate>

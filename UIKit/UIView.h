@@ -99,7 +99,7 @@ typedef NS_ENUM(NSUInteger, UISystemAnimation) {
 @property (nonatomic, getter=isUserInteractionEnabled) BOOL userInteractionEnabled;
 @property (nonatomic) NSInteger tag;
 @property (nonatomic, readonly, retain) CALayer *layer;
-@property (nonatomic, readonly) UIWindow *window;
+@property (nonatomic, readonly, unsafe_unretained) UIWindow *window;
 
 #pragma mark - Geometry
 

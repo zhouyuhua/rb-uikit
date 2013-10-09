@@ -75,6 +75,12 @@
 {
     UIViewController *testController = [UIViewController new];
     testController.view.backgroundColor = [UIColor yellowColor];
+    
+    UIButton *testButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [testButton setTitle:@"Test" forState:UIControlStateNormal];
+    [testButton sizeToFit];
+    [testController.view addSubview:testButton];
+    
     UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:testController];
     [popover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }

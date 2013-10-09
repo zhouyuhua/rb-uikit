@@ -29,4 +29,9 @@
 
 - (void)_selectNextKeyView;
 
+#pragma mark - Super Windows
+
+///The window containing this window. Used for popovers.
+@property (nonatomic, unsafe_unretained) UIWindow *_superwindow;
+
 @end

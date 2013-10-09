@@ -8,16 +8,18 @@
 
 #import "UIPopoverController.h"
 
-#import "_UIConcretePopoverBackgroundView.h"
 #import "UIBarButtonItem_Private.h"
 #import "UIView_Private.h"
 
 #import "UIButton.h"
 
-@interface UIPopoverController ()
+#import "UIWindow_Private.h"
+#import "UIWindowHostNativeView.h"
 
-@property (nonatomic) UIButton *shieldView;
-@property (nonatomic) UIPopoverBackgroundView *backgroundView;
+@interface UIPopoverController () <NSPopoverDelegate>
+
+@property (nonatomic) NSPopover *_nativePopover;
+@property (nonatomic) UIWindow *_window;
 
 #pragma mark - readwrite
 
@@ -35,13 +37,9 @@
 - (instancetype)initWithContentViewController:(UIViewController *)controller
 {
     if((self = [super initWithNibName:nil bundle:nil])) {
-        self.popoverBackgroundViewClass = [_UIConcretePopoverBackgroundView class];
         self.contentViewController = controller;
-        self.contentViewController.view.layer.cornerRadius = _UIPopoverCornerRadius;
         
-        self.shieldView = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.shieldView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self.shieldView addTarget:self action:@selector(_dismiss:) forControlEvents:UIControlEventTouchUpInside];
+        self.backgroundColor = [UIColor clearColor];
     }
     
     return self;
@@ -52,219 +50,7 @@
     return [self initWithContentViewController:[UIViewController new]];
 }
 
-#pragma mark - Layout
-
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    
-    CGRect bounds = self.view.bounds;
-    
-    _backgroundView.frame = bounds;
-    
-    CGRect contentViewFrame = UIEdgeInsetsInsetRect(bounds, [_backgroundView.class contentViewInsets]);
-    switch (self.popoverArrowDirection) {
-        case UIPopoverArrowDirectionUp:
-            contentViewFrame.size.height -= [_popoverBackgroundViewClass arrowHeight];
-            contentViewFrame.origin.y += [_popoverBackgroundViewClass arrowHeight];
-            break;
-            
-        case UIPopoverArrowDirectionDown:
-            contentViewFrame.size.height -= [_popoverBackgroundViewClass arrowHeight];
-            break;
-            
-        case UIPopoverArrowDirectionLeft:
-            contentViewFrame.size.width -= [_popoverBackgroundViewClass arrowBase];
-            contentViewFrame.origin.x += [_popoverBackgroundViewClass arrowBase];
-            break;
-            
-        case UIPopoverArrowDirectionRight:
-            contentViewFrame.size.width -= [_popoverBackgroundViewClass arrowBase];
-            break;
-            
-        default:
-            break;
-    }
-    
-    _contentViewController.view.frame = contentViewFrame;
-}
-
-#pragma mark - Internal Properties
-
-- (void)setBackgroundView:(UIPopoverBackgroundView *)backgroundView
-{
-    [_backgroundView removeFromSuperview];
-    
-    _backgroundView = backgroundView;
-    _backgroundView.userInteractionEnabled = YES;
-    
-    [self.view insertSubview:_backgroundView atIndex:0];
-}
-
 #pragma mark - Presenting and Dismissing the Popover
-
-- (CGRect)_popoverFrameForArrowDirection:(UIPopoverArrowDirection)arrowDirection
-                     inPresentingContext:(UIView *)contextView
-                          fromOriginRect:(CGRect)popoverOriginRect
-                     adjustedContentSize:(out BOOL *)outAdjustedContentSize
-{
-    NSParameterAssert(outAdjustedContentSize);
-    
-    CGSize contextViewSize = contextView.bounds.size;
-    
-    CGSize popoverSize = self.popoverContentSize;
-    
-    UIEdgeInsets contentViewInsets = [_popoverBackgroundViewClass contentViewInsets];
-    if(UIKIT_FLAG_IS_SET(arrowDirection, UIPopoverArrowDirectionLeft) || UIKIT_FLAG_IS_SET(arrowDirection, UIPopoverArrowDirectionRight)) {
-        popoverSize.width += [_popoverBackgroundViewClass arrowBase];
-    }
-    
-    if(UIKIT_FLAG_IS_SET(arrowDirection, UIPopoverArrowDirectionUp) || UIKIT_FLAG_IS_SET(arrowDirection, UIPopoverArrowDirectionDown)) {
-        popoverSize.height += [_popoverBackgroundViewClass arrowHeight];
-    }
-    
-    popoverSize.width += contentViewInsets.left + contentViewInsets.right;
-    popoverSize.height += contentViewInsets.top + contentViewInsets.bottom;
-    
-    if(popoverSize.width > contextViewSize.width) {
-        popoverSize.width = contextViewSize.width;
-        *outAdjustedContentSize = YES;
-    }
-    if(popoverSize.height > contextViewSize.height) {
-        popoverSize.height = contextViewSize.height;
-        *outAdjustedContentSize = YES;
-    }
-    
-    CGRect frame = {CGPointZero, popoverSize};
-    switch (arrowDirection) {
-        case UIPopoverArrowDirectionUp: {
-            frame.origin.x = CGRectGetMinX(popoverOriginRect);
-            if(CGRectGetMaxX(frame) > contextViewSize.width) {
-                frame.origin.x -= CGRectGetMaxX(frame) - contextViewSize.width;
-            }
-            
-            frame.origin.y = CGRectGetMaxY(popoverOriginRect);
-            
-            break;
-        }
-            
-        case UIPopoverArrowDirectionDown: {
-            frame.origin.x = CGRectGetMinX(popoverOriginRect);
-            if(CGRectGetMinX(frame) <= 0.0) {
-                frame.origin.x = 0.0;
-            }
-            
-            frame.origin.y = CGRectGetMinY(popoverOriginRect) - popoverSize.height;
-            
-            break;
-        }
-            
-        case UIPopoverArrowDirectionLeft: {
-            frame.origin.x = CGRectGetMaxX(popoverOriginRect);
-            
-            frame.origin.y = CGRectGetMinY(popoverOriginRect);
-            if(CGRectGetMaxY(frame) > contextViewSize.height) {
-                frame.origin.y -= CGRectGetMaxY(frame) - contextViewSize.height;
-            }
-            
-            break;
-        }
-            
-        case UIPopoverArrowDirectionRight: {
-            frame.origin.x = CGRectGetMinX(popoverOriginRect) - popoverSize.width;
-            
-            frame.origin.y = CGRectGetMinY(popoverOriginRect);
-            if(CGRectGetMinY(frame) <= 0.0) {
-                frame.origin.y = 0.0;
-            }
-            
-            break;
-        }
-            
-        default: {
-            break;
-        }
-    }
-    
-    if(!CGRectContainsRect(contextView.bounds, frame))
-        return CGRectZero;
-    
-    return frame;
-}
-
-- (CGRect)_bestPopoverFrameForArrowDirections:(UIPopoverArrowDirection)arrowDirections
-                          inPresentingContext:(UIView *)contextView
-                               fromOriginRect:(CGRect)popoverOriginRect
-                         chosenArrowDirection:(out UIPopoverArrowDirection *)outArrowDirection
-{
-    NSParameterAssert(outArrowDirection);
-    
-    BOOL didAdjustContentSize = NO;
-    CGRect bestFrame = {};
-    
-    if(UIKIT_FLAG_IS_SET(arrowDirections, UIPopoverArrowDirectionUp)) {
-        CGRect possibleFrame = [self _popoverFrameForArrowDirection:UIPopoverArrowDirectionUp
-                                                inPresentingContext:contextView
-                                                     fromOriginRect:popoverOriginRect
-                                                adjustedContentSize:&didAdjustContentSize];
-        *outArrowDirection = UIPopoverArrowDirectionUp;
-        if(!didAdjustContentSize && !CGRectEqualToRect(possibleFrame, CGRectZero)) {
-            return possibleFrame;
-        } else {
-            bestFrame = possibleFrame;
-        }
-    }
-    
-    if(UIKIT_FLAG_IS_SET(arrowDirections, UIPopoverArrowDirectionDown)) {
-        CGRect possibleFrame = [self _popoverFrameForArrowDirection:UIPopoverArrowDirectionDown
-                                                inPresentingContext:contextView
-                                                     fromOriginRect:popoverOriginRect
-                                                adjustedContentSize:&didAdjustContentSize];
-        *outArrowDirection = UIPopoverArrowDirectionDown;
-        if(!didAdjustContentSize && !CGRectEqualToRect(possibleFrame, CGRectZero)) {
-            return possibleFrame;
-        } else {
-            bestFrame = possibleFrame;
-        }
-    }
-    
-    if(UIKIT_FLAG_IS_SET(arrowDirections, UIPopoverArrowDirectionLeft)) {
-        CGRect possibleFrame = [self _popoverFrameForArrowDirection:UIPopoverArrowDirectionLeft
-                                                inPresentingContext:contextView
-                                                     fromOriginRect:popoverOriginRect
-                                                adjustedContentSize:&didAdjustContentSize];
-        *outArrowDirection = UIPopoverArrowDirectionLeft;
-        if(!didAdjustContentSize && !CGRectEqualToRect(possibleFrame, CGRectZero)) {
-            return possibleFrame;
-        } else {
-            bestFrame = possibleFrame;
-        }
-    }
-    
-    if(UIKIT_FLAG_IS_SET(arrowDirections, UIPopoverArrowDirectionRight)) {
-        CGRect possibleFrame = [self _popoverFrameForArrowDirection:UIPopoverArrowDirectionRight
-                                                inPresentingContext:contextView
-                                                     fromOriginRect:popoverOriginRect
-                                                adjustedContentSize:&didAdjustContentSize];
-        *outArrowDirection = UIPopoverArrowDirectionRight;
-        if(!didAdjustContentSize && !CGRectEqualToRect(possibleFrame, CGRectZero)) {
-            return possibleFrame;
-        } else {
-            bestFrame = possibleFrame;
-        }
-    }
-    
-    if(CGRectEqualToRect(bestFrame, CGRectZero) && arrowDirections != UIPopoverArrowDirectionAny) {
-        return [self _bestPopoverFrameForArrowDirections:UIPopoverArrowDirectionAny
-                                     inPresentingContext:contextView
-                                          fromOriginRect:popoverOriginRect
-                                    chosenArrowDirection:outArrowDirection];
-    }
-    
-    return bestFrame;
-}
-
-#pragma mark -
 
 - (void)presentPopoverFromRect:(CGRect)rect inView:(UIView *)view permittedArrowDirections:(UIPopoverArrowDirection)arrowDirections animated:(BOOL)animate
 {
@@ -274,35 +60,45 @@
         return;
     
     UIView *presentingContext = (UIView *)view.window ?: view._topSuperview;
-    CGRect popoverOriginRect = [presentingContext convertRect:rect fromView:view];
-    UIPopoverArrowDirection arrowDirection = UIPopoverArrowDirectionUnknown;
-    CGRect popoverFrame = [self _bestPopoverFrameForArrowDirections:arrowDirections
-                                                inPresentingContext:presentingContext
-                                                     fromOriginRect:popoverOriginRect
-                                               chosenArrowDirection:&arrowDirection];
     
+    self._nativePopover = [NSPopover new];
+    self._nativePopover.behavior = NSPopoverBehaviorTransient;
+    self._nativePopover.contentSize = self.popoverContentSize;
+    self._nativePopover.delegate = self;
+    [self._nativePopover setContentViewController:[NSViewController new]];
     
-    CGRect backgroundFrame = { CGPointZero, self.popoverContentSize };
-    self.backgroundView = [[self.popoverBackgroundViewClass alloc] initWithFrame:backgroundFrame];
-    self.backgroundView.arrowDirection = arrowDirection;
-    self.backgroundView.arrowOffset = UIOffsetMake(CGRectGetMidX(popoverFrame) - CGRectGetMidX(popoverOriginRect),
-                                                   CGRectGetMidY(popoverFrame) - CGRectGetMidY(popoverOriginRect));
-    self.popoverArrowDirection = arrowDirection;
+    if(self.backgroundColor.whiteComponent < 0.5 && ![self.backgroundColor isEqual:[UIColor clearColor]]) {
+        self._nativePopover.appearance = NSPopoverAppearanceHUD;
+    } else {
+        self._nativePopover.appearance = NSPopoverAppearanceMinimal;
+    }
     
+    CGRect frame = {CGPointZero, self.popoverContentSize};
+    self._window = [[UIWindow alloc] initWithFrame:frame nativeWindow:nil];
+    self._window.rootViewController = self.contentViewController;
+    self._window._superwindow = presentingContext.window;
     
-    self.shieldView.frame = presentingContext.bounds;
-    [presentingContext addSubview:self.shieldView];
+    self._nativePopover.contentViewController.view = self._window._hostNativeView;
     
-    self.view.userInteractionEnabled = YES;
-    self.view.alpha = 0.0;
-    self.view.frame = popoverFrame;
-    [presentingContext addSubview:self.view];
+    NSRectEdge popUpEdge = 0;
+    if(UIKIT_FLAG_IS_SET(arrowDirections, UIPopoverArrowDirectionUp)) {
+        popUpEdge = NSMinYEdge;
+    } else if(UIKIT_FLAG_IS_SET(arrowDirections, UIPopoverArrowDirectionDown)) {
+        popUpEdge = NSMaxYEdge;
+    } else if(UIKIT_FLAG_IS_SET(arrowDirections, UIPopoverArrowDirectionLeft)) {
+        popUpEdge = NSMaxXEdge;
+    } else if(UIKIT_FLAG_IS_SET(arrowDirections, UIPopoverArrowDirectionRight)) {
+        popUpEdge = NSMinXEdge;
+    } else {
+        [NSException raise:NSInternalInconsistencyException format:@"Unsupported arrow direction given"];
+    }
+    
+    NSRect popoverOriginFrame = [presentingContext.window convertRect:view.bounds fromView:view];
+    [self._nativePopover showRelativeToRect:popoverOriginFrame
+                                     ofView:presentingContext.window._hostNativeView
+                              preferredEdge:popUpEdge];
     
     self.popoverVisible = YES;
-    
-    [UIView animateWithDuration:(animate? UIKitAnimationDurationFast : 0.0) animations:^{
-        self.view.alpha = 1.0;
-    }];
     
     (void)(__bridge_retained CFTypeRef)(self); // [self retain];
 }
@@ -320,31 +116,12 @@
     if(!self.popoverVisible)
         return;
     
-    [UIView animateWithDuration:(animate? UIKitAnimationDuration : 0.0) animations:^{
-        self.view.alpha = 0.0;
-    } completion:^(BOOL finished) {
-        self.popoverVisible = NO;
-        
-        [self.shieldView removeFromSuperview];
-        [self.view removeFromSuperview];
-    }];
+    [self._nativePopover close];
+    
+    self._nativePopover = nil;
+    self._window = nil;
     
     (void)(__bridge_transfer id)((__bridge CFTypeRef)(self)); // [self autorelease];
-}
-
-#pragma mark -
-
-- (void)_dismiss:(UIButton *)sender
-{
-    if([self.delegate respondsToSelector:@selector(popoverControllerShouldDismissPopover:)]) {
-        if(![self.delegate popoverControllerShouldDismissPopover:self])
-            return;
-    }
-    
-    [self dismissPopoverAnimated:YES];
-    
-    if([self.delegate respondsToSelector:@selector(popoverControllerDidDismissPopover:)])
-        [self.delegate popoverControllerDidDismissPopover:self];
 }
 
 #pragma mark - Configuring the Popover Content
@@ -377,6 +154,55 @@
 - (void)setPopoverContentSize:(CGSize)popoverContentSize animated:(BOOL)animate
 {
     _popoverContentSize = popoverContentSize;
+    
+    if(self._nativePopover)
+        self._nativePopover.contentSize = popoverContentSize;
+}
+
+#pragma mark - Customizing the Popover Appearance
+
+- (void)setPopoverBackgroundViewClass:(Class)popoverBackgroundViewClass
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSLog(@"*** Warning, UIPopoverController does not support background view classes.");
+    });
+}
+
+- (Class)popoverBackgroundViewClass
+{
+    return nil;
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    self.view.backgroundColor = backgroundColor;
+}
+
+- (UIColor *)backgroundColor
+{
+    return self.view.backgroundColor;
+}
+
+#pragma mark - <NSPopoverDelegate>
+
+- (BOOL)popoverShouldClose:(NSPopover *)popover
+{
+    if([self.delegate respondsToSelector:@selector(popoverControllerShouldDismissPopover:)])
+        return [self.delegate popoverControllerShouldDismissPopover:self];
+    else
+        return YES;
+}
+
+- (void)popoverDidClose:(NSNotification *)notification
+{
+    if([self.delegate respondsToSelector:@selector(popoverControllerDidDismissPopover:)])
+        [self.delegate popoverControllerDidDismissPopover:self];
+    
+    self._nativePopover = nil;
+    self._window = nil;
+    
+    (void)(__bridge_transfer id)((__bridge CFTypeRef)(self)); // [self autorelease];
 }
 
 @end

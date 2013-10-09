@@ -29,7 +29,7 @@ UIKIT_EXTERN NSString *const UIViewDidChangeSuperviewNotification;
 
 #pragma mark -
 
-@property (nonatomic, weak) UIViewController *_viewController;
+@property (nonatomic, unsafe_unretained) UIViewController *_viewController;
 
 #pragma mark -
 
@@ -48,6 +48,6 @@ UIKIT_EXTERN NSString *const UIViewDidChangeSuperviewNotification;
 
 @property (nonatomic, readwrite, unsafe_unretained) UIView *superview;
 @property (nonatomic, readwrite, retain) CALayer *layer;
-@property (nonatomic, readwrite) UIWindow *window;
+@property (nonatomic, readwrite, unsafe_unretained) UIWindow *window;
 
 @end

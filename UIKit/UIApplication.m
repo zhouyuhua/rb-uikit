@@ -371,7 +371,7 @@ static CGPoint ScrollWheelEventGetDelta(NSEvent *event)
     _currentTouch.timestamp = event.timestamp;
     _currentTouch.tapCount = event.clickCount;
     _currentTouch.window = hostView.kitWindow;
-    _currentTouch.locationInWindow = [hostView convertPoint:event.locationInWindow fromView:nil];
+    _currentTouch.locationInWindow = [hostView convertPoint:event.locationInWindow fromView:nil];;
     _currentTouch.phase = UITouchPhaseBegan;
     
     [_currentEvent.touches addObject:_currentTouch];

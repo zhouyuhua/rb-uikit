@@ -74,6 +74,10 @@ NSString *const UIViewDidChangeSuperviewNotification = @"UIViewDidChangeSupervie
 {
     while (_subviews.count > 0)
         [_subviews.lastObject removeFromSuperview];
+    
+    _layer.layoutManager = nil;
+    _layer.delegate = nil;
+    [_layer removeFromSuperlayer];
 }
 
 - (id)initWithFrame:(CGRect)frame
