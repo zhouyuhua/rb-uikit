@@ -58,6 +58,7 @@
 #import "UIGestureRecognizer.h"
 #import "UIPanGestureRecognizer.h"
 #import "UILongPressGestureRecognizer.h"
+#import "UITapGestureRecognizer.h"
 
 #import "UICollectionViewDelegate.h"
 #import "NSIndexPath+UICollectionViewAdditions.h"

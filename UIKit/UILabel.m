@@ -222,6 +222,9 @@
     
     textFrame.origin.y = round(CGRectGetMidY(rect) - CGRectGetHeight(textFrame) / 2.0);
     
+    textFrame.size.width = round(CGRectGetWidth(textFrame));
+    textFrame.size.height = round(CGRectGetHeight(textFrame));
+    
     return textFrame;
 }
 

@@ -154,6 +154,8 @@
 		8B755AF917E032FA006BBA4F /* UIPasteboard.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B755AF717E032FA006BBA4F /* UIPasteboard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B755AFA17E032FA006BBA4F /* UIPasteboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B755AF817E032FA006BBA4F /* UIPasteboard.m */; };
 		8B755AFC17E03648006BBA4F /* UIPasteboard_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B755AFB17E03648006BBA4F /* UIPasteboard_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8B7946311805123000D43EB4 /* UITapGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B79462F1805123000D43EB4 /* UITapGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B7946321805123000D43EB4 /* UITapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7946301805123000D43EB4 /* UITapGestureRecognizer.m */; };
 		8B79B16E17FC8FA5001604E4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B79B16D17FC8FA5001604E4 /* WebKit.framework */; };
 		8B91075B17A8A8A8008D9DF0 /* UIResponder_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		8B91075D17A8A971008D9DF0 /* UIView_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B91075C17A8A971008D9DF0 /* UIView_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -478,6 +480,8 @@
 		8B755AF717E032FA006BBA4F /* UIPasteboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPasteboard.h; path = UIKit/UIPasteboard.h; sourceTree = "<group>"; };
 		8B755AF817E032FA006BBA4F /* UIPasteboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIPasteboard.m; path = UIKit/UIPasteboard.m; sourceTree = "<group>"; };
 		8B755AFB17E03648006BBA4F /* UIPasteboard_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPasteboard_Private.h; path = UIKit/UIPasteboard_Private.h; sourceTree = "<group>"; };
+		8B79462F1805123000D43EB4 /* UITapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITapGestureRecognizer.h; sourceTree = "<group>"; };
+		8B7946301805123000D43EB4 /* UITapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITapGestureRecognizer.m; sourceTree = "<group>"; };
 		8B79B16D17FC8FA5001604E4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8B91075A17A8A8A8008D9DF0 /* UIResponder_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIResponder_Private.h; path = UIKit/UIResponder_Private.h; sourceTree = "<group>"; };
 		8B91075C17A8A971008D9DF0 /* UIView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIView_Private.h; path = UIKit/UIView_Private.h; sourceTree = "<group>"; };
@@ -1033,6 +1037,8 @@
 				8B39CBF917B2B9C900435CEC /* UIScrollWheelGestureRecognizer.m */,
 				8B54A03517B9CB2C0068775C /* UILongPressGestureRecognizer.h */,
 				8B54A03617B9CB2C0068775C /* UILongPressGestureRecognizer.m */,
+				8B79462F1805123000D43EB4 /* UITapGestureRecognizer.h */,
+				8B7946301805123000D43EB4 /* UITapGestureRecognizer.m */,
 			);
 			name = UIGestureRecognizer;
 			sourceTree = "<group>";
@@ -1387,6 +1393,7 @@
 				8BD5304A17F9259500F81175 /* UIToolbar.h in Headers */,
 				8B08256017AA1A3500494FAA /* UITextInputTraits.h in Headers */,
 				8B1EC8E417A9F8280035369C /* UITextField.h in Headers */,
+				8B7946311805123000D43EB4 /* UITapGestureRecognizer.h in Headers */,
 				8B08255E17AA19EF00494FAA /* UIBarCommon.h in Headers */,
 				8BE493301798E39A002BEA5A /* UILabel.h in Headers */,
 				8B6AEDE617AB638B00D6858A /* UIGestureRecognizer.h in Headers */,
@@ -1695,6 +1702,7 @@
 				8BD530AE1800ACD800F81175 /* UIConcreteAppearance.m in Sources */,
 				8B755AF517E02FC3006BBA4F /* UIView+UIDraggingDestination.m in Sources */,
 				8BB4BD5617B1E860009B7708 /* UIScrollView.m in Sources */,
+				8B7946321805123000D43EB4 /* UITapGestureRecognizer.m in Sources */,
 				8BD5308C17FBC17800F81175 /* UIPopoverBackgroundView.m in Sources */,
 				8BE493191798D65C002BEA5A /* UINavigationController.m in Sources */,
 				8B54A04E17B9CD7B0068775C /* UIGridLayoutInfo.m in Sources */,
