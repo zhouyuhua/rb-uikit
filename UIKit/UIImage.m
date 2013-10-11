@@ -388,3 +388,62 @@
 }
 
 @end
+
+#pragma mark - Representations
+
+NSData *UIImageJPEGRepresentation(UIImage *image, CGFloat compressionQuality)
+{
+    if(!image)
+        return nil;
+    
+    CGImageRef underlyingImage = [[image _bestProviderForScale:2.0] image];
+    if(!underlyingImage)
+        return nil;
+    
+    NSMutableData *imageData = [NSMutableData data];
+    CGImageDestinationRef destination = CGImageDestinationCreateWithData(/* in data */ (__bridge CFMutableDataRef)imageData,
+                                                                         /* in type */ kUTTypeJPEG,
+                                                                         /* in count */ 1,
+                                                                         /* in options */ NULL);
+    
+    NSDictionary *options = @{ (__bridge id)kCGImageDestinationLossyCompressionQuality: @(compressionQuality) };
+    CGImageDestinationAddImage(/* in destination */ destination,
+                               /* in image */ underlyingImage,
+                               /* in options */ (__bridge CFDictionaryRef)options);
+    
+    if(!CGImageDestinationFinalize(destination)) {
+        imageData = nil;
+    }
+    
+    CFRelease(destination);
+    
+    return imageData;
+}
+
+NSData *UIImagePNGRepresentation(UIImage *image)
+{
+    if(!image)
+        return nil;
+    
+    CGImageRef underlyingImage = [[image _bestProviderForScale:2.0] image];
+    if(!underlyingImage)
+        return nil;
+    
+    NSMutableData *imageData = [NSMutableData data];
+    CGImageDestinationRef destination = CGImageDestinationCreateWithData(/* in data */ (__bridge CFMutableDataRef)imageData,
+                                                                         /* in type */ kUTTypePNG,
+                                                                         /* in count */ 1,
+                                                                         /* in options */ NULL);
+    
+    CGImageDestinationAddImage(/* in destination */ destination,
+                               /* in image */ underlyingImage,
+                               /* in options */ NULL);
+    
+    if(!CGImageDestinationFinalize(destination)) {
+        imageData = nil;
+    }
+    
+    CFRelease(destination);
+    
+    return imageData;
+}

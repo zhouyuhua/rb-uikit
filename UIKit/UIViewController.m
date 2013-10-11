@@ -336,6 +336,11 @@
                     format:@"UIViewController %@ cannot present more than one controller at once", self];
     }
     
+    if([childController _isResponsibleForOwnModalPresentation]) {
+        [childController _presentModallyWithinViewController:self animate:animated completionHandler:completionHandler];
+        return;
+    }
+    
     dispatch_block_t internalCompletionHandler = ^{
         _currentAnimationContext = nil;
         
@@ -404,6 +409,18 @@
     self.presentedViewController.movingFromParentViewController = YES;
     [self.presentedViewController viewWillDisappear:animated];
     [transitioningObject animateTransition:_currentAnimationContext];
+}
+
+#pragma mark - Supporting External Presentation
+
+- (BOOL)_isResponsibleForOwnModalPresentation
+{
+    return NO;
+}
+
+- (void)_presentModallyWithinViewController:(UIViewController *)parent animate:(BOOL)animate completionHandler:(dispatch_block_t)completionHandler
+{
+    
 }
 
 #pragma mark - Configuring the View’s Layout Behavior

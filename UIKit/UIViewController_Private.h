@@ -22,6 +22,11 @@
 ///Whether or not the controller is a root view controller in a window.
 @property (nonatomic, getter=_isRootViewController) BOOL _rootViewController;
 
+#pragma mark - Supporting External Presentation
+
+- (BOOL)_isResponsibleForOwnModalPresentation;
+- (void)_presentModallyWithinViewController:(UIViewController *)parent animate:(BOOL)animate completionHandler:(dispatch_block_t)completionHandler;
+
 #pragma mark - readwrite
 
 @property (nonatomic, getter=isMovingFromParentViewController) BOOL movingFromParentViewController;

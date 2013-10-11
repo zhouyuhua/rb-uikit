@@ -75,3 +75,5 @@
 
 #import "UISplitViewController.h"
 #import "UIPopoverController.h"
+
+#import "UIImagePickerController.h"

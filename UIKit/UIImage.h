@@ -95,4 +95,9 @@ typedef NS_ENUM(NSInteger, UIImageRenderingMode) {
 
 @end
 
+#pragma mark - Representations
+
+UIKIT_EXTERN NSData *UIImageJPEGRepresentation(UIImage *image, CGFloat compressionQuality);
+UIKIT_EXTERN NSData *UIImagePNGRepresentation(UIImage *image);
+
 #endif

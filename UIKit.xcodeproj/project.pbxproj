@@ -214,6 +214,8 @@
 		8BC9D28C17F7A58900BF1E63 /* UINSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D28A17F7A58900BF1E63 /* UINSTextView.m */; };
 		8BC9D29317F7BBDF00BF1E63 /* UIMacWindowButtonsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC9D29117F7BBDF00BF1E63 /* UIMacWindowButtonsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BC9D29417F7BBDF00BF1E63 /* UIMacWindowButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D29217F7BBDF00BF1E63 /* UIMacWindowButtonsView.m */; };
+		8BD375371807B215000DC8D8 /* UIImagePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD375351807B215000DC8D8 /* UIImagePickerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BD375381807B215000DC8D8 /* UIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD375361807B215000DC8D8 /* UIImagePickerController.m */; };
 		8BD5304A17F9259500F81175 /* UIToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5304817F9259500F81175 /* UIToolbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BD5304B17F9259500F81175 /* UIToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5304917F9259500F81175 /* UIToolbar.m */; };
 		8BD5304F17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5304D17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -530,6 +532,8 @@
 		8BC9D28A17F7A58900BF1E63 /* UINSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UINSTextView.m; path = UIKit/UINSTextView.m; sourceTree = "<group>"; };
 		8BC9D29117F7BBDF00BF1E63 /* UIMacWindowButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIMacWindowButtonsView.h; path = UIKit/UIMacWindowButtonsView.h; sourceTree = "<group>"; };
 		8BC9D29217F7BBDF00BF1E63 /* UIMacWindowButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIMacWindowButtonsView.m; path = UIKit/UIMacWindowButtonsView.m; sourceTree = "<group>"; };
+		8BD375351807B215000DC8D8 /* UIImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImagePickerController.h; sourceTree = "<group>"; };
+		8BD375361807B215000DC8D8 /* UIImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImagePickerController.m; sourceTree = "<group>"; };
 		8BD5304817F9259500F81175 /* UIToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIToolbar.h; path = UIKit/UIToolbar.h; sourceTree = "<group>"; };
 		8BD5304917F9259500F81175 /* UIToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIToolbar.m; path = UIKit/UIToolbar.m; sourceTree = "<group>"; };
 		8BD5304D17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _UIBarButtonFlexibleSpaceItem.h; path = UIKit/_UIBarButtonFlexibleSpaceItem.h; sourceTree = "<group>"; };
@@ -1042,6 +1046,15 @@
 			name = UITextView;
 			sourceTree = "<group>";
 		};
+		8BD375341807B202000DC8D8 /* UIImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				8BD375351807B215000DC8D8 /* UIImagePickerController.h */,
+				8BD375361807B215000DC8D8 /* UIImagePickerController.m */,
+			);
+			name = UIImagePickerController;
+			sourceTree = "<group>";
+		};
 		8BD5304717F9258900F81175 /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1160,6 +1173,7 @@
 				8BC9D26F17F54A9500BF1E63 /* Web View */,
 				8BD5307B17FBB8A400F81175 /* Content Controller */,
 				8B1255C517E978080063454E /* Stubs */,
+				8BD375341807B202000DC8D8 /* UIImagePickerController */,
 				8BE492C11798C44F002BEA5A /* Supporting Files */,
 			);
 			path = UIKit;
@@ -1363,6 +1377,7 @@
 				8BD5304A17F9259500F81175 /* UIToolbar.h in Headers */,
 				8B08256017AA1A3500494FAA /* UITextInputTraits.h in Headers */,
 				8B1EC8E417A9F8280035369C /* UITextField.h in Headers */,
+				8BD375371807B215000DC8D8 /* UIImagePickerController.h in Headers */,
 				8B7946311805123000D43EB4 /* UITapGestureRecognizer.h in Headers */,
 				8B08255E17AA19EF00494FAA /* UIBarCommon.h in Headers */,
 				8BE493301798E39A002BEA5A /* UILabel.h in Headers */,
@@ -1701,6 +1716,7 @@
 				8B5BD762179B3A8500A53E4A /* UIThreePartImageProvider.m in Sources */,
 				8B91076B17A8B883008D9DF0 /* UITouch.m in Sources */,
 				8B54A04117B9CD7B0068775C /* UICollectionViewController.m in Sources */,
+				8BD375381807B215000DC8D8 /* UIImagePickerController.m in Sources */,
 				8B1EC8E217A9F8280035369C /* UINSTextField.m in Sources */,
 				8BE492FF1798CFDD002BEA5A /* UIWindow.m in Sources */,
 				8BC9D28C17F7A58900BF1E63 /* UINSTextView.m in Sources */,
