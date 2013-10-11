@@ -69,9 +69,7 @@
 {
     [_itemView barButtonItemsWillChange];
     {
-        [_leftBarButtonItems setValue:nil forKey:@"_appearanceContainer"];
         _leftBarButtonItems = [items copy];
-        [_leftBarButtonItems setValue:[UINavigationBar class] forKey:@"_appearanceContainer"];
         [self _invalidateAllLeftItems];
     }
     [_itemView barButtonItemsDidChange];
@@ -86,9 +84,7 @@
 {
     [_itemView barButtonItemsWillChange];
     {
-        [_rightBarButtonItems setValue:nil forKey:@"_appearanceContainer"];
         _rightBarButtonItems = [items copy];
-        [_rightBarButtonItems setValue:[UINavigationBar class] forKey:@"_appearanceContainer"];
         [self _invalidateAllLeftItems];
     }
     [_itemView barButtonItemsDidChange];
@@ -111,9 +107,7 @@
 {
     [_itemView barButtonItemsWillChange];
     {
-        _backBarButtonItem._appearanceContainer = nil;
         _backBarButtonItem = backBarButtonItem;
-        _backBarButtonItem._appearanceContainer = [UINavigationBar class];
         [self _invalidateAllLeftItems];
     }
     [_itemView barButtonItemsDidChange];
@@ -126,7 +120,6 @@
                                                               style:UIBarButtonItemStyle_Private_Back
                                                              target:nil
                                                              action:nil];
-        _backBarButtonItem._appearanceContainer = [UINavigationBar class];
     }
     
     return _backBarButtonItem;
@@ -209,9 +202,7 @@
 {
     [self._itemView barButtonItemsWillChange];
     {
-        __backItem._appearanceContainer = nil;
         __backItem = _backItem;
-        __backItem._appearanceContainer = [UINavigationBar class];
         [self _invalidateAllLeftItems];
     }
     [self._itemView barButtonItemsDidChange];

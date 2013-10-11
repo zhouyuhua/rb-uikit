@@ -10,9 +10,9 @@
 
 @implementation NSObject (UIAppearance)
 
-- (Class)_appearanceContainer
+- (id)_appearanceContainer
 {
-    return Nil;
+    return nil;
 }
 
 @end

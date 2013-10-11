@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UIAppearance.h"
+#import "UIView_Private.h"
 
 ///The UIConcreteAppearance class implements the UIAppearance proxy for RB-UIKit.
 ///
@@ -69,4 +70,9 @@ UIKIT_EXTERN UIConcreteAppearance *UIConcreteAppearanceForInstance(id instance);
     id appearance = [UIConcreteAppearance appearanceForClass:self containedIn:ContainerClass arguments:args]; \
     va_end(args); \
     return appearance; \
+}
+
+#define UI_CONCRETE_APPEARANCE_VIEW_CONTAINER(_Class) - (id)_appearanceContainer \
+{ \
+    return self._viewController; \
 }

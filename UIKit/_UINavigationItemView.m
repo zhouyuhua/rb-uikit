@@ -18,6 +18,8 @@
 #import "UINavigationBar_Private.h"
 #import "UINavigationItem_Private.h"
 
+#import "UIConcreteAppearance.h"
+
 #define OUTER_EDGE_PADDING  8.0
 #define INTER_ITEM_PADDING  8.0
 
@@ -206,13 +208,32 @@
 {
     for (UIBarButtonItem *leftItem in _navigationItem._allLeftItems) {
         [self addSubview:leftItem._itemView];
+        
+        leftItem._appearanceContainer = (UINavigationBar *)self.superview;
     }
     
     for (UIBarButtonItem *rightItem in _navigationItem._allRightItems) {
         [self addSubview:rightItem._itemView];
+        
+        rightItem._appearanceContainer = (UINavigationBar *)self.superview;
     }
     
     [self setNeedsLayout];
+}
+
+#pragma mark - Responding to View Movements
+
+- (void)didMoveToWindow
+{
+    [super didMoveToWindow];
+    
+    for (UIBarButtonItem *leftItem in _navigationItem._allLeftItems) {
+        leftItem._appearanceContainer = (UINavigationBar *)self.superview;
+    }
+    
+    for (UIBarButtonItem *rightItem in _navigationItem._allRightItems) {
+        rightItem._appearanceContainer = (UINavigationBar *)self.superview;
+    }
 }
 
 @end

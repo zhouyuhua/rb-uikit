@@ -14,7 +14,7 @@
 @protocol UIToolbarDelegate;
 @class UIImage;
 
-@interface UIToolbar : UIView <UIBarPositioning, UIAppearance>
+@interface UIToolbar : UIView <UIBarPositioning, UIAppearance, UIAppearanceContainer>
 
 #pragma mark - Configuring Toolbar Items
 

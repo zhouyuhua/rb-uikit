@@ -10,6 +10,6 @@
 
 @interface NSObject (UIAppearance)
 
-- (Class)_appearanceContainer;
+- (id)_appearanceContainer;
 
 @end

@@ -13,6 +13,8 @@
 
 #import "UIConcreteAppearance.h"
 
+#import "UIView_Private.h"
+
 #define OUTER_EDGE_PADDING  8.0
 #define INTER_ITEM_PADDING  8.0
 
@@ -25,7 +27,12 @@
 
 @implementation UIToolbar
 
+#pragma mark - UIAppearance
+
 UI_CONCRETE_APPEARANCE_GENERATE(UIToolbar);
+UI_CONCRETE_APPEARANCE_VIEW_CONTAINER(UIToolbar);
+
+#pragma mark - Lifecycle
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -102,7 +109,7 @@ UI_CONCRETE_APPEARANCE_GENERATE(UIToolbar);
             _numberOfFlexibleSpaces++;
         } else {
             [self addSubview:item._itemView];
-            item._appearanceContainer = [UIToolbar class];
+            item._appearanceContainer = self;
         }
     }
     

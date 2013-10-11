@@ -60,7 +60,7 @@ static BOOL IsSelectorBlackListed(SEL selector)
     return sharedInstances;
 }
 
-+ (instancetype)sharedInstanceForClass:(Class)class containedIn:(NSArray *)containerPath
++ (instancetype)sharedInstanceForClass:(Class)class containedIn:(NSArray *)containerPath createIfAbsent:(BOOL)createIfAbsent
 {
     NSMutableArray *sharedInstances = [self sharedInstances];
     for (UIConcreteAppearance *appearance in sharedInstances) {
@@ -68,9 +68,13 @@ static BOOL IsSelectorBlackListed(SEL selector)
             return appearance;
     }
     
-    UIConcreteAppearance *newAppearance = [[UIConcreteAppearance alloc] initWithClass:class containedIn:containerPath];
-    [sharedInstances addObject:newAppearance];
-    return newAppearance;
+    if(createIfAbsent) {
+        UIConcreteAppearance *newAppearance = [[UIConcreteAppearance alloc] initWithClass:class containedIn:containerPath];
+        [sharedInstances addObject:newAppearance];
+        return newAppearance;
+    } else {
+        return nil;
+    }
 }
 
 #pragma mark -
@@ -99,7 +103,7 @@ static BOOL IsSelectorBlackListed(SEL selector)
         }
     }
     
-    return [self sharedInstanceForClass:class containedIn:containerPath];
+    return [self sharedInstanceForClass:class containedIn:containerPath createIfAbsent:YES];
 }
 
 - (instancetype)initWithClass:(Class)class containedIn:(NSArray *)containerPath
@@ -312,11 +316,8 @@ BOOL UIConcreteAppearanceHasValueFor(UIConcreteAppearance *appearance, SEL gette
 NSArray *UIConcreteAppearanceGetContainerPathForInstance(id containee)
 {
     NSMutableArray *containerPath = [NSMutableArray array];
-    Class container;
-    while ((container = [containee _appearanceContainer]) != nil) {
-        [containerPath addObject:container];
-        
-        containee = [container _appearanceContainer];
+    for (id container = [containee _appearanceContainer]; container != nil; container = [container _appearanceContainer]) {
+        [containerPath addObject:[container class]];
     }
     
     return containerPath;
@@ -327,6 +328,17 @@ UIConcreteAppearance *UIConcreteAppearanceForInstance(id instance)
     if(!instance || ![instance conformsToProtocol:@protocol(UIAppearance)])
         return nil;
     
-    return [UIConcreteAppearance sharedInstanceForClass:[instance class]
-                                            containedIn:UIConcreteAppearanceGetContainerPathForInstance(instance)];
+    NSArray *path = UIConcreteAppearanceGetContainerPathForInstance(instance);
+    while (path.count > 0) {
+        UIConcreteAppearance *appearance = [UIConcreteAppearance sharedInstanceForClass:[instance class]
+                                                                            containedIn:path
+                                                                         createIfAbsent:NO];
+        if(appearance) {
+            return appearance;
+        } else {
+            path = [path subarrayWithRange:NSMakeRange(0, path.count - 1)];
+        }
+    }
+    
+    return nil;
 }

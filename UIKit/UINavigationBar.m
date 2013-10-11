@@ -17,7 +17,16 @@
 
 @implementation UINavigationBar
 
+#pragma mark - Appearance Support
+
 UI_CONCRETE_APPEARANCE_GENERATE(UINavigationBar);
+
+- (id)_appearanceContainer
+{
+    return self._navigationController ?: self._viewController;
+}
+
+#pragma mark - Lifecycle
 
 - (id)initWithFrame:(NSRect)frameRect
 {
