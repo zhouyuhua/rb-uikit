@@ -28,6 +28,7 @@
 #import "UIControl.h"
 #import "UIButton.h"
 #import "UIImageView.h"
+#import "UISlider.h"
 
 #import "UIActivityIndicatorView.h"
 

@@ -31,7 +31,7 @@
 
 - (UIControlState)state
 {
-    return self.isEnabled? UIControlStateNormal : UIControlStateDisabled;
+    return self.enabled? UIControlStateNormal : UIControlStateDisabled;
 }
 
 #pragma mark - Tracking

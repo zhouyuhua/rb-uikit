@@ -55,6 +55,10 @@
     searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     searchBar.placeholder = @"Search";
     [self.view addSubview:searchBar];
+    
+    
+    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(50.0, 300.0, 200.0, 20.0)];
+    [self.view addSubview:slider];
 }
 
 #pragma mark - Actions

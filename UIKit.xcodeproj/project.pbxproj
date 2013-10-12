@@ -216,6 +216,18 @@
 		8BC9D29417F7BBDF00BF1E63 /* UIMacWindowButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC9D29217F7BBDF00BF1E63 /* UIMacWindowButtonsView.m */; };
 		8BD375371807B215000DC8D8 /* UIImagePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD375351807B215000DC8D8 /* UIImagePickerController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BD375381807B215000DC8D8 /* UIImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD375361807B215000DC8D8 /* UIImagePickerController.m */; };
+		8BD3753C180902BA000DC8D8 /* UISlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD3753A180902BA000DC8D8 /* UISlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BD3753D180902BA000DC8D8 /* UISlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD3753B180902BA000DC8D8 /* UISlider.m */; };
+		8BD3754A18090D61000DC8D8 /* UISliderMinimumTrackImage_Disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3754018090D61000DC8D8 /* UISliderMinimumTrackImage_Disabled.png */; };
+		8BD3754B18090D61000DC8D8 /* UISliderMinimumTrackImage_Disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3754118090D61000DC8D8 /* UISliderMinimumTrackImage_Disabled@2x.png */; };
+		8BD3754C18090D61000DC8D8 /* UISliderMaximumTrackImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3754218090D61000DC8D8 /* UISliderMaximumTrackImage.png */; };
+		8BD3754D18090D61000DC8D8 /* UISliderMaximumTrackImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3754318090D61000DC8D8 /* UISliderMaximumTrackImage@2x.png */; };
+		8BD3754E18090D61000DC8D8 /* UISliderMinimumTrackImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3754418090D61000DC8D8 /* UISliderMinimumTrackImage.png */; };
+		8BD3754F18090D61000DC8D8 /* UISliderMinimumTrackImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3754518090D61000DC8D8 /* UISliderMinimumTrackImage@2x.png */; };
+		8BD3755018090D61000DC8D8 /* UISliderThumbImage_Disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3754618090D61000DC8D8 /* UISliderThumbImage_Disabled.png */; };
+		8BD3755118090D61000DC8D8 /* UISliderThumbImage_Disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3754718090D61000DC8D8 /* UISliderThumbImage_Disabled@2x.png */; };
+		8BD3755218090D61000DC8D8 /* UISliderThumbImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3754818090D61000DC8D8 /* UISliderThumbImage.png */; };
+		8BD3755318090D61000DC8D8 /* UISliderThumbImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BD3754918090D61000DC8D8 /* UISliderThumbImage@2x.png */; };
 		8BD5304A17F9259500F81175 /* UIToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5304817F9259500F81175 /* UIToolbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BD5304B17F9259500F81175 /* UIToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5304917F9259500F81175 /* UIToolbar.m */; };
 		8BD5304F17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD5304D17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -534,6 +546,18 @@
 		8BC9D29217F7BBDF00BF1E63 /* UIMacWindowButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIMacWindowButtonsView.m; path = UIKit/UIMacWindowButtonsView.m; sourceTree = "<group>"; };
 		8BD375351807B215000DC8D8 /* UIImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImagePickerController.h; sourceTree = "<group>"; };
 		8BD375361807B215000DC8D8 /* UIImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImagePickerController.m; sourceTree = "<group>"; };
+		8BD3753A180902BA000DC8D8 /* UISlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISlider.h; sourceTree = "<group>"; };
+		8BD3753B180902BA000DC8D8 /* UISlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISlider.m; sourceTree = "<group>"; };
+		8BD3754018090D61000DC8D8 /* UISliderMinimumTrackImage_Disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UISliderMinimumTrackImage_Disabled.png; sourceTree = "<group>"; };
+		8BD3754118090D61000DC8D8 /* UISliderMinimumTrackImage_Disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UISliderMinimumTrackImage_Disabled@2x.png"; sourceTree = "<group>"; };
+		8BD3754218090D61000DC8D8 /* UISliderMaximumTrackImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UISliderMaximumTrackImage.png; sourceTree = "<group>"; };
+		8BD3754318090D61000DC8D8 /* UISliderMaximumTrackImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UISliderMaximumTrackImage@2x.png"; sourceTree = "<group>"; };
+		8BD3754418090D61000DC8D8 /* UISliderMinimumTrackImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UISliderMinimumTrackImage.png; sourceTree = "<group>"; };
+		8BD3754518090D61000DC8D8 /* UISliderMinimumTrackImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UISliderMinimumTrackImage@2x.png"; sourceTree = "<group>"; };
+		8BD3754618090D61000DC8D8 /* UISliderThumbImage_Disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UISliderThumbImage_Disabled.png; sourceTree = "<group>"; };
+		8BD3754718090D61000DC8D8 /* UISliderThumbImage_Disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UISliderThumbImage_Disabled@2x.png"; sourceTree = "<group>"; };
+		8BD3754818090D61000DC8D8 /* UISliderThumbImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UISliderThumbImage.png; sourceTree = "<group>"; };
+		8BD3754918090D61000DC8D8 /* UISliderThumbImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UISliderThumbImage@2x.png"; sourceTree = "<group>"; };
 		8BD5304817F9259500F81175 /* UIToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIToolbar.h; path = UIKit/UIToolbar.h; sourceTree = "<group>"; };
 		8BD5304917F9259500F81175 /* UIToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIToolbar.m; path = UIKit/UIToolbar.m; sourceTree = "<group>"; };
 		8BD5304D17F928C100F81175 /* _UIBarButtonFlexibleSpaceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _UIBarButtonFlexibleSpaceItem.h; path = UIKit/_UIBarButtonFlexibleSpaceItem.h; sourceTree = "<group>"; };
@@ -1055,6 +1079,26 @@
 			name = UIImagePickerController;
 			sourceTree = "<group>";
 		};
+		8BD3753E180902EE000DC8D8 /* UISlider */ = {
+			isa = PBXGroup;
+			children = (
+				8BD3753A180902BA000DC8D8 /* UISlider.h */,
+				8BD3753B180902BA000DC8D8 /* UISlider.m */,
+			);
+			name = UISlider;
+			sourceTree = "<group>";
+		};
+		8BD3753F180902F3000DC8D8 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				8B5BD7361798FA9B00A53E4A /* UIButton.h */,
+				8B5BD7371798FA9B00A53E4A /* UIButton.m */,
+				8B5BD7481799040E00A53E4A /* UIButton_Private.h */,
+				8B5BD73F1799039E00A53E4A /* UIButton Background Views */,
+			);
+			name = UIButton;
+			sourceTree = "<group>";
+		};
 		8BD5304717F9258900F81175 /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1182,6 +1226,16 @@
 		8BE492C11798C44F002BEA5A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8BD3754018090D61000DC8D8 /* UISliderMinimumTrackImage_Disabled.png */,
+				8BD3754118090D61000DC8D8 /* UISliderMinimumTrackImage_Disabled@2x.png */,
+				8BD3754218090D61000DC8D8 /* UISliderMaximumTrackImage.png */,
+				8BD3754318090D61000DC8D8 /* UISliderMaximumTrackImage@2x.png */,
+				8BD3754418090D61000DC8D8 /* UISliderMinimumTrackImage.png */,
+				8BD3754518090D61000DC8D8 /* UISliderMinimumTrackImage@2x.png */,
+				8BD3754618090D61000DC8D8 /* UISliderThumbImage_Disabled.png */,
+				8BD3754718090D61000DC8D8 /* UISliderThumbImage_Disabled@2x.png */,
+				8BD3754818090D61000DC8D8 /* UISliderThumbImage.png */,
+				8BD3754918090D61000DC8D8 /* UISliderThumbImage@2x.png */,
 				8BD5307617FBAF7300F81175 /* UITabBarOverflowIcon.png */,
 				8BD5307717FBAF7300F81175 /* UITabBarOverflowIcon@2x.png */,
 				8BD5307217FBA4C100F81175 /* UITabBarShadow.png */,
@@ -1306,11 +1360,9 @@
 				8BE493381798E44D002BEA5A /* UIControl.m */,
 				8BB8A22B17B1E66A004FB0E8 /* UIAction.h */,
 				8BB8A22C17B1E66A004FB0E8 /* UIAction.m */,
-				8B5BD7361798FA9B00A53E4A /* UIButton.h */,
-				8B5BD7371798FA9B00A53E4A /* UIButton.m */,
-				8B5BD7481799040E00A53E4A /* UIButton_Private.h */,
-				8B5BD73F1799039E00A53E4A /* UIButton Background Views */,
 				8BC9D27417F54B7E00BF1E63 /* UIDataDetectorTypes.h */,
+				8BD3753F180902F3000DC8D8 /* UIButton */,
+				8BD3753E180902EE000DC8D8 /* UISlider */,
 			);
 			name = Controls;
 			path = ..;
@@ -1365,6 +1417,7 @@
 				8BC9D27217F54AA500BF1E63 /* UIWebView.h in Headers */,
 				8BE493161798D65C002BEA5A /* UINavigationBar.h in Headers */,
 				8BE493181798D65C002BEA5A /* UINavigationController.h in Headers */,
+				8BD3753C180902BA000DC8D8 /* UISlider.h in Headers */,
 				8B5BD74E179908EC00A53E4A /* UIButtonBarBackgroundView.h in Headers */,
 				8BE493341798E3F3002BEA5A /* UIBarItem.h in Headers */,
 				8BE4933E1798E564002BEA5A /* UIBarButtonItem.h in Headers */,
@@ -1581,10 +1634,12 @@
 				8BD5305517F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive@2x.png in Resources */,
 				8BC9D26317F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive@2x.png in Resources */,
 				8B5AF84F179B6D12008B3BF3 /* UIBarButtonItemBackgroundHighlighted@2x.png in Resources */,
+				8BD3755118090D61000DC8D8 /* UISliderThumbImage_Disabled@2x.png in Resources */,
 				8BC9D26817F28F3D00BF1E63 /* UIWindowBackground@2x.png in Resources */,
 				8BD5305B17F9337600F81175 /* UIBarButtonSystemItemAdd.png in Resources */,
 				8BD5305817F92DCF00F81175 /* UIToolBarBackgroundImage.png in Resources */,
 				8BC9D25717EFA80800BF1E63 /* UINavigationBarShadow.png in Resources */,
+				8BD3754A18090D61000DC8D8 /* UISliderMinimumTrackImage_Disabled.png in Resources */,
 				8B5AF863179B9B79008B3BF3 /* UITextFieldSquareBackground.png in Resources */,
 				8BC9D26417F28F3700BF1E63 /* UINavigationBarBackgroundImage_Inactive.png in Resources */,
 				8BD5307517FBA4C100F81175 /* UITabBarShadow@2x.png in Resources */,
@@ -1592,11 +1647,16 @@
 				8BE492C51798C44F002BEA5A /* InfoPlist.strings in Resources */,
 				8B08256417AA1F7300494FAA /* UISearchBarMagnifyingGlass@2x.png in Resources */,
 				8BF0F9E917BF0D2D00DAFD92 /* UITableViewHeaderFooterViewBackground@2x.png in Resources */,
+				8BD3754B18090D61000DC8D8 /* UISliderMinimumTrackImage_Disabled@2x.png in Resources */,
 				8BD5307117FBA37800F81175 /* UITabBarItemPlaceholderImage@2x.png in Resources */,
+				8BD3754E18090D61000DC8D8 /* UISliderMinimumTrackImage.png in Resources */,
 				8BD5306C17FB9CDD00F81175 /* UITabBarBackground.png in Resources */,
+				8BD3754D18090D61000DC8D8 /* UISliderMaximumTrackImage@2x.png in Resources */,
 				8BD5305617F92DCF00F81175 /* UIToolBarBackgroundImage_Inactive.png in Resources */,
+				8BD3755018090D61000DC8D8 /* UISliderThumbImage_Disabled.png in Resources */,
 				8BAE9591179A1D3100562F35 /* UIBarButtonItemBackground.png in Resources */,
 				8B54687617D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator@2x.png in Resources */,
+				8BD3755218090D61000DC8D8 /* UISliderThumbImage.png in Resources */,
 				8BD5307417FBA4C100F81175 /* UITabBarShadow.png in Resources */,
 				8BD5305717F92DCF00F81175 /* UIToolBarBackgroundImage@2x.png in Resources */,
 				8B5AF867179B9D15008B3BF3 /* UITextFieldRoundBackground.png in Resources */,
@@ -1611,9 +1671,12 @@
 				8BD5305C17F9337600F81175 /* UIBarButtonSystemItemAdd@2x.png in Resources */,
 				8BD5307017FBA37800F81175 /* UITabBarItemPlaceholderImage.png in Resources */,
 				8B54687517D2BB9F00D7E338 /* UITableViewCellAccessoryDisclosureIndicator.png in Resources */,
+				8BD3754F18090D61000DC8D8 /* UISliderMinimumTrackImage@2x.png in Resources */,
+				8BD3754C18090D61000DC8D8 /* UISliderMaximumTrackImage.png in Resources */,
 				8BC9D25617EFA80800BF1E63 /* UINavigationBarShadow@2x.png in Resources */,
 				8B1255A417E418C80063454E /* UISearchBarBackground.png in Resources */,
 				8B1255A717E41D580063454E /* UISearchBarClearButtonIcon@2x.png in Resources */,
+				8BD3755318090D61000DC8D8 /* UISliderThumbImage@2x.png in Resources */,
 				8B5BD7351798F3E100A53E4A /* UINavigationBarBackgroundImage@2x.png in Resources */,
 				8B5AF868179B9D15008B3BF3 /* UITextFieldRoundBackground@2x.png in Resources */,
 				8B1255A817E41D580063454E /* UISearchBarClearButtonIcon.png in Resources */,
@@ -1663,6 +1726,7 @@
 				8B08256E17AA2ACF00494FAA /* UIAlertView.m in Sources */,
 				8B54A04317B9CD7B0068775C /* UICollectionViewData.m in Sources */,
 				8BF623F317BDD2A70015ED5C /* UITableViewSectionInfo.m in Sources */,
+				8BD3753D180902BA000DC8D8 /* UISlider.m in Sources */,
 				8BE492E91798C52F002BEA5A /* UIResponder.m in Sources */,
 				8BD530C11800F4C900F81175 /* UILocalNotification.m in Sources */,
 				8B91076317A8B6B7008D9DF0 /* UIWindowHostNativeView.m in Sources */,
