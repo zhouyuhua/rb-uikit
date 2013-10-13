@@ -335,7 +335,7 @@ UI_CONCRETE_APPEARANCE_GENERATE(UISlider);
 
 - (CGRect)thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)trackRect value:(float)value
 {
-    CGFloat fraction = value / (_maximumValue - _minimumValue);
+    CGFloat fraction = (value - _minimumValue) / (_maximumValue - _minimumValue);
     
     CGRect thumbFrame = CGRectZero;
     thumbFrame.size = self.currentThumbImage.size;
@@ -356,7 +356,7 @@ UI_CONCRETE_APPEARANCE_GENERATE(UISlider);
         UITouch *touch = [touches anyObject];
         CGPoint touchLocation = [touch locationInView:self];
         CGFloat percentage = touchLocation.x / CGRectGetWidth(self.bounds);
-        self.value = _minimumValue + ((_maximumValue - _minimumValue) * percentage);
+        self.value = (_maximumValue + ABS(_minimumValue)) * percentage + _minimumValue;
         
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
@@ -371,7 +371,7 @@ UI_CONCRETE_APPEARANCE_GENERATE(UISlider);
         UITouch *touch = [touches anyObject];
         CGPoint touchLocation = [touch locationInView:self];
         CGFloat percentage = touchLocation.x / CGRectGetWidth(self.bounds);
-        self.value = _minimumValue + ((_maximumValue - _minimumValue) * percentage);
+        self.value = (_maximumValue + ABS(_minimumValue)) * percentage + _minimumValue;
         
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
@@ -386,7 +386,7 @@ UI_CONCRETE_APPEARANCE_GENERATE(UISlider);
         UITouch *touch = [touches anyObject];
         CGPoint touchLocation = [touch locationInView:self];
         CGFloat percentage = touchLocation.x / CGRectGetWidth(self.bounds);
-        self.value = _minimumValue + ((_maximumValue - _minimumValue) * percentage);
+        self.value = (_maximumValue + ABS(_minimumValue)) * percentage + _minimumValue;
         
         [self sendActionsForControlEvents:UIControlEventValueChanged];
     }
