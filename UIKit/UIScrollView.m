@@ -14,6 +14,8 @@
 
 #import "UIScroller.h"
 
+#import "UIRefreshControl_Private.h"
+
 const CGFloat UIScrollViewDecelerationRateNormal = 0.33;
 const CGFloat UIScrollViewDecelerationRateFast = 0.2;
 
@@ -129,6 +131,12 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.35;
     
     contentOffset.x = MIN(_contentSize.width, MAX(contentOffset.x, 0.0));
     contentOffset.y = MIN(_contentSize.height, MAX(contentOffset.y, 0.0));
+    
+    if(_refreshControl && _contentOffset.y <= -_UIRefreshControlFullHeight && isForBounceBack) {
+        contentOffset.y = -_UIRefreshControlFullHeight;
+        
+        [_refreshControl _scrollViewDidPullControl];
+    }
     
     return contentOffset;
 }
@@ -250,7 +258,26 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.35;
     UIKitUnimplementedMethod();
 }
 
+#pragma mark - Refresh Control
+
+- (void)_refreshControlDidEndRefreshing
+{
+    [self setContentOffset:[self _constrainContentOffset:self.contentOffset forBounceBack:YES] animated:YES];
+}
+
 #pragma mark - Layout
+
+- (void)_layoutRefreshControl
+{
+    CGPoint contentOffset = self.contentOffset;
+    
+    CGRect refreshControlFrame;
+    refreshControlFrame.size.width = self.contentSize.width;
+    refreshControlFrame.size.height = MIN(_UIRefreshControlFullHeight, ABS(MIN(0.0, contentOffset.y)));
+    refreshControlFrame.origin.x = 0.0;
+    refreshControlFrame.origin.y = contentOffset.y;
+    _refreshControl.frame = refreshControlFrame;
+}
 
 - (void)layoutSubviews
 {
@@ -278,6 +305,9 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.35;
         horizontalScrollerFrame.size.width -= UIScrollerTrackArea;
     
     _horizontalScroller.frame = horizontalScrollerFrame;
+    
+    if(_refreshControl)
+        [self _layoutRefreshControl];
 }
 
 #pragma mark -
@@ -294,6 +324,15 @@ static CGFloat const UIScrollViewNegativeSpaceScaleFactor = 0.35;
     
     if(view != _horizontalScroller && view != _verticalScroller)
         [self _bringScrollersToFront];
+    
+    if([view isKindOfClass:[UIRefreshControl class]]) {
+        [_refreshControl removeFromSuperview];
+        
+        _refreshControl = (UIRefreshControl *)view;
+        _refreshControl._scrollView = self;
+        
+        [self setNeedsLayout];
+    }
 }
 
 - (void)bringSubviewToFront:(UIView *)view

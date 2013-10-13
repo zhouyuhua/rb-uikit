@@ -8,8 +8,6 @@
 
 #import "UITableView.h"
 
-@class UIRefreshControl;
-
 @interface UITableView () {
     struct {
         int numberOfSectionsInTableView : 1;
@@ -62,11 +60,7 @@
     
     BOOL _needsReload;
     BOOL _editing;
-    
-    UIRefreshControl *_refreshControl;
 }
-
-- (void)_refreshControlDidEndRefreshing;
 
 #pragma mark - readwrite
 

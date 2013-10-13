@@ -214,40 +214,6 @@
     }
 }
 
-#pragma mark - Refresh Control
-
-- (void)insertSubview:(UIView *)view atIndex:(NSInteger)index
-{
-    [super insertSubview:view atIndex:index];
-    
-    if([view isKindOfClass:[UIRefreshControl class]]) {
-        [_refreshControl removeFromSuperview];
-        
-        _refreshControl = (UIRefreshControl *)view;
-        _refreshControl._tableView = self;
-        
-        [self setNeedsLayout];
-    }
-}
-
-- (CGPoint)_constrainContentOffset:(CGPoint)contentOffset forBounceBack:(BOOL)isForBounceBack
-{
-    contentOffset = [super _constrainContentOffset:contentOffset forBounceBack:isForBounceBack];
-    
-    if(self.contentOffset.y <= -_UIRefreshControlFullHeight && isForBounceBack) {
-        contentOffset.y = -_UIRefreshControlFullHeight;
-        
-        [_refreshControl _tableViewDidPullControl];
-    }
-    
-    return contentOffset;
-}
-
-- (void)_refreshControlDidEndRefreshing
-{
-    [self setContentOffset:[super _constrainContentOffset:self.contentOffset forBounceBack:YES] animated:YES];
-}
-
 #pragma mark - Registering Classes
 
 - (void)registerClass:(Class)class forCellReuseIdentifier:(NSString *)reuseIdentifier
@@ -459,18 +425,6 @@
     }
 }
 
-- (void)_layoutRefreshControl
-{
-    CGPoint contentOffset = self.contentOffset;
-    
-    CGRect refreshControlFrame;
-    refreshControlFrame.size.width = self.contentSize.width;
-    refreshControlFrame.size.height = MIN(_UIRefreshControlFullHeight, ABS(MIN(0.0, contentOffset.y)));
-    refreshControlFrame.origin.x = 0.0;
-    refreshControlFrame.origin.y = contentOffset.y;
-    _refreshControl.frame = refreshControlFrame;
-}
-
 - (void)layoutSubviews
 {
     if(_needsReload) {
@@ -478,9 +432,6 @@
     }
     
     [self _layoutContents];
-    
-    if(_refreshControl)
-        [self _layoutRefreshControl];
     
     [super layoutSubviews];
 }

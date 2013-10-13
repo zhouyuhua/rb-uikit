@@ -8,7 +8,7 @@
 
 #import "UIRefreshControl.h"
 
-@class UIActivityIndicatorView, UITableView, UILabel;
+@class UIActivityIndicatorView, UIScrollView, UILabel;
 
 UIKIT_EXTERN CGFloat const _UIRefreshControlFullHeight;
 
@@ -21,8 +21,8 @@ UIKIT_EXTERN CGFloat const _UIRefreshControlFullHeight;
 
 #pragma mar k-
 
-@property (nonatomic, weak) UITableView *_tableView;
-- (void)_tableViewDidPullControl;
+@property (nonatomic, weak) UIScrollView *_scrollView;
+- (void)_scrollViewDidPullControl;
 
 #pragma mark - readwrite
 

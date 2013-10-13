@@ -8,7 +8,7 @@
 
 #import "UIScrollView.h"
 
-@class UIScroller, UIAnimator;
+@class UIScroller, UIAnimator, UIRefreshControl;
 
 @interface UIScrollView () {
     struct {
@@ -32,6 +32,8 @@
         int scrollViewShouldScrollToTop : 1;
         int scrollViewDidScrollToTop : 1;
     } _delegateRespondsTo;
+    
+    UIRefreshControl *_refreshControl;
 }
 
 @property (nonatomic) UIScroller *horizontalScroller;
@@ -47,6 +49,10 @@
 
 - (CGPoint)_constrainContentOffset:(CGPoint)contentOffset forBounceBack:(BOOL)isForBounceBack;
 - (CGPoint)_constrainSnapbackTargetContentOffset:(CGPoint)contentOffset velocity:(CGPoint)velocity;
+
+#pragma mark - Refresh Control
+
+- (void)_refreshControlDidEndRefreshing;
 
 #pragma mark - readwrite
 

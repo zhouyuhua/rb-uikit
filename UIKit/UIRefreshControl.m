@@ -9,7 +9,7 @@
 #import "UIRefreshControl_Private.h"
 
 #import "UIActivityIndicatorView.h"
-#import "UITableView_Private.h"
+#import "UIScrollView_Private.h"
 
 #import "UILabel.h"
 #import "UIFont.h"
@@ -105,12 +105,12 @@ CGFloat const _UIRefreshControlFullHeight = 40.0;
     self.refreshing = NO;
     [self._activityIndicatorView stopAnimating];
     
-    [self._tableView _refreshControlDidEndRefreshing];
+    [self._scrollView _refreshControlDidEndRefreshing];
 }
 
 #pragma mark - Internal Callbacks
 
-- (void)_tableViewDidPullControl
+- (void)_scrollViewDidPullControl
 {
     [self beginRefreshing];
     

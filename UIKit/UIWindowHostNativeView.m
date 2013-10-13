@@ -15,6 +15,8 @@
 #import "UIApplication_Private.h"
 #import "UIGestureRecognizer_Private.h"
 
+#import "UIView+UIDraggingDestination.h"
+
 @implementation UIWindowHostNativeView {
     UIEvent *_currentEvent;
     UITouch *_currentTouch;
@@ -162,37 +164,80 @@
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
-    return NSDragOperationNone;
+    NSPoint locationInView = [self convertPointFromBase:[sender draggingLocation]];
+    UIView *targetView = [_kitWindow hitTest:locationInView withEvent:nil];
+    if(targetView && ([[sender draggingPasteboard] availableTypeFromArray:[targetView registeredDragTypes]] != nil)) {
+        UIDraggingInfo *info = [[UIDraggingInfo alloc] initWithNSDraggingInfo:sender window:_kitWindow];
+        return [targetView draggingEntered:info];
+    } else {
+        return NSDragOperationNone;
+    }
 }
 
 - (NSDragOperation)draggingUpdated:(id <NSDraggingInfo>)sender
 {
-    return NSDragOperationNone;
+    NSPoint locationInView = [self convertPointFromBase:[sender draggingLocation]];
+    UIView *targetView = [_kitWindow hitTest:locationInView withEvent:nil];
+    if(targetView && ([[sender draggingPasteboard] availableTypeFromArray:[targetView registeredDragTypes]] != nil)) {
+        UIDraggingInfo *info = [[UIDraggingInfo alloc] initWithNSDraggingInfo:sender window:_kitWindow];
+        return [targetView draggingUpdated:info];
+    } else {
+        return NSDragOperationNone;
+    }
 }
 
 - (void)draggingExited:(id <NSDraggingInfo>)sender
 {
-    
+    NSPoint locationInView = [self convertPointFromBase:[sender draggingLocation]];
+    UIView *targetView = [_kitWindow hitTest:locationInView withEvent:nil];
+    if(targetView && ([[sender draggingPasteboard] availableTypeFromArray:[targetView registeredDragTypes]] != nil)) {
+        UIDraggingInfo *info = [[UIDraggingInfo alloc] initWithNSDraggingInfo:sender window:_kitWindow];
+        [targetView draggingExited:info];
+    }
 }
 
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender
 {
-    return YES;
+    NSPoint locationInView = [self convertPointFromBase:[sender draggingLocation]];
+    UIView *targetView = [_kitWindow hitTest:locationInView withEvent:nil];
+    if(targetView && ([[sender draggingPasteboard] availableTypeFromArray:[targetView registeredDragTypes]] != nil)) {
+        UIDraggingInfo *info = [[UIDraggingInfo alloc] initWithNSDraggingInfo:sender window:_kitWindow];
+        return [targetView prepareForDragOperation:info];
+    } else {
+        return NO;
+    }
 }
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
-    return YES;
+    NSPoint locationInView = [self convertPointFromBase:[sender draggingLocation]];
+    UIView *targetView = [_kitWindow hitTest:locationInView withEvent:nil];
+    if(targetView && ([[sender draggingPasteboard] availableTypeFromArray:[targetView registeredDragTypes]] != nil)) {
+        UIDraggingInfo *info = [[UIDraggingInfo alloc] initWithNSDraggingInfo:sender window:_kitWindow];
+        return [targetView performDragOperation:info];
+    } else {
+        return NO;
+    }
 }
 
 - (void)concludeDragOperation:(id <NSDraggingInfo>)sender
 {
-    
+    NSPoint locationInView = [self convertPointFromBase:[sender draggingLocation]];
+    UIView *targetView = [_kitWindow hitTest:locationInView withEvent:nil];
+    if(targetView && ([[sender draggingPasteboard] availableTypeFromArray:[targetView registeredDragTypes]] != nil)) {
+        UIDraggingInfo *info = [[UIDraggingInfo alloc] initWithNSDraggingInfo:sender window:_kitWindow];
+        [targetView concludeDragOperation:info];
+    }
 }
 
 - (void)draggingEnded:(id <NSDraggingInfo>)sender
 {
-    
+    NSPoint locationInView = [self convertPointFromBase:[sender draggingLocation]];
+    UIView *targetView = [_kitWindow hitTest:locationInView withEvent:nil];
+    if(targetView && ([[sender draggingPasteboard] availableTypeFromArray:[targetView registeredDragTypes]] != nil)) {
+        UIDraggingInfo *info = [[UIDraggingInfo alloc] initWithNSDraggingInfo:sender window:_kitWindow];
+        [targetView draggingEnded:info];
+    }
 }
 
 @end
