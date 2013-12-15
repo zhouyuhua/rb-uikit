@@ -53,14 +53,14 @@ static NSArray *CreateLinesForString(NSString *string, UIFont *font, NSLineBreak
         
         switch (lineBreakMode) {
             case NSLineBreakByClipping:
-            case NSLineBreakByWordWrapping: {
+            case NSLineBreakByCharWrapping: {
                 consumedCharacters = CTTypesetterSuggestClusterBreak(typesetter, stringOffset, boundingSize.width);
                 line = CTTypesetterCreateLine(typesetter, CFRangeMake(stringOffset, consumedCharacters));
                 
                 break;
             }
                 
-            case NSLineBreakByCharWrapping: {
+            case NSLineBreakByWordWrapping: {
                 consumedCharacters = CTTypesetterSuggestLineBreak(typesetter, stringOffset, boundingSize.width);
                 line = CTTypesetterCreateLine(typesetter, CFRangeMake(stringOffset, consumedCharacters));
                 
@@ -207,6 +207,7 @@ static NSArray *CreateLinesForString(NSString *string, UIFont *font, NSLineBreak
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     {
+        CGContextClipToRect(context, drawingRect);
         CGContextTranslateCTM(context, CGRectGetMinX(drawingRect), CGRectGetMinY(drawingRect) + font.ascender);
         CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
         
